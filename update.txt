@@ -1,0 +1,6 @@
+[config]
+version=1.0
+forceUpdate=false
+url=https://codetransporter.github.io/
+updateText=本次新增了一些东西/n测试所用
+[/config]
