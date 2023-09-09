@@ -43,7 +43,6 @@
 			margin:0.5em 0;
 		}
 		section>div div p{
-			margin-left:1.5em;
 			text-align:center;
 		}
 		section>div div p a{
@@ -51,22 +50,27 @@
 			color:#000000;
 			padding:0.5em 1em;
 			border:1px solid #0ae2e2;
-			margin-right:1em;
 			border-radius:1em;
 			text-align:center;
 			margin-bottom:0.5em;
 			display:inline-block;
+			font-size:7vw;
 		}
 		section>div h2{
 			color:#FFFFFF;
 			border-radius:2em 1.5em 0 0;
 			text-align:center;
+			font-size:6vw;
 		}
-		#zaos{
+		.zaos{
 			background-color:#00c5c5;
 		}
-		#xiawu{
+		.xiawu{
 			background-color:#b164bb;
+		}
+		.noZuoWei{
+			border-color:#dadada;
+			color:#dadada;
 		}
 		</style>
         <!--<script type="text/javascript" src=".js"></script>-->
@@ -79,31 +83,31 @@
 			<section>
 				<h1 id="A1A2A34242">座位号：A1A2A3</h1>
 				<div>
-					<h2 id="zaos">早上第1趟</h2>
+					<h2 class="zaos">早上第1趟</h2>
 					<div>
 						<p><a href="tel:1234567890">401爱上放</a><a href="">401爱上放</a><a href="">401爱上放</a></p>
 					</div>
 				</div>
 				<div>
-					<h2 id="zaos">早上第2趟</h2>
+					<h2 class="zaos">早上第2趟</h2>
 					<div>
 						<p><a href="tel:1234567890">401爱上放</a><a href="">401爱上放</a><a href="">401爱上放</a></p>
 					</div>
 				</div>
 				<div>
-					<h2 id="xiawu">下午第1趟</h2>
+					<h2 class="xiawu">下午第1趟</h2>
 					<div>
 						<p><a href="tel:1234567890">401爱上放</a><a href="">401爱上放</a><a href="">401爱上放</a></p>
 					</div>
 				</div>
 				<div>
-					<h2 id="xiawu">下午第2趟</h2>
+					<h2 class="xiawu">下午第2趟</h2>
 					<div>
 						<p><a href="tel:1234567890">401爱上放</a><a href="">401爱上放</a><a href="">401爱上放</a></p>
 					</div>
 				</div>
 				<div>
-					<h2 id="xiawu">下午第3趟</h2>
+					<h2 class="xiawu">下午第3趟</h2>
 					<div>
 						<p><a href="tel:1234567890">401爱上放</a><a href="">401爱上放</a><a href="">401爱上放</a></p>
 					</div>
@@ -335,6 +339,7 @@ var DataWan='[data]'+
 					console.log(matchPhone[i]);
 					var yuanI;
 					var zuowei;
+					var zuoweiName;
 					//创建元素插入
 					var section = document.createElement('section');
 					var h1 = document.createElement("h1");
@@ -344,16 +349,18 @@ var DataWan='[data]'+
 					if (xch==1){
 						yuanI=i+3;
 						xch=2;
-						zuowei="A"+(i+1)+"(外)"+"A"+(i+2)+"(中)"+"A"+(i+3)+"(窗)";
+						zuoweiName="A"+(i+1)+"(外)"+"A"+(i+2)+"(中)"+"A"+(i+3)+"(窗)";
+						zuowei="A"+(i+1)+"A"+(i+2)+"A"+(i+3);
 					}
 					else{
 						yuanI=i+2;
 						xch=1;
-						zuowei="A"+(i+1)+"(外)"+"A"+(i+2)+"(窗)";
+						zuoweiName="A"+(i+1)+"(外)"+"A"+(i+2)+"(窗)";
+						zuowei="A"+(i+1)+"A"+(i+2);
 					}
 					section.setAttribute('id',zuowei);
 					h1.setAttribute('id',zuowei+zOrx+k);
-					h1.innerText="座位号:"+zuowei;
+					h1.innerText="座位号:"+zuoweiName;
 					section.appendChild(h1);
 					var div = document.createElement('div');
 					var h2 = document.createElement("h2");
@@ -365,7 +372,7 @@ var DataWan='[data]'+
 						zTxt="下午"
 					}
 					h2.innerText=zTxt+"第"+k+"趟";
-					h2.setAttribute('id',zOrx);
+					h2.setAttribute('class',zOrx);
 					var divdiv = document.createElement('div');
 					var p = document.createElement('p');
 					while (i<yuanI){
@@ -373,10 +380,11 @@ var DataWan='[data]'+
 						//console.log(matchBanji[i])
 						if (typeof(matchBanji[i])=="undefined"){
 							a.innerText="此座位无人";
+							a.setAttribute('class','noZuoWei');
 						}
 						else{
 							a.setAttribute('href','tel:'+matchPhone[i]);
-							a.innerText=matchBanji[i];
+							a.innerText=matchBanji[i]+"【A"+(i+1)+"】";
 						}
 						p.appendChild(a);
 						i++;
@@ -413,4 +421,3 @@ var DataWan='[data]'+
 			}
 		</script>
 </html>
-
