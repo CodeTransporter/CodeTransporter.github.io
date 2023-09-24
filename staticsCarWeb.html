@@ -680,7 +680,7 @@ var DataWan='[data]'+
 			  tempInput.select();
 			  document.execCommand("copy");
 			  document.body.removeChild(tempInput);
-			  alert('微信号复制成功');
+			  alert('微信号复制成功,请在打开微信后在添加朋友界面进行添加老师操作');
 			}
 			
 			function SearchButtonAdd(dataBjiPhone,tangci,sCont,bool){
@@ -752,7 +752,7 @@ var DataWan='[data]'+
 					var a=document.createElement('a');
 					a.innerHTML="有错误?复制微信号联系老师";
 					a.setAttribute('href','weixin://');
-					a.setAttribute('onclick','copyToClipboard("thbrobot")');
+					a.setAttribute('onclick','copyToClipboard("ZSBRLTC")');
 					divN.appendChild(a);
 					article.appendChild(divW);
 					//console.log(article);
