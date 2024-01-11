@@ -801,12 +801,12 @@ var DataWan='[data]'+
 							}
 							//判断一下这个学生早上是否坐校车，不坐校车特别标红!标重点
 							var xmbj=gainMatch("Banji",StHBRessJ[j]);
+							xmbjInHtml="<span class='orange'>" + xmbj +"</span>"
 							xmbj=xmbj.replace(/\d+/,'');//先把数字替换了
 							var xmbjInHtml;
 							DataZao=DataZao.replace(/\s*/g,'');
 							var DataGuiz=new RegExp(/\[data\][\s\S]*?\[\/data\]/,"g"); //查找姓名
 							var DataLen=DataZao.match(DataGuiz);
-							xmbjInHtml="<span class='orange'>" + xmbj +"</span>"
 							if (DataLen!=null && DataLen!='undefined'){
 								var isExitsGuiz=new RegExp(xmbj,"g"); //查找姓名
 								var isExitsRessJ=DataLen[dijige-1].match(isExitsGuiz);
