@@ -135,7 +135,19 @@
 			color:#FFFFFF;
 			padding:0.3em 0;
 		}
-		
+		/*临时变更站点样式*/
+		article span.orange{
+			color:orange;
+			font-weight:bold;
+		}
+		article label.station{
+			color:#00c5c5;
+			font-weight:bold;
+		}
+		article .important{
+			color:#ff0000;
+			display:inline-block;
+		}
 		/*搜索页面样式*/
 		aside{
 			margin:2% 5%;
@@ -353,6 +365,11 @@
 			</header>
 			<ul>
 				<li>
+					<a onclick="show('LsChangeZd',false)" title="临时变更站点">
+						<svg t="1704971411728" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2490" width="7em" height="7em"><path d="M510.844518 857.853902C320.61575 857.853902 165.781209 703.019361 165.781209 512.790593c0-190.228768 154.834541-345.063309 345.063309-345.063309 190.228768 0 345.063309 154.834541 345.063309 345.063309C855.907828 703.019361 701.194916 857.853902 510.844518 857.853902L510.844518 857.853902zM510.844518 200.567288C338.738568 200.567288 198.621214 340.684642 198.621214 512.790593c0 172.105951 140.117354 312.223304 312.223304 312.223304 172.105951 0 312.223304-140.117354 312.223304-312.223304C823.067823 340.684642 683.072099 200.567288 510.844518 200.567288L510.844518 200.567288z" fill="#272536" p-id="2491"></path><path d="M321.345528 402.107614l39.651265 0c8.392446-1.702815 12.041335 3.284 10.825039 14.838817l0 207.135289c0 8.270816-2.432593 13.136002-7.176149 14.838817l-41.47571 0c-5.959853-3.284-9.608742-6.568001-10.825039-9.852001L312.344934 421.811617C312.344934 408.675615 315.264046 402.107614 321.345528 402.107614zM398.701984 319.642713l41.597339 0c6.93289-3.52726 10.46015 1.824445 10.46015 16.176743L450.759473 710.31714c0.973037 10.825039-1.459556 16.176743-7.419408 16.176743l-43.178525 0c-4.986816 1.216296-7.905927-0.608148-8.878964-5.351704L391.282575 339.346716C391.160945 326.210714 393.715168 319.642713 398.701984 319.642713zM520.818149 321.223898l22.501485 0c11.311557-1.216296 18.122817 1.824445 20.67704 9.365483-8.757335 12.527854-6.93289 17.514669 5.594964 15.082076l146.563725 0c8.757335 0 13.136002 4.378667 13.136002 13.136002l0 22.501485c2.554223 10.095261-1.824445 14.473928-13.136002 13.136002L556.577266 394.444946c-11.311557-2.554223-20.068892 2.554223-26.272004 15.082076-7.541038 17.514669-16.906521 27.60993-28.218078 30.042523l-22.501485 0c-11.311557-1.216296-16.906521-5.594964-16.906521-13.136002l0-16.906521c-1.216296-15.082076 0.608148-23.109633 5.594964-24.447559 11.311557-4.986816 17.514669-10.581779 18.730966-16.906521l16.906521-26.272004C508.898444 328.156788 514.615037 321.223898 520.818149 321.223898zM490.775627 537.359781l216.014253 0c13.74415 0 20.67704 9.365483 20.67704 28.218078l0 129.657204c0 21.285188-12.527854 32.596745-37.583561 33.813042l-189.74225 0c-18.730966 0-27.60993-4.986816-26.272004-15.082076L473.869106 556.090747C473.869106 544.77919 479.464069 538.576078 490.775627 537.359781zM581.024825 685.747951l0-105.209645L524.588668 580.538306l0 105.209645L581.024825 685.747951zM564.118304 426.433543l24.447559 0c15.082076 1.216296 20.67704 4.986816 16.906521 11.311557l0 30.042523L693.653878 467.787623c8.757335-1.216296 12.527854 2.554223 11.311557 11.311557l0 24.447559c1.216296 6.324742-7.541038 9.365483-26.272004 9.365483l-78.937641 0c-27.60993 0-44.516451-10.581779-50.719563-31.988597l0-37.583561C549.036228 433.366433 554.023043 427.64984 564.118304 426.433543zM674.922912 685.747951l0-105.209645-45.124599 0 0 105.209645L674.922912 685.747951z" fill="#272536" p-id="2492"></path></svg>
+					</a>
+				<li>
+				<li>
 					<a onclick="show('message',false)" title="致班主任的一封信">
 						<svg t="1704782040255" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1887" width="6em" height="6em"><path d="M870.5 206.6h-719c-48.3 0-87.5 39.3-87.5 87.6v435.7c0 48.3 39.3 87.6 87.5 87.6h719c48.3 0 87.5-39.3 87.5-87.6V294.2c0-48.3-39.3-87.6-87.5-87.6z m0 56.4c4.1 0 8 0.8 11.6 2.3L519.9 549 154.3 263h716.2zM165.2 761.1l242.2-170.8c8.5-6 10.5-17.7 4.5-26.2s-17.7-10.5-26.2-4.5L123.9 744.2c-2.2-4.3-3.6-9.1-3.6-14.3V294.2c0-3.1 0.6-6.1 1.5-9l375 293.3c6.8 5.3 15 8 23.2 8s16.4-2.7 23.2-8l358.6-280.8v432.2c0 0.6-0.2 1.2-0.2 1.8L657.3 559.6c-8.5-6-20.2-3.9-26.2 4.5-6 8.5-4 20.2 4.5 26.2l241.2 170.1c-2.1 0.4-4.2 0.7-6.4 0.7H165.2z" fill="#4F4F4F" p-id="1888"></path></svg>
 					</a>
@@ -501,6 +518,9 @@
 		var houcheZAndTime=[{'zhandian':'天星学校空架层@天星学校孔子像@天星学校孔子像','zdtime':'15:45分@16:35分@16:55分'},//@进行分割 默认第一个是学校候车时间地点，其它为各站点的候车时间
 							{'zhandian':'新桥村公交站','zdtime':'7:35分@@@7:35分@16:55分'}
 							];
+							
+		var lsChangeXwZdTC1=["傍江东村公交站","傍江西村公交站","城市花园路口公交站","石岗美心苑公交站","石岗东村公交站","沙墟市场公交站"];//下午临时更改下午第一趟站点名称
+		var lsChangeXwZdTC2=["新桥东公交站","新桥村公交站","傍新路口公交站","华盛隆超市对面","芙蓉超市"];//临时更改下午第二趟站点名称
 		//console.log(banji);
 		/*Tip:不知道如何批量输入数据的话，notepad++里面按住Alt并往下拖动鼠标即可，即可进行多行编辑*/
 		//坐车人员数据，早上数据DataZao    晚上数据DataWan
@@ -524,7 +544,7 @@
 '201	罗湘怡	13126464816<zd>石岗东村公交站</zd>/n'+
 '401	罗振睿	13126464816<zd>石岗东村公交站</zd>/n'+
 '101	吴婧琪	13560054101<zd>石岗东村公交站</zd>/n'+
-'303	韩浩成	18826437536<zd>石岗东村公交站</zd>/n'+
+'403	韩浩成	18826437536<zd>石岗东村公交站</zd>/n'+
 '203	陈泽锐	13640625950<zd>石岗东村公交站</zd>/n'+
 '201	林杰钦	13640686467<zd>石岗东村公交站</zd>/n'+
 '801	谭凯文	15382636555<zd>石岗东村公交站</zd>/n'+
@@ -562,7 +582,7 @@
 '401	李佳	18826138592<zd>傍新路口公交站</zd>/n'+
 '301	罗智宇	18125082637<zd>傍新路口公交站</zd>/n'+
 '102	赖家烨	13728490905<zd>傍新路口公交站</zd>/n'+
-'504	张琦	13434389079<zd>傍新路口公交站</zd>/n'+
+'504	陈琦	13434389079<zd>傍新路口公交站</zd>/n'+
 '504	陈嘉怡	16620176086<zd>傍新路口公交站</zd>/n'+
 '102	陈俊泽	18998383589<zd>傍新路口公交站</zd>/n'+
 '303	赖嘉豪	13728490905<zd>傍新路口公交站</zd>/n'+
@@ -674,6 +694,7 @@ var DataWan='[data]'+
 '103李芯悦<zd>石岗东村公交站</zd>/n'+
 '[/data]'; 
 			initForceReadData();
+			
 			//判断是否为第一次查看，第一次查看强制看致一封信
 			let isRead=window.localStorage['isRead'];
 			var DSJInterval="";//我已知晓定时器
@@ -691,7 +712,6 @@ var DataWan='[data]'+
 				removeHtmlYs(['aside','footer','musicPlayer','musicList','FirstIndexForceRead'],{"caozuo":"hide"});//首页先隐藏搜索框
 				matchData(DataZao,'zaos',false);
 				matchData(DataWan,'xiawu',true);
-				alert("2024.1.11[周四]下午开始往后3号校车只走两趟，请各位班主任知悉，如不清楚学生的具体到站站点，可以通过搜索功能搜索本班学生的到站站点!")
 			}
 			function initForceReadData(){
 				var fIFR=document.getElementById("FirstIndexForceReadHtml");
@@ -720,8 +740,8 @@ var DataWan='[data]'+
 				}
 				return rtStr;
 			}
-			//20s倒计时
-			var totalDSJ=60;//20s
+			//60s倒计时
+			var totalDSJ=60;//60s
 			function IKnowDJS(){
 				document.getElementById("IKnow").innerText="我已知晓  " + totalDSJ +"S";
 				totalDSJ=totalDSJ-1;
@@ -738,6 +758,81 @@ var DataWan='[data]'+
 				isR=true;//阅读了
 				window.localStorage['isRead']='true';//已经阅读过
 				show("shouye");
+			}
+			//遍历站点
+			function stationHBArr(ZdArr,Sj,houzui,tangci,dijige){
+				var article=document.createElement('article');
+				article.setAttribute("id",houzui+"lsTcArtcile");
+				var p=document.createElement('p');
+				p.innerHTML="临时更改<label>"+tangci+"</label>人员(按班级划分)";
+				p.setAttribute("id","lsTcP");
+				article.appendChild(p);
+				document.getElementsByTagName("body")[0].appendChild(article);
+				for(var i=0;i<ZdArr.length;i++){
+					stationHB(ZdArr[i],Sj,houzui,dijige);
+				}
+			}
+			//站点合并,并进行输出
+			function stationHB(HbZdStr,HbData,houzui,dijige){
+				HbData=HbData.replace(/\s*/g,'');//把空格去掉
+				var StHBGuiz=new RegExp("\\d+[\u4e00-\u9fa5]+1[3456789]\\d{9}<zd>"+HbZdStr+"<\/zd>|\\d+[\u4e00-\u9fa5]+<zd>"+HbZdStr+"<\/zd>","g"); //两者选其中一个规则，首选第一个规则
+				var StHBRessJ=HbData.match(StHBGuiz);
+				if (StHBRessJ!=null){ //搜索到内容
+					var art=document.getElementById(houzui+'lsTcArtcile');
+					var divW=null;
+					var divN=null;
+					for(var j=0;j<StHBRessJ.length;j++){
+						try{
+							var banjiNum=gainMatch("BanjiNum",StHBRessJ[j]);
+							var bjIdN=document.getElementById(houzui+banjiNum);
+							var bjIdW=document.getElementById(houzui+banjiNum+"W");
+							if (bjIdN!=null && bjIdN!='undefined'){
+								divN=bjIdN;
+								divW=bjIdW;
+							}else{
+								divW=document.createElement('div');
+								divW.setAttribute('id',houzui+banjiNum+"W")
+								var a=document.createElement('a');
+								a.innerText=banjiNum;
+								var divN=document.createElement('div');
+								divN.setAttribute('id',houzui+banjiNum)
+								divN.appendChild(a);
+								divW.appendChild(divN);
+								art.appendChild(divW);
+							}
+							//判断一下这个学生早上是否坐校车，不坐校车特别标红!标重点
+							var xmbj=gainMatch("Banji",StHBRessJ[j]);
+							xmbj=xmbj.replace(/\d+/,'');//先把数字替换了
+							var xmbjInHtml;
+							DataZao=DataZao.replace(/\s*/g,'');
+							var DataGuiz=new RegExp(/\[data\][\s\S]*?\[\/data\]/,"g"); //查找姓名
+							var DataLen=DataZao.match(DataGuiz);
+							xmbjInHtml="<span class='orange'>" + xmbj +"</span>"
+							if (DataLen!=null && DataLen!='undefined'){
+								var isExitsGuiz=new RegExp(xmbj,"g"); //查找姓名
+								var isExitsRessJ=DataLen[dijige-1].match(isExitsGuiz);
+								if (isExitsRessJ==null || isExitsRessJ=='undefined'){
+									xmbjInHtml=xmbjInHtml + "<h1 class='important'>[重点留意!!]</h1>"
+								}
+							}
+							
+							var p=document.createElement('p');
+							p.innerHTML="姓名班级:" +xmbjInHtml;
+							divN.appendChild(p);
+							var p=document.createElement('p');
+							p.innerHTML="下车站点:<label class='station'>" + gainMatch("ZhanDian",StHBRessJ[j])+"</label>";
+							divN.appendChild(p);
+							/*var p=document.createElement('p');
+							p.innerHTML="家长号码:<label>" + gainMatch("Phone",StHBRessJ[j])+"</label>";*/
+							divN.appendChild(p);
+							
+						}
+						catch{
+						}
+					}
+					divW.appendChild(divN);
+					art.appendChild(divW);
+				}
 			}
 			//正则匹配数据，获取对应的班级，姓名，手机号码，并进行存储
 			function matchData(data,zOrx,bool,sOrNot,sCont,tc){
@@ -898,17 +993,23 @@ var DataWan='[data]'+
 			//取班级，姓名，手机号码
 			function gainMatch(gSort,data){
 				var rtdata='';
-				if (gSort=='Banji'){
+				if (gSort=='Banji'){ //返回班级姓名
 					rtdata=data.replace(/1[3456789]\d{9}/g,'');//去掉手机号码
 					return rtdata.replace(/<zd>[\u4e00-\u9fa5]+<\/zd>/g,'');//去掉站点，返回班级姓名
 				}
-				else if(gSort=='Phone'){
+				else if(gSort=='Phone'){ //返回手机号码
 					rtdata=data.replace(/<zd>[\u4e00-\u9fa5]+<\/zd>/g,'');//去掉站点
 					return rtdata.replace(/\d+[\u4e00-\u9fa5]+/g,'');//去掉姓名班级，返回手机号码
 				}
-				else{
+				else if(gSort=='ZhanDian'){//返回站点名
 					rtdata=data.replace(/\d+[\u4e00-\u9fa5]+/g,'');//去掉班级姓名
 					rtdata=rtdata.replace(/1[3456789]\d{9}/g,'');//去掉手机号码
+					rtdata=rtdata.replace('<zd>','');//去掉<zd></zd>
+					return rtdata.replace('</zd>','');//返回站点名
+				}
+				else{ //返回手机号码
+					rtdata=data.replace(/1[3456789]\d{9}/g,'');//去掉手机号码
+					rtdata=rtdata.replace(/[\u4e00-\u9fa5]+/g,'');//去掉班级
 					rtdata=rtdata.replace('<zd>','');//去掉<zd></zd>
 					return rtdata.replace('</zd>','');//返回站点名
 				}
@@ -1097,6 +1198,12 @@ var DataWan='[data]'+
 					}
 					DSJInterval=setInterval('IKnowDJS()',1000);//开启定时器
 					delPos()
+				}
+				else if (caoz=="LsChangeZd"){ //临时变更站点
+					delPos();
+					removeHtmlYs(['aside','musicPlayer','musicList','footer','FirstIndexForceRead'],{"caozuo":"hide"});//全部隐藏
+					stationHBArr(lsChangeXwZdTC1,DataWan,'F','下午第一趟',1);
+					stationHBArr(lsChangeXwZdTC2,DataWan,'S',"下午第二趟",2);
 				}
 			}
 			//加载音乐
