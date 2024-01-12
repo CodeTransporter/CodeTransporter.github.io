@@ -83,22 +83,21 @@
 		/*搜索结果样式*/
 		article>p{
 			padding:0.5em 0em 0.5em 0.5em;
-			background-color:#ffffff;
-			color:#636262;
+			background-color:#ff7300;
+			color:#000000;
 			font-weight:bold;
 			font-size:2em;
-			border-top:1px solid #00c5c5;
-			border-bottom:1px solid #00c5c5;
 		}
 		article>p>label{
 			font-weight:bold;
-			color:#ff0000;
+			color:#ffffff;
 		}
 		article>div{
 			width:80%;
 			margin:1% 10%;
 			border:1px solid #00c5c5;
 			border-radius:2em;
+			box-shadow:1px -1px 20px #86afd3;
 		}
 		article>h2{
 			margin:0.8em 0;
@@ -816,7 +815,7 @@ var DataWan='[data]'+
 							}
 							
 							var p=document.createElement('p');
-							p.innerHTML="姓名班级:" +xmbjInHtml;
+							p.innerHTML="班级姓名:" +xmbjInHtml;
 							divN.appendChild(p);
 							var p=document.createElement('p');
 							p.innerHTML="下车站点:<label class='station'>" + gainMatch("ZhanDian",StHBRessJ[j])+"</label>";
