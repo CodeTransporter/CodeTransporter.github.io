@@ -147,6 +147,16 @@
 			color:#ff0000;
 			display:inline-block;
 		}
+		article p button{
+			font-size:1em;
+			color:#00c5c5;
+			background-color:#ffffff;
+			outline:0;
+			border:0;
+			border-radius:0.5em;
+			padding:0 1%;
+			margin-left:1.5%;
+		}
 		/*搜索页面样式*/
 		aside{
 			margin:2% 5%;
@@ -389,7 +399,7 @@
 					</a>
 				</li>
 			</ul>
-			<aside>
+			<aside style="display:none">
 				<h1>3号校车名单查询</h1>
 				<div>
 					<p>温馨提示</p>
@@ -404,7 +414,7 @@
 					<p><button onclick='search("searchInput")'>查询</button></p>
 				</div>
 			</aside>
-			<div id="musicPlayer" class="musicPlayer">
+			<div id="musicPlayer" class="musicPlayer" style="display:none">
 				<div id="musicfm">
 					<img id="img" src="https://s.learn.qq.com/header/user-mag.png" title="标签"/>
 					<p>
@@ -436,13 +446,13 @@
 				</div>
 			</div>
 			
-			<div id="musicList" class="musicList">
+			<div id="musicList" class="musicList" style="display:none">
 				<div>
 					<ol id="musicListOl">
 					</ol>
 				</div>
 			</div>
-			<div id="FirstIndexForceRead" class="FirstIndexForceRead">
+			<div id="FirstIndexForceRead" class="FirstIndexForceRead" style="display:none">
 				<div id="FirstIndexForceReadHtml">
 				</div>
 				<div>
@@ -499,13 +509,6 @@
 				</div>
 			</section>
 			-->
-		<footer>
-			Copyright © 2023 thb<br/>
-			温馨提示:本页面数据请勿传播<br/>
-			建议以手机和高版本浏览器访问本网页<br/>
-			页面技术由<a href="https://mp.weixin.qq.com/s/jZVBa8stKUODEyY_m-bGiA" target="_blank" title="访问微信公众号添洪帮">微信公众号添洪帮</a>独家提供技术支持<br/>
-			如果遇到数据错误，请及时向老师反应，谢谢大家支持!
-		</footer>
 		<script type="text/javascript">
 		var banji=[{'classId':'101','classbzr':'李晚霞','classPhone':'1122222222'},
 				   {'classId':'102','classbzr':'李晚霞','classPhone':'1122222222'}
@@ -518,8 +521,17 @@
 							{'zhandian':'新桥村公交站','zdtime':'7:35分@@@7:35分@16:55分'}
 							];
 							
-		var lsChangeXwZdTC1=["傍江东村公交站","傍江西村公交站","城市花园路口公交站","石岗美心苑公交站","石岗东村公交站","沙墟市场公交站"];//下午临时更改下午第一趟站点名称
-		var lsChangeXwZdTC2=["新桥东公交站","新桥村公交站","傍新路口公交站","华盛隆超市对面","芙蓉超市"];//临时更改下午第二趟站点名称
+		var lsChangeXwZdTC1=[{'station':'傍江东村公交站','stationPY':'bjdcgjz'},
+							{'station':'傍江西村公交站','stationPY':'bjxcgjz'},
+							{'station':'城市花园路口公交站','stationPY':'cshylkgjz'},
+							{'station':'石岗美心苑公交站','stationPY':'sgmxygjz'},
+							{'station':'石岗东村公交站','stationPY':'sgdcgjz'},
+							{'station':'沙墟市场公交站','stationPY':'sxscgjz'}];//下午临时更改下午第一趟站点名称
+		var lsChangeXwZdTC2=[{'station':'新桥东公交站','stationPY':'xqdgjz'},
+							{'station':'新桥村公交站','stationPY':'xqcgjz'},
+							{'station':'傍新路口公交站','stationPY':'bxlkgjz'},
+							{'station':'华盛隆超市对面','stationPY':'hslcsdm'},
+							{'station':'芙蓉超市','stationPY':'frcs'}];//临时更改下午第二趟站点名称
 		//console.log(banji);
 		/*Tip:不知道如何批量输入数据的话，notepad++里面按住Alt并往下拖动鼠标即可，即可进行多行编辑*/
 		//坐车人员数据，早上数据DataZao    晚上数据DataWan
@@ -704,10 +716,10 @@ var DataWan='[data]'+
 				isR=false;
 				show('message',true);
 			}*/
-			initData();//正常初始化
+			show('shouye',false);//正常初始化
 			//false代表不在第一个后面直接加入进去,True代表在section后面直接添加,zaos代表早上的样式，xiawu代表下午的样式  sOrNot代表True为搜索模式
 			function initData(){
-				removeHtmlYs(['aside','footer','musicPlayer','musicList','FirstIndexForceRead'],{"caozuo":"hide"});//首页先隐藏搜索框
+				removeHtmlYs(['aside','musicPlayer','musicList','FirstIndexForceRead'],{"caozuo":"hide"});//首页先隐藏搜索框
 				matchData(DataZao,'zaos',false);
 				matchData(DataWan,'xiawu',true);
 			}
@@ -758,20 +770,29 @@ var DataWan='[data]'+
 				show("shouye");
 			}
 			//遍历站点
-			function stationHBArr(ZdArr,Sj,houzui,tangci,dijige){
+			function stationHBArr(ZdArr,Sj,houzui,tangci,dijige,OrderStr){
 				var article=document.createElement('article');
 				article.setAttribute("id",houzui+"lsTcArtcile");
 				var p=document.createElement('p');
-				p.innerHTML="临时更改<label>"+tangci+"</label>人员(按班级划分)";
+				var lsTemp='';//存储划分字符
+				var lsT='';//存储划分字符，不带双引号
+				if (OrderStr=="班级"){
+					lsTemp='\"站点\"';
+					lsT="站点";
+				}else{
+					lsTemp='\"班级\"';
+					lsT="班级";
+				}
+				p.innerHTML="临时更改<label>"+tangci+"</label>人员<button onclick='changeLs("+lsTemp+",true)'>按"+lsT+"排序</button>";
 				p.setAttribute("id","lsTcP");
 				article.appendChild(p);
 				document.getElementsByTagName("body")[0].appendChild(article);
 				for(var i=0;i<ZdArr.length;i++){
-					stationHB(ZdArr[i],Sj,houzui,dijige);
+					stationHB(ZdArr[i].station,Sj,houzui,dijige,OrderStr,ZdArr[i].stationPY);
 				}
 			}
 			//站点合并,并进行输出
-			function stationHB(HbZdStr,HbData,houzui,dijige){
+			function stationHB(HbZdStr,HbData,houzui,dijige,OrderStr,zdPY){
 				HbData=HbData.replace(/\s*/g,'');//把空格去掉
 				var StHBGuiz=new RegExp("\\d+[\u4e00-\u9fa5]+1[3456789]\\d{9}<zd>"+HbZdStr+"<\/zd>|\\d+[\u4e00-\u9fa5]+<zd>"+HbZdStr+"<\/zd>","g"); //两者选其中一个规则，首选第一个规则
 				var StHBRessJ=HbData.match(StHBGuiz);
@@ -779,9 +800,14 @@ var DataWan='[data]'+
 					var art=document.getElementById(houzui+'lsTcArtcile');
 					var divW=null;
 					var divN=null;
+					var banjiNum=null;
 					for(var j=0;j<StHBRessJ.length;j++){
 						try{
-							var banjiNum=gainMatch("BanjiNum",StHBRessJ[j]);
+							if (OrderStr=="班级"){
+								banjiNum=gainMatch("BanjiNum",StHBRessJ[j]);
+							}else{
+								banjiNum=zdPY;
+							}
 							var bjIdN=document.getElementById(houzui+banjiNum);
 							var bjIdW=document.getElementById(houzui+banjiNum+"W");
 							if (bjIdN!=null && bjIdN!='undefined'){
@@ -791,7 +817,12 @@ var DataWan='[data]'+
 								divW=document.createElement('div');
 								divW.setAttribute('id',houzui+banjiNum+"W")
 								var a=document.createElement('a');
-								a.innerText=banjiNum;
+								if (OrderStr=="班级"){
+									a.innerText=banjiNum;
+								}else{
+									a.innerText=gainMatch("ZhanDian",StHBRessJ[j]);
+								}
+								
 								var divN=document.createElement('div');
 								divN.setAttribute('id',houzui+banjiNum)
 								divN.appendChild(a);
@@ -1138,7 +1169,7 @@ var DataWan='[data]'+
 					return;
 				}
 				else{
-					removeHtmlYs(['aside','footer','musicPlayer','musicList','FirstIndexForceRead'],{"caozuo":"hide"});
+					removeHtmlYs(['aside','musicPlayer','musicList','FirstIndexForceRead'],{"caozuo":"hide"});
 					delPos();
 					matchData(DataZao,'',true,true,sCont,'zaos'); //搜索
 					matchData(DataWan,'',true,true,sCont,'xiawu'); //搜索
@@ -1148,15 +1179,15 @@ var DataWan='[data]'+
 			
 			//删除所有的校车人员位置
 			function delPos(){
-				removeHtmlYs(['article','section'],{"caozuo":"remove"});
-				removeHtmlYs(['article','section'],{"caozuo":"remove"});
-				removeHtmlYs(['article','section'],{"caozuo":"remove"});
-				removeHtmlYs(['article','section'],{"caozuo":"remove"});
-				removeHtmlYs(['article','section'],{"caozuo":"remove"});
-				removeHtmlYs(['article','section'],{"caozuo":"remove"});
-				removeHtmlYs(['article','section'],{"caozuo":"remove"});
-				removeHtmlYs(['article','section'],{"caozuo":"remove"});
-				removeHtmlYs(['article','section'],{"caozuo":"remove"});
+				removeHtmlYs(['article','section','footer'],{"caozuo":"remove"});
+				removeHtmlYs(['article','section','footer'],{"caozuo":"remove"});
+				removeHtmlYs(['article','section','footer'],{"caozuo":"remove"});
+				removeHtmlYs(['article','section','footer'],{"caozuo":"remove"});
+				removeHtmlYs(['article','section','footer'],{"caozuo":"remove"});
+				removeHtmlYs(['article','section','footer'],{"caozuo":"remove"});
+				removeHtmlYs(['article','section','footer'],{"caozuo":"remove"});
+				removeHtmlYs(['article','section','footer'],{"caozuo":"remove"});
+				removeHtmlYs(['article','section','footer'],{"caozuo":"remove"});
 			}
 			//展示相应页面
 			function show(caoz,bool){
@@ -1171,14 +1202,14 @@ var DataWan='[data]'+
 					initData();
 				}
 				else if(caoz=="sousuo"){
-					removeHtmlYs(['aside','footer'],{"caozuo":"show"});
+					removeHtmlYs(['aside'],{"caozuo":"show"});
 					removeHtmlYs(['musicPlayer','musicList','FirstIndexForceRead'],{"caozuo":"hide"});
 					document.getElementById("searchInput").focus();
 					delPos();
 				}
 				else if(caoz=="music"){
 					removeHtmlYs(['aside','FirstIndexForceRead'],{"caozuo":"hide"});
-					removeHtmlYs(['footer','musicPlayer'],{"caozuo":"show"});
+					removeHtmlYs(['musicPlayer'],{"caozuo":"show"});
 					delPos()
 				}
 				else if(caoz=="message"){
@@ -1190,7 +1221,7 @@ var DataWan='[data]'+
 					}
 					document.getElementById("IKnow").removeAttribute('onclick');//去掉我已知晓按钮点击事件
 					removeHtmlYs(['aside','musicPlayer','musicList'],{"caozuo":"hide"});
-					removeHtmlYs(['footer','FirstIndexForceRead'],{"caozuo":"show"});
+					removeHtmlYs(['FirstIndexForceRead'],{"caozuo":"show"});
 					if (DSJInterval!="" || DSJInterval!=null){
 						clearInterval(DSJInterval);
 					}
@@ -1198,12 +1229,30 @@ var DataWan='[data]'+
 					delPos()
 				}
 				else if (caoz=="LsChangeZd"){ //临时变更站点
-					delPos();
-					removeHtmlYs(['aside','musicPlayer','musicList','footer','FirstIndexForceRead'],{"caozuo":"hide"});//全部隐藏
-					stationHBArr(lsChangeXwZdTC1,DataWan,'F','下午第一趟',1);
-					stationHBArr(lsChangeXwZdTC2,DataWan,'S',"下午第二趟",2);
+					changeLs("班级",false);//需要按班级或者站点再进行划分。
 				}
+				addFooter()
+			}
+			function addFooter(){
+				//最后才添加footer版权
+				var footer=document.createElement("footer");
+				footer.innerHTML='Copyright © 2023 thb<br/>'+
+								'温馨提示:本页面数据请勿传播<br/>'+
+								'建议以手机和高版本浏览器访问本网页<br/>'+
+								'页面技术由<a href="https://mp.weixin.qq.com/s/jZVBa8stKUODEyY_m-bGiA" target="_blank" title="访问微信公众号添洪帮">微信公众号添洪帮</a>独家提供技术支持<br/>'+
+								'如果遇到数据错误，请及时向老师反应，谢谢大家支持!';
+				document.getElementsByTagName("body")[0].appendChild(footer);
 				window.scrollTo(0, 0);//滚动到顶部位置
+			}
+			//临时更改站点默认排序，按班级，可以更改为站点，
+			function changeLs(OrderStr,AddFbool){
+				delPos();
+				removeHtmlYs(['aside','musicPlayer','musicList','FirstIndexForceRead'],{"caozuo":"hide"});//全部隐藏
+				stationHBArr(lsChangeXwZdTC1,DataWan,'F','下午第一趟',1,OrderStr);
+				stationHBArr(lsChangeXwZdTC2,DataWan,'S',"下午第二趟",2,OrderStr);
+				if (AddFbool){//需要添加脚步版权
+					addFooter();
+				}
 			}
 			//加载音乐
 			var musicArr=[{'music':'/校车提示音乐/0(背景)下午第一趟校车提示音.mp3','musicName':'0(背景)下午第一趟校车提示音'},{'music':'/校车提示音乐/0下午第一趟校车提示音.mp3','musicName':'0下午第一趟校车提示音'},{'music':'/校车提示音乐/1(背景)下午第二趟校车提示音.mp3','musicName':'1(背景)下午第二趟校车提示音'},{'music':'/校车提示音乐/1下午第二趟校车提示音.mp3','musicName':'1下午第二趟校车提示音'},{'music':'/校车提示音乐/万疆（保持安静提示版本）.mp3','musicName':'万疆（保持安静提示版本）'},{'music':'/校车提示音乐/你看到的我（遵守校车提示版本）.mp3','musicName':'你看到的我（遵守校车提示版本）'},{'music':'/校车提示音乐/刚好遇见你（表现好奖励提示版本）.mp3','musicName':'刚好遇见你（表现好奖励提示版本）'},{'music':'/校车提示音乐/听妈妈的话.mp3','musicName':'听妈妈的话'},{'music':'/校车提示音乐/孤城（防疫提示版本）.mp3','musicName':'孤城（防疫提示版本）'},{'music':'/校车提示音乐/少年（卫生提示版本）.mp3','musicName':'少年（卫生提示版本）'},{'music':'/校车提示音乐/忘川彼岸（候车纪律提示版本）.mp3','musicName':'忘川彼岸（候车纪律提示版本）'},{'music':'/校车提示音乐/怎叹（安全提示版本）.mp3','musicName':'怎叹（安全提示版本）'},{'music':'/校车提示音乐/来迟（车内安全卫生提示版本）.mp3','musicName':'来迟（车内安全卫生提示版本）'},{'music':'/校车提示音乐/白月光与朱砂痣（请假提示版本）.mp3','musicName':'白月光与朱砂痣（请假提示版本）'},{'music':'/校车提示音乐/稻香（爱护提示版本）.mp3','musicName':'稻香（爱护提示版本）'},{'music':'/校车提示音乐/虞兮叹（过马路提示版本）.mp3','musicName':'虞兮叹（过马路提示版本）'},{'music':'/校车提示音乐/踏山河（安全带放好提示版本）.mp3','musicName':'踏山河（安全带放好提示版本）'},{'music':'/校车提示音乐/银河与星斗（礼貌提示版本）.mp3','musicName':'银河与星斗（礼貌提示版本）'},{'music':'/校车提示音乐/青花瓷（准时候车提示版本）.mp3','musicName':'青花瓷（准时候车提示版本）'},{'music':'/更新版本/2021.12.7/yes！ok！【候车纪律提示版本】.mp3','musicName':'yes！ok！【候车纪律提示版本】'},{'music':'/更新版本/2021.12.7/半生雪（韩浩成）【安全带提示版本】.mp3','musicName':'半生雪（韩浩成）【安全带提示版本】'},{'music':'/更新版本/2021.12.7/名字叫中国【礼貌提示版本】.mp3','musicName':'名字叫中国【礼貌提示版本】'},{'music':'/更新版本/2021.12.7/听我说【忘带口罩&&下车前提示版本】.mp3','musicName':'听我说【忘带口罩&&下车前提示版本】'},{'music':'/更新版本/2021.12.7/听我说谢谢你【车内安全卫生提示版本】.mp3','musicName':'听我说谢谢你【车内安全卫生提示版本】'},{'music':'/更新版本/2021.12.7/成长是首歌【忘带口罩&&下车前提示版本】.mp3','musicName':'成长是首歌【忘带口罩&&下车前提示版本】'},{'music':'/更新版本/2021.12.7/有你就幸福【忘带口罩&&下车前提示版本】.mp3','musicName':'有你就幸福【忘带口罩&&下车前提示版本】'},{'music':'/更新版本/2021.12.7/琵琶行【请假提示版本】.mp3','musicName':'琵琶行【请假提示版本】'},{'music':'/更新版本/2021.12.7/给我一个拥抱【候车纪律提示版本】.mp3','musicName':'给我一个拥抱【候车纪律提示版本】'},{'music':'/更新版本/2021.12.7/美人画卷（陈忻儿）【候车&&下车慢慢前行提示版本】.mp3','musicName':'美人画卷（陈忻儿）【候车&&下车慢慢前行提示版本】'},{'music':'/更新版本/2021.12.7/美人画卷（陈忻儿）【表扬&&下车慢慢前行版本】.mp3','musicName':'美人画卷（陈忻儿）【表扬&&下车慢慢前行版本】'},{'music':'/更新版本/2021.12.7/表扬.mp3','musicName':'表扬'},{'music':'/更新版本/2021.12.7/西楼别序（王淋淋）【候车&&下车慢慢前行提示版本】.mp3','musicName':'西楼别序（王淋淋）【候车&&下车慢慢前行提示版本】'},{'music':'/更新版本/2021.12.7/踏山河（张一凡）【安全带放好提示版本】.mp3','musicName':'踏山河（张一凡）【安全带放好提示版本】'},{'music':'/更新版本/2022.03.13/一生有你（校车行为举报&&物品丢失找回版本&车内安全卫生提示版本）.mp3','musicName':'一生有你（校车行为举报&&物品丢失找回版本&车内安全卫生提示版本）'},{'music':'/更新版本/2022.03.13/一起向未来（带齐东西&&下车提示）.mp3','musicName':'一起向未来（带齐东西&&下车提示）'},{'music':'/更新版本/2022.03.13/一路生花（候车&&下车提示）.mp3','musicName':'一路生花（候车&&下车提示）'},{'music':'/更新版本/2022.03.13/卡拉永远OK（校车行为举报）.mp3','musicName':'卡拉永远OK（校车行为举报）'},{'music':'/更新版本/2022.03.13/启程（带齐东西&&下车提示）.mp3','musicName':'启程（带齐东西&&下车提示）'},{'music':'/更新版本/2022.03.13/夜空中最亮的星（候车&&下车提示）.mp3','musicName':'夜空中最亮的星（候车&&下车提示）'},{'music':'/更新版本/2022.03.13/孤勇者【刘诗蕙等】（带齐东西&&下车提示）.mp3','musicName':'孤勇者【刘诗蕙等】（带齐东西&&下车提示）'},{'music':'/更新版本/2022.03.13/快乐崇拜（校车行为举报&&物品丢失找回版本）.mp3','musicName':'快乐崇拜（校车行为举报&&物品丢失找回版本）'},{'music':'/更新版本/2022.03.13/曾经的你（校车行为举报&&物品丢失找回版本）.mp3','musicName':'曾经的你（校车行为举报&&物品丢失找回版本）'},{'music':'/更新版本/2022.03.13/最初的梦想（候车&&下车提示）.mp3','musicName':'最初的梦想（候车&&下车提示）'},{'music':'/更新版本/2022.03.13/校车提示音（版本5奇迹再现）.mp3','musicName':'校车提示音（版本5奇迹再现）'},{'music':'/更新版本/2022.03.13/蓝莲花（候车&&下车提示）.mp3','musicName':'蓝莲花（候车&&下车提示）'},{'music':'/更新版本/2022.03.13/调查中【702张议元】（带齐东西&&下车提示）.mp3','musicName':'调查中【702张议元】（带齐东西&&下车提示）'},{'music':'/更新版本/2022.03.13/青春修炼手册（准时候车提示版本）.mp3','musicName':'青春修炼手册（准时候车提示版本）'},{'music':'/更新版本/2022.10.24/明天会更好（校车行为举报&&物品丢失找回版本）.mp3','musicName':'明天会更好（校车行为举报&&物品丢失找回版本）'},{'music':'/更新版本/2022.10.24/稻香+卡农（校车行为举报&&物品丢失找回版本）.mp3','musicName':'稻香+卡农（校车行为举报&&物品丢失找回版本）'},{'music':'/更新版本/2022.10.24/阳光总在风雨后（校车行为举报&&物品丢失找回版本）.mp3','musicName':'阳光总在风雨后（校车行为举报&&物品丢失找回版本）'},{'music':'/更新版本/2022.10.31/声声慢（举报&&拿回东西）.mp3','musicName':'声声慢（举报&&拿回东西）'},{'music':'/更新版本/2022.10.31/明天会更好（举报&&拿回东西）.mp3','musicName':'明天会更好（举报&&拿回东西）'},{'music':'/更新版本/2022.10.31/火红的撒日朗（举报&&拿回东西）.mp3','musicName':'火红的撒日朗（举报&&拿回东西）'},{'music':'/更新版本/2022.10.31/稻香+卡农（举报&&拿回东西）.mp3','musicName':'稻香+卡农（举报&&拿回东西）'},{'music':'/更新版本/2022.10.31/超级棒棒糖（违反举报&&破坏公物举报&&拿回东西）.mp3','musicName':'超级棒棒糖（违反举报&&破坏公物举报&&拿回东西）'},{'music':'/更新版本/2022.10.31/阳光总在风雨后（举报&&点歌&&拿回东西）.mp3','musicName':'阳光总在风雨后（举报&&点歌&&拿回东西）'},{'music':'/更新版本/2022.10.31/难却（举报&&拿回东西）.mp3','musicName':'难却（举报&&拿回东西）'},{'music':'/更新版本/2022.8.27/17岁【纪律提示版本】.mp3','musicName':'17岁【纪律提示版本】'},{'music':'/更新版本/2022.8.27/你曾是少年【请假提示版本】.mp3','musicName':'你曾是少年【请假提示版本】'},{'music':'/更新版本/2022.8.27/山河【安全带提示版本】.mp3','musicName':'山河【安全带提示版本】'},{'music':'/更新版本/2022.8.27/校车提示音（版本6Just Blue）.mp3','musicName':'校车提示音（版本6Just Blue）'},{'music':'/更新版本/2022.8.27/校车提示音（版本7Just Like This）.mp3','musicName':'校车提示音（版本7Just Like This）'},{'music':'/更新版本/2022.8.27/梦的光点【请假提示版本】.mp3','musicName':'梦的光点【请假提示版本】'},{'music':'/更新版本/2022.8.27/森林【安全带提示版本】.mp3','musicName':'森林【安全带提示版本】'},{'music':'/更新版本/2022.8.27/水手【谜语&&纪律】.mp3','musicName':'水手【谜语&&纪律】'},{'music':'/更新版本/2022.8.27/永不退缩【安全带提示版本】.mp3','musicName':'永不退缩【安全带提示版本】'},{'music':'/更新版本/2023.12.16/三国恋(校车违规行为举报&&垃圾清理提示).mp3','musicName':'三国恋(校车违规行为举报&&垃圾清理提示)'},{'music':'/更新版本/2023.12.16/中国人(校车违规行为举报&&候车遇到问题向组长举报提示).mp3','musicName':'中国人(校车违规行为举报&&候车遇到问题向组长举报提示)'},{'music':'/更新版本/2023.12.16/小英雄大肚腩(校车违规行为举报&&下车慢行回家&&破坏公物举报提示).mp3','musicName':'小英雄大肚腩(校车违规行为举报&&下车慢行回家&&破坏公物举报提示)'},{'music':'/更新版本/2023.12.16/小跳蛙(请假&&物品丢失拿回提示).mp3','musicName':'小跳蛙(请假&&物品丢失拿回提示)'},{'music':'/更新版本/2023.12.16/明天会更好(请假&&不舒服状况&&向司机老师问好提示).mp3','musicName':'明天会更好(请假&&不舒服状况&&向司机老师问好提示)'},{'music':'/更新版本/2023.12.16/最美的光(礼貌问好&&不舒服状况&&候车纪律提示).mp3','musicName':'最美的光(礼貌问好&&不舒服状况&&候车纪律提示)'},{'music':'/更新版本/2023.12.16/梦想家(不舒服状况&&候车纪律&&下车回家提示).mp3','musicName':'梦想家(不舒服状况&&候车纪律&&下车回家提示)'},{'music':'/更新版本/2023.12.16/离别开出花(佩戴放好安全带&&上车问好提示).mp3','musicName':'离别开出花(佩戴放好安全带&&上车问好提示)'},{'music':'/更新版本/2023.12.16/西楼儿女(垃圾清理&&破坏公共物品举报&&下车马上回家提示).mp3','musicName':'西楼儿女(垃圾清理&&破坏公共物品举报&&下车马上回家提示)'},{'music':'/更新版本/2023.5.10/乡间的小路（违规行为举报&破坏公共物品举报）.mp3','musicName':'乡间的小路（违规行为举报&破坏公共物品举报）'},{'music':'/更新版本/2023.5.10/光明（下车清理垃圾&请假提醒）.mp3','musicName':'光明（下车清理垃圾&请假提醒）'},{'music':'/更新版本/2023.5.10/再见（下车清理垃圾&请假提醒）.mp3','musicName':'再见（下车清理垃圾&请假提醒）'},{'music':'/更新版本/2023.5.10/奔跑（候车&上车&下车&拿回物品提醒）.mp3','musicName':'奔跑（候车&上车&下车&拿回物品提醒）'},{'music':'/更新版本/2023.5.10/山不转水转（下车清理垃圾&请假提醒）.mp3','musicName':'山不转水转（下车清理垃圾&请假提醒）'},{'music':'/更新版本/2023.5.10/常回家看看（下车清理垃圾&请假提醒）.mp3','musicName':'常回家看看（下车清理垃圾&请假提醒）'},{'music':'/更新版本/2023.5.10/平凡之路（候车&上车&下车&拿回物品提醒）.mp3','musicName':'平凡之路（候车&上车&下车&拿回物品提醒）'},{'music':'/更新版本/2023.5.10/桃花诺（候车&上车&下车&拿回物品提醒）.mp3','musicName':'桃花诺（候车&上车&下车&拿回物品提醒）'},{'music':'/更新版本/2023.5.10/真的爱你（下车清理垃圾&请假提醒）.mp3','musicName':'真的爱你（下车清理垃圾&请假提醒）'},{'music':'/更新版本/2023.5.10/红蜻蜓（下车清理垃圾&请假提醒）.mp3','musicName':'红蜻蜓（下车清理垃圾&请假提醒）'},{'music':'/更新版本/2023.5.10/超兽武装（候车&上车&下车&拿回物品提醒）.mp3','musicName':'超兽武装（候车&上车&下车&拿回物品提醒）'},{'music':'/更新版本/2023.5.10/鲁冰花（下车清理垃圾&请假提醒）.mp3','musicName':'鲁冰花（下车清理垃圾&请假提醒）'},{'music':'/更新版本/2023.8.31/光芒(校车提示音版本3).mp3','musicName':'光芒(校车提示音版本3)'},{'music':'/更新版本/2023.8.31/勇气大爆发(校车违规行为举报&&物品拿回提示).mp3','musicName':'勇气大爆发(校车违规行为举报&&物品拿回提示)'},{'music':'/更新版本/2023.8.31/年少的你啊(家长接请在原地等候&&下车检查物品提示).mp3','musicName':'年少的你啊(家长接请在原地等候&&下车检查物品提示)'},{'music':'/更新版本/2023.8.31/我爱你中国(校车提示音版本2).mp3','musicName':'我爱你中国(校车提示音版本2)'},{'music':'/更新版本/2023.8.31/阿衣莫(校车提示音版本1).mp3','musicName':'阿衣莫(校车提示音版本1)'},{'music':'/更新版本/你笑起来真好看（下车提示版本）.mp3','musicName':'你笑起来真好看（下车提示版本）'},{'music':'/更新版本/入海【安全带提示版本】.mp3','musicName':'入海【安全带提示版本】'},{'music':'/更新版本/刚好遇见你（下车提示版本）.mp3','musicName':'刚好遇见你（下车提示版本）'},{'music':'/更新版本/听妈妈的话【原地等候&&下车检查版本】.mp3','musicName':'听妈妈的话【原地等候&&下车检查版本】'},{'music':'/更新版本/外婆说（张议元）【下车提示版本】.mp3','musicName':'外婆说（张议元）【下车提示版本】'},{'music':'/更新版本/彩虹的微笑（下车提示版本）.mp3','musicName':'彩虹的微笑（下车提示版本）'},{'music':'/更新版本/春庭雪(上车听从安排提示版本).mp3','musicName':'春庭雪(上车听从安排提示版本)'},{'music':'/更新版本/校车提示音（版本1阿衣莫）.mp3','musicName':'校车提示音（版本1阿衣莫）'},{'music':'/更新版本/校车提示音（版本2我爱你中国）.mp3','musicName':'校车提示音（版本2我爱你中国）'},{'music':'/更新版本/校车提示音（版本3中国话）.mp3','musicName':'校车提示音（版本3中国话）'},{'music':'/更新版本/校车提示音（版本4waybackhome）.mp3','musicName':'校车提示音（版本4waybackhome）'},{'music':'/更新版本/画里弦（王淋淋）【原地等待&&下车检查版本】.mp3','musicName':'画里弦（王淋淋）【原地等待&&下车检查版本】'},{'music':'/更新版本/麻雀【纪律提示版本】.mp3','musicName':'麻雀【纪律提示版本】'},{'music':'/六一校车专辑/不问别离.mp3','musicName':'不问别离'},{'music':'/六一校车专辑/勇气大爆发.mp3','musicName':'勇气大爆发'},{'music':'/六一校车专辑/外婆的澎湖湾.mp3','musicName':'外婆的澎湖湾'},{'music':'/六一校车专辑/奇迹再现.mp3','musicName':'奇迹再现'},{'music':'/六一校车专辑/极乐净土.mp3','musicName':'极乐净土'},{'music':'/六一校车专辑/桃花诺（候车&上车&下车&拿回物品提醒）.mp3','musicName':'桃花诺（候车&上车&下车&拿回物品提醒）'},{'music':'/机房提示音/初中下课提示音.mp3','musicName':'初中下课提示音'},{'music':'/机房提示音/初中下课提示音（背景音乐版）.mp3.mp3','musicName':'初中下课提示音（背景音乐版）'},{'music':'/机房提示音/小学下课提示音.mp3','musicName':'小学下课提示音'},{'music':'/机房提示音/小学下课提示音（背景音乐版）.mp3','musicName':'小学下课提示音（背景音乐版）'},{'music':'/考试音乐/考生守则.mp3','musicName':'考生守则'},{'music':'/考试音乐/考试开始.mp3','musicName':'考试开始'},{'music':'/考试音乐/考试开考前.mp3','musicName':'考试开考前'},{'music':'/考试音乐/考试结束.mp3','musicName':'考试结束'},{'music':'/考试音乐/考试结束前15分钟.mp3','musicName':'考试结束前15分钟'}]
@@ -1305,11 +1354,11 @@ var DataWan='[data]'+
 					var musicShow=document.getElementById("musicList").style.display;
 					if (musicShow=="none"){
 						removeHtmlYs(['aside'],{"caozuo":"hide"});
-						removeHtmlYs(['footer','musicPlayer','musicList'],{"caozuo":"show"});
+						removeHtmlYs(['musicPlayer','musicList'],{"caozuo":"show"});
 					}
 					else{
 						removeHtmlYs(['aside','musicList'],{"caozuo":"hide"});
-						removeHtmlYs(['footer','musicPlayer'],{"caozuo":"show"});
+						removeHtmlYs(['musicPlayer'],{"caozuo":"show"});
 					}
 				}
 				
