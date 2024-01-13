@@ -517,8 +517,20 @@
 		var DataQuest=[{'question':'为什么车上不允许饮食?','answer':'校车上禁止饮食的，饮食会导致车上一股异味。首先，异味可能会导致有些同学发生呕吐现象，其次车在行走过程中吃东西一旦遇到急刹车，可能会造成危险。最后，建议校车到来前把早餐吃完！所以校车内是禁止饮食的！如有不便之处，敬请谅解'},
 					   {'question':'校车到了，学生没到，会等吗？','answer':'校车过时不等！因为校车的时间点基本上固定的，如果一旦等待，那其它站点的时间就会发生晚点，对于其它站点的学生或者家长来说，这是不公平的，另外，有些家长学生不来坐车没有跟老师说或者说了等一分钟，结果等了半小时都有可能的，为了避免这种情况，还是建议提前候车！'}
 				  ];
-		var houcheZAndTime=[{'zhandian':'天星学校空架层@天星学校孔子像@天星学校孔子像','zdtime':'15:45分@16:35分@16:55分'},//@进行分割 默认第一个是学校候车时间地点，其它为各站点的候车时间
-							{'zhandian':'新桥村公交站','zdtime':'7:35分@@@7:35分@16:55分'}
+		var houcheZAndTime=[{'zhandian':'天星学校空架层@天星学校孔子像@天星学校孔子像','zdtime':'15:47分@16:37分@16:53分'},//@进行分割 默认第一个是学校候车时间地点，其它为各站点的候车时间
+							{'zhandian':'新桥东公交站','zdtime':'@7:27分@15:55分@@'},
+							{'zhandian':'新桥村公交站','zdtime':'@7:30分@15:57分@@17:06分'},
+							{'zhandian':'傍新路口公交站','zdtime':'@7:32分@@@17:07分'},
+							{'zhandian':'傍江东村公交站','zdtime':'6:49分@@15:59分@@17:09分'},
+							{'zhandian':'傍江西村公交站','zdtime':'6:51分@@16:01分@@17:11分'},
+							{'zhandian':'城市花园路口公交站','zdtime':'6:53分@@@@17:13分'},
+							{'zhandian':'石岗美心苑公交站','zdtime':'6:55分@@16:03分@@17:14分'},
+							{'zhandian':'石岗东村公交站','zdtime':'6:57分@@16:05分@@17:15分'},
+							{'zhandian':'沙墟市场公交站','zdtime':'7:03分@@16:11分@@'},
+							{'zhandian':'桥虹花园公交站','zdtime':'7:08分@@@@'},
+							{'zhandian':'茶东村富怡路公交站','zdtime':'7:14分@@@@'},
+							{'zhandian':'华盛隆超市对面','zdtime':'@7:39分@@16:45分@'},
+							{'zhandian':'芙蓉超市','zdtime':'@7:41分@@16:47分@'}
 							];
 							
 		var lsChangeXwZdTC1=[{'station':'傍江东村公交站','stationPY':'bjdcgjz'},
@@ -580,7 +592,7 @@
 '802	付家欣	           <zd>沙墟市场公交站</zd>/n'+
 '402	陈文晞	13710055234<zd>沙墟市场公交站</zd>/n'+
 '802	马依萱	15920509207<zd>桥虹花园公交站</zd>/n'+
-'702	韦宇轩	15217715250<zd>茶东村(富怡路)公交站</zd>/n'+
+'702	韦宇轩	15217715250<zd>茶东村富怡路公交站</zd>/n'+
 '[/data]                   /n'+
 '[data]'+
 '403	谢鹏宇	13662848541<zd>新桥东公交站</zd>/n'+
@@ -1100,36 +1112,59 @@ var DataWan='[data]'+
 					
 					var zdian='';
 					zdian=gainMatch("ZhanDian",dataBjiPhone[j]);
-					if (zdian==''){
-						zdian='暂无相应站点';
-					}
+					var dzzd=gainMatch("ZhanDian",dataBjiPhone[j]);//到站站点
 					var ztime='暂无相应时间';
-					if (tangci.indexOf("下午")>=0){ //下午趟次 找到对应的候车时间以及地点
+					if (tangci.indexOf("下午")>=0){ //下午趟次 找到对应的候车时间以及地点===>取校内
 						var pN5=document.createElement('p');
 						pN5.innerHTML="到站站点：<label>"+zdian+"</label>";
 						divN.appendChild(pN5);
-						for (var ii=0;ii<houcheZAndTime.length;ii++){
-							var zhandian=houcheZAndTime[ii].zhandian;
-							var zhandianTime=houcheZAndTime[ii].zdtime;
-							if (zhandianTime.indexOf("@")>=0 && zhandian.indexOf("@")>=0){
-								//字符串分割
-								var zdTimeArr=zhandianTime.split("@");
-								var zdArr=zhandian.split("@");
-								for (var t=0;t<zdTimeArr.length;t++){
-									if (tangci.indexOf(t+1)>=0){
-										zdian=zdArr[t];
-										ztime=zdTimeArr[t];
-									}
+						var zhandian=houcheZAndTime[0].zhandian;//首个默认是校内站点
+						var zhandianTime=houcheZAndTime[0].zdtime;
+						if (zhandianTime.indexOf("@")>=0 && zhandian.indexOf("@")>=0){
+							//字符串分割
+							var zdTimeArr=zhandianTime.split("@");
+							var zdArr=zhandian.split("@");
+							for (var t=0;t<zdTimeArr.length;t++){
+								if (tangci.indexOf(t+1)>=0){
+									zdian=zdArr[t];
+									ztime=zdTimeArr[t];//下午候车时间以及站点
 								}
 							}
 						}
 					}
+					if (zdian==''){
+						zdian='暂无相应站点';
+					}
+					
+					for(var zdN=0;zdN<houcheZAndTime.length;zdN++){
+						if (dzzd==houcheZAndTime[zdN].zhandian){
+							var zdT=houcheZAndTime[zdN].zdtime;
+							var zdTArr=zdT.split("@");
+							for (var t=0;t<zdTArr.length;t++){
+								if (tangci.indexOf("下午")>=0){
+									if (tangci.indexOf(t+1)>=0){
+										var pN6=document.createElement('p');
+										pN6.innerHTML="到站时间：<label>"+zdTArr[t+2]+"</label>,请提前5分钟候车"; //从第三个开始取，第三个开始才是下午趟次
+										divN.appendChild(pN6);
+										break;
+									}
+								}else{
+									if (tangci.indexOf(t+1)>=0){
+										ztime=zdTArr[t];//早上候车时间
+									}
+								}
+								
+							}
+							
+						}
+					}
+					
 					var pN3=document.createElement('p');
 					pN3.innerHTML="候车站点：<label>"+zdian+"</label>";
 					divN.appendChild(pN3);
 					
 					var pN4=document.createElement('p');
-					pN4.innerHTML="侯车时间：<label>"+ztime+"</label>前,过时不等!";
+					pN4.innerHTML="候车时间：<label>"+ztime+"</label>前,过时不等!";
 					divN.appendChild(pN4);
 					
 					var a=document.createElement('a');
@@ -1169,10 +1204,11 @@ var DataWan='[data]'+
 					return;
 				}
 				else{
-					removeHtmlYs(['aside','musicPlayer','musicList','FirstIndexForceRead'],{"caozuo":"hide"});
 					delPos();
+					removeHtmlYs(['aside','musicPlayer','musicList','FirstIndexForceRead'],{"caozuo":"hide"});
 					matchData(DataZao,'',true,true,sCont,'zaos'); //搜索
 					matchData(DataWan,'',true,true,sCont,'xiawu'); //搜索
+					addFooter();//添加脚步版权
 				}
 				
 			}
@@ -1209,7 +1245,7 @@ var DataWan='[data]'+
 				}
 				else if(caoz=="music"){
 					removeHtmlYs(['aside','FirstIndexForceRead'],{"caozuo":"hide"});
-					removeHtmlYs(['musicPlayer'],{"caozuo":"show"});
+					removeHtmlYs(['musicPlayer','musicList'],{"caozuo":"show"});
 					delPos()
 				}
 				else if(caoz=="message"){
@@ -1395,13 +1431,15 @@ var DataWan='[data]'+
 			//图片封面旋转
 			var xzdu=0;//刚刚开始图片不旋转
 			function musicPhotoxz(){
-				if (!audio.paused){ //不是暂停状态
-					var img=document.getElementById("img");
-					if (xzdu>360){
-						xzdu=0;//360度则重新赋值为0
+				if (audio.readyState==4||audio.readyState==3){
+					if (!audio.paused){ //不是暂停状态
+						var img=document.getElementById("img");
+						if (xzdu>360){
+							xzdu=0;//360度则重新赋值为0
+						}
+						xzdu+=1;//每次加1度
+						img.setAttribute("style","transform:rotate("+xzdu+"deg)");
 					}
-					xzdu+=1;//每次加1度
-					img.setAttribute("style","transform:rotate("+xzdu+"deg)");
 				}
 			}
 			
