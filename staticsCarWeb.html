@@ -92,6 +92,9 @@
 			font-weight:bold;
 			color:#ffffff;
 		}
+		article div p.center{
+			text-align:center;
+		}
 		article>div{
 			width:80%;
 			margin:1% 10%;
@@ -1115,9 +1118,6 @@ var DataWan='[data]'+
 					var dzzd=gainMatch("ZhanDian",dataBjiPhone[j]);//到站站点
 					var ztime='暂无相应时间';
 					if (tangci.indexOf("下午")>=0){ //下午趟次 找到对应的候车时间以及地点===>取校内
-						var pN5=document.createElement('p');
-						pN5.innerHTML="到站站点：<label>"+zdian+"</label>";
-						divN.appendChild(pN5);
 						var zhandian=houcheZAndTime[0].zhandian;//首个默认是校内站点
 						var zhandianTime=houcheZAndTime[0].zdtime;
 						if (zhandianTime.indexOf("@")>=0 && zhandian.indexOf("@")>=0){
@@ -1135,6 +1135,12 @@ var DataWan='[data]'+
 					if (zdian==''){
 						zdian='暂无相应站点';
 					}
+					var pN3=document.createElement('p');
+					pN3.innerHTML="候车站点：<label>"+zdian+"</label>";
+					divN.appendChild(pN3);
+					var pN4=document.createElement('p');
+					pN4.innerHTML="候车时间：<label>"+ztime+"</label>前,过时不等!";
+					divN.appendChild(pN4);
 					
 					for(var zdN=0;zdN<houcheZAndTime.length;zdN++){
 						if (dzzd==houcheZAndTime[zdN].zhandian){
@@ -1143,14 +1149,19 @@ var DataWan='[data]'+
 							for (var t=0;t<zdTArr.length;t++){
 								if (tangci.indexOf("下午")>=0){
 									if (tangci.indexOf(t+1)>=0){
+										var pN5=document.createElement('p');
+										pN5.innerHTML="下车站点：<label>"+dzzd+"</label>";
+										divN.appendChild(pN5);
 										var pN6=document.createElement('p');
-										pN6.innerHTML="到站时间：<label>"+zdTArr[t+2]+"</label>,请提前5分钟候车"; //从第三个开始取，第三个开始才是下午趟次
+										pN6.innerHTML="下车时间：<label>"+zdTArr[t+2]+"</label>,请提前5分钟候车"; //从第三个开始取，第三个开始才是下午趟次
 										divN.appendChild(pN6);
 										break;
 									}
 								}else{
 									if (tangci.indexOf(t+1)>=0){
 										ztime=zdTArr[t];//早上候车时间
+										pN4.innerHTML="候车时间：<label>"+ztime+"</label>前,过时不等!";
+										break;
 									}
 								}
 								
@@ -1159,13 +1170,10 @@ var DataWan='[data]'+
 						}
 					}
 					
-					var pN3=document.createElement('p');
-					pN3.innerHTML="候车站点：<label>"+zdian+"</label>";
-					divN.appendChild(pN3);
-					
-					var pN4=document.createElement('p');
-					pN4.innerHTML="候车时间：<label>"+ztime+"</label>前,过时不等!";
-					divN.appendChild(pN4);
+					var pN7=document.createElement('p');
+					pN7.innerHTML="早晚点5分钟属于正常情况!!!";
+					pN7.setAttribute("class","center")
+					divN.appendChild(pN7);
 					
 					var a=document.createElement('a');
 					a.innerHTML="有错误?复制微信号联系老师";
