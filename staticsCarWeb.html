@@ -725,7 +725,7 @@ var DataWan='[data]'+
 			var DSJInterval="";//我已知晓定时器
 			var isR=true;//默认已经阅读过一封信
 			/*if (isRead==='true'){
-				initData();//正常初始化
+				show('shouye',false);//正常初始化
 			}else{
 				//展示致班主任的一封信
 				isR=false;
@@ -753,7 +753,7 @@ var DataWan='[data]'+
 					"如果学生请假，请跟校车老师说，否则，下次不等该名学生，您自行送回!!!</p><p>" +
 					"校车站点固定，一旦确认，不可更改上下车站点!!!</p><p>" +
 					"校车上禁止饮食!!!所以有些学生早餐没有吃完可能会带回来吃，请各位班主任知悉!</p><p>" +
-					"本校车校内候车时间以及候车地点:</p>"+getCarPlaceAndTime()+"过时不等!没赶上请自行送回!<br/><br/>本页面仅强制显示一次<p>3号校车管理员示<br/>2024年1月9日</p></div>"
+					"本校车校内候车时间以及候车地点:</p>"+getCarPlaceAndTime()+"过时不等!没赶上校车,请班主任自行联系家长接回~<br/><br/>本页面数据(包括网页地址)禁止转发给其他人员！一经造成数据泄露，后果由您自行承担!<br/><br/>本页面仅强制显示一次<br/><p>3号校车管理员示<br/>2024年1月13日</p></div>"
 			}
 			//获取候车时间和候车地点
 			function getCarPlaceAndTime(){
@@ -1281,7 +1281,7 @@ var DataWan='[data]'+
 				//最后才添加footer版权
 				var footer=document.createElement("footer");
 				footer.innerHTML='Copyright © 2023 thb<br/>'+
-								'温馨提示:本页面数据请勿传播<br/>'+
+								'温馨提示:本页面数据禁止传播<br/>'+
 								'建议以手机和高版本浏览器访问本网页<br/>'+
 								'页面技术由<a href="https://mp.weixin.qq.com/s/jZVBa8stKUODEyY_m-bGiA" target="_blank" title="访问微信公众号添洪帮">微信公众号添洪帮</a>独家提供技术支持<br/>'+
 								'如果遇到数据错误，请及时向老师反应，谢谢大家支持!';
