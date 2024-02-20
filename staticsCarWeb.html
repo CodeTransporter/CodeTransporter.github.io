@@ -141,6 +141,10 @@
 			color:#1200ff;
 			font-weight:bold;
 		}
+		article span.pink{
+			color:#df00ff;
+			font-weight:bold;
+		}
 		article label.station{
 			color:#00c5c5;
 			font-weight:bold;
@@ -669,9 +673,7 @@ var DataZao='[data]'+'104林安琪15107599092<zd>傍江东村公交站</zd>/n'+
 
 '402陈文晞13710055234<zd>沙墟市场公交站</zd>/n'+
 
-'802马依萱15920509207<zd>桥虹花园公交站</zd>/n'+
-
-'702韦宇轩15217715250<zd>茶东村富怡路公交站</zd>/n[/data]'+
+'802马依萱15920509207<zd>桥虹花园公交站</zd>/n[/data]'+
 
 '[data]'+'403谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
 
@@ -840,8 +842,6 @@ var DataWan='[data]'+'403谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
 '104陈泰睿18476826989<zd>城市花园路口公交站</zd>/n'+
 
 '302张一凡15537077787<zd>石岗美心苑公交站</zd>/n'+
-
-'702魏成18927580248<zd>石岗东村公交站</zd>/n'+
 
 '104苏宇轩13539456833<zd>石岗东村公交站</zd>/n'+
 
@@ -1018,7 +1018,7 @@ var DataWan='[data]'+'403谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
 							}else{
 								banjiNum=zdPY;
 							}
-							
+							var bjPhone=gainMatch("Phone",StHBRessJ[j]);
 							var bjIdN=document.getElementById(houzui+banjiNum);
 							var bjIdW=document.getElementById(houzui+banjiNum+"W");
 							if (bjIdN!=null && bjIdN!='undefined'){
@@ -1042,9 +1042,14 @@ var DataWan='[data]'+'403谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
 							}
 							//判断一下这个学生早上是否坐校车，不坐校车特别标红!标重点
 							var xmbj=gainMatch("Banji",StHBRessJ[j]);
-							xmbjInHtml="<span class='blue'>" + xmbj +"</span>"
-							xmbj=xmbj.replace(/\d+/,'');//先把数字替换了
 							var xmbjInHtml;
+							if (bjPhone!=''){
+								xmbjInHtml="<a href='tel:"+bjPhone+"'><span class='blue'>" + xmbj +"</span></a>"
+							}else{
+								xmbjInHtml="<a href='javascript:alert(\"此学生没有留有号码!\")'><span class='pink'>" + xmbj +"</span></a>"
+							}
+							
+							xmbj=xmbj.replace(/\d+/,'');//先把数字替换了
 							//匹配的数据，查找早上或者下午是否乘坐校车人员，则，单程，标红
 							var ppData=null;
 							if (tangci.indexOf("早上")>-1){
@@ -1485,6 +1490,7 @@ var DataWan='[data]'+'403谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
 				}
 				else if (caoz=="LsChangeZd"){ //临时变更站点
 					alert("目前为正式站点，临时站点已停用!!!");
+					return false;
 					//changeLs("班级",false);//需要按班级或者站点再进行划分。
 					
 				}
