@@ -149,6 +149,10 @@
 			color:#00c5c5;
 			font-weight:bold;
 		}
+		article label.arrTime{
+			color:#c5006b;
+			font-weight:bold;
+		}
 		article .important{
 			color:#ff0000;
 			display:inline-block;
@@ -558,17 +562,17 @@
 							{'zhandian':'芙蓉超市','zdtime':'@7:41分@@16:47分@'}
 							];
 							
-		var lsChangeXwZdTC1=[{'station':'傍江东村公交站','stationPY':'bjdcgjz'},
-							{'station':'傍江西村公交站','stationPY':'bjxcgjz'},
-							{'station':'城市花园路口公交站','stationPY':'cshylkgjz'},
-							{'station':'石岗美心苑公交站','stationPY':'sgmxygjz'},
-							{'station':'石岗东村公交站','stationPY':'sgdcgjz'},
-							{'station':'沙墟市场公交站','stationPY':'sxscgjz'}];//下午临时更改下午第一趟站点名称
-		var lsChangeXwZdTC2=[{'station':'新桥东公交站','stationPY':'xqdgjz'},
-							{'station':'新桥村公交站','stationPY':'xqcgjz'},
-							{'station':'傍新路口公交站','stationPY':'bxlkgjz'},
-							{'station':'华盛隆超市对面','stationPY':'hslcsdm'},
-							{'station':'芙蓉超市','stationPY':'frcs'}];//临时更改下午第二趟站点名称
+		var lsChangeXwZdTC1=[{'station':'傍江东村公交站','stationPY':'bjdcgjz','zdLsTime':'16:35分'},//16:27分发车
+							{'station':'傍江西村公交站','stationPY':'bjxcgjz','zdLsTime':'16:37分'},
+							{'station':'城市花园路口公交站','stationPY':'cshylkgjz','zdLsTime':'16:39分'},
+							{'station':'石岗美心苑公交站','stationPY':'sgmxygjz','zdLsTime':'16:40分'},
+							{'station':'石岗东村公交站','stationPY':'sgdcgjz','zdLsTime':'16:42分'},
+							{'station':'沙墟市场公交站','stationPY':'sxscgjz','zdLsTime':'16:47分'}];//下午临时更改下午第一趟站点名称
+		var lsChangeXwZdTC2=[{'station':'新桥东公交站','stationPY':'xqdgjz','zdLsTime':'17:09分'},
+							{'station':'新桥村公交站','stationPY':'xqcgjz','zdLsTime':'17:11分'},
+							{'station':'傍新路口公交站','stationPY':'bxlkgjz','zdLsTime':'17:12分'},
+							{'station':'华盛隆超市对面','stationPY':'hslcsdm','zdLsTime':'17:15分'},
+							{'station':'芙蓉超市','stationPY':'frcs','zdLsTime':'17:16分'}];//临时更改下午第二趟站点名称
 		var allZhandian=[{'station':'傍江东村公交站','stationPY':'bjdcgjz'},
 						{'station':'傍江西村公交站','stationPY':'bjxcgjz'},
 						{'station':'城市花园路口公交站','stationPY':'cshylkgjz'},
@@ -994,19 +998,20 @@ var DataWan='[data]'+'403谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
 					if (ZdArr[i].station=='undefined' || ZdArr[i].station==null){
 						for (var ii=0;ii<allZhandian.length;ii++){	//在所有站点信息里面查找
 							if (allZhandian[ii].station==ZdArr[i]){
-								totalPerson=totalPerson+stationHB(allZhandian[ii].station,Sj,houzui,dijige,OrderStr,allZhandian[ii].stationPY,tangci);
+								totalPerson=totalPerson+stationHB(allZhandian[ii].station,Sj,houzui,dijige,OrderStr,allZhandian[ii].stationPY,tangci,action);
 								break;//退出for
 							}
 						}
 					}else{
-						totalPerson=totalPerson+stationHB(ZdArr[i].station,Sj,houzui,dijige,OrderStr,ZdArr[i].stationPY,tangci);
+						totalPerson=totalPerson+stationHB(ZdArr[i].station,Sj,houzui,dijige,OrderStr,ZdArr[i].stationPY,tangci,action);
 					}
 					
 				}
 				p.innerHTML=p.innerHTML+"  共"+totalPerson+"人";
+				//console.log(tangci);
 			}
 			//站点合并,并进行输出
-			function stationHB(HbZdStr,HbData,houzui,dijige,OrderStr,zdPY,tangci){
+			function stationHB(HbZdStr,HbData,houzui,dijige,OrderStr,zdPY,tangci,action){
 				HbData=HbData.replace(/\s*/g,'');//把空格去掉
 				var StHBGuiz=new RegExp("\\d+[\u4e00-\u9fa5]+1[3456789]\\d{9}<zd>"+HbZdStr+"<\/zd>|\\d+[\u4e00-\u9fa5]+<zd>"+HbZdStr+"<\/zd>","g"); //两者选其中一个规则，首选第一个规则
 				var StHBRessJ=HbData.match(StHBGuiz);
@@ -1056,10 +1061,17 @@ var DataWan='[data]'+'403谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
 							xmbj=xmbj.replace(/\d+/,'');//先把数字替换了
 							//匹配的数据，查找早上或者下午是否乘坐校车人员，则，单程，标红
 							var ppData=null;
+							//判断预计到站还是早上候车时间提示
+							var arrOrWaitTimeTip='';
+							var InOrLeaveCarStationTip="";
 							if (tangci.indexOf("早上")>-1){
 								ppData=DataWan;
+								arrOrWaitTimeTip="候车时间:";
+								InOrLeaveCarStationTip="候车站点:"
 							}else{
 								ppData=DataZao;
+								arrOrWaitTimeTip="到站时间:";
+								InOrLeaveCarStationTip="下车站点:"
 							}
 							ppData=ppData.replace(/\s*/g,'');
 							var DataGuiz=new RegExp(/\[data\][\s\S]*?\[\/data\]/,"g"); //查找姓名
@@ -1082,8 +1094,25 @@ var DataWan='[data]'+'403谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
 							var p=document.createElement('p');
 							p.innerHTML="班级姓名:" +xmbjInHtml;
 							divN.appendChild(p);
+							//如果为班级，则把上下车时间也写在对应页面
+							var curStation=gainMatch("ZhanDian",StHBRessJ[j]);
+							//如果为临时变更，则时间可能不一样。
+							var arrT='';
+							if (action=="临时变更"){
+								arrT=gainArrTime(curStation,tangci,true)
+							}else{
+								arrT=gainArrTime(curStation,tangci,false)
+							}
+							if (arrT==null || arrT=='undefined'){
+								arrT='暂无相应时间'
+							}
+							if (OrderStr=="班级"){
+								var p=document.createElement('p');
+								p.innerHTML=arrOrWaitTimeTip + "<label class='arrTime'>"+ arrT +"</label>,请提前3分钟候车";
+								divN.appendChild(p);
+							}
 							var p=document.createElement('p');
-							p.innerHTML="下车站点:<label class='station'>" + gainMatch("ZhanDian",StHBRessJ[j])+"</label>";
+							p.innerHTML=InOrLeaveCarStationTip + "<label class='station'>" + curStation +"</label>";
 							divN.appendChild(p);
 							/*var p=document.createElement('p');
 							p.innerHTML="家长号码:<label>" + gainMatch("Phone",StHBRessJ[j])+"</label>";*/
@@ -1096,6 +1125,51 @@ var DataWan='[data]'+'403谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
 					divW.appendChild(divN);
 					art.appendChild(divW);
 					return StHBRessJ.length;//返回总人数
+				}
+			}
+			//匹配每个趟次的站点到站时间，返回时间
+			function gainArrTime(station,tangci,linshiOrNot){
+				if (linshiOrNot){ //为True时则为临时变更。
+					var lsTTemp=loadLsTimeData(station,lsChangeXwZdTC1);
+					if  (lsTTemp==null || lsTTemp=='undefined'){
+						lsTTemp=loadLsTimeData(station,lsChangeXwZdTC2);
+					}
+					return lsTTemp;
+				}else{
+					for(var zdN=0;zdN<houcheZAndTime.length;zdN++){
+						if (station==houcheZAndTime[zdN].zhandian){
+							var zdT=houcheZAndTime[zdN].zdtime;
+							var zdTArr=zdT.split("@");
+							for (var t=0;t<zdTArr.length;t++){
+								if (tangci.indexOf("下午")>=0){
+									if (tangci.indexOf(t+1)>=0){
+										return zdTArr[t+2];
+										break;
+									}
+								}else{
+									if (tangci.indexOf(t+1)>=0){
+										ztime=zdTArr[t];//早上候车时间
+										return ztime;
+										break;
+									}
+								}
+								
+							}
+							
+						}
+					}
+				
+				}
+				
+			}
+			function loadLsTimeData(station,Data){
+				var totalStation=Data;
+				for(var zdN=0;zdN<totalStation.length;zdN++){
+					if (station==totalStation[zdN].station){
+						var zdT=totalStation[zdN].zdLsTime;
+						return zdT;
+						break;
+					}
 				}
 			}
 			//正则匹配数据，获取对应的班级，姓名，手机号码，并进行存储
@@ -1432,6 +1506,10 @@ var DataWan='[data]'+'403谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
 					return;
 				}
 				else{
+					//临时变更是否启用
+					if (BjTimeStatus()){
+						alert("临时变更已启用，下午趟次的搜索结果可能不是正确的到站时间!请以首页的'临'页面数据显示为准!如有问题请联系老师!");
+					}
 					delPos();
 					removeHtmlYs(['aside','musicPlayer','musicList','FirstIndexForceRead'],{"caozuo":"hide"});
 					matchData(DataZao,'',true,true,sCont,'zaos'); //搜索
@@ -1452,6 +1530,39 @@ var DataWan='[data]'+'403谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
 				removeHtmlYs(['article','section','footer'],{"caozuo":"remove"});
 				removeHtmlYs(['article','section','footer'],{"caozuo":"remove"});
 				removeHtmlYs(['article','section','footer'],{"caozuo":"remove"});
+			}
+			//获取当前日期 返回 yyyy-mm-dd格式
+			function gainCurRq(){
+			  const now = new Date();
+			  // 分别获取年、月、日、小时、分钟、秒
+			  const year = now.getFullYear();
+			  const month = (now.getMonth() + 1).toString().padStart(2, '0');
+			  const day = now.getDate().toString().padStart(2, '0');
+			  const hours = now.getHours().toString().padStart(2, '0');
+			  const minutes = now.getMinutes().toString().padStart(2, '0');
+			  const seconds = now.getSeconds().toString().padStart(2, '0');
+			  // 返回格式化的字符串
+			  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+			}
+			//临时变更开始日期
+			var setLsBeginT='2024-05-10 00:00:00';
+			var setLsOverT='2024-05-11 23:59:59';
+			//比较日期是否已经结束或者已经开始
+			function BjTimeStatus(){
+				var currq = new Date(gainCurRq());
+				var beginTime = new Date(setLsBeginT);
+				var overTime = new Date(setLsOverT);
+				 
+				if (currq.getTime() < beginTime.getTime()) {
+					//console.log('临时变更尚未启用!');
+					return false;
+				} else if (currq.getTime() > overTime.getTime()) {
+					//console.log('临时变更启用已结束!');
+					return false;
+				} else {
+					//console.log('临时变更还在启用中');
+					return true;
+				}
 			}
 			//展示相应页面
 			function show(caoz,bool){
@@ -1493,14 +1604,22 @@ var DataWan='[data]'+'403谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
 					delPos()
 				}
 				else if (caoz=="LsChangeZd"){ //临时变更站点
-					alert("目前为正式站点，临时站点已停用!!!");
-					return false;
-					//changeLs("班级",false);//需要按班级或者站点再进行划分。
-					
+					if (BjTimeStatus()){
+						changeLs("班级",false);//需要按班级或者站点再进行划分。
+					}else{
+						alert("目前为正式站点，临时站点已停用!!!请点首页的'晚'查看相应的站点");
+						return false;
+					}
 				}
 				else if(caoz=="ZSWanChangeZd"){
-					//常规校车趟次
-					changecgName("站点","下午",false);
+					if (!BjTimeStatus()){
+						//常规校车趟次
+						changecgName("站点","下午",false);
+					}else{
+						alert("目前为临时变更到站站点，晚上到站站点已停用!!!请点首页的'临'查看相应的站点");
+						return false;
+					}
+					
 				}
 				else if(caoz=="ZSZaoChangeZd"){
 					//常规校车趟次
