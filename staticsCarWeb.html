@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>校车名单管理系统——Powered By 添洪帮</title>
+        <title>校车名单管理系统V3.0——Powered By 添洪帮</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="format-detection" content="telephone=no, email=no">
         <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
@@ -388,7 +388,7 @@
 		</head>
 		<body>
 			<header>
-				校车名单管理系统
+				校车名单管理系统V3.0
 			</header>
 			<ul>
 				<li>
@@ -548,31 +548,31 @@
 				  ];
 		var houcheZAndTime=[{'zhandian':'天星学校空架层@天星学校孔子像@天星学校孔子像','zdtime':'15:47分@16:37分@16:53分'},//@进行分割 默认第一个是学校候车时间地点，其它为各站点的候车时间
 							{'zhandian':'新桥东公交站','zdtime':'@7:27分@15:55分@@'},
-							{'zhandian':'新桥村公交站','zdtime':'@7:30分@15:57分@@17:06分'},
-							{'zhandian':'傍新路口公交站','zdtime':'@7:32分@@@17:07分'},
+							{'zhandian':'新桥村公交站','zdtime':'@7:28分@15:57分@@17:06分'},
+							{'zhandian':'傍新路口公交站','zdtime':'@7:30分@@@17:07分'},
 							{'zhandian':'傍江东村公交站','zdtime':'6:49分@@15:59分@@17:09分'},
 							{'zhandian':'傍江西村公交站','zdtime':'6:51分@@16:01分@@17:11分'},
 							{'zhandian':'城市花园路口公交站','zdtime':'6:53分@@@@17:13分'},
-							{'zhandian':'石岗美心苑公交站','zdtime':'6:55分@@16:03分@@17:14分'},
-							{'zhandian':'石岗东村公交站','zdtime':'6:57分@@16:05分@@17:15分'},
+							{'zhandian':'石岗美心苑公交站','zdtime':'6:54分@@16:03分@@17:14分'},
+							{'zhandian':'石岗东村公交站','zdtime':'6:55分@@16:05分@@17:15分'},
 							{'zhandian':'沙墟市场公交站','zdtime':'7:03分@@16:11分@@'},
-							{'zhandian':'桥虹花园公交站','zdtime':'7:08分@@@@'},
-							{'zhandian':'茶东村富怡路公交站','zdtime':'7:14分@@@@'},
-							{'zhandian':'华盛隆超市对面','zdtime':'@7:39分@@16:45分@'},
-							{'zhandian':'芙蓉超市','zdtime':'@7:41分@@16:47分@'}
+							{'zhandian':'桥虹花园公交站','zdtime':'7:07分@@@@'},
+							{'zhandian':'茶东村富怡路公交站','zdtime':'7:11分@@@@'},
+							{'zhandian':'华盛隆超市对面','zdtime':'@7:38分@@16:45分@'},
+							{'zhandian':'芙蓉超市','zdtime':'@7:39分@@16:47分@'}
 							];
 							
-		var lsChangeXwZdTC1=[{'station':'傍江东村公交站','stationPY':'bjdcgjz','zdLsTime':'16:35分'},//16:27分发车
+		var lsChangeXwZdTC1=[{'station':'傍江东村公交站','stationPY':'bjdcgjz','zdLsTime':'16:35分'},//16:25分发车
 							{'station':'傍江西村公交站','stationPY':'bjxcgjz','zdLsTime':'16:37分'},
 							{'station':'城市花园路口公交站','stationPY':'cshylkgjz','zdLsTime':'16:39分'},
 							{'station':'石岗美心苑公交站','stationPY':'sgmxygjz','zdLsTime':'16:40分'},
 							{'station':'石岗东村公交站','stationPY':'sgdcgjz','zdLsTime':'16:42分'},
-							{'station':'沙墟市场公交站','stationPY':'sxscgjz','zdLsTime':'16:47分'}];//下午临时更改下午第一趟站点名称
-		var lsChangeXwZdTC2=[{'station':'新桥东公交站','stationPY':'xqdgjz','zdLsTime':'17:09分'},
-							{'station':'新桥村公交站','stationPY':'xqcgjz','zdLsTime':'17:11分'},
-							{'station':'傍新路口公交站','stationPY':'bxlkgjz','zdLsTime':'17:12分'},
-							{'station':'华盛隆超市对面','stationPY':'hslcsdm','zdLsTime':'17:15分'},
-							{'station':'芙蓉超市','stationPY':'frcs','zdLsTime':'17:16分'}];//临时更改下午第二趟站点名称
+							{'station':'沙墟市场公交站','stationPY':'sxscgjz','zdLsTime':'16:49分'}];//下午临时更改下午第一趟站点名称   学校回，估计要20分
+		var lsChangeXwZdTC2=[{'station':'新桥东公交站','stationPY':'xqdgjz','zdLsTime':'17:17分'},
+							{'station':'新桥村公交站','stationPY':'xqcgjz','zdLsTime':'17:19分'},
+							{'station':'傍新路口公交站','stationPY':'bxlkgjz','zdLsTime':'17:20分'},
+							{'station':'华盛隆超市对面','stationPY':'hslcsdm','zdLsTime':'17:25分'},
+							{'station':'芙蓉超市','stationPY':'frcs','zdLsTime':'17:26分'}];//临时更改下午第二趟站点名称
 		var allZhandian=[{'station':'傍江东村公交站','stationPY':'bjdcgjz'},
 						{'station':'傍江西村公交站','stationPY':'bjxcgjz'},
 						{'station':'城市花园路口公交站','stationPY':'cshylkgjz'},
@@ -589,7 +589,7 @@
 		//console.log(banji);
 		/*Tip:不知道如何批量输入数据的话，notepad++里面按住Alt并往下拖动鼠标即可，即可进行多行编辑*/
 		//坐车人员数据，早上数据DataZao    晚上数据DataWan	
-var DataZao='[data]'+'104林安琪15107599092<zd>傍江东村公交站</zd>/n'+
+var DataZao='[data]'+'104林安琪15107599092<zd>傍江东村公交站</zd><js>需要家长接送</js><newstu>是</newstu>/n'+
 
 '302雷雅婷13574566313<zd>傍江东村公交站</zd>/n'+
 
@@ -939,7 +939,7 @@ var DataWan='[data]'+'403谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
 					"过时不等!没赶上校车,请班主任自行联系家长接回~<br/><br/>"+
 					"尊重是相互的，望各位班主任理解!!!<br/><br/>"+
 					"本页面数据(包括网页地址)禁止转发给其他人员！仅供内部人员使用!!!!一经造成数据泄露，后果由您自行承担!<br/><br/>"+
-					"本页面仅强制显示一次<br/><p>3号校车管理员示<br/>2024年1月13日</p></div>"
+					"本页面每个学期仅强制显示一次<br/><p>3号校车管理员示<br/>2024年1月13日</p></div>"
 			}
 			//获取候车时间和候车地点
 			function getCarPlaceAndTime(){
@@ -966,9 +966,16 @@ var DataWan='[data]'+'403谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
 				}
 			}
 			function IKnowClick(){
-				isR=true;//阅读了
-				window.localStorage['isRead']='true';//已经阅读过
-				show("shouye");
+				//弹出相应提示
+				var waitBusConf=confirm("我已知晓3号校车下午候车时间以及地点,如果学生没有及时下来我会将其送回去!");
+				if (waitBusConf==true){
+					isR=true;//阅读了
+					window.localStorage['isRead']='true';//已经阅读过
+					show("shouye");
+				}else{
+					alert("你点了取消按钮，请先确保阅读完相关内容并已知晓，方可进行下一步!");
+				}
+				
 			}
 			//遍历站点
 			function stationHBArr(ZdArr,Sj,houzui,tangci,dijige,OrderStr,action){
@@ -1008,6 +1015,7 @@ var DataWan='[data]'+'403谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
 					
 				}
 				p.innerHTML=p.innerHTML+"  共"+totalPerson+"人";
+				//   <a><input type='checkbox' value='接送'/>接送</a>   <a><input type='checkbox' value='新生'/>新生</a>
 				//console.log(tangci);
 			}
 			//站点合并,并进行输出
@@ -1545,8 +1553,8 @@ var DataWan='[data]'+'403谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
 			  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 			}
 			//临时变更开始日期
-			var setLsBeginT='2024-05-10 00:00:00';
-			var setLsOverT='2024-05-11 23:59:59';
+			var setLsBeginT='2024-07-07 17:30:00';
+			var setLsOverT='2024-07-15 17:59:59';
 			//比较日期是否已经结束或者已经开始
 			function BjTimeStatus(){
 				var currq = new Date(gainCurRq());
@@ -1612,13 +1620,11 @@ var DataWan='[data]'+'403谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
 					}
 				}
 				else if(caoz=="ZSWanChangeZd"){
-					if (!BjTimeStatus()){
-						//常规校车趟次
-						changecgName("站点","下午",false);
-					}else{
-						alert("目前为临时变更到站站点，晚上到站站点已停用!!!请点首页的'临'查看相应的站点");
-						return false;
+					if (BjTimeStatus()){
+						alert("目前为临时变更到站站点，当前'晚'到站站点已停用!!!当前查询信息可能不准确,请点首页的'临'查看相应的站点");
 					}
+					//常规校车趟次
+					changecgName("站点","下午",false);
 					
 				}
 				else if(caoz=="ZSZaoChangeZd"){
