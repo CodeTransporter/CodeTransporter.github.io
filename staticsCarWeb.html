@@ -567,12 +567,12 @@
 							{'station':'城市花园路口公交站','stationPY':'cshylkgjz','zdLsTime':'16:49分'},
 							{'station':'石岗美心苑公交站','stationPY':'sgmxygjz','zdLsTime':'16:50分'},
 							{'station':'石岗东村公交站','stationPY':'sgdcgjz','zdLsTime':'16:52分'},
-							{'station':'沙墟市场公交站','stationPY':'sxscgjz','zdLsTime':'16:59分'}];//下午临时更改下午第一趟站点名称   学校回，估计要20分
-		var lsChangeXwZdTC2=[{'station':'新桥东公交站','stationPY':'xqdgjz','zdLsTime':'17:27分'},
-							{'station':'新桥村公交站','stationPY':'xqcgjz','zdLsTime':'17:29分'},
-							{'station':'傍新路口公交站','stationPY':'bxlkgjz','zdLsTime':'17:30分'},
-							{'station':'华盛隆超市对面','stationPY':'hslcsdm','zdLsTime':'17:35分'},
-							{'station':'芙蓉超市','stationPY':'frcs','zdLsTime':'17:36分'}];//临时更改下午第二趟站点名称
+							{'station':'沙墟市场公交站','stationPY':'sxscgjz','zdLsTime':'16:57分'}];//下午临时更改下午第一趟站点名称   学校回，估计要20分
+		var lsChangeXwZdTC2=[{'station':'新桥东公交站','stationPY':'xqdgjz','zdLsTime':'17:25分'},
+							{'station':'新桥村公交站','stationPY':'xqcgjz','zdLsTime':'17:27分'},
+							{'station':'傍新路口公交站','stationPY':'bxlkgjz','zdLsTime':'17:28分'},
+							{'station':'华盛隆超市对面','stationPY':'hslcsdm','zdLsTime':'17:33分'},
+							{'station':'芙蓉超市','stationPY':'frcs','zdLsTime':'17:34分'}];//临时更改下午第二趟站点名称
 		var allZhandian=[{'station':'傍江东村公交站','stationPY':'bjdcgjz'},
 						{'station':'傍江西村公交站','stationPY':'bjxcgjz'},
 						{'station':'城市花园路口公交站','stationPY':'cshylkgjz'},
@@ -1517,7 +1517,7 @@ var DataWan='[data]'+'403谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
 				else{
 					//临时变更是否启用
 					if (BjTimeStatus()){
-						alert("临时变更已启用，下午趟次的搜索结果可能不是正确的到站时间!请以首页的'临'页面数据显示为准!如有问题请联系老师!");
+						alert("临时变更趟次已启用\n\n请以首页的'临'页面数据显示为准!\n\n当前页面下午趟次的搜索结果可能不是正确的到站时间!\n\n如有问题请联系老师!");
 					}
 					delPos();
 					removeHtmlYs(['aside','musicPlayer','musicList','FirstIndexForceRead'],{"caozuo":"hide"});
@@ -1616,13 +1616,13 @@ var DataWan='[data]'+'403谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
 					if (BjTimeStatus()){
 						changeLs("班级",false);//需要按班级或者站点再进行划分。
 					}else{
-						alert("目前为正式站点，临时站点已停用!!!请点首页的'晚'查看相应的站点");
+						alert("请点首页的'晚'查看相应的站点\n\n目前为正式站点，临时站点已停用!!!");
 						return false;
 					}
 				}
 				else if(caoz=="ZSWanChangeZd"){
 					if (BjTimeStatus()){
-						alert("目前为临时变更到站站点，当前'晚'到站站点已停用!!!当前查询信息可能不准确,请点首页的'临'查看相应的站点");
+						alert("当前查询信息可能不准确,请点首页的'临'查看相应的站点\n\n目前为临时变更到站站点，当前'晚'到站站点已停用!!!");
 					}
 					//常规校车趟次
 					changecgName("站点","下午",false);
