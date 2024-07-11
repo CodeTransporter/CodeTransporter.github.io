@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>校车名单管理系统V3.21——Powered By 添洪帮</title>
+        <title>校车名单管理程序V3.22——Powered By 添洪帮</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="format-detection" content="telephone=no, email=no">
         <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
@@ -116,6 +116,20 @@
 		article>div div p{
 			padding:0.3em;
 			border-bottom:1px solid #00c5c5;
+		}
+		/*复制完样式*/
+		article p button.copyFinishstu{
+			font-size:1.5em;
+			color:#b3bbbb;
+		}
+		/*复制样式*/
+		article p button.copystu{
+			font-size:1.5em;
+			color:#103d3d;
+		}
+		/*居中*/
+		article>div div p.center{
+			text-align:center;
 		}
 		article>div div p label{
 			color:#4a96f4;
@@ -404,7 +418,7 @@
 		</head>
 		<body>
 			<header>
-				校车名单管理系统V3.21
+				校车名单管理程序V3.22
 			</header>
 			<ul>
 				<li>
@@ -578,17 +592,17 @@
 							{'zhandian':'芙蓉超市','zdtime':'@7:39分@@16:47分@'}
 							];
 							
-		var lsChangeXwZdTC1=[{'station':'傍江东村公交站','stationPY':'bjdcgjz','zdLsTime':'16:45分'},//16:38分发车
-							{'station':'傍江西村公交站','stationPY':'bjxcgjz','zdLsTime':'16:47分'},
-							{'station':'城市花园路口公交站','stationPY':'cshylkgjz','zdLsTime':'16:49分'},
-							{'station':'石岗美心苑公交站','stationPY':'sgmxygjz','zdLsTime':'16:50分'},
-							{'station':'石岗东村公交站','stationPY':'sgdcgjz','zdLsTime':'16:52分'},
-							{'station':'沙墟市场公交站','stationPY':'sxscgjz','zdLsTime':'16:57分'}];//下午临时更改下午第一趟站点名称   学校回，估计要20分
-		var lsChangeXwZdTC2=[{'station':'新桥东公交站','stationPY':'xqdgjz','zdLsTime':'17:25分'},
-							{'station':'新桥村公交站','stationPY':'xqcgjz','zdLsTime':'17:27分'},
-							{'station':'傍新路口公交站','stationPY':'bxlkgjz','zdLsTime':'17:28分'},
-							{'station':'华盛隆超市对面','stationPY':'hslcsdm','zdLsTime':'17:33分'},
-							{'station':'芙蓉超市','stationPY':'frcs','zdLsTime':'17:34分'}];//临时更改下午第二趟站点名称
+		var lsChangeXwZdTC1=[{'station':'傍江东村公交站','stationPY':'bjdcgjz','zdLsTime':'10:38分'},//10:30分发车
+							{'station':'傍江西村公交站','stationPY':'bjxcgjz','zdLsTime':'10:40分'},
+							{'station':'城市花园路口公交站','stationPY':'cshylkgjz','zdLsTime':'10:42分'},
+							{'station':'石岗美心苑公交站','stationPY':'sgmxygjz','zdLsTime':'10:43分'},
+							{'station':'石岗东村公交站','stationPY':'sgdcgjz','zdLsTime':'10:44分'},
+							{'station':'沙墟市场公交站','stationPY':'sxscgjz','zdLsTime':'10:51分'}];//下午临时更改下午第一趟站点名称   学校回，估计要20分
+		var lsChangeXwZdTC2=[{'station':'新桥东公交站','stationPY':'xqdgjz','zdLsTime':'11:16分'},
+							{'station':'新桥村公交站','stationPY':'xqcgjz','zdLsTime':'11:17分'},
+							{'station':'傍新路口公交站','stationPY':'bxlkgjz','zdLsTime':'11:18分'},
+							{'station':'华盛隆超市对面','stationPY':'hslcsdm','zdLsTime':'11:23分'},
+							{'station':'芙蓉超市','stationPY':'frcs','zdLsTime':'11:24分'}];//临时更改下午第二趟站点名称
 		var allZhandian=[{'station':'傍江东村公交站','stationPY':'bjdcgjz'},
 						{'station':'傍江西村公交站','stationPY':'bjxcgjz'},
 						{'station':'城市花园路口公交站','stationPY':'cshylkgjz'},
@@ -1100,6 +1114,7 @@ var DataWan='[data]'+'403谢鹏宇13662848541<zd>新桥东公交站</zd>'+
 							}
 							//判断一下这个学生是否为单程坐校车，不坐校车特别标红!标重点
 							var xmbj=gainMatch("Banji",StHBRessJ[j]);
+							var xmClass=xmbj;//存储班级姓名
 							var xmbjInHtml;
 							if (bjPhone!=''){
 								xmbjInHtml="<a href='tel:"+bjPhone+"'><span class='blue'>"+  xmbj + "</span></a>"
@@ -1194,6 +1209,14 @@ var DataWan='[data]'+'403谢鹏宇13662848541<zd>新桥东公交站</zd>'+
 								p.innerHTML="<label class="+classN+">学生备注:</label><label class='dtbeizhu'>" + bz+"</label>";
 								divNN.appendChild(p);
 							}
+							var tip='未在候车点候车';
+							if (tangci.indexOf("下午")>-1){
+								tip='未上车';
+							}
+							var p=document.createElement("p");
+							p.innerHTML="<button class='copystu' onclick='showCopyCG(this,\""+xmClass+"\",\""+tip+"\");'>复制学生:" + xmClass +"</button>";
+							p.setAttribute('class','center');
+							divNN.appendChild(p);
 							/*var p=document.createElement('p');
 							p.innerHTML="家长号码:<label>" + gainMatch("Phone",StHBRessJ[j])+"</label>";*/
 							divN.appendChild(divNN);
@@ -1466,7 +1489,7 @@ var DataWan='[data]'+'403谢鹏宇13662848541<zd>新桥东公交站</zd>'+
 				alert("抱歉，"+banJiName+"尚未存有号码,无法进行拨打电话操作，如您是班主任，请及时向校车老师进行更新号码！");
 			}
 			
-			function copyToClipboard(text) {
+			function copyToClipboard(text,isAlert) {
 			  var tempInput = document.createElement("input");
 			  tempInput.style = "position: absolute; left: -1000px; top: -1000px";
 			  tempInput.value = text;
@@ -1474,7 +1497,9 @@ var DataWan='[data]'+'403谢鹏宇13662848541<zd>新桥东公交站</zd>'+
 			  tempInput.select();
 			  document.execCommand("copy");
 			  document.body.removeChild(tempInput);
-			  alert('微信号复制成功,请在打开微信后在添加朋友界面进行添加老师操作');
+			  if (isAlert){
+				alert('微信号复制成功,请在打开微信后在添加朋友界面进行添加老师操作');
+			  }
 			}
 			
 			function SearchButtonAdd(dataBjiPhone,tangci,sCont,bool){
@@ -1581,7 +1606,7 @@ var DataWan='[data]'+'403谢鹏宇13662848541<zd>新桥东公交站</zd>'+
 					var a=document.createElement('a');
 					a.innerHTML="有错误?复制微信号联系老师";
 					a.setAttribute('href','weixin://');
-					a.setAttribute('onclick','copyToClipboard("ZSBRLTC")');
+					a.setAttribute('onclick','copyToClipboard("ZSBRLTC",true)');
 					divN.appendChild(a);
 					article.appendChild(divW);
 					//console.log(article);
@@ -2054,6 +2079,45 @@ var DataWan='[data]'+'403谢鹏宇13662848541<zd>新桥东公交站</zd>'+
 				catch{
 				}
 				
+			}
+			//复制名单，按照剪切板输出以下格式内容:XX班XX级未在候车点候车
+			var cpName='';
+			function cpyStuName(name,cpHz){
+				if (cpName.indexOf(cpHz)<=-1){
+					cpName=name + cpHz;
+					copyToClipboard(cpName,false);
+				}else{
+					if (cpName.indexOf(name)<=-1){//名字不存在就复制
+						cpName=cpName.replace(cpHz,'');
+						cpName=cpName + "," + name + cpHz;
+						copyToClipboard(cpName,false);
+					}
+				}
+			}
+			//显示复制成功
+			function showCopyCG(obj,stu,cpHz){
+				//调用复制
+				cpyStuName(stu,cpHz);
+				obj.innerText='复制成功!可连续复制名单';
+				obj.setAttribute('class','copyFinishstu');
+				obj.setAttribute('onclick','delCopyStu(this,"'+stu+'","'+cpHz+'")');
+			}
+			//删除复制的学生 由于不能直接操作用户剪切板，所以只能复制删掉的内容。
+			function delCopyStu(obj,stu,cpHz){
+				obj.innerText='复制学生:' + stu;
+				obj.setAttribute('class','copystu');
+				obj.setAttribute('onclick','showCopyCG(this,"'+stu+'","'+cpHz+'")');
+				var hz=",";
+				//判断这个学生在不在，在的话就取消复制
+				if (cpName.indexOf(hz+stu)>-1 || cpName.indexOf(stu+hz)>-1){
+					cpName=cpName.replace(hz+stu,'');
+					cpName=cpName.replace(stu+hz,'');//不只这个学生
+				}
+				else{
+					cpName=' ';//清空，只有这个学生，清空剪切板
+				}
+				//复制该内容
+				copyToClipboard(cpName,false);
 			}
 		</script>
 	</body>
