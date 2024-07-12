@@ -121,11 +121,14 @@
 		article p button.copyFinishstu{
 			font-size:1.5em;
 			color:#b3bbbb;
+			padding:1% 5%;
 		}
 		/*复制样式*/
 		article p button.copystu{
 			font-size:1.5em;
-			color:#103d3d;
+			color:#ffffff;
+			background-color:#00c5c5;
+			padding:1% 5%;
 		}
 		/*居中*/
 		article>div div p.center{
@@ -158,14 +161,17 @@
 		article span.blue{
 			color:#1200ff;
 			font-weight:bold;
+			font-size:1.5em;
 		}
 		article span.pink{
 			color:#df00ff;
 			font-weight:bold;
+			font-size:1.5em;
 		}
 		article label.station{
 			color:#00c5c5;
 			font-weight:bold;
+			font-size:1.5em;
 		}
 		article label.arrTime{
 			color:#c5006b;
@@ -1723,8 +1729,11 @@ var DataWan='[data]'+'403谢鹏宇13662848541<zd>新桥东公交站</zd>'+
 			//展示相应页面
 			//定时执行
 			var changeYS='';
+			var cpName='';//存储复制名单
 			function show(caoz,bool){
 				clearInterval(changeYS);//关闭定时器
+				//清空复制提示
+				cpName='';
 				if (!bool){
 					if(!isR){
 						alert("请先阅读完!!!并点击我已知晓按钮!");
@@ -2081,7 +2090,6 @@ var DataWan='[data]'+'403谢鹏宇13662848541<zd>新桥东公交站</zd>'+
 				
 			}
 			//复制名单，按照剪切板输出以下格式内容:XX班XX级未在候车点候车
-			var cpName='';
 			function cpyStuName(name,cpHz){
 				if (cpName.indexOf(cpHz)<=-1){
 					cpName=name + cpHz;
