@@ -1,0 +1,1888 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>校车名单管理程序V3.22——Powered By THB</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="format-detection" content="telephone=no, email=no">
+        <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
+        <meta name="referrer" content="no-referrer-when-downgrade">
+        <meta name="renderer" content="webkit">
+        <meta name="keywords" content="校车名单在线查看,THB">
+        <meta name="application-name" content="校车名单管理系统">
+        <link rel="shortcut icon" href="/favicon.ico">
+        <!--<link rel="stylesheet" href="/.css" media="print" onload='this.media="all"'>-->
+		<style type="text/css">
+		*{
+			margin:0;
+			padding:0;
+			outline:0;
+			/*font-weight:200;*/
+		}
+		header{
+			text-align:center;
+			background-color:#00c5c5;
+			color:#FFFFFF;
+			font-size:3em;
+			font-weight:bold;
+			padding:0.5em 0;
+		}
+		section h1{
+			padding:0.5em 0.5em 0.5em 1em;
+			background-color:#ffbb00;
+			font-size:2em;
+			color:#FFFFFF;
+			font-weight:bold;
+		}
+		section>div{
+			width:90%;
+			margin:1% 5%;
+			box-shadow:5px 8px 10px 1px rgba(0,0,0,0.25);
+			border-radius:2em;
+			font-size:1.8em;
+			margin-bottom:0.5em;
+		}
+		section>div div{
+			margin:0.5em 0;
+		}
+		section>div div p{
+			text-align:center;
+		}
+		section>div div p a{
+			text-decoration:none;
+			color:#000000;
+			padding:0.5em 1em;
+			border:1px solid #0ae2e2;
+			border-radius:1em;
+			text-align:center;
+			margin-bottom:0.5em;
+			display:inline-block;
+			font-size:7vw;
+		}
+		section>div h2{
+			color:#FFFFFF;
+			border-radius:2em 1.5em 0 0;
+			text-align:center;
+			font-weight:bold;
+			font-size:2em;/*6vw*/
+		}
+		.zaos{
+			background-color:#00c5c5;
+		}
+		.xiawu{
+			background-color:#b164bb;
+		}
+		.noZuoWei{
+			border-color:#dadada;
+			color:#dadada;
+		}
+		.noPhone{
+			border:1px solid #d198b8;
+			color:#d198b8;
+		}
+		/*搜索结果样式*/
+		article>p{
+			padding:0.5em 0em 0.5em 0.5em;
+			background-color:#ff7300;
+			color:#000000;
+			font-weight:bold;
+			font-size:2em;
+		}
+		article>p>label{
+			font-weight:bold;
+			color:#ffffff;
+		}
+		article div p.center{
+			text-align:center;
+		}
+		article>div{
+			width:80%;
+			margin:1% 10%;
+			border:1px solid #00c5c5;
+			border-radius:2em;
+			box-shadow:1px -1px 20px #86afd3;
+		}
+		article>h2{
+			margin:0.8em 0;
+			font-weight:200;
+		}
+		article>div>div{
+			margin:3% 5%;
+			font-size:2em;
+		}
+		article>div>div div{
+			border:1px solid #00e3e3;
+			margin-bottom:1em;
+		}
+		article>div div p{
+			padding:0.3em;
+			border-bottom:1px solid #00c5c5;
+		}
+		/*复制完样式*/
+		article p button.copyFinishstu{
+			font-size:1.5em;
+			color:#b3bbbb;
+			padding:1% 5%;
+		}
+		/*复制样式*/
+		article p button.copystu{
+			font-size:1.5em;
+			color:#ffffff;
+			background-color:#00c5c5;
+			padding:1% 5%;
+		}
+		/*居中*/
+		article>div div p.center{
+			text-align:center;
+		}
+		article>div div p label{
+			color:#4a96f4;
+			font-weight:bold;
+		}
+		article>div div p:nth-child(5) label{
+			color:#00c5c5;
+		}
+		article>div div a{
+			text-decoration:none;
+			color:#ff5e00;
+			font-weight:bold;
+		}
+		article>div div>a{
+			display:block;
+			width:100%;
+			text-align:center;
+			border:1px solid #00c5c5;
+			margin-top:0.5em;
+			background-color:#00c5c5;
+			font-weight:bold;
+			color:#FFFFFF;
+			padding:0.3em 0;
+			font-size:1.5em;
+		}
+		/*临时变更站点样式*/
+		article span.blue{
+			color:#1200ff;
+			font-weight:bold;
+			font-size:1.5em;
+		}
+		article span.pink{
+			color:#df00ff;
+			font-weight:bold;
+			font-size:1.5em;
+		}
+		article label.station{
+			color:#00c5c5;
+			font-weight:bold;
+			font-size:1.5em;
+		}
+		article label.arrTime{
+			color:#c5006b;
+			font-weight:bold;
+		}
+		/*备注样式*/
+		article label.red,article>div div p:nth-child(5) label.red{
+			color:#ff0000;
+			font-weight:bold;
+			font-size:1.5em;
+		}
+		article label.purple,article>div div p:nth-child(5) label.purple{
+			color:#b400ff;
+			font-weight:bold;
+			font-size:1.5em;
+		}
+		article .important{
+			color:#ff0000;
+			display:inline-block;
+		}
+		/*重要标注样式*/
+		article p button{
+			font-size:1em;
+			color:#00c5c5;
+			background-color:#ffffff;
+			outline:0;
+			border:0;
+			border-radius:0.5em;
+			padding:0 1%;
+			margin-left:1.5%;
+		}
+		/*搜索页面样式*/
+		aside{
+			margin:2% 5%;
+			width:90%;
+			box-shadow: 1px -1px 20px #86afd3;
+		}
+		
+		aside h1{
+			text-align:center;
+			background-color:#00c5bc;
+			background: linear-gradient(left, #00c5bc, #0098c5);
+			background:-webkit-linear-gradient(left, #00c5bc, #0098c5);
+			background:-moz-linear-gradient(left, #00c5bc,#0098c5);	        
+			background: -o-linear-gradient(left, #00c5bc, #0098c5);
+			color:#FFFFFF;
+			padding:10% 0;
+			font-size:3.5em;
+			font-weight:bold;
+		}
+		
+		aside>div{
+			border-right:1px solid #cccccc;
+			border-left:1px solid #cccccc;
+			border-bottom:1px solid #cccccc;
+			padding:5% 8%;
+			color:#000000;
+		}
+		aside div p{
+			font-size:2em;
+			margin-bottom:1em;
+		}
+		aside div div{
+			background-color:#e5e5e5;
+			padding:1em 0.8em;
+			margin-bottom:1em;
+		}
+		aside div div input{
+			width:100%;
+			border:0px;
+			background-color:#e5e5e5;
+			font-size:2em;
+			
+		}
+		aside div p:last-child{
+			text-align:center;
+			margin-bottom:0;
+		}
+		aside div p:last-child button{
+			width:8em;
+			padding:0.8em 0;
+			background-color:#00c5c5;
+			color:#FFFFFF;
+			border:0px;
+			font-size:1em;
+			cursor:pointer;
+			font-weight:bold;
+		}
+		
+		/*返回按钮*/
+		ul{
+			position:fixed;
+			right:0.5em;
+			bottom:10%;
+		}
+		ul li{
+			display:block;
+			margin-bottom:2em;
+			text-align:center;
+		}
+		ul li a{
+			cursor:pointer;
+		}
+		/*脚步版权*/
+		footer{
+			text-align:center;
+			color:#6dcbcb;
+			font-weight:bold;
+			font-size:2em;
+		}
+		footer a{
+			color:#ffbb00;
+			text-decoration:none;
+			font-weight:bold;
+		}
+		footer label.neibu{
+			color:#ff0000;
+		}
+		
+		
+		/*音乐播放器*/
+		div#musicPlayer,div#musicList{
+			width:90%;
+			margin:3% 5%;
+			border:1px solid #cccccc;
+			box-shadow: 1px -1px 20px #86afd3;
+			font-size:2em;
+		}
+		
+		div#musicPlayer div#musicfm{
+			padding:1% 3%;
+			position:relative;
+		}
+		div#musicPlayer div img{
+			height:10em;
+			
+		}
+		div#musicPlayer div p{
+			display:inline-block;
+			margin-left:2em;
+			position:absolute;
+			width:45%;
+			text-overflow:ellipsis;
+			overflow:hidden;
+			top:38%;
+		}
+		
+		div#musicPlayer div p span{
+			color:#00c5c5;
+			font-weight:bold;
+		}
+		div#jdline{
+			display:block;
+			padding:0;
+			margin-bottom:0.5em;
+			height:10px;
+			background-color:#cccccc;
+		}
+		div#jdline span#jdgline{
+			display:block;
+			height:100%;
+			background-color:#00c5c5;
+			width:0;/*初始化  不给宽度*/
+		}
+		div#musicPlayer div label{
+			display:block;
+			text-align:center;
+		}
+		div#musicPlayer div ol,div#musicList div ol{
+			width:100%;
+			list-style-type:none;
+			margin:1em 0;
+		}
+		div#musicPlayer div ol li{
+			width:24%;
+			text-align:center;
+			display:inline-block;
+		}
+		
+		/*音乐列表样式*/
+		div#musicList{
+			height:22em;
+			overflow:scroll;
+		}
+		div#musicList div{
+			margin:3% 5%;
+		}
+		div#musicList div ol li{
+			background-color:#00c5c5;
+			margin-bottom:0.5em;
+			padding:0.5em;
+			color:#FFFFFF;
+			font-weight:bold;
+			cursor:pointer;
+		}
+		div#musicTotalNum{
+			color:#00c5c5;
+			text-align:center;
+			margin-bottom:2%;
+		}
+		/*班主任强制阅读样式*/
+		div#FirstIndexForceRead{
+			width:90%;
+			margin:3% 5%;
+			border:1px solid #cccccc;
+			box-shadow: 1px -1px 20px #86afd3;
+			font-size:2em;
+		}
+		div#FirstIndexForceRead div#FirstIndexForceReadHtml>p{
+			padding:3% 0;
+			text-align:center;
+			font-size:2em;
+			background-color:#00c5c5;
+			color:#ffffff;
+		}
+		div#FirstIndexForceRead div#FirstIndexForceReadHtml div{
+			margin:3% 5%;
+		}
+		div#FirstIndexForceRead div#FirstIndexForceReadHtml div p{
+			padding:1% 0;
+			color:#3d3e3e;
+			font-weight:300;
+		}
+		.large{
+			font-size:2.5em;
+		}
+		div#FirstIndexForceRead div#FirstIndexForceReadHtml div p:last-child{
+			font-weight:bold;
+			padding:2% 0;
+			text-align:right;
+		}
+		div#FirstIndexForceRead div#FirstIndexForceReadHtml div span{
+			color:red;
+		}
+		div#FirstIndexForceRead>div:last-child{
+			text-align:center;
+			margin:3% 0;
+		}
+		div#FirstIndexForceRead>div:last-child a{
+			text-decoration:none;
+			padding:3% 10%;
+			color:#3d3e3e;
+			border:1px solid #00c5c5;
+			border-radius:1em;
+			display:inline-block;
+		}
+		div#FirstIndexForceRead>div:last-child a:hover{
+			background-color:#00c5c5;
+			color:#ffffff;
+		}
+		</style>
+        <!--<script type="text/javascript" src=".js"></script>-->
+		</head>
+		<body>
+			<header>
+				校车名单管理程序V3.22
+			</header>
+			<ul>
+				<li>
+					<a onclick="show('LsChangeZd',false)" title="临时变更站点">
+						<svg t="1705485431420" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="13094" width="7em" height="7em"><path d="M510.844518 857.853902C320.61575 857.853902 165.781209 703.019361 165.781209 512.790593c0-190.228768 154.834541-345.063309 345.063309-345.063309 190.228768 0 345.063309 154.834541 345.063309 345.063309C855.907828 703.019361 701.194916 857.853902 510.844518 857.853902L510.844518 857.853902zM510.844518 200.567288C338.738568 200.567288 198.621214 340.684642 198.621214 512.790593c0 172.105951 140.117354 312.223304 312.223304 312.223304 172.105951 0 312.223304-140.117354 312.223304-312.223304C823.067823 340.684642 683.072099 200.567288 510.844518 200.567288L510.844518 200.567288z" fill="#515151" p-id="13095"></path><path d="M321.345528 402.107614l39.651265 0c8.392446-1.702815 12.041335 3.284 10.825039 14.838817l0 207.135289c0 8.270816-2.432593 13.136002-7.176149 14.838817l-41.47571 0c-5.959853-3.284-9.608742-6.568001-10.825039-9.852001L312.344934 421.811617C312.344934 408.675615 315.264046 402.107614 321.345528 402.107614zM398.701984 319.642713l41.597339 0c6.93289-3.52726 10.46015 1.824445 10.46015 16.176743L450.759473 710.31714c0.973037 10.825039-1.459556 16.176743-7.419408 16.176743l-43.178525 0c-4.986816 1.216296-7.905927-0.608148-8.878964-5.351704L391.282575 339.346716C391.160945 326.210714 393.715168 319.642713 398.701984 319.642713zM520.818149 321.223898l22.501485 0c11.311557-1.216296 18.122817 1.824445 20.67704 9.365483-8.757335 12.527854-6.93289 17.514669 5.594964 15.082076l146.563725 0c8.757335 0 13.136002 4.378667 13.136002 13.136002l0 22.501485c2.554223 10.095261-1.824445 14.473928-13.136002 13.136002L556.577266 394.444946c-11.311557-2.554223-20.068892 2.554223-26.272004 15.082076-7.541038 17.514669-16.906521 27.60993-28.218078 30.042523l-22.501485 0c-11.311557-1.216296-16.906521-5.594964-16.906521-13.136002l0-16.906521c-1.216296-15.082076 0.608148-23.109633 5.594964-24.447559 11.311557-4.986816 17.514669-10.581779 18.730966-16.906521l16.906521-26.272004C508.898444 328.156788 514.615037 321.223898 520.818149 321.223898zM490.775627 537.359781l216.014253 0c13.74415 0 20.67704 9.365483 20.67704 28.218078l0 129.657204c0 21.285188-12.527854 32.596745-37.583561 33.813042l-189.74225 0c-18.730966 0-27.60993-4.986816-26.272004-15.082076L473.869106 556.090747C473.869106 544.77919 479.464069 538.576078 490.775627 537.359781zM581.024825 685.747951l0-105.209645L524.588668 580.538306l0 105.209645L581.024825 685.747951zM564.118304 426.433543l24.447559 0c15.082076 1.216296 20.67704 4.986816 16.906521 11.311557l0 30.042523L693.653878 467.787623c8.757335-1.216296 12.527854 2.554223 11.311557 11.311557l0 24.447559c1.216296 6.324742-7.541038 9.365483-26.272004 9.365483l-78.937641 0c-27.60993 0-44.516451-10.581779-50.719563-31.988597l0-37.583561C549.036228 433.366433 554.023043 427.64984 564.118304 426.433543zM674.922912 685.747951l0-105.209645-45.124599 0 0 105.209645L674.922912 685.747951z" fill="#515151" p-id="13096"></path></svg>
+					</a>
+				</li>
+				<li>
+					<a onclick="show('message',false)" title="致家长的一封信">
+						<svg t="1704782040255" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1887" width="6em" height="6em"><path d="M870.5 206.6h-719c-48.3 0-87.5 39.3-87.5 87.6v435.7c0 48.3 39.3 87.6 87.5 87.6h719c48.3 0 87.5-39.3 87.5-87.6V294.2c0-48.3-39.3-87.6-87.5-87.6z m0 56.4c4.1 0 8 0.8 11.6 2.3L519.9 549 154.3 263h716.2zM165.2 761.1l242.2-170.8c8.5-6 10.5-17.7 4.5-26.2s-17.7-10.5-26.2-4.5L123.9 744.2c-2.2-4.3-3.6-9.1-3.6-14.3V294.2c0-3.1 0.6-6.1 1.5-9l375 293.3c6.8 5.3 15 8 23.2 8s16.4-2.7 23.2-8l358.6-280.8v432.2c0 0.6-0.2 1.2-0.2 1.8L657.3 559.6c-8.5-6-20.2-3.9-26.2 4.5-6 8.5-4 20.2 4.5 26.2l241.2 170.1c-2.1 0.4-4.2 0.7-6.4 0.7H165.2z" fill="#4F4F4F" p-id="1888"></path></svg>
+					</a>
+				</li>
+				<li>
+					<a onclick="show('sousuo',false)" title="搜索">
+						<svg t="1695523799371" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3985" width="6em" height="6em"><path d="M809.246403 771.926938 777.737782 803.458071 924.965961 950.667831 956.476629 919.157163Z" fill="#5D5D5D" p-id="3986"></path><path d="M454.878536 70.285786C239.51556 70.285786 64.93236 244.847497 64.93236 460.231963c0 215.341486 174.583201 389.945153 389.945153 389.945153 215.362976 0 389.9472-174.603667 389.9472-389.945153C844.825736 244.847497 670.241512 70.285786 454.878536 70.285786zM454.878536 805.611108c-190.750415 0-345.381192-154.626683-345.381192-345.379145 0-190.751439 154.629753-345.380168 345.381192-345.380168 190.752462 0 345.382215 154.62873 345.382215 345.380168C800.259728 650.983401 645.630998 805.611108 454.878536 805.611108z" fill="#5D5D5D" p-id="3987"></path></svg>
+					</a>
+				</li>
+			</ul>
+			<aside style="display:none">
+				<h1>3号校车名单查询</h1>
+				<div>
+					<p>温馨提示</p>
+					<p>如七年级1班，请输入  701  进行查询</p>
+					<p>如需要查询姓名，请输入  相应学生姓名  进行查询(不能有错别字)</p>
+					<p>如需要查询站点，请输入详细站点查询  如：石岗东村公交站</p>
+					<p>如数据错误，请及时联系更新老师进行更新，谢谢</p>
+					<p><label>请输入姓名/班级/站点:</label></p>
+					<div>
+						<input id='searchInput' placeholder="请输入班级或者姓名或者详细站点" />
+					</div>
+					<p><button onclick='search("searchInput")'>查询</button></p>
+				</div>
+			</aside>
+			<div id="musicPlayer" class="musicPlayer" style="display:none">
+				<div id="musicfm">
+					<img id="img" src="https://s.learn.qq.com/header/user-mag.png" title="标签"/>
+					<p>
+						当前正在播放的是:<br/><br/>
+						<span id="musicTs">微信公众号添洪帮</span>
+					</p>
+				</div>
+				
+				<div>
+					<div id="jdline" onclick="musicDj(event,'jdline')">
+						<span id="jdgline"></span>
+					</div>
+					<label id="jdTip">00:00/00:00</label>
+					<ol>
+						<li>
+							<a onclick="musicAct('preSong')">上一首</a>
+						</li>
+						<li>
+							<a onclick="musicAct('PlayStauts')">暂停/播放</a>
+						</li>
+						<li>
+							<a onclick="musicAct('nextSong')">下一首</a>
+						</li>
+						<li>
+							<a onclick="musicAct('musicList')">播放列表</a>
+						</li>
+					</ol>
+					<audio id="audio" preload></audio>
+				</div>
+				<div id="musicTotalNum">歌曲好多首</div>
+			</div>
+			
+			<div id="musicList" class="musicList" style="display:none">
+				<div>
+					<ol id="musicListOl">
+					</ol>
+				</div>
+			</div>
+			<div id="FirstIndexForceRead" class="FirstIndexForceRead" style="display:none">
+				<div id="FirstIndexForceReadHtml">
+				</div>
+				<div>
+					<a id="IKnow">我已知晓</a>
+				</div>
+			</div>
+			<!--注释  搜索结果生成模板
+			<article>
+				<p>关于<label>101</label>的搜索结果如下:</p>
+				<div>
+					<div>
+						<p>班级姓名：<label>叶家豪</label></p>
+						<p>家长号码：<a href=''>1235345345354</a></p>
+						<p>坐车趟次：<label>1235345345354</label></p>
+						<p>候车站点：<label>1235345345354</label></p>
+						<p>侯车时间：<label>早上6:42分</label></p>
+						<a href="">点击联系班主任</a>
+					</div>
+				</div>
+			</article>
+			-->
+			<!--注释  校车座位生成模板
+			<section>
+				<h1 id="A1A2A34242">座位号：A1A2A3</h1>
+				<div>
+					<h2 class="zaos">早上第1趟</h2>
+					<div>
+						<p><a href="tel:1234567890">401爱上放</a><a href="">401爱上放</a><a href="">401爱上放</a></p>
+					</div>
+				</div>
+				<div>
+					<h2 class="zaos">早上第2趟</h2>
+					<div>
+						<p><a href="tel:1234567890">401爱上放</a><a href="">401爱上放</a><a href="">401爱上放</a></p>
+					</div>
+				</div>
+				<div>
+					<h2 class="xiawu">下午第1趟</h2>
+					<div>
+						<p><a href="tel:1234567890">401爱上放</a><a href="">401爱上放</a><a href="">401爱上放</a></p>
+					</div>
+				</div>
+				<div>
+					<h2 class="xiawu">下午第2趟</h2>
+					<div>
+						<p><a href="tel:1234567890">401爱上放</a><a href="">401爱上放</a><a href="">401爱上放</a></p>
+					</div>
+				</div>
+				<div>
+					<h2 class="xiawu">下午第3趟</h2>
+					<div>
+						<p><a href="tel:1234567890">401爱上放</a><a href="">401爱上放</a><a href="">401爱上放</a></p>
+					</div>
+				</div>
+			</section>
+			-->
+		<script type="text/javascript">
+		var houcheZAndTime=[{'zhandian':'天星学校空架层@天星学校孔子像@天星学校孔子像','zdtime':'15:47分@16:37分@16:53分'},//@进行分割 默认第一个是学校候车时间地点，其它为各站点的候车时间
+							{'zhandian':'新桥东公交站','zdtime':'@7:26分@15:55分@@17:03分'},
+							{'zhandian':'新桥村公交站','zdtime':'@7:28分@15:57分@@17:06分'},
+							{'zhandian':'傍新路口公交站','zdtime':'@7:31分@15:58分@@17:07分'},
+							{'zhandian':'傍江东村公交站','zdtime':'@7:33分@15:59分@@17:09分'},
+							{'zhandian':'傍江西村公交站','zdtime':'6:51分@@16:01分@@17:11分'},
+							{'zhandian':'城市花园路口公交站','zdtime':'6:53分@@@@17:13分'},
+							{'zhandian':'石岗美心苑公交站','zdtime':'6:54分@@16:03分@@17:14分'},
+							{'zhandian':'石岗东村公交站','zdtime':'6:55分@@16:05分@@17:15分'},
+							{'zhandian':'沙墟市场公交站','zdtime':'7:03分@@16:11分@@'},
+							{'zhandian':'罗家村富怡路公交站','zdtime':'7:05分@@16:15分@@'},
+							{'zhandian':'桥虹花园公交站','zdtime':'7:07分@@@@'},
+							{'zhandian':'茶东村富怡路公交站','zdtime':'7:11分@@@@'},
+							{'zhandian':'华盛隆超市对面','zdtime':'@7:38分@@16:45分@'},
+							{'zhandian':'芙蓉超市','zdtime':'@7:39分@@16:47分@'}
+							];
+							
+		var lsChangeXwZdTC1=[{'station':'傍江东村公交站','stationPY':'bjdcgjz','zdLsTime':'10:38分'},//10:30分发车
+							{'station':'傍江西村公交站','stationPY':'bjxcgjz','zdLsTime':'10:40分'},
+							{'station':'城市花园路口公交站','stationPY':'cshylkgjz','zdLsTime':'10:42分'},
+							{'station':'石岗美心苑公交站','stationPY':'sgmxygjz','zdLsTime':'10:43分'},
+							{'station':'石岗东村公交站','stationPY':'sgdcgjz','zdLsTime':'10:44分'},
+							{'station':'沙墟市场公交站','stationPY':'sxscgjz','zdLsTime':'10:51分'},
+							{'station':'罗家村富怡路公交站','stationPY':'ljcfylgjz','zdLsTime':'10:57分'}];//下午临时更改下午第一趟站点名称   学校回，估计要20分
+		var lsChangeXwZdTC2=[{'station':'新桥东公交站','stationPY':'xqdgjz','zdLsTime':'11:16分'},
+							{'station':'新桥村公交站','stationPY':'xqcgjz','zdLsTime':'11:17分'},
+							{'station':'傍新路口公交站','stationPY':'bxlkgjz','zdLsTime':'11:18分'},
+							{'station':'华盛隆超市对面','stationPY':'hslcsdm','zdLsTime':'11:23分'},
+							{'station':'芙蓉超市','stationPY':'frcs','zdLsTime':'11:24分'}];//临时更改下午第二趟站点名称
+		var allZhandian=[{'station':'傍江东村公交站','stationPY':'bjdcgjz'},
+						{'station':'傍江西村公交站','stationPY':'bjxcgjz'},
+						{'station':'城市花园路口公交站','stationPY':'cshylkgjz'},
+						{'station':'石岗美心苑公交站','stationPY':'sgmxygjz'},
+						{'station':'石岗东村公交站','stationPY':'sgdcgjz'},
+						{'station':'沙墟市场公交站','stationPY':'sxscgjz'},
+						{'station':'罗家村富怡路公交站','stationPY':'ljcfylgjz'},
+						{'station':'桥虹花园公交站','stationPY':'qhhygjz'},
+						{'station':'茶东村富怡路公交站','stationPY':'cdcfylgjz'},
+						{'station':'新桥东公交站','stationPY':'xqdgjz'},
+						{'station':'新桥村公交站','stationPY':'xqcgjz'},
+						{'station':'傍新路口公交站','stationPY':'bxlkgjz'},
+						{'station':'华盛隆超市对面','stationPY':'hslcsdm'},
+						{'station':'芙蓉超市','stationPY':'frcs'}];//全部站点信息
+		//console.log(banji);
+		/*Tip:不知道如何批量输入数据的话，notepad++里面按住Alt并往下拖动鼠标即可，即可进行多行编辑*/
+		//坐车人员数据，早上数据DataZao    晚上数据DataWan	//<beizhu>请假，家长接送</beizhu><newstu>是</newstu>/n
+
+var DataZao='[data]'+'504文宇<zd>傍江西村公交站</zd>/n'+
+
+'203农奕祺<zd>傍江西村公交站</zd>/n'+
+
+'302张玥<zd>傍江西村公交站</zd>/n'+
+
+'301郑佳齐<zd>傍江西村公交站</zd>/n'+
+
+'604杨学硕<zd>石岗美心苑公交站</zd>/n'+
+
+'801饶洪华<zd>石岗东村公交站</zd>/n'+
+
+'101刘沐炎<zd>石岗东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'503韩媛婷<zd>石岗东村公交站</zd>/n'+
+
+'101韦世楚<zd>石岗东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'202杨永杰<zd>石岗东村公交站</zd>/n'+
+
+'301郑明河<zd>石岗东村公交站</zd>/n'+
+
+'101邓锦瑞<zd>石岗东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'401游雅倩<zd>石岗东村公交站</zd>/n'+
+
+'201胡文茜<zd>石岗东村公交站</zd>/n'+
+
+'301罗湘怡<zd>石岗东村公交站</zd>/n'+
+
+'501罗振睿<zd>石岗东村公交站</zd>/n'+
+
+'102杨浩然<zd>石岗东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'201吴婧琪<zd>石岗东村公交站</zd>/n'+
+
+'702熊永康<zd>石岗东村公交站</zd>/n'+
+
+'503韩浩成<zd>石岗东村公交站</zd>/n'+
+
+'301林杰钦<zd>石岗东村公交站</zd>/n'+
+
+'103孟明昊<zd>石岗东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'202黄艳梅<zd>石岗东村公交站</zd>/n'+
+
+'501叶家豪<zd>石岗东村公交站</zd>/n'+
+
+'102邓钰阳<zd>石岗东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'204苏宇轩<zd>石岗东村公交站</zd>/n'+
+
+'601陆春娴<zd>石岗东村公交站</zd>/n'+
+
+'101郑文铭<zd>石岗东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'501魏冰冰<zd>石岗东村公交站</zd>/n'+
+
+'401韦世航<zd>石岗东村公交站</zd>/n'+
+
+'204魏通毅<zd>石岗东村公交站</zd>/n'+
+
+'802魏成<zd>石岗东村公交站</zd>/n'+
+
+'103林敬浩<zd>石岗东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'203黄子睿<zd>石岗东村公交站</zd>/n'+
+
+'601郭敬婷<zd>石岗东村公交站</zd>/n'+
+
+'203甘翌朋<zd>石岗东村公交站</zd>/n'+
+
+'103林波仕<zd>石岗东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'701吴梓豪<zd>石岗东村公交站</zd>/n'+
+
+'604王琳淋<zd>石岗东村公交站</zd>/n'+
+
+'103李思妍<zd>石岗东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'401钟沅钊<zd>石岗东村公交站</zd>/n'+
+
+'203李芯悦<zd>石岗东村公交站</zd>/n'+
+
+'401崔一帆<zd>石岗东村公交站</zd>/n'+
+
+'802万能<zd>石岗东村公交站</zd>/n'+
+
+'902付经心<zd>沙墟市场公交站</zd>/n'+
+
+'902付家欣<zd>沙墟市场公交站</zd>/n'+
+
+'303李语凝<zd>沙墟市场公交站</zd>/n'+
+
+'502陈文晞<zd>沙墟市场公交站</zd>/n'+
+
+'102刘绮桐<zd>罗家村富怡路公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'901马依萱<zd>桥虹花园公交站</zd>/n[/data]'+
+
+'[data]'+'503谢鹏宇<zd>新桥东公交站</zd>/n'+
+
+'102徐子涵<zd>新桥东公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'603植泳煜<zd>新桥村公交站</zd>/n'+
+
+'404毛宇铭<zd>新桥村公交站</zd>/n'+
+
+'404曹俊熙<zd>新桥村公交站</zd>/n'+
+
+'502杨子琴<zd>新桥村公交站</zd>/n'+
+
+'501李佳<zd>傍新路口公交站</zd>/n'+
+
+'202赖家烨<zd>傍新路口公交站</zd>/n'+
+
+'604陈琦<zd>傍新路口公交站</zd>/n'+
+
+'604陈嘉怡<zd>傍新路口公交站</zd>/n'+
+
+'102彭灏彦<zd>傍新路口公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'403赖嘉豪<zd>傍新路口公交站</zd>/n'+
+
+'401陈雨萱<zd>傍新路口公交站</zd>/n'+
+
+'103肖玥<zd>傍新路口公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'604黄正帆<zd>傍新路口公交站</zd>/n'+
+
+'204林安琪<zd>傍江东村公交站</zd>/n'+
+
+'101邓思瑶<zd>傍江东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'101张陈晞<zd>傍江东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'402雷雅婷<zd>傍江东村公交站</zd>/n'+
+
+'101高沁妤<zd>傍江东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'302常成熙<zd>傍江东村公交站</zd>/n'+
+
+'203黄雨萍<zd>傍江东村公交站</zd>/n'+
+
+'203张雨露<zd>傍江东村公交站</zd>/n'+
+
+'701熊永智<zd>傍江东村公交站</zd>/n'+
+
+'103武心悦<zd>傍江东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'404黄宇轩<zd>傍江东村公交站</zd>/n'+
+
+'402张锦航<zd>傍江东村公交站</zd>/n'+
+
+'103张欣怡<zd>傍江东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'202蔡卓林<zd>华盛隆超市对面</zd>/n'+
+
+'403蔡卓辉<zd>华盛隆超市对面</zd>/n'+
+
+'103卢雨欣<zd>华盛隆超市对面</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'504蒋欢欣<zd>华盛隆超市对面</zd>/n'+
+
+'402王毅轩<zd>华盛隆超市对面</zd>/n'+
+
+'101马一茜<zd>华盛隆超市对面</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'303虞智轩<zd>芙蓉超市</zd>/n'+
+
+'402刘轩<zd>芙蓉超市</zd>/n'+
+
+'702陈嘉琦<zd>芙蓉超市</zd>/n[/data]';
+
+var DataWan='[data]'+'503谢鹏宇<zd>新桥东公交站</zd>/n'+
+
+'102徐子涵<zd>新桥东公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'501傅梦圆<zd>新桥村公交站</zd>/n'+
+
+'103肖玥<zd>傍新路口公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'101邓思瑶<zd>傍江东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'101张陈晞<zd>傍江东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'302常成熙<zd>傍江东村公交站</zd>/n'+
+
+'101高沁妤<zd>傍江东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'103武心悦<zd>傍江东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'103张欣怡<zd>傍江东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'104冼俊凯<zd>傍江东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'504文宇<zd>傍江西村公交站</zd>/n'+
+
+'302张玥<zd>傍江西村公交站</zd>/n'+
+
+'104尹小满<zd>傍江西村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'203农奕祺<zd>傍江西村公交站</zd>/n'+
+
+'402张一凡<zd>石岗美心苑公交站</zd>/n'+
+
+'101刘沐炎<zd>石岗东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'101邓锦瑞<zd>石岗东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'501叶家豪<zd>石岗东村公交站</zd>/n'+
+
+'102杨浩然<zd>石岗东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'102邓钰阳<zd>石岗东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'103孟明昊<zd>石岗东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'201吴婧琪<zd>石岗东村公交站</zd>/n'+
+
+'201胡文茜<zd>石岗东村公交站</zd>/n'+
+
+'103林波仕<zd>石岗东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'103林敬浩<zd>石岗东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'103李思妍<zd>石岗东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'502陈文晞<zd>沙墟市场公交站</zd>/n'+
+
+'303李语凝<zd>沙墟市场公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'102刘绮桐<zd>罗家村富怡路公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n[/data]'+
+
+'[data]'+'702王钰<zd>华盛隆超市对面</zd>/n'+
+
+'403蔡卓辉<zd>华盛隆超市对面</zd>/n'+
+
+'103卢雨欣<zd>华盛隆超市对面</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'202蔡卓林<zd>华盛隆超市对面</zd>/n'+
+
+'402王毅轩<zd>华盛隆超市对面</zd>/n'+
+
+'504蒋欢欣<zd>华盛隆超市对面</zd>/n'+
+
+'501谭绍均<zd>芙蓉超市</zd>/n'+
+
+'402刘轩<zd>芙蓉超市</zd>/n'+
+
+'303虞智轩<zd>芙蓉超市</zd>/n'+
+
+'702陈嘉琦<zd>芙蓉超市</zd>/n[/data]'+
+
+'[data]'+'403曹敬钊<zd>新桥东公交站</zd>/n'+
+
+'404毛宇铭<zd>新桥村公交站</zd>/n'+
+
+'404曹俊熙<zd>新桥村公交站</zd>/n'+
+
+'603植泳煜<zd>新桥村公交站</zd>/n'+
+
+'502杨子琴<zd>新桥村公交站</zd>/n'+
+
+'604陈嘉怡<zd>新桥村公交站</zd>/n'+
+
+'202赖家烨<zd>傍新路口公交站</zd>/n'+
+
+'604陈琦<zd>傍新路口公交站</zd>/n'+
+
+'102彭灏彦<zd>傍新路口公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'403赖嘉豪<zd>傍新路口公交站</zd>/n'+
+
+'203张涵博<zd>傍新路口公交站</zd>/n'+
+
+'401陈雨萱<zd>傍新路口公交站</zd>/n'+
+
+'501李佳<zd>傍新路口公交站</zd>/n'+
+
+'604黄正帆<zd>傍新路口公交站</zd>/n'+
+
+'404黄宇轩<zd>傍江东村公交站</zd>/n'+
+
+'402张锦航<zd>傍江东村公交站</zd>/n'+
+
+'301周浩宇<zd>傍江东村公交站</zd>/n'+
+
+'402雷雅婷<zd>傍江东村公交站</zd>/n'+
+
+'204林安琪<zd>傍江东村公交站</zd>/n'+
+
+'301张家瑞<zd>傍江西村公交站</zd>/n'+
+
+'203张雨露<zd>傍江西村公交站</zd>/n'+
+
+'603张雅婷<zd>傍江西村公交站</zd>/n'+
+
+'301郑佳齐<zd>傍江西村公交站</zd>/n'+
+
+'203黄雨萍<zd>傍江西村公交站</zd>/n'+
+
+'604杨学硕<zd>石岗美心苑公交站</zd>/n'+
+
+'204苏宇轩<zd>石岗东村公交站</zd>/n'+
+
+'401游雅倩<zd>石岗东村公交站</zd>/n'+
+
+'301罗湘怡<zd>石岗东村公交站</zd>/n'+
+
+'501罗振睿<zd>石岗东村公交站</zd>/n'+
+
+'204魏通毅<zd>石岗东村公交站</zd>/n'+
+
+'401钟沅钊<zd>石岗东村公交站</zd>/n'+
+
+'101韦世楚<zd>石岗东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+
+'401韦世航<zd>石岗东村公交站</zd>/n'+
+
+'202黄艳梅<zd>石岗东村公交站</zd>/n'+
+
+'503韩浩成<zd>石岗东村公交站</zd>/n'+
+
+'501魏冰冰<zd>石岗东村公交站</zd>/n'+
+
+'601陆春娴<zd>石岗东村公交站</zd>/n'+
+
+'203甘翌朋<zd>石岗东村公交站</zd>/n'+
+
+'503韩媛婷<zd>石岗东村公交站</zd>/n'+
+
+'301郑明河<zd>石岗东村公交站</zd>/n'+
+
+'701吴梓豪<zd>石岗东村公交站</zd>/n'+
+
+'202杨永杰<zd>石岗东村公交站</zd>/n'+
+
+'203黄子睿<zd>石岗东村公交站</zd>/n'+
+
+'604王琳淋<zd>石岗东村公交站</zd>/n'+
+
+'601郭敬婷<zd>石岗东村公交站</zd>/n'+
+
+'404张贤豪<zd>石岗东村公交站</zd>/n'+
+
+'301张贤威<zd>石岗东村公交站</zd>/n'+
+
+'401崔一帆<zd>石岗东村公交站</zd>/n'+
+
+'203李芯悦<zd>石岗东村公交站</zd>/n'+
+
+'303林杰钦<zd>石岗东村公交站</zd>/n[/data]';
+			initForceReadData();
+			
+			//判断是否为第一次查看，第一次查看强制看致一封信
+			let isRead=window.localStorage['JZBisRead'];
+			var DSJInterval="";//我已知晓定时器
+			var isR=true;//默认已经阅读过一封信
+			if (isRead==='true'){
+				show('sousuo',false);//正常初始化
+			}else{
+				//展示致班主任的一封信
+				isR=false;
+				show('message',true);
+			}
+			//false代表不在第一个后面直接加入进去,True代表在section后面直接添加,zaos代表早上的样式，xiawu代表下午的样式  sOrNot代表True为搜索模式
+			function initData(){
+				//removeHtmlYs(['aside','musicPlayer','musicList','FirstIndexForceRead'],{"caozuo":"hide"});//首页先隐藏搜索框
+				//matchData(DataZao,'zaos',false);
+				//matchData(DataWan,'xiawu',true);
+			}
+			function initForceReadData(){
+				var fIFR=document.getElementById("FirstIndexForceReadHtml");
+				fIFR.innerHTML="<p id='zyfx'>致家长们的一封信:</p><div><p>" +
+					"各位家长，你们好:</p><p>" +
+					"欢迎您选择全国国防特色学校——天星学校，我是本车管理老师李老师,</p><p>" +
+					"因3号校车学生人员居多，为方便管理好学生，请家长们知悉3号车的相关要求!</p><p>" +
+					"第一二周开学时校车可能<span class='large'>晚点10-20分钟</span>这是正常的，请各位家长耐心等待!</p><p>" +
+					"校车内<span class='large'>禁止饮食，乱扔垃圾</span>如果早餐吃不完，可以带回学校再吃!</p><p>" +
+					"如果需要请假不坐校车，<span class='large'>请假请跟校车老师说</span>否则之后提前到站不等！</p><p>" +
+					"进群请修改群备注，推荐<span class='large'>格式：XX班XX学生家长</span>为了防止不法人员进入群内，没有修改将会被提出校车群！</p><p>" +
+					"校车行为也是孩子良好习惯的一种表现，从小应让孩子养成<span class='large'>不迟到、不乱扔垃圾</span>好习惯！</p><p>" +
+					"请<span class='large'>至少提前5分钟候车</span></p><p>" +
+					"每天路况不同，到站时间可能会<span class='large'>早晚点5-8分钟</span>请提前候车！</p><p>" +
+					"<span class='large'>校车过时不等</span>即超过或者到对应站点的候车时间，学生没到候车点，请家长自行送回学校!</p><p>" +
+					"校车到站，家长没来接回，为了安全，<span class='large'>将会把孩子送回学校</span></p><p>" +
+					"<span class='large'>不要屏蔽校车群消息</span>我会尽量少发信息到群内，不会占用大家太多的存储空间!</p><p>" +
+					"为了不打扰到群内家长，有任何问题，请<span class='large'>及时私聊校车老师沟通!</span></p>" +
+					"<br/><p>3号校车管理员示<br/>2024年9月1日</p></div>"
+			}
+			//获取候车时间和候车地点
+			function getCarPlaceAndTime(){
+				var zdTimeArr=houcheZAndTime[0].zdtime.split("@");
+				var zdArr=houcheZAndTime[0].zhandian.split("@");
+				var rtStr ="";
+				for (var t=0;t<zdTimeArr.length;t++){
+					rtStr=rtStr + "下午第" + (t+1) + "趟<br/>校内候车地点:<span>" + zdArr[t] +"</span>,候车时间:<span>" + zdTimeArr[t] +"</span>前<br/><br/>";
+				}
+				return rtStr;
+			}
+			//20s倒计时
+			var totalDSJ=20;//20s
+			function IKnowDJS(){
+				document.getElementById("IKnow").innerText="我已知晓  " + totalDSJ +"S";
+				totalDSJ=totalDSJ-1;
+				if (totalDSJ<0){
+					document.getElementById("IKnow").innerText="我已知晓";
+					//关闭定时器
+					clearInterval(DSJInterval);
+					document.getElementById("IKnow").setAttribute('onclick','IKnowClick()');
+					//重置倒计时秒数
+					totalDSJ=20;
+				}
+			}
+			function IKnowClick(){
+				//弹出相应提示
+				var waitBusConf=confirm("我已知晓3号校车的相关要求!");
+				if (waitBusConf==true){
+					isR=true;//阅读了
+					window.localStorage['JZBisRead']='true';//已经阅读过
+					show("sousuo");
+					UrlDo();//根据Url做相关的事
+				}else{
+					alert("请注意，不同意无法正常使用本系统!\n\n你点了取消按钮，请先确保阅读完相关内容并已知晓，方可进行下一步!");
+					window.localStorage['JZBisRead']='false';//不同意条款
+					isR=false;//不同意条款
+				}
+				
+			}
+			//遍历站点
+			function stationHBArr(ZdArr,Sj,houzui,tangci,dijige,OrderStr,action){
+				var article=document.createElement('article');
+				article.setAttribute("id",houzui+"lsTcArtcile");
+				var p=document.createElement('p');
+				var lsTemp='';//存储划分字符
+				var lsT='';//存储划分字符，不带双引号
+				if (OrderStr=="班级"){
+					lsTemp='\"站点\"';
+					lsT="站点";
+				}else{
+					lsTemp='\"班级\"';
+					lsT="班级";
+				}
+				if (action=="临时变更"){
+					p.innerHTML="临时更改<label>"+tangci+"</label>人员<button onclick='changeLs("+lsTemp+",true)'>按"+lsT+"排序</button>";
+				}else{
+					p.innerHTML="<label>"+tangci+"</label>人员<button onclick='changecgName("+lsTemp+",\""+tangci+"\",true)'>按"+lsT+"排序</button>";
+				}
+				
+				p.setAttribute("id",houzui+"lsTcP");
+				article.appendChild(p);
+				document.getElementsByTagName("body")[0].appendChild(article);
+				var totalPerson=0;
+				for(var i=0;i<ZdArr.length;i++){
+					if (ZdArr[i].station=='undefined' || ZdArr[i].station==null){
+						for (var ii=0;ii<allZhandian.length;ii++){	//在所有站点信息里面查找
+							if (allZhandian[ii].station==ZdArr[i]){
+								totalPerson=totalPerson+stationHB(allZhandian[ii].station,Sj,houzui,dijige,OrderStr,allZhandian[ii].stationPY,tangci,action);
+								break;//退出for
+							}
+						}
+					}else{
+						totalPerson=totalPerson+stationHB(ZdArr[i].station,Sj,houzui,dijige,OrderStr,ZdArr[i].stationPY,tangci,action);
+					}
+					
+				}
+				p.innerHTML=p.innerHTML+"  共"+totalPerson+"人";//每个趟次全部的总人数
+				//输出班级的人数 ，班级才输出，不然不执行输出，因为站点已经默认有人数统计
+				if (OrderStr=="班级"){
+					if (AArr.length>0){
+						for(var i=0;i<AArr.length;i++){
+							//循环获取id下的P标签数量
+							var PNum=document.getElementById(AArr[i]).getElementsByClassName('student'); //多少个P标签代表就多少个人
+							var BJPerson=PNum.length;
+							document.getElementById(AArr[i]+'A').innerText=document.getElementById(AArr[i]+'A').innerText+"   共" + BJPerson +"人";
+						}
+					}
+				}
+				AArr.splice(0, AArr.length);//清空数组
+				//   <a><input type='checkbox' value='接送'/>接送</a>   <a><input type='checkbox' value='新生'/>新生</a>
+				//console.log(tangci);
+			}
+			//站点合并,并进行输出
+			var AArr=new Array();
+			function stationHB(HbZdStr,HbData,houzui,dijige,OrderStr,zdPY,tangci,action){
+				HbData=HbData.replace(/\s*/g,'');//把空格去掉
+				var StHBGuiz=new RegExp("\\d+[\u4e00-\u9fa5]+1[3456789]\\d{9}<zd>"+HbZdStr+"<\/zd><beizhu>[^<]*?<\/beizhu><newstu>[^<]*?<\/newstu>|"+
+										"\\d+[\u4e00-\u9fa5]+1[3456789]\\d{9}<zd>"+HbZdStr+"<\/zd><newstu>[^<]*?<\/newstu>|"+
+										"\\d+[\u4e00-\u9fa5]+1[3456789]\\d{9}<zd>"+HbZdStr+"<\/zd><beizhu>[^<]*?<\/beizhu>|"+
+										"\\d+[\u4e00-\u9fa5]+1[3456789]\\d{9}<zd>"+HbZdStr+"<\/zd>|"+
+										"\\d+[\u4e00-\u9fa5]+<zd>"+HbZdStr+"<\/zd><beizhu>[^<]*?<\/beizhu><newstu>[^<]*?<\/newstu>|"+
+										"\\d+[\u4e00-\u9fa5]+<zd>"+HbZdStr+"<\/zd><newstu>[^<]*?<\/newstu>|"+
+										"\\d+[\u4e00-\u9fa5]+<zd>"+HbZdStr+"<\/zd><beizhu>[^<]*?<\/beizhu>|"+
+										"\\d+[\u4e00-\u9fa5]+<zd>"+HbZdStr+"<\/zd>","g"); //六个条件选其中一个规则，首选第一个规则
+				var StHBRessJ=HbData.match(StHBGuiz);
+				if (StHBRessJ!=null){ //搜索到内容
+					var art=document.getElementById(houzui+'lsTcArtcile');
+					var divW=null;
+					var divN=null;
+					var banjiNum=null;
+					//添加标签A数组，以便查询班级人数
+					for(var j=0;j<StHBRessJ.length;j++){
+						try{
+							if (OrderStr=="班级"){
+								banjiNum=gainMatch("BanjiNum",StHBRessJ[j]);
+							}else{
+								banjiNum=zdPY;
+							}
+							var bjPhone=gainMatch("Phone",StHBRessJ[j]);
+							var bjIdN=document.getElementById(houzui+banjiNum);
+							var bjIdW=document.getElementById(houzui+banjiNum+"W");
+							if (bjIdN!=null && bjIdN!='undefined'){
+								divN=bjIdN;
+								divW=bjIdW;
+							}else{
+								divW=document.createElement('div');
+								divW.setAttribute('id',houzui+banjiNum+"W")
+								var a=document.createElement('a');
+								if (OrderStr=="班级"){
+									a.innerText=banjiNum;
+								}else{
+									a.innerText=gainMatch("ZhanDian",StHBRessJ[j])+"  "+ StHBRessJ.length +"人";
+								}
+								a.setAttribute('id',houzui+banjiNum+"A");
+								AArr.push(houzui+banjiNum);
+								divN=document.createElement('div');
+								divN.setAttribute('id',houzui+banjiNum)
+								divN.appendChild(a);
+								divW.appendChild(divN);
+								art.appendChild(divW);
+							}
+							//判断一下这个学生是否为单程坐校车，不坐校车特别标红!标重点
+							var xmbj=gainMatch("Banji",StHBRessJ[j]);
+							var xmClass=xmbj;//存储班级姓名
+							var xmbjInHtml;
+							if (bjPhone!=''){
+								xmbjInHtml="<a href='tel:"+bjPhone+"'><span class='blue'>"+  xmbj + "</span></a>"
+							}else{
+								xmbjInHtml="<a href='javascript:alert(\"此学生没有留有号码!\")'><span class='pink'>"+  xmbj + "</span></a>"
+							}
+							//查询是否为新生
+							var isXS=gainMatch("xinsheng",StHBRessJ[j]);	
+							var xstb='';
+							if (isXS){
+								xstb='<svg t="1720269311706" class="icon" viewBox="0 -100 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="3em" height="3em"><path d="M859.34 707.7c49.83-55.26 79.16-122.91 79.16-196 0-186.48-191-337.65-426.5-337.65S85.5 325.24 85.5 511.72s191 337.65 426.5 337.65c90.49 0 174.39-22.31 243.42-60.36l90.3 55.49c29.31 18 64.57-11.91 51.58-43.76z m-520.61-71.93h-50.18L217 503.3l-25.09-53.19h-1.71c2.34 26.76 6 57.87 6 86.31v99.35h-46.81V388.23h50.51L271.82 520l24.75 53.52h1.67c-2.68-25.76-6.36-58.54-6.36-86.64v-98.65h46.83z m216.76 0H399.94V388.23h151.87v41.15H449.44v57.2h87v41.48h-87v66.23h106z m273.29 0h-61.55l-27.77-122.43c-4-19.4-7.69-38.47-10.7-57.2h-1.34c-3.35 18.73-6.69 37.8-10.7 57.2l-27.1 122.43h-60.55l-47.83-247.54h50.51L651.49 509c3.68 26.09 7.69 52.52 11.37 78.95h1.34c5-26.43 10.37-53.19 15.72-78.95l28.77-120.76h42.15L779.61 509c5.35 25.42 10.37 52.19 15.72 78.95H797c3.68-26.76 7.36-53.19 11-78.95l19.4-120.76h47.17z" fill="#d81e06"></path></svg>';//新生图标
+							}
+							//添加新生
+							xmbjInHtml=xmbjInHtml+xstb;
+							xmbj=xmbj.replace(/\d+/,'');//先把数字替换了
+							//匹配的数据，查找早上或者下午是否乘坐校车人员，则，单程，标红
+							var ppData=null;
+							//判断预计到站还是早上候车时间提示
+							var arrOrWaitTimeTip='';
+							var InOrLeaveCarStationTip="";
+							if (tangci.indexOf("早上")>-1){
+								ppData=DataWan;
+								arrOrWaitTimeTip="候车时间:";
+								InOrLeaveCarStationTip="候车站点:"
+							}else{
+								ppData=DataZao;
+								arrOrWaitTimeTip="到站时间:";
+								InOrLeaveCarStationTip="下车站点:"
+							}
+							ppData=ppData.replace(/\s*/g,'');
+							var DataGuiz=new RegExp(/\[data\][\s\S]*?\[\/data\]/,"g"); //查找姓名
+							var DataLen=ppData.match(DataGuiz);
+							if (DataLen!=null && DataLen!='undefined'){
+								var pipeiData=null;
+								if (dijige==""){ //那就整个匹配
+									pipeiData=ppData;
+								}else{
+									pipeiData=DataLen[dijige-1];
+								}
+								var isExitsGuiz=new RegExp(xmbj,"g"); //查找姓名
+								var isExitsRessJ=pipeiData.match(isExitsGuiz);
+								if (isExitsRessJ==null || isExitsRessJ=='undefined'){//单程校车图标，这里的单程是指不是同一个站点下车的学生，即有可能A在B站上车，在C站下车，即为单程
+									//xmbjInHtml=xmbjInHtml + "<h1 class='important'>[重点留意!!]</h1>"
+									xmbjInHtml=xmbjInHtml + '<svg t="1720318277927" class="icon" viewBox="0 0 2048 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="4em" height="2em"><path d="M1945.6 665.6v358.4H0v-358.4a153.6 153.6 0 0 0 0-307.2V0h1945.6v358.4a153.6 153.6 0 0 0 0 307.2zM460.3904 310.6816v255.5904h183.0912v55.9104H392.192v42.3936h251.2896v115.5072h44.8512V664.576h250.6752v-42.3936h-250.6752V566.272h183.0912V310.6816h-110.592c16.5888-24.576 31.9488-52.8384 46.08-84.7872l-42.3936-15.36a629.76 629.76 0 0 1-48.5376 100.1472H588.8l28.2624-14.7456a709.3248 709.3248 0 0 0-58.368-82.944l-38.7072 18.432c20.2752 23.3472 39.3216 49.7664 57.7536 79.2576H460.3904z m366.7968 216.2688h-138.8544V458.1376h138.8544v68.8128z m-183.7056 0H504.0128V458.1376h139.4688v68.8128z m-139.4688-107.52V351.232h139.4688v68.1984H504.0128z m184.32-68.1984h138.8544v68.1984h-138.8544V351.232z m573.8496-113.664v177.5616h254.976V237.568h-254.976z m211.968 137.6256h-168.3456v-98.304h168.3456v98.304z m-235.9296 97.0752v40.5504h125.952v78.6432H1252.352v39.936h111.8208v82.944h-150.528v41.7792h344.6784v-41.7792h-148.6848v-82.944h114.8928v-39.936h-114.8928v-78.6432h133.9392v-40.5504h-305.3568z m-229.7856-89.088v42.3936h85.4016a486.1952 486.1952 0 0 1-99.5328 186.7776l19.0464 49.152a649.3696 649.3696 0 0 0 84.7872-162.816v277.0944h42.3936V498.688c17.2032 22.7328 38.7072 53.4528 63.2832 91.5456l24.576-36.864a1354.0864 1354.0864 0 0 0-87.8592-95.232v-32.5632h79.2576v-42.3936h-79.2576V286.72c30.72-6.144 60.2112-12.9024 87.8592-20.8896l-15.36-41.7792c-58.9824 18.432-127.1808 31.3344-203.9808 38.7072l8.6016 41.7792c27.648-3.072 54.6816-6.7584 80.4864-10.4448v89.088h-89.7024z" fill="#d81e06"></path></svg>';
+								}
+							}
+							//查看备注里面是否有重点留意这个字眼，有则标红
+							var bz=gainMatch("Beizhu",StHBRessJ[j]);//查看是否有备注，没有则不需要添加
+							if (bz.indexOf("留意")>-1 || bz.indexOf("关注")>-1 || bz.indexOf("重点")>-1){
+								xmbjInHtml=xmbjInHtml +'<svg t="1720321605219" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"  width="2em" height="2em"><path d="M768.41 991.22c-10.34 0-22.4-3.59-32.74-9l-224-116.55-225.73 116.59c-22.4 12.55-51.69 10.75-72.37-5.38s-32.74-44.83-27.57-71.73l46.53-251L55.05 482c-19-19.72-25.85-50.2-19-75.31 8.62-26.89 29.3-46.62 56.87-50.2l246.4-46.62L449.64 76.76c12.06-25.1 36.18-41.24 62-41.24s51.69 16.14 62 41.24L684 309.86l246.4 44.82c25.84 3.59 48.24 23.31 55.14 50.21a75.23 75.23 0 0 1-17.23 75.31l-177.5 173.92 44.8 251A74.09 74.09 0 0 1 808 976.88a60 60 0 0 1-39.59 14.34z" fill="#d81e06"></path></svg>';
+							}
+							//是否为家长接送，添加图标
+							if (bz.indexOf("接送")>-1){
+								xmbjInHtml=xmbjInHtml +'<svg t="1720321736301" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="2em" height="2em"><path d="M951.907286 579.214128c-16.63172 20.603474-145.537893 113.96038-155.146641 134.460422-9.608749 20.500043 6.609247 68.140405 62.058656 165.489751 55.44941 97.349346-26.747281 101.910657-72.401765 62.058657-45.654485-39.852001-92.281222-184.562445-93.087985-113.774204-0.806763 70.788241 19.279556 155.146641-31.029329 155.146641-101.072865 0-95.197979-238.625878-93.087984-268.920845 2.109994-30.294968 9.639778-69.019569-10.34311-93.087985s-80.2315-128.233871-82.744875-144.803532c-2.513376-16.569661-6.971256-47.340412-20.686219 0s-42.51018 366.104701-51.715547 455.096815c-9.205367 88.992113-81.172723 93.087985-93.087985 93.087985-11.915262 0-60.889885 3.485628-93.087985-62.058657-32.1981-65.544284-31.029328-465.439924-31.029328-465.439924s17.283336-78.948954 10.343109-72.401766-32.146384 61.789736-41.372437 93.087985c-9.226054 31.298249-85.444427 242.82518-93.087985 41.372438-7.643558-201.452742 124.117313-320.636392 124.117313-320.636392s56.307888-52.35682 93.087985-10.34311 56.483721 66.888889 155.146641 62.058657c98.662921-4.830232 103.327663 43.316942 124.117313 113.774204s98.85944 166.410288 175.83286 175.83286c76.97342 9.422573 123.765647-20.903424 175.832861-41.372438 52.067213-20.469014 58.004158 20.768964 41.372437 41.372438z m-181.004415-51.715547a98.25954 98.25954 0 0 1-98.259539-98.25954 98.25954 98.25954 0 0 1 98.259539-98.259539 98.25954 98.25954 0 0 1 98.25954 98.259539 98.25954 98.25954 0 0 1-98.25954 98.25954z m-356.837275-279.263955c-68.543786 0-124.117313-55.573527-124.117313-124.117313s55.573527-124.117313 124.117313-124.117313 124.117313 55.573527 124.117313 124.117313-55.573527 124.117313-124.117313 124.117313z" fill="#d81e06"></path></svg>';
+							}
+							//是否请假图标
+							if (bz.indexOf("请假")>-1){
+								xmbjInHtml=xmbjInHtml +'<svg t="1720322191261" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="2em" height="2em"><path d="M396.8 249.6H448v76.8h-51.2z" p-id="29369" fill="#d81e06"></path><path d="M512 768c-12.8-19.2-32-38.4-51.2-51.2 19.2-6.4 44.8-19.2 64-32 6.4-25.6 19.2-44.8 32-64-19.2-38.4-32-76.8-38.4-121.6h-19.2v-64h230.4v57.6c19.2-6.4 44.8-6.4 64-6.4 32 0 64 6.4 96 19.2V160c0-70.4-57.6-128-128-128H128c-70.4 0-128 57.6-128 128v640c0 70.4 57.6 128 128 128h435.2c-32-44.8-51.2-102.4-51.2-160z m19.2-448h115.2V256H531.2V179.2h192v217.6h-192V320z m-256 448H198.4V473.6c-12.8 25.6-25.6 51.2-38.4 70.4 0-19.2-6.4-51.2-19.2-108.8 38.4-89.6 70.4-185.6 89.6-281.6l76.8 19.2c-12.8 44.8-19.2 76.8-32 108.8V768z m121.6 0H320V172.8h192v224H396.8V448h89.6v76.8H396.8v44.8h108.8V640H396.8v128z" p-id="29370" fill="#d81e06"></path><path d="M601.6 556.8c12.8-12.8 25.6-25.6 44.8-32 0-6.4 6.4-12.8 6.4-19.2h-64c0 12.8 6.4 32 12.8 51.2zM800 544C678.4 544 576 646.4 576 768s102.4 224 224 224S1024 889.6 1024 768s-102.4-224-224-224z m115.2 198.4l-115.2 115.2c-6.4 6.4-12.8 6.4-19.2 12.8-6.4 0-19.2-6.4-25.6-12.8l-70.4-70.4c-12.8-12.8-12.8-32 0-44.8 6.4-6.4 12.8-6.4 25.6-6.4 6.4 0 19.2 0 19.2 6.4l44.8 44.8 89.6-89.6c6.4-6.4 12.8-12.8 25.6-12.8 6.4 0 19.2 6.4 25.6 6.4 6.4 6.4 6.4 12.8 6.4 25.6 0 6.4 0 19.2-6.4 25.6z" fill="#d81e06"></path></svg>';
+							}
+							var divNN=document.createElement('div');
+							var p=document.createElement('p');
+							p.setAttribute('class','student');
+							p.innerHTML="班级姓名:" +xmbjInHtml;
+							divNN.appendChild(p);
+							//如果为班级，则把上下车时间也写在对应页面
+							var curStation=gainMatch("ZhanDian",StHBRessJ[j]);
+							//如果为临时变更，则时间可能不一样。
+							var arrT='';
+							if (action=="临时变更"){
+								arrT=gainArrTime(curStation,tangci,true)
+							}else{
+								arrT=gainArrTime(curStation,tangci,false)
+							}
+							if (arrT==null || arrT=='undefined'){
+								arrT='暂无相应时间'
+							}
+							if (OrderStr=="班级"){
+								var p=document.createElement('p');
+								p.innerHTML=arrOrWaitTimeTip + "<label class='arrTime'>"+ arrT +"</label>,请提前3分钟候车";
+								divNN.appendChild(p);
+							}
+							var p=document.createElement('p');
+							p.innerHTML=InOrLeaveCarStationTip + "<label class='station'>" + curStation +"</label>";
+							divNN.appendChild(p);
+							//上面已经获取过bz，不需要重新获取
+							if (bz!=''){//不为空
+								var p=document.createElement('p');
+								var classN='red';
+								if (bz.indexOf("请假")>-1){
+									classN='purple';
+								}
+								p.innerHTML="<label class="+classN+">学生备注:</label><label class='dtbeizhu'>" + bz+"</label>";
+								divNN.appendChild(p);
+							}
+							var tip='未在候车点候车';
+							if (tangci.indexOf("下午")>-1){
+								tip='未上车';
+							}
+							var p=document.createElement("p");
+							p.innerHTML="<button class='copystu' onclick='showCopyCG(this,\""+xmClass+"\",\""+tip+"\");'>复制学生:" + xmClass +"</button>";
+							p.setAttribute('class','center');
+							divNN.appendChild(p);
+							/*var p=document.createElement('p');
+							p.innerHTML="家长号码:<label>" + gainMatch("Phone",StHBRessJ[j])+"</label>";*/
+							divN.appendChild(divNN);
+						}
+						catch{
+						}
+					}
+					divW.appendChild(divN);
+					art.appendChild(divW);
+					return StHBRessJ.length;//返回总人数
+				}
+			}
+			//匹配每个趟次的站点到站时间，返回时间
+			function gainArrTime(station,tangci,linshiOrNot){
+				if (linshiOrNot){ //为True时则为临时变更。
+					var lsTTemp=loadLsTimeData(station,lsChangeXwZdTC1);
+					if  (lsTTemp==null || lsTTemp=='undefined'){
+						lsTTemp=loadLsTimeData(station,lsChangeXwZdTC2);
+					}
+					return lsTTemp;
+				}else{
+					for(var zdN=0;zdN<houcheZAndTime.length;zdN++){
+						if (station==houcheZAndTime[zdN].zhandian){
+							var zdT=houcheZAndTime[zdN].zdtime;
+							var zdTArr=zdT.split("@");
+							for (var t=0;t<zdTArr.length;t++){
+								if (tangci.indexOf("下午")>=0){
+									if (tangci.indexOf(t+1)>=0){
+										return zdTArr[t+2];
+										break;
+									}
+								}else{
+									if (tangci.indexOf(t+1)>=0){
+										ztime=zdTArr[t];//早上候车时间
+										return ztime;
+										break;
+									}
+								}
+								
+							}
+							
+						}
+					}
+				
+				}
+				
+			}
+			function loadLsTimeData(station,Data){
+				var totalStation=Data;
+				for(var zdN=0;zdN<totalStation.length;zdN++){
+					if (station==totalStation[zdN].station){
+						var zdT=totalStation[zdN].zdLsTime;
+						return zdT;
+						break;
+					}
+				}
+			}
+			//正则匹配数据，获取对应的班级，姓名，手机号码，并进行存储
+			function matchData(data,zOrx,bool,sOrNot,sCont,tc){
+				//匹配最外层数据
+				var guiz=/\[data\][\s\S]*?\[\/data\]/g;
+				var matchRes;
+				var i=1;//存储第几个
+				while(matchRes=guiz.exec(data)){
+					if (matchRes!=null){
+						matchRes=matchRes+'';//转换成str
+						//匹配具体的数据，如班级，姓名，手机号码，并进行分类，存储
+						matchRes=matchRes.replace('[data]','')//去掉data
+						matchRes=matchRes.replace('[/data]','')//去掉data
+						matchRess=matchRes.replace(/\s*/g,'');//把空格去掉
+						//console.log(matchRess)
+						var mBjGuiz='';
+						if (sOrNot){ //为True时进入搜索模式，仅输出搜索结果
+							if (isNaN(sCont)){
+								//查找姓名或者站点
+								mBjGuiz=new RegExp("\\d+" + sCont + "1[3456789]\\d{9}<zd>[\u4e00-\u9fa5]+<\/zd>|\\d+"+ sCont+"<zd>[\u4e00-\u9fa5]+<\/zd>|\\d+" + sCont + "1[3456789]\\d{9}|\\d+"+ sCont+"|\\d+[\u4e00-\u9fa5]+1[3456789]\\d{9}<zd>"+sCont+"<\/zd>|\\d+[\u4e00-\u9fa5]+<zd>"+sCont+"<\/zd>","g"); //两者选其中一个规则，首选第一个规则
+							}
+							else{
+								//查找班级
+								mBjGuiz=new RegExp(sCont+"[\u4e00-\u9fa5]+" + "1[3456789]\\d{9}<zd>[\u4e00-\u9fa5]+<\/zd>|" + sCont+"[\u4e00-\u9fa5]+" + "<zd>[\u4e00-\u9fa5]+<\/zd>|" + sCont +"[\u4e00-\u9fa5]+" + "1[3456789]\\d{9}|"+sCont+"[\u4e00-\u9fa5]+","g");
+							}
+							
+							var matchRessJ;
+							matchRessJ=matchRess.match(mBjGuiz);
+							var curTc='';
+							if (tc=='xiawu'){
+								curTc="下午第"+i+"趟";
+							}
+							else{
+								curTc="早上第"+i+"趟";
+							}
+							if (matchRessJ!=null){
+								//console.log(matchRessJ);
+								SearchButtonAdd(matchRessJ,curTc,sCont,bool);//输出搜索结果，添加进网页内  bool为True时直接添加，false为新插入article元素再添加
+							}
+							else{
+								SearchButtonAdd('',curTc,sCont,bool);//没有搜索到学生
+								//console.log(matchRessJ);
+							}
+						}
+						else{ //非搜索模式，正常输出所有校车名单
+							//班级，姓名,手机号码
+							mBjGuiz=new RegExp("\\d+[\u4e00-\u9fa5]+1[3456789]\\d{9}|\\d+[\u4e00-\u9fa5]+","g");
+							//班级，姓名,手机号码
+							var matchBanjiPhoneData;
+							matchBanjiPhoneData=matchRess.match(mBjGuiz);
+							addData(matchBanjiPhoneData,zOrx,i,bool);
+						}
+					}
+					i+=1;
+				}
+				
+			}
+			
+			//取班级，姓名，手机号码
+			function gainMatch(gSort,data){
+				var rtdata='';
+				if (gSort=='Banji'){ //返回班级姓名
+					rtdata=data.replace(/1[3456789]\d{9}/g,'');//去掉手机号码
+					rtdata=rtdata.replace(/<beizhu>[^<]*?<\/beizhu>/g,'');//去掉备注信息
+					rtdata=rtdata.replace(/<newstu>[^<]*?<\/newstu>/g,'');//去掉是否新生
+					return rtdata.replace(/<zd>[\u4e00-\u9fa5]+<\/zd>/g,'');//去掉站点，返回班级姓名
+				}
+				else if(gSort=='Phone'){ //返回手机号码
+					rtdata=data.replace(/<zd>[\u4e00-\u9fa5]+<\/zd>/g,'');//去掉站点
+					rtdata=rtdata.replace(/<beizhu>[^<]*?<\/beizhu>/g,'');//去掉备注信息
+					rtdata=rtdata.replace(/<newstu>[^<]*?<\/newstu>/g,'');//去掉是否新生
+					return rtdata.replace(/\d+[\u4e00-\u9fa5]+/g,'');//去掉姓名班级，返回手机号码
+				}
+				else if(gSort=='ZhanDian'){//返回站点名
+					rtdata=data.replace(/\d+[\u4e00-\u9fa5]+/g,'');//去掉班级姓名
+					rtdata=rtdata.replace(/1[3456789]\d{9}/g,'');//去掉手机号码
+					rtdata=rtdata.replace(/<beizhu>[^<]*?<\/beizhu>/g,'');//去掉备注信息
+					rtdata=rtdata.replace(/<newstu>[^<]*?<\/newstu>/g,'');//去掉是否新生
+					rtdata=rtdata.replace('<zd>','');//去掉<zd></zd>
+					return rtdata.replace('</zd>','');//返回站点名
+				}
+				else if(gSort=="Beizhu"){ //返回备注信息
+					rtdata=data.replace(/1[3456789]\d{9}/g,'');//去掉手机号码
+					rtdata=rtdata.replace(/\d+[\u4e00-\u9fa5]+/g,'');//去掉班级
+					rtdata=rtdata.replace(/<zd>[\u4e00-\u9fa5]+<\/zd>/g,'');//去掉备注信息
+					rtdata=rtdata.replace(/<newstu>[^<]*?<\/newstu>/g,'');//去掉是否新生
+					rtdata=rtdata.replace('<beizhu>','');
+					return rtdata.replace('</beizhu>','');//返回备注信息
+				}
+				else if(gSort=="xinsheng"){//返回是否为新生
+					rtdata=data.replace(/1[3456789]\d{9}/g,'');//去掉手机号码
+					rtdata=rtdata.replace(/\d+[\u4e00-\u9fa5]+/g,'');//去掉班级
+					rtdata=rtdata.replace(/<zd>[\u4e00-\u9fa5]+<\/zd>/g,'');//去掉备注信息
+					rtdata=rtdata.replace(/<beizhu>[^<]*?<\/beizhu>/g,'');//去掉是否新生
+					rtdata=rtdata.replace('<newstu>','');
+					rtdata=rtdata.replace('</newstu>','');//返回是否为新生
+					if (rtdata.indexOf("是")>-1){
+						return true;//是新生
+					}
+					else{
+						return false;//不是新生
+					}
+				}
+				else{//返回班级
+					rtdata=data.replace(/1[3456789]\d{9}/g,'');//去掉手机号码
+					rtdata=rtdata.replace(/<beizhu>[^<]*?<\/beizhu>/g,'');//去掉备注
+					rtdata=rtdata.replace(/<zd>[\u4e00-\u9fa5]+<\/zd>/g,'');//去掉备注信息
+					rtdata=rtdata.replace(/<newstu>[^<]*?<\/newstu>/g,'');//去掉是否新生
+					rtdata=rtdata.replace(/[\u4e00-\u9fa5]+/g,'');//去掉姓名
+					return rtdata;//返回班级		
+				}
+			}
+			
+			function noPhone(banJiName){
+				//alert("抱歉，"+banJiName+"尚未存有号码,无法进行拨打电话操作，如您是家长，请及时向校车老师进行更新号码！");
+			}
+			
+			function copyToClipboard(text,isAlert) {
+			  var tempInput = document.createElement("input");
+			  tempInput.style = "position: absolute; left: -1000px; top: -1000px";
+			  tempInput.value = text;
+			  document.body.appendChild(tempInput);
+			  tempInput.select();
+			  document.execCommand("copy");
+			  document.body.removeChild(tempInput);
+			  if (isAlert){
+				alert('微信号复制成功,请在打开微信后在添加朋友界面进行添加老师操作');
+			  }
+			}
+			
+			function SearchButtonAdd(dataBjiPhone,tangci,sCont,bool){
+				var article=document.createElement('article');
+				if (bool){
+					var p=document.createElement('p');
+					p.innerHTML="关于<label>"+sCont+"</label>的"+tangci+"搜索结果如下:";
+					article.appendChild(p);
+					//document.getElementsByTagName("body")[0].insertBefore(article,document.getElementsByTagName('aside')[0]);
+					document.getElementsByTagName("body")[0].appendChild(article);
+				}
+				if (dataBjiPhone==''){
+					var h2=document.createElement('h2');
+					h2.innerHTML="抱歉~没有搜索到相关结果，请更改关键词进行查询!"
+					article.appendChild(h2);
+					return;
+				}
+				for (var j=0;j<dataBjiPhone.length;j++){
+					var divW=document.createElement('div');
+					var divN=document.createElement('div');
+					divW.appendChild(divN);
+					var pN=document.createElement('p');
+					pN.innerHTML="班级姓名：<label>"+gainMatch("Banji",dataBjiPhone[j])+"</label>";
+					divN.appendChild(pN);
+					
+					var phone=gainMatch("Phone",dataBjiPhone[j]);
+					var phoneTip='';
+					if (isNull(phone)){
+						phone="无";
+					}
+					else{
+						phoneTip="href='tel:"+phone+"' title='点击打开电话联系家长'"
+					}
+					var pN1=document.createElement('p');
+					pN1.innerHTML="家长号码：<a "+phoneTip+">"+phone+"</a>";
+					divN.appendChild(pN1);
+					
+					var pN2=document.createElement('p');
+					pN2.innerHTML="坐车趟次：<label>"+tangci+"</label>";
+					divN.appendChild(pN2);
+					
+					var zdian='';
+					zdian=gainMatch("ZhanDian",dataBjiPhone[j]);
+					var dzzd=gainMatch("ZhanDian",dataBjiPhone[j]);//到站站点
+					var ztime='暂无相应时间';
+					if (tangci.indexOf("下午")>=0){ //下午趟次 找到对应的候车时间以及地点===>取校内
+						var zhandian=houcheZAndTime[0].zhandian;//首个默认是校内站点
+						var zhandianTime=houcheZAndTime[0].zdtime;
+						if (zhandianTime.indexOf("@")>=0 && zhandian.indexOf("@")>=0){
+							//字符串分割
+							var zdTimeArr=zhandianTime.split("@");
+							var zdArr=zhandian.split("@");
+							for (var t=0;t<zdTimeArr.length;t++){
+								if (tangci.indexOf(t+1)>=0){
+									zdian=zdArr[t];
+									ztime=zdTimeArr[t];//下午候车时间以及站点
+								}
+							}
+						}
+					}
+					if (zdian==''){
+						zdian='暂无相应站点';
+					}
+					var pN3=document.createElement('p');
+					pN3.innerHTML="候车站点：<label>"+zdian+"</label>";
+					divN.appendChild(pN3);
+					var pN4=document.createElement('p');
+					pN4.innerHTML="候车时间：<label>"+ztime+"</label>前,过时不等!";
+					divN.appendChild(pN4);
+					
+					for(var zdN=0;zdN<houcheZAndTime.length;zdN++){
+						if (dzzd==houcheZAndTime[zdN].zhandian){
+							var zdT=houcheZAndTime[zdN].zdtime;
+							var zdTArr=zdT.split("@");
+							for (var t=0;t<zdTArr.length;t++){
+								if (tangci.indexOf("下午")>=0){
+									if (tangci.indexOf(t+1)>=0){
+										var pN5=document.createElement('p');
+										pN5.innerHTML="下车站点：<label>"+dzzd+"</label>";
+										divN.appendChild(pN5);
+										var pN6=document.createElement('p');
+										pN6.innerHTML="下车时间：<label>"+zdTArr[t+2]+"</label>,请提前5分钟候车"; //从第三个开始取，第三个开始才是下午趟次
+										divN.appendChild(pN6);
+										break;
+									}
+								}else{
+									if (tangci.indexOf(t+1)>=0){
+										ztime=zdTArr[t];//早上候车时间
+										pN4.innerHTML="候车时间：<label>"+ztime+"</label>前,过时不等!";
+										break;
+									}
+								}
+								
+							}
+							
+						}
+					}
+					
+					var pN7=document.createElement('p');
+					pN7.innerHTML="早晚点5分钟属于正常情况!!!";
+					pN7.setAttribute("class","center")
+					divN.appendChild(pN7);
+					
+					var a=document.createElement('a');
+					a.innerHTML="有错误?复制微信号联系老师";
+					a.setAttribute('href','weixin://');
+					a.setAttribute('onclick','copyToClipboard("ZSBRLTC",true)');
+					divN.appendChild(a);
+					article.appendChild(divW);
+					//console.log(article);
+				}
+			}
+			//去掉html
+			function stripHtml(html) {
+				return html.replace(/<[^>]+>/g,'');
+			}
+			function isNull(cont){
+				if (!cont.trim()){
+					return true;
+				}
+				else{
+					if(cont==null || cont==""){
+						return true;
+					}
+				}
+				return false;
+			}
+			//搜索按钮
+			function search(searchId){
+				var searchid=document.getElementById(searchId);
+				var searchCont=searchid.value;
+				//检测是否为空，去html代码
+				var sCont=stripHtml(searchCont);
+				if (isNull(sCont)){
+					alert("查询内容不符合要求，请重新输入！");
+					searchid.value='';
+					searchid.focus();
+					return;
+				}
+				else{
+					//临时变更是否启用
+					if (BjTimeStatus()){
+						alert("临时变更趟次已启用\n\n请以首页的'临'页面数据显示为准!\n\n当前页面下午趟次的搜索结果可能不是正确的到站时间!\n\n如有问题请联系老师!");
+					}
+					delPos();
+					removeHtmlYs(['aside','musicPlayer','musicList','FirstIndexForceRead'],{"caozuo":"hide"});
+					matchData(DataZao,'',true,true,sCont,'zaos'); //搜索
+					matchData(DataWan,'',true,true,sCont,'xiawu'); //搜索
+					addFooter();//添加脚步版权
+				}
+				
+			}
+			
+			//删除所有的校车人员位置
+			function delPos(){
+				removeHtmlYs(['article','section','footer'],{"caozuo":"remove"});
+				removeHtmlYs(['article','section','footer'],{"caozuo":"remove"});
+				removeHtmlYs(['article','section','footer'],{"caozuo":"remove"});
+				removeHtmlYs(['article','section','footer'],{"caozuo":"remove"});
+				removeHtmlYs(['article','section','footer'],{"caozuo":"remove"});
+				removeHtmlYs(['article','section','footer'],{"caozuo":"remove"});
+				removeHtmlYs(['article','section','footer'],{"caozuo":"remove"});
+				removeHtmlYs(['article','section','footer'],{"caozuo":"remove"});
+				removeHtmlYs(['article','section','footer'],{"caozuo":"remove"});
+			}
+			//获取当前日期 返回 yyyy-mm-dd格式
+			function gainCurRq(){
+			  const now = new Date();
+			  // 分别获取年、月、日、小时、分钟、秒
+			  const year = now.getFullYear();
+			  const month = (now.getMonth() + 1).toString().padStart(2, '0');
+			  const day = now.getDate().toString().padStart(2, '0');
+			  const hours = now.getHours().toString().padStart(2, '0');
+			  const minutes = now.getMinutes().toString().padStart(2, '0');
+			  const seconds = now.getSeconds().toString().padStart(2, '0');
+			  // 返回格式化的字符串
+			  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+			}
+			//临时变更开始日期
+			var setLsBeginT='2024-07-06 00:00:00';
+			var setLsOverT='2024-07-15 17:59:59';
+			//比较日期是否已经结束或者已经开始
+			function BjTimeStatus(){
+				var currq = new Date(gainCurRq());
+				var beginTime = new Date(setLsBeginT);
+				var overTime = new Date(setLsOverT);
+				 
+				if (currq.getTime() < beginTime.getTime()) {
+					//console.log('临时变更尚未启用!');
+					return false;
+				} else if (currq.getTime() > overTime.getTime()) {
+					//console.log('临时变更启用已结束!');
+					return false;
+				} else {
+					//console.log('临时变更还在启用中');
+					return true;
+				}
+			}
+			//根据URL做相关的事情
+			UrlDo()
+			function UrlDo(){
+				var curWUrl=window.location.href;
+				if (curWUrl.indexOf('force')>-1){
+					window.localStorage['JZBisRead']='true';
+				}
+				if (curWUrl.indexOf('#sousuo')>-1){
+					show('sousuo',false);
+				}else if (curWUrl.indexOf('#zaoshang')>-1){
+					show('ZSZaoChangeZd',false);
+				}else if (curWUrl.indexOf('#xiawu')>-1){
+					show('ZSWanChangeZd',false);
+				}else if (curWUrl.indexOf('#linshi')>-1){
+					show('LsChangeZd',false);
+				}else if (curWUrl.indexOf('#message')>-1){
+					show('message',false);
+				}
+
+			}
+			//展示相应页面
+			//定时执行
+			var changeYS='';
+			var cpName='';//存储复制名单
+			function show(caoz,bool){
+				clearInterval(changeYS);//关闭定时器
+				//清空复制提示
+				cpName='';
+				if (!bool){
+					if(!isR){
+						alert("请先阅读完!!!并点击我已知晓按钮!");
+						return;
+					}
+				}
+				if (caoz=='shouye'){
+					delPos();
+					//initData();
+				}
+				else if(caoz=="sousuo"){
+					removeHtmlYs(['aside'],{"caozuo":"show"});
+					removeHtmlYs(['musicPlayer','musicList','FirstIndexForceRead'],{"caozuo":"hide"});
+					document.getElementById("searchInput").focus();
+					delPos();
+				}
+				else if(caoz=="music"){
+					removeHtmlYs(['aside','FirstIndexForceRead'],{"caozuo":"hide"});
+					removeHtmlYs(['musicPlayer','musicList'],{"caozuo":"show"});
+					delPos()
+				}
+				else if(caoz=="message"){
+					//更改一封信标题
+					if (!isR){
+						document.getElementById('zyfx').innerText='强制阅读20S:';
+					}else{
+						document.getElementById('zyfx').innerText='致家长们的一封信:';
+					}
+					document.getElementById("IKnow").removeAttribute('onclick');//去掉我已知晓按钮点击事件
+					removeHtmlYs(['aside','musicPlayer','musicList'],{"caozuo":"hide"});
+					removeHtmlYs(['FirstIndexForceRead'],{"caozuo":"show"});
+					if (DSJInterval!="" || DSJInterval!=null){
+						clearInterval(DSJInterval);
+					}
+					DSJInterval=setInterval('IKnowDJS()',1000);//开启定时器
+					delPos()
+				}
+				else if (caoz=="LsChangeZd"){ //临时变更站点
+					if (BjTimeStatus()){
+						changeLs("班级",false);//需要按班级或者站点再进行划分。
+					}else{
+						alert("临时停靠站点尚未启用!!!");
+						return false;
+					}
+					changeYS=setInterval(changeColor.bind(null, 'dtbeizhu'),300);
+				}
+				else if(caoz=="ZSWanChangeZd"){
+					if (BjTimeStatus()){
+						alert("当前查询信息可能不准确,请点首页的'临'查看相应的站点\n\n目前为临时变更到站站点，当前'晚'到站站点已停用!!!");
+					}
+					//常规校车趟次
+					changecgName("站点","下午",false);
+					changeYS=setInterval(changeColor.bind(null, 'dtbeizhu'),300);
+				}
+				else if(caoz=="ZSZaoChangeZd"){
+					//常规校车趟次
+					changecgName("站点","早上",false);
+					changeYS=setInterval(changeColor.bind(null, 'dtbeizhu'),300);
+				}
+				addFooter()
+			}
+			function addFooter(){
+				//最后才添加footer版权
+				var footer=document.createElement("footer");
+				footer.innerHTML='<label class="neibu">温馨提示:本页面数据禁止传播</label><br/>'+
+								'建议以手机和高版本浏览器访问本网页<br/>'+
+								'页面技术由<a href="https://mp.weixin.qq.com/s/kHm89OSzGrdpBqRdpOXgIA" target="_blank" title="访问微信公众号添洪帮">微信公众号添洪帮</a>独家提供技术支持<br/>'+
+								'如果遇到数据错误，请及时向老师反应，谢谢大家支持!<br/>'+
+								'Powered By <a href="https://mp.weixin.qq.com/s/kHm89OSzGrdpBqRdpOXgIA" target="_blank" title="访问微信公众号添洪帮">添洪帮</a> Copyright © 2023-'+new Date().getFullYear()+' thb版权所有<br/>';
+				document.getElementsByTagName("body")[0].appendChild(footer);
+				window.scrollTo(0, 0);//滚动到顶部位置
+			}
+			function changecgName(bjORzd,ZorW,bool){
+				if (ZorW.indexOf("早上")>-1){
+					changeCg(DataZao,bjORzd,"早上",bool);
+				}else{
+					changeCg(DataWan,bjORzd,"下午",bool);
+				}
+			}
+			//常规站点
+			function changeCg(sj,orderBy,qianzhui,AddFbool){
+				delPos();
+				removeHtmlYs(['aside','musicPlayer','musicList','FirstIndexForceRead'],{"caozuo":"hide"});//全部隐藏
+				var CGZDData=new RegExp("\\[data\\][\\s\\S]*?\\[/data\\]","g")
+				var CGZDDataJ=sj.match(CGZDData);
+				if (CGZDDataJ!=null){
+					for(var cgi=0;cgi<CGZDDataJ.length;cgi++){
+						var CGZhanDianData=CGZDDataJ[cgi];
+						CGZhanDianData=CGZhanDianData.replace(/\s*/g,'');//去掉空格
+						var CGZDGuiz=new RegExp("\\d+[\u4e00-\u9fa5]+1[3456789]\\d{9}<zd>[\u4e00-\u9fa5]+<\/zd>|\\d+[\u4e00-\u9fa5]+<zd>[\u4e00-\u9fa5]+<\/zd>","g"); //两者选其中一个规则，首选第一个规则
+						var CGZDGuizJ=CGZhanDianData.match(CGZDGuiz);
+						var zdNameArr=new Array()
+						if (CGZDGuizJ!=null){ //取每一趟站点
+							for(var cgzdi=0;cgzdi<CGZDGuizJ.length;cgzdi++){
+								//console.log(CGZDGuizJ[cgzdi]);
+								//取站点
+								var zdName=gainMatch("ZhanDian",CGZDGuizJ[cgzdi]);
+								if (zdNameArr.length>0){
+									var isExist=false;
+									for (var zdii=0;zdii<zdNameArr.length;zdii++){
+										if (zdNameArr[zdii]==zdName){ //存在相同站点，不进行存储操作
+											isExist=true;
+										}
+									}
+									if (!isExist){
+										zdNameArr.push(zdName);
+									}
+								}
+								else{
+									zdNameArr.push(zdName);
+								}
+								
+							}
+							stationHBArr(zdNameArr,CGZhanDianData,cgi+1,qianzhui+"第"+ (cgi+1) +"趟","",orderBy,"常规趟次");
+						}
+					}
+				}
+				if (AddFbool){//需要添加脚步版权
+					addFooter();
+				}
+			}
+			//临时更改站点默认排序，按班级，可以更改为站点，
+			function changeLs(OrderStr,AddFbool){
+				delPos();
+				removeHtmlYs(['aside','musicPlayer','musicList','FirstIndexForceRead'],{"caozuo":"hide"});//全部隐藏
+				stationHBArr(lsChangeXwZdTC1,DataWan,'F','下午第1趟',1,OrderStr,"临时变更");
+				stationHBArr(lsChangeXwZdTC2,DataWan,'S',"下午第2趟",2,OrderStr,"临时变更");
+				if (AddFbool){//需要添加脚步版权
+					addFooter();
+				}
+			}
+			//不足10返回01
+			function noTen(num){
+				if (num<10){
+					return '0' + num;
+				}
+				else{
+					return num;
+				}
+			}
+			
+			function removeHtmlYs(htmlArg,cz){
+				for(var i=0;i<htmlArg.length;i++){
+					//console.log(htmlArg[i]);
+					var html='';
+					try{
+						html=document.getElementsByTagName('body')[0].getElementsByTagName(htmlArg[i]);
+						//console.log(html.length);
+						if (html.length<=0){
+							html=document.getElementsByTagName('body')[0].getElementsByClassName(htmlArg[i]);
+						}
+					}
+					catch(e){
+						html=document.getElementsByTagName('body')[0].getElementsByClassName(htmlArg[i]);
+					}
+					//console.log(html.length);
+					if (typeof(html)=='undefined'){
+						return;
+					}
+					//console.log(html);
+					//console.log(html.length);
+					if (html.length>0){
+						//console.log(html.length);
+						for (var k=0;k<html.length;k++){
+							if (cz.caozuo=="show"){
+								html[k].setAttribute('style','display:block');
+							}
+							else if(cz.caozuo=="hide"){
+								html[k].setAttribute('style','display:none');
+							}
+							else{
+								html[k].parentNode.removeChild(html[k]);
+							}
+						}
+					}
+					
+				}
+			}
+			//动态更改颜色
+			function changeColor(classid){
+				var curCArr='rgb('+(Math.floor(Math.random() * 255) + 1)+','+(Math.floor(Math.random() * 255) + 1)+', '+(Math.floor(Math.random() * 255) + 1)+')';//随机生成颜色
+				try{
+					var classArr=document.getElementsByClassName(classid);
+					for (var i=0;i<classArr.length;i++){
+						classArr[i].setAttribute('style','color:'+curCArr)
+					}
+				}
+				catch{
+				}
+				
+			}
+			//复制名单，按照剪切板输出以下格式内容:XX班XX级未在候车点候车
+			function cpyStuName(name,cpHz){
+				if (cpName.indexOf(cpHz)<=-1){
+					cpName=name + cpHz;
+					copyToClipboard(cpName,false);
+				}else{
+					if (cpName.indexOf(name)<=-1){//名字不存在就复制
+						cpName=cpName.replace(cpHz,'');
+						cpName=cpName + "," + name + cpHz;
+						copyToClipboard(cpName,false);
+					}
+				}
+			}
+			//显示复制成功
+			function showCopyCG(obj,stu,cpHz){
+				//调用复制
+				cpyStuName(stu,cpHz);
+				obj.innerText='复制成功!可连续复制名单';
+				obj.setAttribute('class','copyFinishstu');
+				obj.setAttribute('onclick','delCopyStu(this,"'+stu+'","'+cpHz+'")');
+			}
+			//删除复制的学生 由于不能直接操作用户剪切板，所以只能复制删掉的内容。
+			function delCopyStu(obj,stu,cpHz){
+				obj.innerText='复制学生:' + stu;
+				obj.setAttribute('class','copystu');
+				obj.setAttribute('onclick','showCopyCG(this,"'+stu+'","'+cpHz+'")');
+				var hz=",";
+				//判断这个学生在不在，在的话就取消复制
+				if (cpName.indexOf(hz+stu)>-1 || cpName.indexOf(stu+hz)>-1){
+					cpName=cpName.replace(hz+stu,'');
+					cpName=cpName.replace(stu+hz,'');//不只这个学生
+				}
+				else{
+					cpName=' ';//清空，只有这个学生，清空剪切板
+				}
+				//复制该内容
+				copyToClipboard(cpName,false);
+			}
+		</script>
+	</body>
+</html>
+
