@@ -603,18 +603,18 @@
 							{'zhandian':'芙蓉超市','zdtime':'@7:39分@@16:36分@'}
 							];
 							
-		var lsChangeXwZdTC1=[{'station':'傍江西村公交站','stationPY':'bjxcgjz','zdLsTime':'10:40分'},//10:30分发车
-							{'station':'城市花园路口公交站','stationPY':'cshylkgjz','zdLsTime':'10:42分'},
-							{'station':'石岗美心苑公交站','stationPY':'sgmxygjz','zdLsTime':'10:43分'},
-							{'station':'石岗东村公交站','stationPY':'sgdcgjz','zdLsTime':'10:44分'},
-							{'station':'沙墟市场公交站','stationPY':'sxscgjz','zdLsTime':'10:51分'},
-							{'station':'罗家村富怡路公交站','stationPY':'ljcfylgjz','zdLsTime':'10:57分'}];//下午临时更改下午第一趟站点名称   学校回，估计要20分
-		var lsChangeXwZdTC2=[{'station':'新桥东公交站','stationPY':'xqdgjz','zdLsTime':'11:16分'},
-							{'station':'新桥村公交站','stationPY':'xqcgjz','zdLsTime':'11:17分'},
-							{'station':'傍新路口公交站','stationPY':'bxlkgjz','zdLsTime':'11:18分'},
-							{'station':'傍江东村公交站','stationPY':'bjdcgjz','zdLsTime':'11:20分'},
-							{'station':'华盛隆超市对面','stationPY':'hslcsdm','zdLsTime':'11:23分'},
-							{'station':'芙蓉超市','stationPY':'frcs','zdLsTime':'11:24分'}];//临时更改下午第二趟站点名称
+		var lsChangeXwZdTC1=[{'station':'傍江西村公交站','stationPY':'bjxcgjz','zdLsTime':'15:50分'},//10:30分发车
+							{'station':'城市花园路口公交站','stationPY':'cshylkgjz','zdLsTime':'15:52分'},
+							{'station':'石岗美心苑公交站','stationPY':'sgmxygjz','zdLsTime':'15:53分'},
+							{'station':'石岗东村公交站','stationPY':'sgdcgjz','zdLsTime':'15:54分'},
+							{'station':'沙墟市场公交站','stationPY':'sxscgjz','zdLsTime':'16:01分'},
+							{'station':'罗家村富怡路公交站','stationPY':'ljcfylgjz','zdLsTime':'16:07分'}];//下午临时更改下午第一趟站点名称   学校回，估计要20分
+		var lsChangeXwZdTC2=[{'station':'新桥东公交站','stationPY':'xqdgjz','zdLsTime':'16:26分'},
+							{'station':'新桥村公交站','stationPY':'xqcgjz','zdLsTime':'16:27分'},
+							{'station':'傍新路口公交站','stationPY':'bxlkgjz','zdLsTime':'16:28分'},
+							{'station':'傍江东村公交站','stationPY':'bjdcgjz','zdLsTime':'16:30分'},
+							{'station':'华盛隆超市对面','stationPY':'hslcsdm','zdLsTime':'16:33分'},
+							{'station':'芙蓉超市','stationPY':'frcs','zdLsTime':'16:34分'}];//临时更改下午第二趟站点名称
 		var allZhandian=[{'station':'傍江东村公交站','stationPY':'bjdcgjz'},
 						{'station':'傍江西村公交站','stationPY':'bjxcgjz'},
 						{'station':'城市花园路口公交站','stationPY':'cshylkgjz'},
@@ -1690,8 +1690,8 @@ var DataWan='[data]'+'503谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
 			  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 			}
 			//临时变更开始日期
-			var setLsBeginT='2025-01-01 17:30:00';
-			var setLsOverT='2025-01-17 17:59:59';
+			var setLsBeginT='2025-06-26 00:30:00';
+			var setLsOverT='2025-07-05 17:59:59';
 			//比较日期是否已经结束或者已经开始
 			function BjTimeStatus(){
 				var currq = new Date(gainCurRq());
@@ -1785,6 +1785,8 @@ var DataWan='[data]'+'503谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
 						return false;
 					}
 					changeYS=setInterval(changeColor.bind(null, 'dtbeizhu'),300);
+					/*因为有些时间到站时间不一致，做个提示*/
+					alert("温馨提示【重要!!!!!】\n2025年7月2日在下面的时间基础上加1小时\n2025年7月3日在下面的时间基础上加30分钟");
 				}
 				else if(caoz=="ZSWanChangeZd"){
 					if (BjTimeStatus()){
