@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>广州版信息技术八年级专项练习</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0E639C',
+                        secondary: '#27AE60',
+                        accent: '#9B59B6',
+                        dark: '#2C3E50',
+                        light: '#F8F9FA'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .question-card {
+                transition: all 0.3s ease;
+            }
+            .question-card:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 8px 16px -4px rgba(0,0,0,0.1);
+            }
+            .fill-blank {
+                display: inline-block;
+                width: 120px;
+                height: 28px;
+                border-bottom: 2px solid #0E639C;
+                margin: 0 4px;
+                vertical-align: middle;
+            }
+            .fill-blank.short {
+                width: 60px;
+            }
+            .fill-blank.long {
+                width: 180px;
+            }
+            .answer-toggle {
+                cursor: pointer;
+                transition: color 0.2s ease;
+            }
+            .answer-toggle:hover {
+                color: #0E639C;
+            }
+            .answer-content {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s ease;
+            }
+            .answer-content.show {
+                max-height: 1000px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-dark">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-md fixed w-full top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <i class="fa fa-pencil-square-o text-primary text-2xl mr-3"></i>
+                    <span class="text-xl font-bold text-primary">信息技术八年级专项练习</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#unit1" class="text-gray-600 hover:text-primary transition-colors">第1章 数据处理</a>
+                    <a href="#unit2" class="text-gray-600 hover:text-primary transition-colors">第2章 Python编程（重点）</a>
+                    <a href="#unit3" class="text-gray-600 hover:text-primary transition-colors">第3章 App开发</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="menuBtn" class="text-gray-600 hover:text-primary">
+                        <i class="fa fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 移动端菜单 -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white shadow-lg">
+            <div class="container mx-auto px-4 py-3 space-y-3">
+                <a href="#unit1" class="block text-gray-600 hover:text-primary transition-colors py-2">第1章 数据处理</a>
+                <a href="#unit2" class="block text-gray-600 hover:text-primary transition-colors py-2">第2章 Python编程（重点）</a>
+                <a href="#unit3" class="block text-gray-600 hover:text-primary transition-colors py-2">第3章 App开发</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 头部横幅 -->
+    <header class="pt-24 pb-12 bg-gradient-to-r from-primary to-accent text-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-3xl sm:text-4xl font-bold mb-4">专项练习与巩固</h1>
+                <p class="text-lg opacity-90">聚焦重点知识点，强化Python编程能力，包含填空、选择、编程应用题</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <!-- 第一单元：数据的分析与处理 -->
+        <section id="unit1" class="mb-16">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center mb-8">
+                    <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white mr-3">
+                        <i class="fa fa-table"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-dark">第1章 数据的分析与处理</h2>
+                </div>
+
+                <!-- 填空题 -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8 question-card">
+                    <h3 class="text-xl font-semibold text-primary mb-4 flex items-center">
+                        <i class="fa fa-pencil mr-2"></i>一、填空题
+                    </h3>
+                    <div class="space-y-6">
+                        <!-- 题1 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-2">1. WPS表格中，一个完整的文件称为________，其中包含多个________，数据存储的最小单元是________。</p>
+                            <div class="flex flex-wrap items-center gap-2 mt-2">
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                            </div>
+                            <div class="mt-4 text-primary answer-toggle flex items-center" onclick="toggleAnswer('unit1-1')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="unit1-1" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-primary">
+                                <p>答案：工作簿；工作表；单元格</p>
+                            </div>
+                        </div>
+
+                        <!-- 题2 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-2">2. 在WPS表格中，输入公式时必须以________开头；若要计算A1到A10单元格的总和，可使用函数________；计算平均值使用函数________。</p>
+                            <div class="flex flex-wrap items-center gap-2 mt-2">
+                                <span class="fill-blank short"></span>
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                            </div>
+                            <div class="mt-4 text-primary answer-toggle flex items-center" onclick="toggleAnswer('unit1-2')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="unit1-2" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-primary">
+                                <p>答案：=（等号）；SUM(A1:A10)；AVERAGE(A1:A10)</p>
+                            </div>
+                        </div>
+
+                        <!-- 题3 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-2">3. 数据排序时，若主要关键字相同，可通过设置________进一步排序；数据筛选分为________和________两种方式，筛选后隐藏的数据________（填“会”或“不会”）被删除。</p>
+                            <div class="flex flex-wrap items-center gap-2 mt-2">
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank short"></span>
+                            </div>
+                            <div class="mt-4 text-primary answer-toggle flex items-center" onclick="toggleAnswer('unit1-3')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="unit1-3" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-primary">
+                                <p>答案：次要关键字；自动筛选；高级筛选；不会</p>
+                            </div>
+                        </div>
+
+                        <!-- 题4 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-2">4. 制作图表时，________图表适合比较不同类别数据的差异，________图表适合展示数据的变化趋势，________图表适合显示各部分占总体的比例关系。</p>
+                            <div class="flex flex-wrap items-center gap-2 mt-2">
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                            </div>
+                            <div class="mt-4 text-primary answer-toggle flex items-center" onclick="toggleAnswer('unit1-4')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="unit1-4" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-primary">
+                                <p>答案：柱形；折线；饼图</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 选择题 -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8 question-card">
+                    <h3 class="text-xl font-semibold text-primary mb-4 flex items-center">
+                        <i class="fa fa-check-square-o mr-2"></i>二、选择题
+                    </h3>
+                    <div class="space-y-6">
+                        <!-- 题1 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">1. 在WPS表格中，若要固定某列数据不随滚动条移动，应使用的功能是（  ）</p>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">A. 合并单元格</div>
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">B. 冻结窗格</div>
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">C. 筛选</div>
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">D. 分类汇总</div>
+                            </div>
+                            <div class="mt-4 text-primary answer-toggle flex items-center" onclick="toggleAnswer('unit1-choice1')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="unit1-choice1" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-primary">
+                                <p>答案：B</p>
+                                <p class="mt-1 text-sm">解析：冻结窗格功能可固定指定的行或列，方便查看大量数据时对照表头。</p>
+                            </div>
+                        </div>
+
+                        <!-- 题2 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">2. 下列关于单元格引用的说法，正确的是（  ）</p>
+                            <div class="grid grid-cols-1 gap-3">
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">A. 相对引用（如A1）复制公式时地址不变</div>
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">B. 绝对引用（如$A$1）复制公式时地址随位置调整</div>
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">C. 混合引用（如$A1或A$1）可固定行或列</div>
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">D. 单元格引用只能引用同一工作表中的单元格</div>
+                            </div>
+                            <div class="mt-4 text-primary answer-toggle flex items-center" onclick="toggleAnswer('unit1-choice2')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="unit1-choice2" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-primary">
+                                <p>答案：C</p>
+                                <p class="mt-1 text-sm">解析：相对引用复制时地址自动调整，绝对引用地址固定，混合引用固定行或列；引用可跨工作表（如Sheet2!A1）。</p>
+                            </div>
+                        </div>
+
+                        <!-- 题3 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">3. 对表格数据进行分类汇总前，必须先进行的操作是（  ）</p>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">A. 筛选数据</div>
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">B. 排序数据</div>
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">C. 合并单元格</div>
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">D. 插入图表</div>
+                            </div>
+                            <div class="mt-4 text-primary answer-toggle flex items-center" onclick="toggleAnswer('unit1-choice3')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="unit1-choice3" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-primary">
+                                <p>答案：B</p>
+                                <p class="mt-1 text-sm">解析：分类汇总需先按分类字段排序，确保相同类别的数据集中在一起，否则汇总结果会分散。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 应用题 -->
+                <div class="bg-white rounded-xl shadow-md p-6 question-card">
+                    <h3 class="text-xl font-semibold text-primary mb-4 flex items-center">
+                        <i class="fa fa-cogs mr-2"></i>三、应用题
+                    </h3>
+                    <div class="space-y-6">
+                        <!-- 题1 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">1. 现有班级成绩表（如下表），请完成以下操作：</p>
+                            <div class="overflow-x-auto mb-4">
+                                <table class="min-w-full border border-gray-200 rounded-lg">
+                                    <thead>
+                                        <tr class="bg-gray-100">
+                                            <th class="py-2 px-3 border-b text-left">姓名</th>
+                                            <th class="py-2 px-3 border-b text-left">语文</th>
+                                            <th class="py-2 px-3 border-b text-left">数学</th>
+                                            <th class="py-2 px-3 border-b text-left">英语</th>
+                                            <th class="py-2 px-3 border-b text-left">总分</th>
+                                            <th class="py-2 px-3 border-b text-left">排名</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="py-2 px-3 border-b">张三</td>
+                                            <td class="py-2 px-3 border-b">85</td>
+                                            <td class="py-2 px-3 border-b">92</td>
+                                            <td class="py-2 px-3 border-b">88</td>
+                                            <td class="py-2 px-3 border-b"></td>
+                                            <td class="py-2 px-3 border-b"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-3 border-b">李四</td>
+                                            <td class="py-2 px-3 border-b">90</td>
+                                            <td class="py-2 px-3 border-b">86</td>
+                                            <td class="py-2 px-3 border-b">95</td>
+                                            <td class="py-2 px-3 border-b"></td>
+                                            <td class="py-2 px-3 border-b"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-3 border-b">王五</td>
+                                            <td class="py-2 px-3 border-b">78</td>
+                                            <td class="py-2 px-3 border-b">94</td>
+                                            <td class="py-2 px-3 border-b">82</td>
+                                            <td class="py-2 px-3 border-b"></td>
+                                            <td class="py-2 px-3 border-b"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p class="text-lg mb-2">（1）用公式计算每位同学的“总分”（语文+数学+英语）；</p>
+                            <p class="text-lg mb-2">（2）按“总分”降序排序，并添加“排名”（1、2、3）；</p>
+                            <p class="text-lg mb-2">（3）筛选出“总分≥260”的同学。</p>
+                            <div class="mt-4 text-primary answer-toggle flex items-center" onclick="toggleAnswer('unit1-app1')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示操作步骤
+                            </div>
+                            <div id="unit1-app1" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-primary">
+                                <p class="font-medium">（1）计算总分：</p>
+                                <p class="mt-1">① 选中E2单元格，输入公式“=B2+C2+D2”，按回车；</p>
+                                <p class="mt-1">② 选中E2单元格，拖动右下角填充柄至E4，自动计算李四、王五的总分。</p>
+                                <p class="font-medium mt-3">（2）排序与排名：</p>
+                                <p class="mt-1">① 选中数据区域A1:F4，点击“数据”→“排序”；</p>
+                                <p class="mt-1">② 主要关键字选择“总分”，次序选择“降序”，点击确定；</p>
+                                <p class="mt-1">③ 在F2单元格输入“1”，F3输入“2”，F4输入“3”（或用RANK函数自动排名）。</p>
+                                <p class="font-medium mt-3">（3）筛选数据：</p>
+                                <p class="mt-1">① 选中数据区域A1:F4，点击“数据”→“自动筛选”；</p>
+                                <p class="mt-1">② 点击“总分”列下拉按钮，选择“数字筛选”→“大于或等于”，输入“260”，点击确定。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第二单元：程序设计初步（重点） -->
+        <section id="unit2" class="mb-16">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center mb-8">
+                    <div class="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-white mr-3">
+                        <i class="fa fa-code"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-dark">第2章 Python程序设计（重点强化）</h2>
+                </div>
+
+                <!-- 填空题 -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8 question-card">
+                    <h3 class="text-xl font-semibold text-secondary mb-4 flex items-center">
+                        <i class="fa fa-pencil mr-2"></i>一、填空题（基础概念）
+                    </h3>
+                    <div class="space-y-6">
+                        <!-- 题1 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-2">1. Python中，基本数据类型包括________（如10、-5）、________（如3.14、0.5）、________（如"Python"）和________（只有True和False）。</p>
+                            <div class="flex flex-wrap items-center gap-2 mt-2">
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                            </div>
+                            <div class="mt-4 text-secondary answer-toggle flex items-center" onclick="toggleAnswer('unit2-1')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="unit2-1" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-secondary">
+                                <p>答案：整数（int）；浮点数（float）；字符串（str）；布尔值（bool）</p>
+                            </div>
+                        </div>
+
+                        <!-- 题2 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-2">2. 输入函数________用于获取用户键盘输入，返回________类型；输出函数________用于在屏幕上显示内容；单行注释以________开头，多行注释用________括起来。</p>
+                            <div class="flex flex-wrap items-center gap-2 mt-2">
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank short"></span>
+                                <span class="fill-blank"></span>
+                            </div>
+                            <div class="mt-4 text-secondary answer-toggle flex items-center" onclick="toggleAnswer('unit2-2')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="unit2-2" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-secondary">
+                                <p>答案：input()；字符串（str）；print()；#；三个单引号（'''）或三个双引号（"""）</p>
+                            </div>
+                        </div>
+
+                        <!-- 题3 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-2">3. 关系运算符中，________表示“等于”，________表示“不等于”，________表示“大于等于”；逻辑运算符________表示“与”（两边都为真才为真），________表示“或”（至少一边为真即为真）。</p>
+                            <div class="flex flex-wrap items-center gap-2 mt-2">
+                                <span class="fill-blank short"></span>
+                                <span class="fill-blank short"></span>
+                                <span class="fill-blank short"></span>
+                                <span class="fill-blank short"></span>
+                                <span class="fill-blank short"></span>
+                            </div>
+                            <div class="mt-4 text-secondary answer-toggle flex items-center" onclick="toggleAnswer('unit2-3')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="unit2-3" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-secondary">
+                                <p>答案：==；!=；>=；and；or</p>
+                            </div>
+                        </div>
+
+                        <!-- 题4 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-2">4. range()函数中，range(5)生成的序列是________，range(2,7)生成的序列是________，range(1,10,2)生成的序列是________。</p>
+                            <div class="flex flex-wrap items-center gap-2 mt-2">
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                            </div>
+                            <div class="mt-4 text-secondary answer-toggle flex items-center" onclick="toggleAnswer('unit2-4')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="unit2-4" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-secondary">
+                                <p>答案：0,1,2,3,4；2,3,4,5,6；1,3,5,7,9</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 选择题（程序结构） -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8 question-card">
+                    <h3 class="text-xl font-semibold text-secondary mb-4 flex items-center">
+                        <i class="fa fa-check-square-o mr-2"></i>二、选择题（程序结构重点）
+                    </h3>
+                    <div class="space-y-6">
+                        <!-- 题1（顺序结构） -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">1. 执行以下Python代码，输出结果是（  ）</p>
+                            <pre class="bg-gray-50 p-3 rounded font-mono text-sm mb-3">a = 5
+b = 3
+c = a * b + 2
+print(c)</pre>
+                            <div class="grid grid-cols-4 gap-3">
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">A. 15</div>
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">B. 17</div>
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">C. 25</div>
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">D. 532</div>
+                            </div>
+                            <div class="mt-4 text-secondary answer-toggle flex items-center" onclick="toggleAnswer('unit2-choice1')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="unit2-choice1" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-secondary">
+                                <p>答案：B</p>
+                                <p class="mt-1 text-sm">解析：先计算a*b=5*3=15，再+2得17，print(c)输出17。</p>
+                            </div>
+                        </div>
+
+                        <!-- 题2（分支结构） -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">2. 执行以下代码，若输入“85”，输出结果是（  ）</p>
+                            <pre class="bg-gray-50 p-3 rounded font-mono text-sm mb-3">score = int(input("请输入成绩："))
+if score >= 90:
+    print("优秀")
+elif score >= 80:
+    print("良好")
+elif score >= 60:
+    print("合格")
+else:
+    print("不合格")</pre>
+                            <div class="grid grid-cols-4 gap-3">
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">A. 优秀</div>
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">B. 良好</div>
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">C. 合格</div>
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">D. 不合格</div>
+                            </div>
+                            <div class="mt-4 text-secondary answer-toggle flex items-center" onclick="toggleAnswer('unit2-choice2')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="unit2-choice2" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-secondary">
+                                <p>答案：B</p>
+                                <p class="mt-1 text-sm">解析：85不满足>=90，满足>=80，执行第二个分支，输出“良好”。</p>
+                            </div>
+                        </div>
+
+                        <!-- 题3（for循环） -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">3. 执行以下for循环代码，输出结果是（  ）</p>
+                            <pre class="bg-gray-50 p-3 rounded font-mono text-sm mb-3">sum = 0
+for i in range(1, 6):
+    sum += i
+print(sum)</pre>
+                            <div class="grid grid-cols-4 gap-3">
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">A. 15</div>
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">B. 10</div>
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">C. 21</div>
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">D. 5</div>
+                            </div>
+                            <div class="mt-4 text-secondary answer-toggle flex items-center" onclick="toggleAnswer('unit2-choice3')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="unit2-choice3" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-secondary">
+                                <p>答案：A</p>
+                                <p class="mt-1 text-sm">解析：range(1,6)生成1,2,3,4,5，sum累加为1+2+3+4+5=15。</p>
+                            </div>
+                        </div>
+
+                        <!-- 题4（while循环） -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">4. 执行以下while循环代码，输出结果是（  ）</p>
+                            <pre class="bg-gray-50 p-3 rounded font-mono text-sm mb-3">i = 1
+while i <= 3:
+    print(i, end=" ")
+    i += 1</pre>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">A. 1 2 3</div>
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">B. 1 1 1</div>
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">C. 3 2 1</div>
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">D. 1 2</div>
+                            </div>
+                            <div class="mt-4 text-secondary answer-toggle flex items-center" onclick="toggleAnswer('unit2-choice4')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="unit2-choice4" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-secondary">
+                                <p>答案：A</p>
+                                <p class="mt-1 text-sm">解析：i初始为1，满足i<=3，打印1；i变为2，打印2；i变为3，打印3；i变为4，不满足循环条件，结束。</p>
+                            </div>
+                        </div>
+
+                        <!-- 题5（break语句） -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">5. 以下代码的功能是（  ）</p>
+                            <pre class="bg-gray-50 p-3 rounded font-mono text-sm mb-3">num = 0
+while True:
+    num += 1
+    if num == 5:
+        break
+print(num)</pre>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">A. 打印1-4</div>
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">B. 打印5</div>
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">C. 无限循环</div>
+                                <div class="p-3 border border-gray-200 rounded hover:bg-gray-50 cursor-pointer">D. 打印0</div>
+                            </div>
+                            <div class="mt-4 text-secondary answer-toggle flex items-center" onclick="toggleAnswer('unit2-choice5')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="unit2-choice5" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-secondary">
+                                <p>答案：B</p>
+                                <p class="mt-1 text-sm">解析：无限循环中，num从0开始自增，当num==5时执行break跳出循环，最后打印num=5。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 编程填空题（补全代码） -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8 question-card">
+                    <h3 class="text-xl font-semibold text-secondary mb-4 flex items-center">
+                        <i class="fa fa-code mr-2"></i>三、编程填空题（补全代码）
+                    </h3>
+                    <div class="space-y-8">
+                        <!-- 题1（分支结构：判断奇偶数） -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">1. 以下代码用于判断用户输入的整数是奇数还是偶数，请补全代码：</p>
+                            <pre class="bg-gray-50 p-3 rounded font-mono text-sm mb-3"># 判断奇偶数
+num = int(input("请输入一个整数："))
+if ________ % 2 == 0:  # 补全条件
+    print(num, "是偶数")
+________:  # 补全分支关键字
+    print(num, "是奇数")</pre>
+                            <div class="flex flex-wrap items-center gap-4 mt-4">
+                                <div>条件处填：<span class="fill-blank short"></span></div>
+                                <div>分支关键字：<span class="fill-blank short"></span></div>
+                            </div>
+                            <div class="mt-4 text-secondary answer-toggle flex items-center" onclick="toggleAnswer('unit2-code1')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="unit2-code1" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-secondary">
+                                <p>答案：num；else</p>
+                                <p class="mt-1 text-sm">完整代码：</p>
+                                <pre class="bg-gray-50 p-2 rounded font-mono text-sm"># 判断奇偶数
+num = int(input("请输入一个整数："))
+if num % 2 == 0:
+    print(num, "是偶数")
+else:
+    print(num, "是奇数")</pre>
+                            </div>
+                        </div>
+
+                        <!-- 题2（for循环：计算阶乘） -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">2. 以下代码用于计算n的阶乘（n! = n×(n-1)×...×1），请补全代码：</p>
+                            <pre class="bg-gray-50 p-3 rounded font-mono text-sm mb-3"># 计算n的阶乘
+n = int(input("请输入n的值："))
+factorial = ________  # 初始化阶乘变量
+for i in range(1, ________):  # 补全range参数
+    factorial ________ i  # 补全累加/累乘运算符
+print(n, "的阶乘是：", factorial)</pre>
+                            <div class="flex flex-wrap items-center gap-4 mt-4">
+                                <div>初始化值：<span class="fill-blank short"></span></div>
+                                <div>range参数：<span class="fill-blank short"></span></div>
+                                <div>运算符：<span class="fill-blank short"></span></div>
+                            </div>
+                            <div class="mt-4 text-secondary answer-toggle flex items-center" onclick="toggleAnswer('unit2-code2')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="unit2-code2" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-secondary">
+                                <p>答案：1；n+1；*=（或= factorial *）</p>
+                                <p class="mt-1 text-sm">完整代码：</p>
+                                <pre class="bg-gray-50 p-2 rounded font-mono text-sm"># 计算n的阶乘
+n = int(input("请输入n的值："))
+factorial = 1
+for i in range(1, n+1):
+    factorial *= i  # 等价于factorial = factorial * i
+print(n, "的阶乘是：", factorial)</pre>
+                            </div>
+                        </div>
+
+                        <!-- 题3（while循环：累加至总和超1000） -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">3. 以下代码用于计算1+2+3+...加到多少时总和超1000，请补全代码：</p>
+                            <pre class="bg-gray-50 p-3 rounded font-mono text-sm mb-3"># 累加至总和超1000
+total = 0
+i = 1
+while total <= 1000:
+    total ________ i  # 补全累加运算符
+    ________  # 补全i的自增语句
+print("加到", i-1, "时，总和超1000，总和为：", total)</pre>
+                            <div class="flex flex-wrap items-center gap-4 mt-4">
+                                <div>累加运算符：<span class="fill-blank short"></span></div>
+                                <div>自增语句：<span class="fill-blank"></span></div>
+                            </div>
+                            <div class="mt-4 text-secondary answer-toggle flex items-center" onclick="toggleAnswer('unit2-code3')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="unit2-code3" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-secondary">
+                                <p>答案：+=（或= total +）；i += 1（或i = i + 1）</p>
+                                <p class="mt-1 text-sm">完整代码：</p>
+                                <pre class="bg-gray-50 p-2 rounded font-mono text-sm"># 累加至总和超1000
+total = 0
+i = 1
+while total <= 1000:
+    total += i
+    i += 1
+print("加到", i-1, "时，总和超1000，总和为：", total)</pre>
+                            </div>
+                        </div>
+
+                        <!-- 题4（综合：猜数字游戏） -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">4. 以下是猜数字游戏代码，计算机随机生成1-100的整数，用户猜数字，提示“猜大了”或“猜小了”，直到猜对，请补全代码：</p>
+                            <pre class="bg-gray-50 p-3 rounded font-mono text-sm mb-3"># 猜数字游戏
+import ________  # 导入随机数库
+target = random.________(1, 100)  # 生成1-100的随机整数
+while True:
+    guess = int(input("请猜一个1-100的数字："))
+    if guess > target:
+        print("________")  # 提示猜大了
+    elif guess < target:
+        print("________")  # 提示猜小了
+    else:
+        print("猜对了！目标数字是", target)
+        ________  # 跳出循环</pre>
+                            <div class="flex flex-wrap items-center gap-4 mt-4">
+                                <div>导入库名：<span class="fill-blank"></span></div>
+                                <div>随机函数：<span class="fill-blank"></span></div>
+                                <div>猜大提示：<span class="fill-blank"></span></div>
+                                <div>猜小提示：<span class="fill-blank"></span></div>
+                                <div>跳出语句：<span class="fill-blank"></span></div>
+                            </div>
+                            <div class="mt-4 text-secondary answer-toggle flex items-center" onclick="toggleAnswer('unit2-code4')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="unit2-code4" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-secondary">
+                                <p>答案：random；randint；猜大了！；猜小了！；break</p>
+                                <p class="mt-1 text-sm">完整代码：</p>
+                                <pre class="bg-gray-50 p-2 rounded font-mono text-sm"># 猜数字游戏
+import random
+target = random.randint(1, 100)
+while True:
+    guess = int(input("请猜一个1-100的数字："))
+    if guess > target:
+        print("猜大了！")
+    elif guess < target:
+        print("猜小了！")
+    else:
+        print("猜对了！目标数字是", target)
+        break</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 编程应用题（完整编写） -->
+                <div class="bg-white rounded-xl shadow-md p-6 question-card">
+                    <h3 class="text-xl font-semibold text-secondary mb-4 flex items-center">
+                        <i class="fa fa-laptop-code mr-2"></i>四、编程应用题（完整编写代码）
+                    </h3>
+                    <div class="space-y-8">
+                        <!-- 题1（分支结构：成绩等级评定） -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">1. 编写程序：输入学生成绩（0-100），按以下规则评定等级并输出：</p>
+                            <ul class="list-disc list-inside text-lg mb-4 space-y-1">
+                                <li>90-100分：优秀</li>
+                                <li>80-89分：良好</li>
+                                <li>60-79分：合格</li>
+                                <li>0-59分：不合格</li>
+                            </ul>
+                            <div class="mt-4 text-secondary answer-toggle flex items-center" onclick="toggleAnswer('unit2-app1')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示参考代码
+                            </div>
+                            <div id="unit2-app1" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-secondary">
+                                <pre class="bg-gray-50 p-3 rounded font-mono text-sm"># 成绩等级评定
+score = int(input("请输入学生成绩（0-100）："))
+if score >= 90 and score <= 100:
+    print("等级：优秀")
+elif score >= 80 and score <= 89:
+    print("等级：良好")
+elif score >= 60 and score <= 79:
+    print("等级：合格")
+elif score >= 0 and score <= 59:
+    print("等级：不合格")
+else:
+    print("输入的成绩无效！请输入0-100的整数。")</pre>
+                            </div>
+                        </div>
+
+                        <!-- 题2（for循环：打印偶数和） -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">2. 编写程序：计算并输出1-100中所有偶数的和（2+4+6+...+100）。</p>
+                            <div class="mt-4 text-secondary answer-toggle flex items-center" onclick="toggleAnswer('unit2-app2')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示参考代码
+                            </div>
+                            <div id="unit2-app2" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-secondary">
+                                <pre class="bg-gray-50 p-3 rounded font-mono text-sm"># 计算1-100所有偶数的和
+even_sum = 0
+# 方法1：range(2, 101, 2)生成2,4,...,100
+for num in range(2, 101, 2):
+    even_sum += num
+# 方法2：判断每个数是否为偶数
+# for num in range(1, 101):
+#     if num % 2 == 0:
+#         even_sum += num
+print("1-100所有偶数的和为：", even_sum)</pre>
+                                <p class="mt-2 text-sm text-gray-600">输出结果：1-100所有偶数的和为：2550</p>
+                            </div>
+                        </div>
+
+                        <!-- 题3（while循环：打印乘法表） -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">3. 编写程序：使用while循环打印9×9乘法表（格式如下）：</p>
+                            <pre class="bg-gray-50 p-2 rounded font-mono text-sm mb-3">1×1=1
+1×2=2 2×2=4
+1×3=3 2×3=6 3×3=9
+...
+1×9=9 2×9=18 ... 9×9=81</pre>
+                            <div class="mt-4 text-secondary answer-toggle flex items-center" onclick="toggleAnswer('unit2-app3')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示参考代码
+                            </div>
+                            <div id="unit2-app3" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-secondary">
+                                <pre class="bg-gray-50 p-3 rounded font-mono text-sm"># 9×9乘法表（while循环）
+i = 1  # 控制行数
+while i <= 9:
+    j = 1  # 控制每行的列数
+    while j <= i:
+        # end=" "使不换行，格式化输出对齐
+        print(f"{j}×{i}={j*i}", end="\t")
+        j += 1
+    print()  # 换行
+    i += 1</pre>
+                            </div>
+                        </div>
+
+                        <!-- 题4（综合：学生成绩统计） -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">4. 编写程序：输入5名学生的语文成绩，计算并输出以下信息：</p>
+                            <ul class="list-disc list-inside text-lg mb-4 space-y-1">
+                                <li>5名学生的成绩列表</li>
+                                <li>总成绩和平均成绩</li>
+                                <li>最高成绩和最低成绩</li>
+                                <li>成绩≥80分的学生人数</li>
+                            </ul>
+                            <div class="mt-4 text-secondary answer-toggle flex items-center" onclick="toggleAnswer('unit2-app4')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示参考代码
+                            </div>
+                            <div id="unit2-app4" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-secondary">
+                                <pre class="bg-gray-50 p-3 rounded font-mono text-sm"># 学生成绩统计
+scores = []  # 存储成绩的列表
+count_80 = 0  # 统计≥80分的人数
+
+# 输入5名学生成绩
+for i in range(5):
+    score = int(input(f"请输入第{i+1}名学生的语文成绩："))
+    scores.append(score)
+    if score >= 80:
+        count_80 += 1
+
+# 计算统计信息
+total = sum(scores)
+average = total / 5
+max_score = max(scores)
+min_score = min(scores)
+
+# 输出结果
+print("\n5名学生的成绩列表：", scores)
+print("总成绩：", total)
+print("平均成绩：", round(average, 1))  # 保留1位小数
+print("最高成绩：", max_score)
+print("最低成绩：", min_score)
+print("成绩≥80分的人数：", count_80)</pre>
+                                <p class="mt-2 text-sm text-gray-600">示例输入：85、92、78、88、65 → 输出：成绩列表[85,92,78,88,65]，总成绩408，平均81.6，最高92，最低65，≥80分人数3</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第三单元：App Inventor手机积木式编程 -->
+        <section id="unit3" class="mb-16">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center mb-8">
+                    <div class="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-white mr-3">
+                        <i class="fa fa-mobile"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-dark">第3章 App Inventor编程</h2>
+                </div>
+
+                <!-- 填空题 -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8 question-card">
+                    <h3 class="text-xl font-semibold text-accent mb-4 flex items-center">
+                        <i class="fa fa-pencil mr-2"></i>一、填空题
+                    </h3>
+                    <div class="space-y-6">
+                        <!-- 题1 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-2">1. App Inventor的开发界面分为________和________；________用于设计APP界面布局，添加组件；________用于拼接积木模块，设计APP逻辑功能。</p>
+                            <div class="flex flex-wrap items-center gap-2 mt-2">
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                            </div>
+                            <div class="mt-4 text-accent answer-toggle flex items-center" onclick="toggleAnswer('unit3-1')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="unit3-1" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-accent">
+                                <p>答案：设计界面；编程界面；设计界面；编程界面</p>
+                            </div>
+                        </div>
+
+                        <!-- 题2 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-2">2. 实现“摇一摇”功能需使用________组件；实现语音朗读功能需使用________组件；这两个组件都属于________（填“可视化”或“非可视化”）组件。</p>
+                            <div class="flex flex-wrap items-center gap-2 mt-2">
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                            </div>
+                            <div class="mt-4 text-accent answer-toggle flex items-center" onclick="toggleAnswer('unit3-2')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="unit3-2" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-accent">
+                                <p>答案：加速度传感器；语音合成器；非可视化</p>
+                            </div>
+                        </div>
+
+                        <!-- 题3 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-2">3. App Inventor中，________是触发APP动作的事件（如按钮被点击、屏幕初始化）；________是组件的功能（如让Web浏览框访问网页）；________是组件的特征（如按钮的文本、颜色）。</p>
+                            <div class="flex flex-wrap items-center gap-2 mt-2">
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                            </div>
+                            <div class="mt-4 text-accent answer-toggle flex items-center" onclick="toggleAnswer('unit3-3')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="unit3-3" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-accent">
+                                <p>答案：事件；方法；属性</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 应用题 -->
+                <div class="bg-white rounded-xl shadow-md p-6 question-card">
+                    <h3 class="text-xl font-semibold text-accent mb-4 flex items-center">
+                        <i class="fa fa-cogs mr-2"></i>二、应用题（组件设计与逻辑）
+                    </h3>
+                    <div class="space-y-6">
+                        <!-- 题1 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">1. 设计一个“简易计算器”APP，实现两个数的加法运算，要求：</p>
+                            <ul class="list-disc list-inside text-lg mb-4 space-y-1">
+                                <li>界面包含两个文本输入框（输入数字）、一个“计算”按钮、一个标签（显示结果）；</li>
+                                <li>点击“计算”按钮时，获取两个文本输入框的数字，计算和并显示在标签中。</li>
+                            </ul>
+                            <p class="text-lg mb-2">（1）列出所需组件及属性设置；</p>
+                            <p class="text-lg mb-2">（2）描述编程逻辑（积木拼接）。</p>
+                            <div class="mt-4 text-accent answer-toggle flex items-center" onclick="toggleAnswer('unit3-app1')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="unit3-app1" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-accent">
+                                <p class="font-medium">（1）组件设计：</p>
+                                <table class="min-w-full border border-gray-200 rounded-lg mt-2 mb-4">
+                                    <thead>
+                                        <tr class="bg-gray-100">
+                                            <th class="py-2 px-3 border-b text-left">组件类型</th>
+                                            <th class="py-2 px-3 border-b text-left">组件命名</th>
+                                            <th class="py-2 px-3 border-b text-left">属性设置</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="py-2 px-3 border-b">Screen</td>
+                                            <td class="py-2 px-3 border-b">Screen1</td>
+                                            <td class="py-2 px-3 border-b">标题：简易计算器</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-3 border-b">文本输入框</td>
+                                            <td class="py-2 px-3 border-b">TextInput1</td>
+                                            <td class="py-2 px-3 border-b">提示文本：请输入第一个数</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-3 border-b">文本输入框</td>
+                                            <td class="py-2 px-3 border-b">TextInput2</td>
+                                            <td class="py-2 px-3 border-b">提示文本：请输入第二个数</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-3 border-b">按钮</td>
+                                            <td class="py-2 px-3 border-b">Button1</td>
+                                            <td class="py-2 px-3 border-b">文本：计算</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-3 border-b">标签</td>
+                                            <td class="py-2 px-3 border-b">Label1</td>
+                                            <td class="py-2 px-3 border-b">文本：结果：</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p class="font-medium">（2）编程逻辑：</p>
+                                <ol class="list-decimal list-inside mt-2 space-y-1">
+                                    <li>选择“当Button1被点击时”事件积木；</li>
+                                    <li>添加“将Label1的文本设为”方法积木；</li>
+                                    <li>拼接文本：“结果：” + （TextInput1的文本转换为数字 + TextInput2的文本转换为数字）；</li>
+                                    <li>注意：文本输入框的内容需转换为数字（使用“文本转数字”积木）后再计算。</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-8">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>© 2025 广州版信息技术八年级专项练习</p>
+            <p class="mt-2 text-sm text-gray-400">专注重点知识点巩固，强化编程实践能力</p>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端菜单切换
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // 答案显示/隐藏切换
+        function toggleAnswer(id) {
+            const content = document.getElementById(id);
+            const toggleBtn = content.previousElementSibling;
+            
+            content.classList.toggle('show');
+            if (content.classList.contains('show')) {
+                toggleBtn.innerHTML = '<i class="fa fa-chevron-up mr-2"></i>隐藏答案';
+            } else {
+                toggleBtn.innerHTML = '<i class="fa fa-chevron-down mr-2"></i>显示答案';
+            }
+        }
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    // 关闭移动端菜单
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                    
+                    // 滚动到目标位置
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

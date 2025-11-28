@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>广州版信息技术七年级专项练习</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#36D399',
+                        accent: '#7C3AED',
+                        dark: '#1E293B',
+                        light: '#F8FAFC'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(22, 93, 255, 0.1), 0 10px 10px -5px rgba(22, 93, 255, 0.04);
+            }
+            .fill-blank {
+                display: inline-block;
+                width: 100px;
+                height: 26px;
+                border-bottom: 2px solid #165DFF;
+                margin: 0 4px;
+                vertical-align: middle;
+            }
+            .fill-blank.short {
+                width: 60px;
+            }
+            .fill-blank.long {
+                width: 160px;
+            }
+            .option-hover {
+                transition: all 0.2s ease;
+            }
+            .option-hover:hover {
+                background-color: #F0F7FF;
+                border-color: #165DFF;
+            }
+            .tab-active {
+                border-bottom: 3px solid #165DFF;
+                color: #165DFF;
+                font-weight: 600;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-dark">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-md fixed w-full top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <i class="fa fa-laptop-code text-primary text-2xl mr-3"></i>
+                    <span class="text-xl font-bold text-primary">信息技术七年级专项练习</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#file-operation" class="text-gray-600 hover:text-primary transition-colors">Windows文件操作</a>
+                    <a href="#info-tech" class="text-gray-600 hover:text-primary transition-colors">信息与信息技术</a>
+                    <a href="#network" class="text-gray-600 hover:text-primary transition-colors">网络基础</a>
+                    <a href="#multimedia" class="text-gray-600 hover:text-primary transition-colors">多媒体作品</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="menuBtn" class="text-gray-600 hover:text-primary">
+                        <i class="fa fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 移动端菜单 -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white shadow-lg">
+            <div class="container mx-auto px-4 py-3 space-y-3">
+                <a href="#file-operation" class="block text-gray-600 hover:text-primary transition-colors py-2">Windows文件操作</a>
+                <a href="#info-tech" class="block text-gray-600 hover:text-primary transition-colors py-2">信息与信息技术</a>
+                <a href="#network" class="block text-gray-600 hover:text-primary transition-colors py-2">网络基础</a>
+                <a href="#multimedia" class="block text-gray-600 hover:text-primary transition-colors py-2">多媒体作品</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 头部横幅 -->
+    <header class="pt-24 pb-12 bg-gradient-to-r from-primary to-accent text-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-3xl sm:text-4xl font-bold mb-4">七年级信息技术专项练习</h1>
+                <p class="text-lg opacity-90">覆盖文件操作、信息技术基础、网络知识、多媒体制作，强化知识巩固</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <!-- Windows文件基本操作技巧 -->
+        <section id="file-operation" class="mb-16">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center mb-8">
+                    <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white mr-3">
+                        <i class="fa fa-folder-open"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-dark">Windows文件基本操作技巧</h2>
+                </div>
+
+                <!-- 操作技巧讲解 -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8 card-hover">
+                    <h3 class="text-xl font-semibold text-primary mb-6 flex items-center">
+                        <i class="fa fa-book mr-2"></i>核心操作技巧详解
+                    </h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <!-- 新建文件/文件夹 -->
+                        <div class="bg-light p-4 rounded-lg border border-gray-100">
+                            <div class="flex items-center mb-3">
+                                <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary mr-2">
+                                    <i class="fa fa-plus"></i>
+                                </div>
+                                <h4 class="font-medium text-dark">1. 新建文件/文件夹</h4>
+                            </div>
+                            <ol class="list-decimal list-inside text-sm text-gray-700 space-y-1 pl-2">
+                                <li>打开资源管理器，定位到要新建的位置</li>
+                                <li>右键单击空白处，选择「新建」→「文件夹」或对应文件类型（如文本文档）</li>
+                                <li>输入名称后按回车键确认</li>
+                            </ol>
+                            <div class="mt-2 text-xs text-gray-500">快捷键：Ctrl+Shift+N（快速新建文件夹）</div>
+                        </div>
+
+                        <!-- 重命名 -->
+                        <div class="bg-light p-4 rounded-lg border border-gray-100">
+                            <div class="flex items-center mb-3">
+                                <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary mr-2">
+                                    <i class="fa fa-pencil"></i>
+                                </div>
+                                <h4 class="font-medium text-dark">2. 重命名文件/文件夹</h4>
+                            </div>
+                            <ol class="list-decimal list-inside text-sm text-gray-700 space-y-1 pl-2">
+                                <li>选中要重命名的文件/文件夹</li>
+                                <li>右键单击，选择「重命名」；或按F2键</li>
+                                <li>输入新名称后按回车键确认</li>
+                            </ol>
+                            <div class="mt-2 text-xs text-gray-500">注意：不能包含\/:*?"<>|等特殊字符</div>
+                        </div>
+
+                        <!-- 复制 -->
+                        <div class="bg-light p-4 rounded-lg border border-gray-100">
+                            <div class="flex items-center mb-3">
+                                <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary mr-2">
+                                    <i class="fa fa-copy"></i>
+                                </div>
+                                <h4 class="font-medium text-dark">3. 复制文件/文件夹</h4>
+                            </div>
+                            <ol class="list-decimal list-inside text-sm text-gray-700 space-y-1 pl-2">
+                                <li>选中目标文件/文件夹</li>
+                                <li>右键单击选择「复制」；或按Ctrl+C快捷键</li>
+                                <li>定位到目标位置，右键单击选择「粘贴」；或按Ctrl+V快捷键</li>
+                            </ol>
+                            <div class="mt-2 text-xs text-gray-500">按住Ctrl键拖动文件可快速复制</div>
+                        </div>
+
+                        <!-- 移动 -->
+                        <div class="bg-light p-4 rounded-lg border border-gray-100">
+                            <div class="flex items-center mb-3">
+                                <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary mr-2">
+                                    <i class="fa fa-arrows"></i>
+                                </div>
+                                <h4 class="font-medium text-dark">4. 移动文件/文件夹</h4>
+                            </div>
+                            <ol class="list-decimal list-inside text-sm text-gray-700 space-y-1 pl-2">
+                                <li>选中目标文件/文件夹</li>
+                                <li>右键单击选择「剪切」；或按Ctrl+X快捷键</li>
+                                <li>定位到目标位置，右键单击选择「粘贴」；或按Ctrl+V快捷键</li>
+                            </ol>
+                            <div class="mt-2 text-xs text-gray-500">按住Shift键拖动文件可快速移动</div>
+                        </div>
+
+                        <!-- 删除 -->
+                        <div class="bg-light p-4 rounded-lg border border-gray-100 md:col-span-2">
+                            <div class="flex items-center mb-3">
+                                <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary mr-2">
+                                    <i class="fa fa-trash"></i>
+                                </div>
+                                <h4 class="font-medium text-dark">5. 删除文件/文件夹</h4>
+                            </div>
+                            <ol class="list-decimal list-inside text-sm text-gray-700 space-y-1 pl-2 mb-2">
+                                <li>选中要删除的文件/文件夹</li>
+                                <li>右键单击选择「删除」；或按Delete键</li>
+                                <li>确认删除（文件会移到回收站）</li>
+                            </ol>
+                            <div class="text-xs text-gray-500">
+                                提示：按Shift+Delete可直接永久删除（不经过回收站）；回收站文件可右键「还原」恢复
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 操作练习 -->
+                    <div class="border-t border-gray-100 pt-6">
+                        <h4 class="font-medium text-dark mb-4">实操练习任务</h4>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <ol class="list-decimal list-inside text-sm text-gray-700 space-y-2">
+                                <li>在桌面新建文件夹，命名为「七年级信息技术练习」</li>
+                                <li>在该文件夹内新建3个文本文档，分别命名为「信息基础.txt」「网络知识.txt」「多媒体笔记.txt」</li>
+                                <li>将「网络知识.txt」复制到D盘根目录</li>
+                                <li>将「多媒体笔记.txt」移动到「我的文档」文件夹</li>
+                                <li>将桌面的「七年级信息技术练习」文件夹重命名为「信息技术学习资料」</li>
+                                <li>删除D盘根目录下的「网络知识.txt」（先移到回收站，再从回收站恢复）</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 文件操作选择题 -->
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <h3 class="text-xl font-semibold text-primary mb-6 flex items-center">
+                        <i class="fa fa-check-square-o mr-2"></i>文件操作选择题
+                    </h3>
+                    <div class="space-y-6">
+                        <!-- 题1 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">1. 在Windows系统中，快速新建文件夹的快捷键是（  ）</p>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">A. Ctrl+N</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">B. Ctrl+Shift+N</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">C. Ctrl+M</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">D. Ctrl+Shift+M</div>
+                            </div>
+                            <div class="mt-3 text-primary answer-toggle flex items-center" onclick="toggleAnswer('file-1')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="file-1" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-primary">
+                                <p>答案：B</p>
+                                <p class="mt-1 text-sm">解析：Ctrl+Shift+N是Windows系统快速新建文件夹的标准快捷键，Ctrl+N常用于新建文档。</p>
+                            </div>
+                        </div>
+
+                        <!-- 题2 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">2. 要将文件从C盘移动到D盘，以下操作正确的是（  ）</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">A. 选中文件→Ctrl+C→定位D盘→Ctrl+V</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">B. 选中文件→Ctrl+X→定位D盘→Ctrl+V</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">C. 选中文件→Ctrl+V→定位D盘→Ctrl+C</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">D. 选中文件→Ctrl+D→定位D盘→Ctrl+V</div>
+                            </div>
+                            <div class="mt-3 text-primary answer-toggle flex items-center" onclick="toggleAnswer('file-2')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="file-2" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-primary">
+                                <p>答案：B</p>
+                                <p class="mt-1 text-sm">解析：Ctrl+X是剪切命令，Ctrl+V是粘贴命令，组合使用实现文件移动；Ctrl+C+Ctrl+V是复制操作。</p>
+                            </div>
+                        </div>
+
+                        <!-- 题3 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">3. 以下关于文件重命名的说法，错误的是（  ）</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">A. 选中文件后按F2键可快速重命名</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">B. 文件名中可以包含问号"?"</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">C. 右键单击文件选择"重命名"可修改名称</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">D. 文件名最长可包含255个字符</div>
+                            </div>
+                            <div class="mt-3 text-primary answer-toggle flex items-center" onclick="toggleAnswer('file-3')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="file-3" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-primary">
+                                <p>答案：B</p>
+                                <p class="mt-1 text-sm">解析：Windows文件名中不能包含\/:*?"<>|等特殊字符，这些字符有特定的系统用途。</p>
+                            </div>
+                        </div>
+
+                        <!-- 题4 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">4. 按Shift+Delete键删除文件后，文件会（  ）</p>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">A. 移到回收站</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">B. 直接永久删除</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">C. 复制到系统盘</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">D. 重命名后隐藏</div>
+                            </div>
+                            <div class="mt-3 text-primary answer-toggle flex items-center" onclick="toggleAnswer('file-4')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="file-4" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-primary">
+                                <p>答案：B</p>
+                                <p class="mt-1 text-sm">解析：Shift+Delete是强制删除命令，文件不会经过回收站，直接永久删除，需谨慎使用。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 信息与信息技术 -->
+        <section id="info-tech" class="mb-16">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center mb-8">
+                    <div class="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-white mr-3">
+                        <i class="fa fa-info-circle"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-dark">信息与信息技术</h2>
+                </div>
+
+                <!-- 填空题 -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8 card-hover">
+                    <h3 class="text-xl font-semibold text-secondary mb-6 flex items-center">
+                        <i class="fa fa-pencil mr-2"></i>一、填空题
+                    </h3>
+                    <div class="space-y-6">
+                        <!-- 题1 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-2">1. 信息通常被理解为通过特定媒体所承载的________、________、________、数据和信号中包含的可传递和可交换的内容。</p>
+                            <div class="flex flex-wrap items-center gap-2 mt-2">
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                            </div>
+                            <div class="mt-3 text-secondary answer-toggle flex items-center" onclick="toggleAnswer('info-1')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="info-1" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-secondary">
+                                <p>答案：消息；情报；指令</p>
+                            </div>
+                        </div>
+
+                        <!-- 题2 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-2">2. 计算机系统由________和________两大部分组成，其中________是计算机看得见、摸得着的部分。</p>
+                            <div class="flex flex-wrap items-center gap-2 mt-2">
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                            </div>
+                            <div class="mt-3 text-secondary answer-toggle flex items-center" onclick="toggleAnswer('info-2')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="info-2" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-secondary">
+                                <p>答案：硬件；软件；硬件</p>
+                            </div>
+                        </div>
+
+                        <!-- 题3 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-2">3. 计算机硬件由________、________、________、输入设备和输出设备五大基本组成部分。</p>
+                            <div class="flex flex-wrap items-center gap-2 mt-2">
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                            </div>
+                            <div class="mt-3 text-secondary answer-toggle flex items-center" onclick="toggleAnswer('info-3')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="info-3" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-secondary">
+                                <p>答案：存储器；运算器；控制器</p>
+                            </div>
+                        </div>
+
+                        <!-- 题4 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-2">4. 计算机软件分为________和________两大类，Windows操作系统属于________。</p>
+                            <div class="flex flex-wrap items-center gap-2 mt-2">
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                            </div>
+                            <div class="mt-3 text-secondary answer-toggle flex items-center" onclick="toggleAnswer('info-4')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="info-4" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-secondary">
+                                <p>答案：系统软件；应用软件；系统软件</p>
+                            </div>
+                        </div>
+
+                        <!-- 题5 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-2">5. 计算机内部所有信息都采用________进制编码表示，这种编码只有________和________两个数字。</p>
+                            <div class="flex flex-wrap items-center gap-2 mt-2">
+                                <span class="fill-blank short"></span>
+                                <span class="fill-blank short"></span>
+                                <span class="fill-blank short"></span>
+                            </div>
+                            <div class="mt-3 text-secondary answer-toggle flex items-center" onclick="toggleAnswer('info-5')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="info-5" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-secondary">
+                                <p>答案：二；0；1</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 选择题 -->
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <h3 class="text-xl font-semibold text-secondary mb-6 flex items-center">
+                        <i class="fa fa-check-square-o mr-2"></i>二、选择题
+                    </h3>
+                    <div class="space-y-6">
+                        <!-- 题1 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">1. 下列属于计算机输入设备的是（  ）</p>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">A. 显示器</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">B. 键盘</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">C. 打印机</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">D. 音箱</div>
+                            </div>
+                            <div class="mt-3 text-secondary answer-toggle flex items-center" onclick="toggleAnswer('info-choice-1')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="info-choice-1" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-secondary">
+                                <p>答案：B</p>
+                                <p class="mt-1 text-sm">解析：键盘是输入设备，用于向计算机输入信息；显示器、打印机、音箱均为输出设备。</p>
+                            </div>
+                        </div>
+
+                        <!-- 题2 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">2. 下列属于计算机系统软件的是（  ）</p>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">A. WPS文字</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">B. Windows 10</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">C. Photoshop</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">D. 微信</div>
+                            </div>
+                            <div class="mt-3 text-secondary answer-toggle flex items-center" onclick="toggleAnswer('info-choice-2')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="info-choice-2" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-secondary">
+                                <p>答案：B</p>
+                                <p class="mt-1 text-sm">解析：Windows 10是操作系统，属于系统软件；WPS文字、Photoshop、微信均为应用软件。</p>
+                            </div>
+                        </div>
+
+                        <!-- 题3 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">3. 计算机中中央处理器（CPU）的主要组成部分是（  ）</p>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">A. 运算器和控制器</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">B. 运算器和存储器</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">C. 控制器和存储器</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">D. 存储器和输入设备</div>
+                            </div>
+                            <div class="mt-3 text-secondary answer-toggle flex items-center" onclick="toggleAnswer('info-choice-3')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="info-choice-3" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-secondary">
+                                <p>答案：A</p>
+                                <p class="mt-1 text-sm">解析：CPU由运算器和控制器组成，运算器负责算术和逻辑运算，控制器负责指挥协调各部件工作。</p>
+                            </div>
+                        </div>
+
+                        <!-- 题4 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">4. 关于信息安全，下列说法错误的是（  ）</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">A. 计算机病毒可以通过U盘传播</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">B. 安装杀毒软件后就不需要更新病毒库了</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">C. 防火墙可以防范黑客入侵</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">D. 定期备份数据可以保障数据安全</div>
+                            </div>
+                            <div class="mt-3 text-secondary answer-toggle flex items-center" onclick="toggleAnswer('info-choice-4')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="info-choice-4" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-secondary">
+                                <p>答案：B</p>
+                                <p class="mt-1 text-sm">解析：病毒库需要定期更新才能防范新出现的病毒，安装杀毒软件后仍需保持更新。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 网络基础及应用 -->
+        <section id="network" class="mb-16">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center mb-8">
+                    <div class="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-white mr-3">
+                        <i class="fa fa-wifi"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-dark">网络基础及应用</h2>
+                </div>
+
+                <!-- 填空题 -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8 card-hover">
+                    <h3 class="text-xl font-semibold text-accent mb-6 flex items-center">
+                        <i class="fa fa-pencil mr-2"></i>一、填空题
+                    </h3>
+                    <div class="space-y-6">
+                        <!-- 题1 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-2">1. 根据覆盖范围，计算机网络可分为________、________和广域网（WAN）。</p>
+                            <div class="flex flex-wrap items-center gap-2 mt-2">
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                            </div>
+                            <div class="mt-3 text-accent answer-toggle flex items-center" onclick="toggleAnswer('net-1')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="net-1" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-accent">
+                                <p>答案：局域网（LAN）；城域网（MAN）</p>
+                            </div>
+                        </div>
+
+                        <!-- 题2 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-2">2. 互联网接入方式主要有专线接入、________和________，其中Wi-Fi属于________接入方式。</p>
+                            <div class="flex flex-wrap items-center gap-2 mt-2">
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                            </div>
+                            <div class="mt-3 text-accent answer-toggle flex items-center" onclick="toggleAnswer('net-2')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="net-2" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-accent">
+                                <p>答案：无线接入；局域网接入；无线</p>
+                            </div>
+                        </div>
+
+                        <!-- 题3 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-2">3. IP地址是互联网上计算机的唯一标识，IPv4地址由________位二进制数组成，通常分为________段十进制数表示。</p>
+                            <div class="flex flex-wrap items-center gap-2 mt-2">
+                                <span class="fill-blank short"></span>
+                                <span class="fill-blank short"></span>
+                            </div>
+                            <div class="mt-3 text-accent answer-toggle flex items-center" onclick="toggleAnswer('net-3')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="net-3" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-accent">
+                                <p>答案：32；4</p>
+                            </div>
+                        </div>
+
+                        <!-- 题4 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-2">4. 电子邮件地址的格式为________@________，其中@符号读作________。</p>
+                            <div class="flex flex-wrap items-center gap-2 mt-2">
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                                <span class="fill-blank"></span>
+                            </div>
+                            <div class="mt-3 text-accent answer-toggle flex items-center" onclick="toggleAnswer('net-4')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="net-4" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-accent">
+                                <p>答案：邮件账号；邮件服务器域名；at</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 选择题 -->
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <h3 class="text-xl font-semibold text-accent mb-6 flex items-center">
+                        <i class="fa fa-check-square-o mr-2"></i>二、选择题
+                    </h3>
+                    <div class="space-y-6">
+                        <!-- 题1 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">1. 下列属于局域网的是（  ）</p>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">A. 互联网</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">B. 学校电脑教室的网络</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">C. 中国移动的移动网络</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">D. 覆盖全国的教育网络</div>
+                            </div>
+                            <div class="mt-3 text-accent answer-toggle flex items-center" onclick="toggleAnswer('net-choice-1')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="net-choice-1" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-accent">
+                                <p>答案：B</p>
+                                <p class="mt-1 text-sm">解析：学校电脑教室的网络覆盖范围小，属于局域网；互联网和移动网络属于广域网。</p>
+                            </div>
+                        </div>
+
+                        <!-- 题2 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">2. 下列IPv4地址格式正确的是（  ）</p>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">A. 192.168.2</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">B. 192.168.2.256</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">C. 192.168.2.1</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">D. 192,168,2,1</div>
+                            </div>
+                            <div class="mt-3 text-accent answer-toggle flex items-center" onclick="toggleAnswer('net-choice-2')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="net-choice-2" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-accent">
+                                <p>答案：C</p>
+                                <p class="mt-1 text-sm">解析：IPv4地址由4段0-255的十进制数组成，段之间用圆点分隔，只有C选项符合格式要求。</p>
+                            </div>
+                        </div>
+
+                        <!-- 题3 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">3. 下列属于互联网常见服务的是（  ）</p>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">A. 电子邮件</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">B. 文件传输（FTP）</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">C. 网页浏览（WWW）</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">D. 以上都是</div>
+                            </div>
+                            <div class="mt-3 text-accent answer-toggle flex items-center" onclick="toggleAnswer('net-choice-3')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="net-choice-3" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-accent">
+                                <p>答案：D</p>
+                                <p class="mt-1 text-sm">解析：电子邮件、文件传输、网页浏览都是互联网的基本服务，此外还有远程登录等服务。</p>
+                            </div>
+                        </div>
+
+                        <!-- 题4 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">4. 关于域名地址，下列说法正确的是（  ）</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">A. www.163.com是教育机构域名</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">B. 域名地址比IP地址更容易记忆</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">C. 域名不需要转换就能被计算机识别</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">D. .gov是商业机构域名</div>
+                            </div>
+                            <div class="mt-3 text-accent answer-toggle flex items-center" onclick="toggleAnswer('net-choice-4')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="net-choice-4" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-accent">
+                                <p>答案：B</p>
+                                <p class="mt-1 text-sm">解析：域名地址采用有意义的字符组合，比数字型的IP地址更容易记忆；www.163.com是商业机构域名，.gov是政府机构域名，域名需要通过DNS转换为IP地址才能被计算机识别。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 制作多媒体作品 -->
+        <section id="multimedia" class="mb-16">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center mb-8">
+                    <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white mr-3">
+                        <i class="fa fa-image"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-dark">制作多媒体作品</h2>
+                </div>
+
+                <!-- 选择题 -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8 card-hover">
+                    <h3 class="text-xl font-semibold text-primary mb-6 flex items-center">
+                        <i class="fa fa-check-square-o mr-2"></i>一、选择题（知识点全覆盖）
+                    </h3>
+                    <div class="space-y-6">
+                        <!-- 题1 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">1. 下列不属于多媒体元素的是（  ）</p>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">A. 文字</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">B. 图像</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">C. 颜色</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">D. 视频</div>
+                            </div>
+                            <div class="mt-3 text-primary answer-toggle flex items-center" onclick="toggleAnswer('multi-choice-1')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="multi-choice-1" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-primary">
+                                <p>答案：C</p>
+                                <p class="mt-1 text-sm">解析：多媒体元素包括文本、图形、图像、声音、动画、视频等，颜色是元素的属性而非独立元素。</p>
+                            </div>
+                        </div>
+
+                        <!-- 题2 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">2. 下列属于图像文件格式的是（  ）</p>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">A. JPG</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">B. MP3</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">C. MP4</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">D. DOC</div>
+                            </div>
+                            <div class="mt-3 text-primary answer-toggle flex items-center" onclick="toggleAnswer('multi-choice-2')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="multi-choice-2" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-primary">
+                                <p>答案：A</p>
+                                <p class="mt-1 text-sm">解析：JPG是常用图像格式；MP3是音频格式；MP4是视频格式；DOC是文档格式。</p>
+                            </div>
+                        </div>
+
+                        <!-- 题3 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">3. 多媒体作品制作的正确流程是（  ）</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">A. 确定主题→采集素材→作品集成→测试优化</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">B. 采集素材→确定主题→作品集成→测试优化</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">C. 作品集成→确定主题→采集素材→测试优化</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">D. 确定主题→作品集成→采集素材→测试优化</div>
+                            </div>
+                            <div class="mt-3 text-primary answer-toggle flex items-center" onclick="toggleAnswer('multi-choice-3')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="multi-choice-3" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-primary">
+                                <p>答案：A</p>
+                                <p class="mt-1 text-sm">解析：多媒体作品制作需先确定主题和策划，再采集加工素材，然后进行作品集成，最后测试优化。</p>
+                            </div>
+                        </div>
+
+                        <!-- 题4 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">4. 下列用于音频文件加工的软件是（  ）</p>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">A. Cool Edit Pro</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">B. Photoshop</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">C. 会声会影</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">D. WPS演示文稿</div>
+                            </div>
+                            <div class="mt-3 text-primary answer-toggle flex items-center" onclick="toggleAnswer('multi-choice-4')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="multi-choice-4" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-primary">
+                                <p>答案：A</p>
+                                <p class="mt-1 text-sm">解析：Cool Edit Pro是音频加工软件；Photoshop用于图像处理；会声会影用于视频编辑；WPS演示文稿用于作品集成。</p>
+                            </div>
+                        </div>
+
+                        <!-- 题5 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">5. 关于位图和矢量图，下列说法正确的是（  ）</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">A. 位图放大后不会失真</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">B. 矢量图由像素点组成</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">C. 位图适合表现色彩丰富的图像</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">D. 矢量图文件容量通常很大</div>
+                            </div>
+                            <div class="mt-3 text-primary answer-toggle flex items-center" onclick="toggleAnswer('multi-choice-5')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="multi-choice-5" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-primary">
+                                <p>答案：C</p>
+                                <p class="mt-1 text-sm">解析：位图由像素点组成，放大后会失真，适合表现色彩丰富的图像；矢量图由数学指令描述，放大不失真，文件容量较小。</p>
+                            </div>
+                        </div>
+
+                        <!-- 题6 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">6. 下列视频格式中，属于流媒体格式的是（  ）</p>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">A. AVI</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">B. FLV</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">C. MOV</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">D. WMV</div>
+                            </div>
+                            <div class="mt-3 text-primary answer-toggle flex items-center" onclick="toggleAnswer('multi-choice-6')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="multi-choice-6" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-primary">
+                                <p>答案：B</p>
+                                <p class="mt-1 text-sm">解析：FLV是主流的流媒体格式，支持边下载边播放；AVI是早期视频格式，文件较大；MOV是iOS中的视频格式；WMV是Windows媒体格式。</p>
+                            </div>
+                        </div>
+
+                        <!-- 题7 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">7. 在WPS演示文稿中集成多媒体作品时，不能直接插入的文件格式是（  ）</p>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">A. JPG</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">B. MP3</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">C. FLV</div>
+                                <div class="p-3 border border-gray-200 rounded option-hover cursor-pointer">D. WMV</div>
+                            </div>
+                            <div class="mt-3 text-primary answer-toggle flex items-center" onclick="toggleAnswer('multi-choice-7')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="multi-choice-7" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-primary">
+                                <p>答案：C</p>
+                                <p class="mt-1 text-sm">解析：WPS演示文稿可直接插入JPG图像、MP3音频、WMV视频，FLV格式需转换为WMV等格式才能插入。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 实操题 -->
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <h3 class="text-xl font-semibold text-primary mb-6 flex items-center">
+                        <i class="fa fa-cogs mr-2"></i>二、实操应用题
+                    </h3>
+                    <div class="space-y-6">
+                        <!-- 题1 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">1. 简述多媒体作品集成的主要步骤，并说明如何在WPS演示文稿中添加音频素材。</p>
+                            <div class="mt-3 text-primary answer-toggle flex items-center" onclick="toggleAnswer('multi-app-1')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="multi-app-1" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-primary">
+                                <p class="font-medium">多媒体作品集成主要步骤：</p>
+                                <ol class="list-decimal list-inside text-sm text-gray-700 space-y-1 mt-1">
+                                    <li>整理素材：按文本、图像、音频、视频等分类存放</li>
+                                    <li>制作封面和目录：设计作品标题和导航结构</li>
+                                    <li>添加内容素材：插入文字、图片、音频、视频等</li>
+                                    <li>设置动态效果：添加幻灯片切换效果和对象动画</li>
+                                    <li>添加导航链接：设置目录与对应页面的超链接</li>
+                                    <li>测试优化：检查内容完整性和功能正确性</li>
+                                </ol>
+                                <p class="font-medium mt-3">WPS演示文稿添加音频素材步骤：</p>
+                                <ol class="list-decimal list-inside text-sm text-gray-700 space-y-1 mt-1">
+                                    <li>点击「插入」→「媒体剪辑」→「声音」→「文件中的声音」</li>
+                                    <li>找到并选中要插入的音频文件（如MP3格式）</li>
+                                    <li>在弹出的窗口中选择播放方式（自动或单击时播放）</li>
+                                    <li>幻灯片中出现"小喇叭"图标，可移动到合适位置</li>
+                                    <li>在「声音选项」中可设置跨幻灯片播放、循环播放等效果</li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <!-- 题2 -->
+                        <div class="question-item">
+                            <p class="text-lg mb-3">2. 要制作一个主题为"校园风光"的多媒体作品，需要采集哪些类型的素材？分别可以通过哪些途径获取？</p>
+                            <div class="mt-3 text-primary answer-toggle flex items-center" onclick="toggleAnswer('multi-app-2')">
+                                <i class="fa fa-chevron-down mr-2"></i>显示答案
+                            </div>
+                            <div id="multi-app-2" class="answer-content mt-2 text-gray-700 pl-6 border-l-2 border-primary">
+                                <p class="font-medium">需要采集的素材类型及获取途径：</p>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
+                                    <div class="bg-light p-3 rounded-lg">
+                                        <p class="font-medium text-dark text-sm">1. 图像素材</p>
+                                        <ul class="list-disc list-inside text-xs text-gray-700 space-y-1 mt-1">
+                                            <li>用数码相机/智能手机拍摄校园风景、建筑</li>
+                                            <li>从学校官网下载校园相关图片</li>
+                                            <li>扫描校园宣传册中的图片</li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-light p-3 rounded-lg">
+                                        <p class="font-medium text-dark text-sm">2. 音频素材</p>
+                                        <ul class="list-disc list-inside text-xs text-gray-700 space-y-1 mt-1">
+                                            <li>录制校园环境音（如下课铃声、校园广播）</li>
+                                            <li>下载适合的背景音乐（如轻音乐）</li>
+                                            <li>录制解说词（介绍校园景点）</li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-light p-3 rounded-lg">
+                                        <p class="font-medium text-dark text-sm">3. 视频素材</p>
+                                        <ul class="list-disc list-inside text-xs text-gray-700 space-y-1 mt-1">
+                                            <li>拍摄校园活动视频（如升旗仪式、运动会）</li>
+                                            <li>剪辑校园宣传片片段</li>
+                                            <li>从学校电视台获取相关视频资料</li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-light p-3 rounded-lg">
+                                        <p class="font-medium text-dark text-sm">4. 文本素材</p>
+                                        <ul class="list-disc list-inside text-xs text-gray-700 space-y-1 mt-1">
+                                            <li>编写校园简介、景点说明文字</li>
+                                            <li>收集学校历史、办学理念等文字资料</li>
+                                            <li>摘录师生创作的关于校园的诗文</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-8">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>© 2025 广州版信息技术七年级专项练习</p>
+            <p class="mt-2 text-sm text-gray-400">覆盖文件操作、信息技术基础、网络知识、多媒体制作全知识点</p>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button id="backToTop" class="fixed bottom-8 right-8 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // 移动端菜单切换
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // 答案显示/隐藏切换
+        function toggleAnswer(id) {
+            const content = document.getElementById(id);
+            const toggleBtn = content.previousElementSibling;
+            
+            content.classList.toggle('show');
+            if (content.classList.contains('show')) {
+                toggleBtn.innerHTML = '<i class="fa fa-chevron-up mr-2"></i>隐藏答案';
+            } else {
+                toggleBtn.innerHTML = '<i class="fa fa-chevron-down mr-2"></i>显示答案';
+            }
+        }
+        
+        // 返回顶部按钮
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.remove('opacity-0', 'invisible');
+                backToTopBtn.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopBtn.classList.add('opacity-0', 'invisible');
+                backToTopBtn.classList.remove('opacity-100', 'visible');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    // 关闭移动端菜单
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                    
+                    // 滚动到目标位置
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

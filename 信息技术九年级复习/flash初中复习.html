@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash动画大神修炼手册 | 初中生版</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6', // 主蓝
+                        secondary: '#F97316', // 活力橙
+                        light: '#F8FAFC', // 浅灰背景
+                        dark: '#1E293B', // 深灰文字
+                        accent: '#8B5CF6', // 紫色强调
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-in-out',
+                        'bounce-slow': 'bounce 3s infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                },
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .card-hover {
+                @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .bg-gradient {
+                background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%);
+            }
+        }
+    </style>
+</head>
+<body class="bg-light text-dark font-sans">
+    <!-- 导航栏 -->
+    <nav class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-sm shadow-sm z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-2 text-primary font-bold text-xl">
+                <i class="fa fa-film text-secondary"></i>
+                <span>动画大神修炼营</span>
+            </a>
+            <div class="hidden md:flex gap-6">
+                <a href="#basic" class="hover:text-primary transition-colors">基础概念</a>
+                <a href="#animation-types" class="hover:text-primary transition-colors">动画三巨头</a>
+                <a href="#symbol" class="hover:text-primary transition-colors">元件神器</a>
+                <a href="#tools" class="hover:text-primary transition-colors">工具技巧</a>
+                <a href="#quiz" class="hover:text-primary transition-colors">小测验</a>
+            </div>
+            <button class="md:hidden text-primary text-xl" id="menuBtn">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        <!-- 移动端菜单 -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white shadow-md absolute w-full">
+            <div class="container mx-auto px-4 py-2 flex flex-col gap-3">
+                <a href="#basic" class="py-2 hover:text-primary transition-colors">基础概念</a>
+                <a href="#animation-types" class="py-2 hover:text-primary transition-colors">动画三巨头</a>
+                <a href="#symbol" class="py-2 hover:text-primary transition-colors">元件神器</a>
+                <a href="#tools" class="py-2 hover:text-primary transition-colors">工具技巧</a>
+                <a href="#quiz" class="py-2 hover:text-primary transition-colors">小测验</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero区域 -->
+    <header class="pt-24 pb-16 bg-gradient text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold mb-4 text-shadow">
+                Flash动画 <span class="text-secondary animate-bounce-slow">大神</span> 速成
+            </h1>
+            <p class="text-[clamp(1rem,2vw,1.25rem)] mb-8 max-w-2xl mx-auto opacity-90">
+                告别枯燥理论！用最搞笑的比喻、最通俗的讲解，让你从动画小白变身班级动画卷王～
+            </p>
+            <a href="#basic" class="inline-block bg-white text-primary font-semibold px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all">
+                开始修炼 <i class="fa fa-arrow-down ml-2"></i>
+            </a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12">
+        <!-- 基础概念模块 -->
+        <section id="basic" class="mb-20 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">
+                    <i class="fa fa-book text-primary mr-2"></i>基础概念：动画的“黑话”大全
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    学动画先搞懂这些“行话”，不然老师讲课你就像听外星语～
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- 动画原理 -->
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover animate-fade-in">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                            <i class="fa fa-magic"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">动画原理：视觉暂留</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        🌠 不是魔法！就像你快速挥舞手电筒，看到的不是光点，而是光带～
+                    </p>
+                    <p class="text-gray-700">
+                        人的眼睛看到一幅画面后，<span class="text-primary font-semibold">1/24秒内不会消失</span>。当一系列静态图片快速切换时，大脑就会“脑补”出动态效果！电影、电视、动画都是这个道理～
+                    </p>
+                    <div class="mt-4 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
+                        <i class="fa fa-lightbulb-o text-yellow-500 mr-2"></i>
+                        <span class="text-sm text-gray-600">小贴士：帧频设为24fps（每秒24帧），动画最流畅～</span>
+                    </div>
+                </div>
+
+                <!-- Flash界面 -->
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover animate-fade-in" style="animation-delay: 0.2s">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                            <i class="fa fa-desktop"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Flash界面：你的动画工作台</h3>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div class="p-3 bg-gray-50 rounded-lg">
+                            <span class="font-semibold text-primary">舞台</span>
+                            <p class="text-sm text-gray-600">演员表演的地方（白色区域）</p>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded-lg">
+                            <span class="font-semibold text-primary">时间轴</span>
+                            <p class="text-sm text-gray-600">动画的“胶片”，控制播放顺序</p>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded-lg">
+                            <span class="font-semibold text-primary">库</span>
+                            <p class="text-sm text-gray-600">道具间，存放图片、元件等素材</p>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded-lg">
+                            <span class="font-semibold text-primary">工具栏</span>
+                            <p class="text-sm text-gray-600">绘图、选择的“工具箱”</p>
+                        </div>
+                    </div>
+                    <img src="https://picsum.photos/id/0/600/300" alt="Flash界面示意图" class="w-full h-48 object-cover rounded-lg">
+                </div>
+
+                <!-- 帧家族 -->
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover animate-fade-in" style="animation-delay: 0.4s">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                            <i class="fa fa-film"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">帧家族：动画的“演员们”</h3>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary flex-shrink-0 mt-1">
+                                <i class="fa fa-circle"></i>
+                            </div>
+                            <div>
+                                <span class="font-semibold">关键帧</span>
+                                <p class="text-sm text-gray-600">动画的“剧情转折点”，有画面内容（实心小圆），是制作动画的核心！</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary flex-shrink-0 mt-1">
+                                <i class="fa fa-square-o"></i>
+                            </div>
+                            <div>
+                                <span class="font-semibold">延长帧</span>
+                                <p class="text-sm text-gray-600">“镜头hold住”，把关键帧的内容原样延时显示（空心矩形）</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center text-accent flex-shrink-0 mt-1">
+                                <i class="fa fa-circle-o"></i>
+                            </div>
+                            <div>
+                                <span class="font-semibold">空白关键帧</span>
+                                <p class="text-sm text-gray-600">“空镜头”，编辑区无内容（空心小圆），用于截断前面的内容</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 flex-shrink-0 mt-1">
+                                <i class="fa fa-clock-o"></i>
+                            </div>
+                            <div>
+                                <span class="font-semibold">帧频（fps）</span>
+                                <p class="text-sm text-gray-600">每秒播放的帧数！数值越大，动画越快（比如30fps=每秒30帧）</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 文件格式 -->
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover animate-fade-in" style="animation-delay: 0.6s">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                            <i class="fa fa-file"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">文件格式：动画的“两种形态”</h3>
+                    </div>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="text-center p-4 bg-blue-50 rounded-lg">
+                            <div class="text-3xl text-primary mb-2">.fla</div>
+                            <h4 class="font-semibold mb-1">源文件</h4>
+                            <p class="text-sm text-gray-600">
+                                📝 可编辑的“草稿本”<br>
+                                能修改动画内容、素材<br>
+                                必须用Flash打开
+                            </p>
+                        </div>
+                        <div class="text-center p-4 bg-purple-50 rounded-lg">
+                            <div class="text-3xl text-accent mb-2">.swf</div>
+                            <h4 class="font-semibold mb-1">影片文件</h4>
+                            <p class="text-sm text-gray-600">
+                                🎬 导出的“成品电影”<br>
+                                不能编辑，体积小<br>
+                                可直接播放
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mt-4 p-3 bg-green-50 rounded-lg border border-green-200">
+                        <i class="fa fa-check-circle text-green-500 mr-2"></i>
+                        <span class="text-sm text-gray-600">重要提醒：做完动画一定要保存.fla文件！不然下次想修改就哭了～</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 动画类型模块 -->
+        <section id="animation-types" class="mb-20 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">
+                    <i class="fa fa-film text-primary mr-2"></i>动画三巨头：三种核心动画类型
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    动画界的“三大天王”，各有神通！学会它们，基本能搞定80%的动画需求～
+                </p>
+            </div>
+
+            <!-- 逐帧动画 -->
+            <div class="bg-white rounded-xl shadow-md p-6 mb-10 card-hover animate-fade-in">
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="md:w-1/3">
+                        <div class="bg-primary/5 rounded-lg p-4 text-center h-full">
+                            <div class="text-4xl text-primary mb-3">
+                                <i class="fa fa-book"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">逐帧动画</h3>
+                            <p class="text-gray-600 mb-3">“翻页漫画”式动画</p>
+                            <span class="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">最基础</span>
+                            <span class="inline-block px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm mt-2">适合复杂动作</span>
+                        </div>
+                    </div>
+                    <div class="md:w-2/3">
+                        <h4 class="font-bold text-lg mb-3">🎯 什么是逐帧动画？</h4>
+                        <p class="text-gray-700 mb-4">
+                            每一帧都是关键帧！就像小时候画的“翻页小人书”，每一页都要自己画，然后快速翻页就动起来了～
+                        </p>
+                        
+                        <h4 class="font-bold text-lg mb-3">📝 制作步骤（以“白鹭展翅”为例）</h4>
+                        <ol class="list-decimal list-inside space-y-2 text-gray-700 mb-4">
+                            <li>导入白鹭的序列图片（每一张都是一个动作）</li>
+                            <li>在时间轴上每帧放置一张图片，调整位置和大小</li>
+                            <li>新增“背景”图层，导入背景图（记得放在最下面）</li>
+                            <li>设置帧频（比如12fps），测试播放</li>
+                            <li>导出为.swf文件</li>
+                        </ol>
+                        
+                        <h4 class="font-bold text-lg mb-3">💡 适用场景</h4>
+                        <div class="flex flex-wrap gap-2 mb-3">
+                            <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">小鸟飞翔</span>
+                            <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">人物走路</span>
+                            <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">复杂形变</span>
+                            <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">逐帧特效</span>
+                        </div>
+                        
+                        <div class="p-3 bg-yellow-50 rounded-lg border border-yellow-200">
+                            <i class="fa fa-exclamation-triangle text-yellow-500 mr-2"></i>
+                            <span class="text-sm text-gray-600">缺点：麻烦！帧越多越累～ 但效果最细腻！</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 形状补间动画 -->
+            <div class="bg-white rounded-xl shadow-md p-6 mb-10 card-hover animate-fade-in" style="animation-delay: 0.2s">
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="md:w-1/3">
+                        <div class="bg-secondary/5 rounded-lg p-4 text-center h-full">
+                            <div class="text-4xl text-secondary mb-3">
+                                <i class="fa fa-magic"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">形状补间动画</h3>
+                            <p class="text-gray-600 mb-3">“魔术变变变”动画</p>
+                            <span class="inline-block px-3 py-1 bg-secondary/10 text-secondary rounded-full text-sm">最有趣</span>
+                            <span class="inline-block px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm mt-2">形状互变</span>
+                        </div>
+                    </div>
+                    <div class="md:w-2/3">
+                        <h4 class="font-bold text-lg mb-3">🎯 什么是形状补间动画？</h4>
+                        <p class="text-gray-700 mb-4">
+                            一个形状变成另一个形状！比如正方形变西瓜、苹果变香蕉、文字变图案～ 中间的渐变过程Flash自动生成，超神奇！
+                        </p>
+                        
+                        <h4 class="font-bold text-lg mb-3">📝 制作步骤（以“魔术水果”为例）</h4>
+                        <ol class="list-decimal list-inside space-y-2 text-gray-700 mb-4">
+                            <li>新建Flash文件，在第1帧画一个苹果（矢量图！）</li>
+                            <li>在第20帧插入“空白关键帧”，画一个西瓜</li>
+                            <li>选中第1-19帧之间的任意一帧，右键选择“创建形状补间”</li>
+                            <li>时间轴变成浅绿色带箭头，就成功啦！</li>
+                        </ol>
+                        
+                        <h4 class="font-bold text-lg mb-3">⚠️ 必记要点（不然会翻车！）</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700 mb-4">
+                            <li>对象必须是 <span class="text-secondary font-semibold">矢量图</span>（用Flash绘图工具画的）</li>
+                            <li>文字要做 <span class="text-secondary font-semibold">“分离”操作</span>（选中文字→右键→分离，要分两次！）</li>
+                            <li>不能是组、实例或位图（不然创建补间是灰色的！）</li>
+                        </ul>
+                        
+                        <h4 class="font-bold text-lg mb-3">💡 实用技巧</h4>
+                        <div class="grid grid-cols-2 gap-3 mb-3">
+                            <div class="p-2 bg-gray-50 rounded-lg">
+                                <span class="font-semibold">调整速度</span>：改帧频，或延长时间轴上的帧数
+                            </div>
+                            <div class="p-2 bg-gray-50 rounded-lg">
+                                <span class="font-semibold">暂停效果</span>：延长开始关键帧的显示时间
+                            </div>
+                            <div class="p-2 bg-gray-50 rounded-lg">
+                                <span class="font-semibold">形状提示</span>：添加形状提示点（Ctrl+Shift+H），让形变更精准
+                            </div>
+                            <div class="p-2 bg-gray-50 rounded-lg">
+                                <span class="font-semibold">颜色渐变</span>：关键帧里改颜色，形变时会自动渐变
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 动画补间动画 -->
+            <div class="bg-white rounded-xl shadow-md p-6 card-hover animate-fade-in" style="animation-delay: 0.4s">
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="md:w-1/3">
+                        <div class="bg-accent/5 rounded-lg p-4 text-center h-full">
+                            <div class="text-4xl text-accent mb-3">
+                                <i class="fa fa-exchange"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">动画补间动画</h3>
+                            <p class="text-gray-600 mb-3">“演员换造型”动画</p>
+                            <span class="inline-block px-3 py-1 bg-accent/10 text-accent rounded-full text-sm">最常用</span>
+                            <span class="inline-block px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm mt-2">属性变化</span>
+                        </div>
+                    </div>
+                    <div class="md:w-2/3">
+                        <h4 class="font-bold text-lg mb-3">🎯 什么是动画补间动画？</h4>
+                        <p class="text-gray-700 mb-4">
+                            对象的属性变化！比如让图片移动、旋转、缩放、变色～ 只需要设置开始和结束两个关键帧的属性，中间过程Flash自动生成，超高效！
+                        </p>
+                        
+                        <h4 class="font-bold text-lg mb-3">📝 制作步骤（以“电影胶片移动”为例）</h4>
+                        <ol class="list-decimal list-inside space-y-2 text-gray-700 mb-4">
+                            <li>导入素材到库，新建“背景”图层，制作电影胶片背景</li>
+                            <li>新建“图片移动”图层，将图片组合（或做成元件）</li>
+                            <li>在第1帧放置图片组在舞台右侧，第30帧插入关键帧</li>
+                            <li>将第30帧的图片组移动到舞台左侧</li>
+                            <li>选中第1-29帧，右键选择“创建动画补间”</li>
+                            <li>设置旋转、缓动等属性，测试播放</li>
+                        </ol>
+                        
+                        <h4 class="font-bold text-lg mb-3">🔍 与形状补间的区别（必考！）</h4>
+                        <div class="overflow-x-auto mb-4">
+                            <table class="w-full border-collapse">
+                                <thead>
+                                    <tr class="bg-gray-50">
+                                        <th class="border border-gray-200 p-3 text-left">对比项</th>
+                                        <th class="border border-gray-200 p-3 text-left">形状补间动画</th>
+                                        <th class="border border-gray-200 p-3 text-left">动画补间动画</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="border border-gray-200 p-3 font-semibold">对象类型</td>
+                                        <td class="border border-gray-200 p-3">矢量图（需分离）</td>
+                                        <td class="border border-gray-200 p-3">实例、组、文本块</td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="border border-gray-200 p-3 font-semibold">效果</td>
+                                        <td class="border border-gray-200 p-3">形状、颜色渐变</td>
+                                        <td class="border border-gray-200 p-3">位置、大小、旋转、缩放等</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border border-gray-200 p-3 font-semibold">时间轴颜色</td>
+                                        <td class="border border-gray-200 p-3">浅绿色</td>
+                                        <td class="border border-gray-200 p-3">浅蓝色</td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="border border-gray-200 p-3 font-semibold">关键帧内容</td>
+                                        <td class="border border-gray-200 p-3">不同形状</td>
+                                        <td class="border border-gray-200 p-3">同一对象的不同属性</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="p-3 bg-green-50 rounded-lg border border-green-200">
+                            <i class="fa fa-star text-green-500 mr-2"></i>
+                            <span class="text-sm text-gray-600">优点：高效！不用逐帧画，适合做简单的运动动画～</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 元件专题 -->
+        <section id="symbol" class="mb-20 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">
+                    <i class="fa fa-cube text-primary mr-2"></i>元件神器：动画效率加速器
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    学会元件，制作动画效率翻倍！重复元素不用反复画，修改一次全同步～
+                </p>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-md p-6 mb-10 card-hover animate-fade-in">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                        <i class="fa fa-magic text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold">什么是元件？</h3>
+                </div>
+                <p class="text-gray-700 mb-6">
+                    元件是Flash中的“独立演员”！可以是图形、动画片段、按钮等，创建后存放在“库”里，随时可以拖到舞台上使用（拖到舞台上的叫“实例”）～
+                </p>
+                <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                    <h4 class="font-semibold mb-2">🎭 生动比喻</h4>
+                    <p class="text-gray-700">
+                        库 = 演员休息室，元件 = 演员，舞台 = 表演区，实例 = 演员在舞台上的表演～ 一个演员（元件）可以在舞台上表演多次（多个实例），每次表演可以穿不同的衣服（修改实例属性），但演员本身（元件）不变！
+                    </p>
+                </div>
+
+                <!-- 元件三兄弟 -->
+                <h3 class="text-xl font-bold mb-4">元件三兄弟：各有神通</h3>
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <!-- 图形元件 -->
+                    <div class="border border-gray-200 rounded-lg p-4 hover:border-primary transition-colors">
+                        <div class="text-3xl text-primary mb-3">
+                            <i class="fa fa-picture-o"></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-2">图形元件</h4>
+                        <p class="text-gray-600 mb-3 text-sm">
+                            静态图像或与主时间轴同步的动画片段
+                        </p>
+                        <div class="space-y-1 text-sm">
+                            <div class="flex items-center gap-2">
+                                <i class="fa fa-check text-green-500"></i>
+                                <span class="text-gray-700">适合重复使用的静态图形</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fa fa-check text-green-500"></i>
+                                <span class="text-gray-700">动画与主时间轴同步</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fa fa-times text-red-500"></i>
+                                <span class="text-gray-700">不能独立循环播放</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 影片剪辑元件 -->
+                    <div class="border border-gray-200 rounded-lg p-4 hover:border-secondary transition-colors">
+                        <div class="text-3xl text-secondary mb-3">
+                            <i class="fa fa-film"></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-2">影片剪辑元件</h4>
+                        <p class="text-gray-600 mb-3 text-sm">
+                            独立于主时间轴的动画片段
+                        </p>
+                        <div class="space-y-1 text-sm">
+                            <div class="flex items-center gap-2">
+                                <i class="fa fa-check text-green-500"></i>
+                                <span class="text-gray-700">自带独立动画</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fa fa-check text-green-500"></i>
+                                <span class="text-gray-700">独立循环播放</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fa fa-check text-green-500"></i>
+                                <span class="text-gray-700">最常用的动画元件</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 按钮元件 -->
+                    <div class="border border-gray-200 rounded-lg p-4 hover:border-accent transition-colors">
+                        <div class="text-3xl text-accent mb-3">
+                            <i class="fa fa-hand-pointer-o"></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-2">按钮元件</h4>
+                        <p class="text-gray-600 mb-3 text-sm">
+                            响应鼠标动作的交互式按钮
+                        </p>
+                        <div class="space-y-1 text-sm">
+                            <div class="flex items-center gap-2">
+                                <i class="fa fa-check text-green-500"></i>
+                                <span class="text-gray-700">支持鼠标经过、点击等状态</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fa fa-check text-green-500"></i>
+                                <span class="text-gray-700">可添加交互效果</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fa fa-check text-green-500"></i>
+                                <span class="text-gray-700">制作交互界面必备</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 元件的超能力 -->
+                <h3 class="text-xl font-bold mb-4">元件的超能力（为什么要用元件？）</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-primary/5 rounded-lg p-3 text-center">
+                        <i class="fa fa-repeat text-primary text-2xl mb-2"></i>
+                        <p class="text-sm font-semibold">重复使用</p>
+                        <p class="text-xs text-gray-600">一次创建，多次调用</p>
+                    </div>
+                    <div class="bg-secondary/5 rounded-lg p-3 text-center">
+                        <i class="fa fa-sync text-secondary text-2xl mb-2"></i>
+                        <p class="text-sm font-semibold">同步更新</p>
+                        <p class="text-xs text-gray-600">修改元件，实例全更</p>
+                    </div>
+                    <div class="bg-accent/5 rounded-lg p-3 text-center">
+                        <i class="fa fa-compress text-accent text-2xl mb-2"></i>
+                        <p class="text-sm font-semibold">减小体积</p>
+                        <p class="text-xs text-gray-600">多次调用不增文件大小</p>
+                    </div>
+                    <div class="bg-green-50/5 rounded-lg p-3 text-center">
+                        <i class="fa fa-sliders text-green-500 text-2xl mb-2"></i>
+                        <p class="text-sm font-semibold">实例独立</p>
+                        <p class="text-xs text-gray-600">实例属性可单独修改</p>
+                    </div>
+                </div>
+
+                <!-- 制作与应用步骤 -->
+                <h3 class="text-xl font-bold mb-4">元件制作与应用（以“旋转木棉花”为例）</h3>
+                <div class="space-y-4">
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold flex-shrink-0">1</div>
+                        <div>
+                            <h4 class="font-semibold">创建图形元件“木棉花”</h4>
+                            <p class="text-sm text-gray-600">插入→新建元件→选择“图形”→命名“木棉花”→用绘图工具画一朵木棉花→保存到库</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold flex-shrink-0">2</div>
+                        <div>
+                            <h4 class="font-semibold">创建影片剪辑元件“旋转木棉花”</h4>
+                            <p class="text-sm text-gray-600">插入→新建元件→选择“影片剪辑”→命名“旋转木棉花”→将库中的“木棉花”拖到中心→创建动画补间→设置旋转属性→保存</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold flex-shrink-0">3</div>
+                        <div>
+                            <h4 class="font-semibold">应用元件到舞台</h4>
+                            <p class="text-sm text-gray-600">从库中拖出“旋转木棉花”到舞台→用任意变形工具调整大小、位置→可多次拖出创建多个实例→测试动画</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 实例与元件的关系 -->
+            <div class="bg-white rounded-xl shadow-md p-6 card-hover animate-fade-in" style="animation-delay: 0.2s">
+                <h3 class="text-xl font-bold mb-4">实例 vs 元件：重要区别！</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full border-collapse">
+                        <thead>
+                            <tr class="bg-gray-50">
+                                <th class="border border-gray-200 p-3 text-left">对比项</th>
+                                <th class="border border-gray-200 p-3 text-left">元件</th>
+                                <th class="border border-gray-200 p-3 text-left">实例</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border border-gray-200 p-3 font-semibold">存放位置</td>
+                                <td class="border border-gray-200 p-3">库面板中</td>
+                                <td class="border border-gray-200 p-3">舞台上</td>
+                            </tr>
+                            <tr class="bg-gray-50">
+                                <td class="border border-gray-200 p-3 font-semibold">修改影响</td>
+                                <td class="border border-gray-200 p-3">所有实例同步更新</td>
+                                <td class="border border-gray-200 p-3">只影响当前实例，不影响元件</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-200 p-3 font-semibold">属性修改</td>
+                                <td class="border border-gray-200 p-3">修改原始内容（如形状、颜色）</td>
+                                <td class="border border-gray-200 p-3">修改大小、位置、色调、透明度等</td>
+                            </tr>
+                            <tr class="bg-gray-50">
+                                <td class="border border-gray-200 p-3 font-semibold">数量</td>
+                                <td class="border border-gray-200 p-3">一个元件可创建多个实例</td>
+                                <td class="border border-gray-200 p-3">多个实例可对应同一个元件</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-6 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                    <i class="fa fa-lightbulb-o text-blue-500 mr-2"></i>
+                    <span class="text-sm text-gray-600">重要技巧：如果想让多个相同元素，修改一个不影响其他，就不要用元件；如果需要重复使用且同步更新，一定要用元件！</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 工具与技巧模块 -->
+        <section id="tools" class="mb-20 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">
+                    <i class="fa fa-wrench text-primary mr-2"></i>工具技巧：避坑指南+实用妙招
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    掌握这些技巧，让你少走99%的弯路！遇到问题不用慌，这里有解决方案～
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- 常用工具 -->
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover animate-fade-in">
+                    <h3 class="text-xl font-bold mb-4">常用工具：绘图&编辑</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fa fa-pencil text-primary text-xl"></i>
+                            <div>
+                                <h4 class="font-semibold">铅笔工具</h4>
+                                <p class="text-sm text-gray-600">画自由线条</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fa fa-square-o text-primary text-xl"></i>
+                            <div>
+                                <h4 class="font-semibold">矩形工具</h4>
+                                <p class="text-sm text-gray-600">画矩形/正方形</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fa fa-circle-o text-primary text-xl"></i>
+                            <div>
+                                <h4 class="font-semibold">椭圆工具</h4>
+                                <p class="text-sm text-gray-600">画圆形/椭圆形</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fa fa-paint-brush text-primary text-xl"></i>
+                            <div>
+                                <h4 class="font-semibold">刷子工具</h4>
+                                <p class="text-sm text-gray-600">画笔触较粗的线条</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fa fa-tint text-primary text-xl"></i>
+                            <div>
+                                <h4 class="font-semibold">颜料桶工具</h4>
+                                <p class="text-sm text-gray-600">填充颜色</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fa fa-arrows text-primary text-xl"></i>
+                            <div>
+                                <h4 class="font-semibold">选择工具</h4>
+                                <p class="text-sm text-gray-600">选择&移动对象</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fa fa-expand text-primary text-xl"></i>
+                            <div>
+                                <h4 class="font-semibold">任意变形工具</h4>
+                                <p class="text-sm text-gray-600">缩放/旋转/倾斜</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fa fa-font text-primary text-xl"></i>
+                            <div>
+                                <h4 class="font-semibold">文本工具</h4>
+                                <p class="text-sm text-gray-600">输入文字</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 图层用法 -->
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover animate-fade-in" style="animation-delay: 0.2s">
+                    <h3 class="text-xl font-bold mb-4">图层用法：分层管理</h3>
+                    <p class="text-gray-700 mb-4">
+                        图层就像透明的塑料板！可以将动画的不同元素放在不同图层，方便单独编辑，不会互相干扰～
+                    </p>
+                    <div class="space-y-3 mb-4">
+                        <div class="flex items-start gap-3">
+                            <i class="fa fa-check-circle text-green-500 mt-1"></i>
+                            <p class="text-gray-700">背景图层放最下面，主角图层在上面</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa fa-check-circle text-green-500 mt-1"></i>
+                            <p class="text-gray-700">不同动画效果放在不同图层（比如一个图层做移动，一个图层做旋转）</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa fa-check-circle text-green-500 mt-1"></i>
+                            <p class="text-gray-700">锁定不需要编辑的图层，避免误操作</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa fa-check-circle text-green-500 mt-1"></i>
+                            <p class="text-gray-700">重命名图层（如“背景”“主角”“文字”），方便识别</p>
+                        </div>
+                    </div>
+                    <img src="https://picsum.photos/id/180/600/300" alt="图层示意图" class="w-full h-40 object-cover rounded-lg">
+                </div>
+
+                <!-- 常见问题与解决方案 -->
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover animate-fade-in" style="animation-delay: 0.4s">
+                    <h3 class="text-xl font-bold mb-4">常见坑&解决方案</h3>
+                    <div class="space-y-4">
+                        <div class="p-3 bg-red-50 rounded-lg border border-red-100">
+                            <h4 class="font-semibold text-red-600 mb-1">坑1：形状补间不能创建（灰色不可用）</h4>
+                            <p class="text-sm text-gray-700">解决方案：对象不是矢量图！文字要分离（两次），组要打散，位图要转换为矢量图</p>
+                        </div>
+                        <div class="p-3 bg-red-50 rounded-lg border border-red-100">
+                            <h4 class="font-semibold text-red-600 mb-1">坑2：动画补间出现虚线</h4>
+                            <p class="text-sm text-gray-700">解决方案：两个关键帧的对象不是同一个！确保开始和结束关键帧是同一个实例/组</p>
+                        </div>
+                        <div class="p-3 bg-red-50 rounded-lg border border-red-100">
+                            <h4 class="font-semibold text-red-600 mb-1">坑3：影片剪辑元件在舞台上不播放</h4>
+                            <p class="text-sm text-gray-700">解决方案：影片剪辑需要测试影片（Ctrl+Enter）才能看到效果，在编辑模式下不播放</p>
+                        </div>
+                        <div class="p-3 bg-red-50 rounded-lg border border-red-100">
+                            <h4 class="font-semibold text-red-600 mb-1">坑4：修改元件后实例没更新</h4>
+                            <p class="text-sm text-gray-700">解决方案：确保实例是该元件的实例！可能误创建了多个同名元件，检查库面板</p>
+                        </div>
+                        <div class="p-3 bg-red-50 rounded-lg border border-red-100">
+                            <h4 class="font-semibold text-red-600 mb-1">坑5：动画播放速度太快/太慢</h4>
+                            <p class="text-sm text-gray-700">解决方案：调整帧频（属性面板→帧频），默认12fps，数值越大越快</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 实用快捷键 -->
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover animate-fade-in" style="animation-delay: 0.6s">
+                    <h3 class="text-xl font-bold mb-4">实用快捷键（提高效率）</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="p-2 bg-gray-50 rounded-lg text-center">
+                            <span class="inline-block bg-primary/10 text-primary px-2 py-1 rounded text-sm mb-1">Ctrl+Enter</span>
+                            <p class="text-xs text-gray-600">测试影片</p>
+                        </div>
+                        <div class="p-2 bg-gray-50 rounded-lg text-center">
+                            <span class="inline-block bg-primary/10 text-primary px-2 py-1 rounded text-sm mb-1">F5</span>
+                            <p class="text-xs text-gray-600">插入延长帧</p>
+                        </div>
+                        <div class="p-2 bg-gray-50 rounded-lg text-center">
+                            <span class="inline-block bg-primary/10 text-primary px-2 py-1 rounded text-sm mb-1">F6</span>
+                            <p class="text-xs text-gray-600">插入关键帧</p>
+                        </div>
+                        <div class="p-2 bg-gray-50 rounded-lg text-center">
+                            <span class="inline-block bg-primary/10 text-primary px-2 py-1 rounded text-sm mb-1">F7</span>
+                            <p class="text-xs text-gray-600">插入空白关键帧</p>
+                        </div>
+                        <div class="p-2 bg-gray-50 rounded-lg text-center">
+                            <span class="inline-block bg-primary/10 text-primary px-2 py-1 rounded text-sm mb-1">Ctrl+B</span>
+                            <p class="text-xs text-gray-600">分离对象（文字）</p>
+                        </div>
+                        <div class="p-2 bg-gray-50 rounded-lg text-center">
+                            <span class="inline-block bg-primary/10 text-primary px-2 py-1 rounded text-sm mb-1">Ctrl+G</span>
+                            <p class="text-xs text-gray-600">组合对象</p>
+                        </div>
+                        <div class="p-2 bg-gray-50 rounded-lg text-center">
+                            <span class="inline-block bg-primary/10 text-primary px-2 py-1 rounded text-sm mb-1">Ctrl+L</span>
+                            <p class="text-xs text-gray-600">打开库面板</p>
+                        </div>
+                        <div class="p-2 bg-gray-50 rounded-lg text-center">
+                            <span class="inline-block bg-primary/10 text-primary px-2 py-1 rounded text-sm mb-1">Ctrl+S</span>
+                            <p class="text-xs text-gray-600">保存文件</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 小测验模块 -->
+        <section id="quiz" class="mb-20 scroll-mt-20">
+            <div class="text-center mb-12">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4">
+                    <i class="fa fa-question-circle text-primary mr-2"></i>小测验：检验你的修炼成果
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    来做几道题，看看你是不是已经成为动画小能手～ 全部答对有惊喜！
+                </p>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-md p-6 max-w-3xl mx-auto">
+                <form id="quizForm" class="space-y-6">
+                    <!-- 题目1 -->
+                    <div class="p-4 border border-gray-200 rounded-lg">
+                        <h3 class="font-bold text-lg mb-3">1. 动画的基本原理是什么？（单选）</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="q1" value="A" class="form-radio text-primary">
+                                <span>A. 视觉暂留原理</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="q1" value="B" class="form-radio text-primary">
+                                <span>B. 光影魔术</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="q1" value="C" class="form-radio text-primary">
+                                <span>C. 电脑合成</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="q1" value="D" class="form-radio text-primary">
+                                <span>D. 图片拼接</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 题目2 -->
+                    <div class="p-4 border border-gray-200 rounded-lg">
+                        <h3 class="font-bold text-lg mb-3">2. 下列哪种动画需要对文字进行“分离”操作？（单选）</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="q2" value="A" class="form-radio text-primary">
+                                <span>A. 逐帧动画</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="q2" value="B" class="form-radio text-primary">
+                                <span>B. 形状补间动画</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="q2" value="C" class="form-radio text-primary">
+                                <span>C. 动画补间动画</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="q2" value="D" class="form-radio text-primary">
+                                <span>D. 按钮动画</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 题目3 -->
+                    <div class="p-4 border border-gray-200 rounded-lg">
+                        <h3 class="font-bold text-lg mb-3">3. 关于元件和实例的关系，下列说法正确的是？（多选）</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" name="q3" value="A" class="form-checkbox text-primary">
+                                <span>A. 修改元件，所有实例都会更新</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" name="q3" value="B" class="form-checkbox text-primary">
+                                <span>B. 修改实例，元件不会改变</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" name="q3" value="C" class="form-checkbox text-primary">
+                                <span>C. 一个元件只能创建一个实例</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" name="q3" value="D" class="form-checkbox text-primary">
+                                <span>D. 实例可以修改大小、颜色等属性</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 题目4 -->
+                    <div class="p-4 border border-gray-200 rounded-lg">
+                        <h3 class="font-bold text-lg mb-3">4. 动画补间动画和形状补间动画的区别有？（多选）</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" name="q4" value="A" class="form-checkbox text-primary">
+                                <span>A. 对象类型不同</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" name="q4" value="B" class="form-checkbox text-primary">
+                                <span>B. 时间轴颜色不同</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" name="q4" value="C" class="form-checkbox text-primary">
+                                <span>C. 动画效果不同</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" name="q4" value="D" class="form-checkbox text-primary">
+                                <span>D. 制作步骤完全相同</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 题目5 -->
+                    <div class="p-4 border border-gray-200 rounded-lg">
+                        <h3 class="font-bold text-lg mb-3">5. Flash中可编辑的源文件扩展名是？（单选）</h3>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="q5" value="A" class="form-radio text-primary">
+                                <span>A. .swf</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="q5" value="B" class="form-radio text-primary">
+                                <span>B. .fla</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="q5" value="C" class="form-radio text-primary">
+                                <span>C. .jpg</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="q5" value="D" class="form-radio text-primary">
+                                <span>D. .png</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-primary text-white font-semibold py-3 rounded-lg hover:bg-primary/90 transition-colors">
+                        提交答案 <i class="fa fa-paper-plane ml-2"></i>
+                    </button>
+                </form>
+
+                <!-- 答案解析 -->
+                <div id="quizResult" class="mt-8 hidden">
+                    <div class="p-4 rounded-lg mb-4" id="resultBg">
+                        <h3 class="font-bold text-lg mb-2" id="resultTitle"></h3>
+                        <p class="text-gray-700" id="resultDesc"></p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="p-3 bg-gray-50 rounded-lg">
+                            <h4 class="font-semibold mb-1">1. 正确答案：A. 视觉暂留原理</h4>
+                            <p class="text-sm text-gray-600">解析：人的眼睛看到画面后1/24秒内不会消失，快速切换静态图片就会产生动态效果～</p>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded-lg">
+                            <h4 class="font-semibold mb-1">2. 正确答案：B. 形状补间动画</h4>
+                            <p class="text-sm text-gray-600">解析：形状补间的对象必须是矢量图，文字需要分离（两次）才能变成矢量图～</p>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded-lg">
+                            <h4 class="font-semibold mb-1">3. 正确答案：A、B、D</h4>
+                            <p class="text-sm text-gray-600">解析：一个元件可以创建多个实例，C选项错误～</p>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded-lg">
+                            <h4 class="font-semibold mb-1">4. 正确答案：A、B、C</h4>
+                            <p class="text-sm text-gray-600">解析：两种补间动画的制作步骤、对象类型、效果、时间轴颜色都不同，D选项错误～</p>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded-lg">
+                            <h4 class="font-semibold mb-1">5. 正确答案：B. .fla</h4>
+                            <p class="text-sm text-gray-600">解析：.fla是可编辑的源文件，.swf是导出的影片文件，.jpg和.png是图片格式～</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+        <!-- 页脚 -->
+    <footer class="bg-dark text-white py-10">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center gap-2 text-primary font-bold text-xl mb-2">
+                        <i class="fa fa-film text-secondary"></i>
+                        <span>动画大神修炼营</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        让Flash动画学习变得简单有趣～
+                    </p>
+                </div>
+                <!-- 补全社交链接的i标签（之前被截断了） -->
+                <div class="flex gap-6">
+                    <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                        <i class="fa fa-weixin text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                        <i class="fa fa-qq text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                        <i class="fa fa-question-circle text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 pt-6 border-t border-gray-700 text-center text-gray-400 text-sm">
+                © 2025 动画大神修炼营 | 基于广州版信息技术教材整理 | 仅供学习使用
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript（之前的平滑滚动代码也补全闭合） -->
+    <script>
+        // 移动端菜单切换
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = menuBtn.querySelector('i');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            }
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    // 关闭移动端菜单（如果打开）
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        const icon = menuBtn.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                    
+                    // 平滑滚动到目标位置（完整代码）
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80, // 避开导航栏
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // 测验表单提交逻辑（完整代码）
+        const quizForm = document.getElementById('quizForm');
+        const quizResult = document.getElementById('quizResult');
+        const resultBg = document.getElementById('resultBg');
+        const resultTitle = document.getElementById('resultTitle');
+        const resultDesc = document.getElementById('resultDesc');
+
+        quizForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let score = 0;
+
+            // 题目1：正确答案A
+            const q1Answer = document.querySelector('input[name="q1"]:checked')?.value;
+            if (q1Answer === 'A') score++;
+
+            // 题目2：正确答案B
+            const q2Answer = document.querySelector('input[name="q2"]:checked')?.value;
+            if (q2Answer === 'B') score++;
+
+            // 题目3：正确答案A、B、D
+            const q3Selected = Array.from(document.querySelectorAll('input[name="q3"]:checked')).map(item => item.value);
+            const q3Correct = ['A', 'B', 'D'];
+            if (q3Selected.length === q3Correct.length && q3Selected.every(val => q3Correct.includes(val))) score++;
+
+            // 题目4：正确答案A、B、C
+            const q4Selected = Array.from(document.querySelectorAll('input[name="q4"]:checked')).map(item => item.value);
+            const q4Correct = ['A', 'B', 'C'];
+            if (q4Selected.length === q4Correct.length && q4Selected.every(val => q4Correct.includes(val))) score++;
+
+            // 题目5：正确答案B
+            const q5Answer = document.querySelector('input[name="q5"]:checked')?.value;
+            if (q5Answer === 'B') score++;
+
+            // 显示结果
+            quizResult.classList.remove('hidden');
+            if (score === 5) {
+                resultBg.className = 'p-4 rounded-lg mb-4 bg-green-50 border border-green-200';
+                resultTitle.textContent = '🎉 恭喜！你是动画大神！';
+                resultDesc.textContent = `得分：${score}/5，全部答对啦！你已经完全掌握了Flash动画的基础知识～`;
+            } else if (score >= 3) {
+                resultBg.className = 'p-4 rounded-lg mb-4 bg-blue-50 border border-blue-200';
+                resultTitle.textContent = '👍 很棒！接近大神水平！';
+                resultDesc.textContent = `得分：${score}/5，基础知识掌握得不错，再复习错题就更完美啦～`;
+            } else {
+                resultBg.className = 'p-4 rounded-lg mb-4 bg-yellow-50 border border-yellow-200';
+                resultTitle.textContent = '💪 加油！再复习知识点吧！';
+                resultDesc.textContent = `得分：${score}/5，有些知识点还没掌握牢固，再看看上面的内容，下次一定能拿高分！`;
+            }
+
+            // 滚动到结果区域
+            quizResult.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    </script>
+</body>
+</html>

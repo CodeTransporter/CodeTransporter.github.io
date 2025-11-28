@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>信息与信息技术&网络基础综合练习题</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .tabs {
+            display: flex;
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+        }
+        .tab-btn {
+            flex: 1;
+            padding: 18px;
+            border: none;
+            background: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #495057;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        .tab-btn.active {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+        }
+        .tab-btn:hover:not(.active) {
+            background-color: #e9ecef;
+            color: #2d3748;
+        }
+        .content {
+            padding: 30px;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .question {
+            background-color: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: transform 0.2s ease;
+        }
+        .question:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        .question-number {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .question-number::before {
+            content: "";
+            display: inline-block;
+            width: 8px;
+            height: 24px;
+            background-color: #667eea;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .question-text {
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background-color: white;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .option:hover {
+            border-color: #667eea;
+            background-color: #f0f3ff;
+        }
+        .option input {
+            margin-right: 15px;
+            accent-color: #667eea;
+            width: 18px;
+            height: 18px;
+        }
+        .option label {
+            font-size: 1rem;
+            color: #495057;
+            cursor: pointer;
+            flex: 1;
+        }
+        .submit-btn {
+            display: block;
+            width: 200px;
+            margin: 40px auto;
+            padding: 15px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        .result {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 30px 0;
+            padding: 20px;
+            border-radius: 12px;
+            display: none;
+        }
+        .correct {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+        .incorrect {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            .tab-btn {
+                font-size: 1rem;
+                padding: 15px 10px;
+            }
+            .content {
+                padding: 20px;
+            }
+            .question {
+                padding: 20px;
+            }
+            .question-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>信息与信息技术&网络基础综合练习题</h1>
+            <p>涵盖两大板块全部知识点，共40道选择题，检验你的学习成果！</p>
+        </div>
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="info-tech">信息与信息技术</button>
+            <button class="tab-btn" data-tab="network">网络基础及应用</button>
+        </div>
+        <div class="content">
+            <!-- 信息与信息技术板块 -->
+            <div class="tab-content active" id="info-tech">
+                <div class="question">
+                    <div class="question-number">1. 下列关于信息的说法，正确的是（ ）</div>
+                    <div class="question-text">A. 信息必须通过文字形式呈现<br>B. 信息不能脱离载体而存在<br>C. 信息一旦产生就不会失效<br>D. 信息只能通过网络传播</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1-a">
+                            <label for="q1-a">A. 信息必须通过文字形式呈现</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1-b">
+                            <label for="q1-b">B. 信息不能脱离载体而存在</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1-c">
+                            <label for="q1-c">C. 信息一旦产生就不会失效</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q1" id="q1-d">
+                            <label for="q1-d">D. 信息只能通过网络传播</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">2. 计算机硬件系统的核心部件是（ ）</div>
+                    <div class="question-text">A. 内存<br>B. 硬盘<br>C. CPU<br>D. 显示器</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q2" id="q2-a">
+                            <label for="q2-a">A. 内存</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q2" id="q2-b">
+                            <label for="q2-b">B. 硬盘</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q2" id="q2-c">
+                            <label for="q2-c">C. CPU</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q2" id="q2-d">
+                            <label for="q2-d">D. 显示器</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">3. 下列属于系统软件的是（ ）</div>
+                    <div class="question-text">A. WPS文字<br>B. Windows 10<br>C. Photoshop<br>D. 微信</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3-a">
+                            <label for="q3-a">A. WPS文字</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3-b">
+                            <label for="q3-b">B. Windows 10</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3-c">
+                            <label for="q3-c">C. Photoshop</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q3" id="q3-d">
+                            <label for="q3-d">D. 微信</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">4. 计算机存储容量单位中，1GB等于（ ）</div>
+                    <div class="question-text">A. 1024B<br>B. 1024KB<br>C. 1024MB<br>D. 1024TB</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q4" id="q4-a">
+                            <label for="q4-a">A. 1024B</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q4" id="q4-b">
+                            <label for="q4-b">B. 1024KB</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q4" id="q4-c">
+                            <label for="q4-c">C. 1024MB</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q4" id="q4-d">
+                            <label for="q4-d">D. 1024TB</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">5. 下列不属于计算机输入设备的是（ ）</div>
+                    <div class="question-text">A. 键盘<br>B. 鼠标<br>C. 打印机<br>D. 扫描仪</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5-a">
+                            <label for="q5-a">A. 键盘</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5-b">
+                            <label for="q5-b">B. 鼠标</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5-c">
+                            <label for="q5-c">C. 打印机</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q5" id="q5-d">
+                            <label for="q5-d">D. 扫描仪</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">6. 计算机处理的所有信息最终都要转换为（ ）编码</div>
+                    <div class="question-text">A. 十进制<br>B. 二进制<br>C. 八进制<br>D. 十六进制</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q6" id="q6-a">
+                            <label for="q6-a">A. 十进制</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q6" id="q6-b">
+                            <label for="q6-b">B. 二进制</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q6" id="q6-c">
+                            <label for="q6-c">C. 八进制</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q6" id="q6-d">
+                            <label for="q6-d">D. 十六进制</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">7. 下列关于操作系统的说法，错误的是（ ）</div>
+                    <div class="question-text">A. 管理计算机软硬件资源<br>B. 为用户提供操作界面<br>C. 是应用软件的一种<br>D. 常见的有Windows、iOS等</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q7" id="q7-a">
+                            <label for="q7-a">A. 管理计算机软硬件资源</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q7" id="q7-b">
+                            <label for="q7-b">B. 为用户提供操作界面</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q7" id="q7-c">
+                            <label for="q7-c">C. 是应用软件的一种</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q7" id="q7-d">
+                            <label for="q7-d">D. 常见的有Windows、iOS等</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">8. 计算机网络中，负责指挥和控制计算机各部件协调工作的是（ ）</div>
+                    <div class="question-text">A. 运算器<br>B. 控制器<br>C. 存储器<br>D. 输入设备</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q8" id="q8-a">
+                            <label for="q8-a">A. 运算器</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q8" id="q8-b">
+                            <label for="q8-b">B. 控制器</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q8" id="q8-c">
+                            <label for="q8-c">C. 存储器</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q8" id="q8-d">
+                            <label for="q8-d">D. 输入设备</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">9. 下列属于人工智能应用的是（ ）</div>
+                    <div class="question-text">A. 用Word编辑文档<br>B. 人脸识别解锁手机<br>C. 用Excel制作表格<br>D. 浏览网页</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q9" id="q9-a">
+                            <label for="q9-a">A. 用Word编辑文档</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q9" id="q9-b">
+                            <label for="q9-b">B. 人脸识别解锁手机</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q9" id="q9-c">
+                            <label for="q9-c">C. 用Excel制作表格</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q9" id="q9-d">
+                            <label for="q9-d">D. 浏览网页</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">10. 保障信息安全时，下列做法错误的是（ ）</div>
+                    <div class="question-text">A. 设置复杂密码并定期更换<br>B. 随意打开来历不明的邮件附件<br>C. 安装杀毒软件并及时更新<br>D. 定期备份重要数据</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q10" id="q10-a">
+                            <label for="q10-a">A. 设置复杂密码并定期更换</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q10" id="q10-b">
+                            <label for="q10-b">B. 随意打开来历不明的邮件附件</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q10" id="q10-c">
+                            <label for="q10-c">C. 安装杀毒软件并及时更新</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q10" id="q10-d">
+                            <label for="q10-d">D. 定期备份重要数据</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">11. 计算机软件的知识产权受法律保护，下列行为合法的是（ ）</div>
+                    <div class="question-text">A. 购买正版软件使用<br>B. 复制正版软件供他人使用<br>C. 破解付费软件免费传播<br>D. 使用盗版软件</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q11" id="q11-a">
+                            <label for="q11-a">A. 购买正版软件使用</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q11" id="q11-b">
+                            <label for="q11-b">B. 复制正版软件供他人使用</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q11" id="q11-c">
+                            <label for="q11-c">C. 破解付费软件免费传播</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q11" id="q11-d">
+                            <label for="q11-d">D. 使用盗版软件</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">12. 下列关于计算机病毒的说法，正确的是（ ）</div>
+                    <div class="question-text">A. 只能通过U盘传播<br>B. 是一种破坏性程序<br>C. 不会影响计算机硬件<br>D. 安装杀毒软件后就不会感染</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q12" id="q12-a">
+                            <label for="q12-a">A. 只能通过U盘传播</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q12" id="q12-b">
+                            <label for="q12-b">B. 是一种破坏性程序</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q12" id="q12-c">
+                            <label for="q12-c">C. 不会影响计算机硬件</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q12" id="q12-d">
+                            <label for="q12-d">D. 安装杀毒软件后就不会感染</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">13. 计算机中，ROM的特点是（ ）</div>
+                    <div class="question-text">A. 可读可写，断电数据丢失<br>B. 只读不写，断电数据不丢失<br>C. 可读可写，断电数据不丢失<br>D. 只读不写，断电数据丢失</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q13" id="q13-a">
+                            <label for="q13-a">A. 可读可写，断电数据丢失</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q13" id="q13-b">
+                            <label for="q13-b">B. 只读不写，断电数据不丢失</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q13" id="q13-c">
+                            <label for="q13-c">C. 可读可写，断电数据不丢失</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q13" id="q13-d">
+                            <label for="q13-d">D. 只读不写，断电数据丢失</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">14. 下列不属于信息处理基本环节的是（ ）</div>
+                    <div class="question-text">A. 信息采集<br>B. 信息存储<br>C. 信息发电<br>D. 信息发布</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q14" id="q14-a">
+                            <label for="q14-a">A. 信息采集</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q14" id="q14-b">
+                            <label for="q14-b">B. 信息存储</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q14" id="q14-c">
+                            <label for="q14-c">C. 信息发电</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q14" id="q14-d">
+                            <label for="q14-d">D. 信息发布</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">15. 智能手机属于计算机的一种，其核心功能不包括（ ）</div>
+                    <div class="question-text">A. 信息处理<br>B. 无线通信<br>C. 机械制造<br>D. 多媒体播放</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="q15" id="q15-a">
+                            <label for="q15-a">A. 信息处理</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q15" id="q15-b">
+                            <label for="q15-b">B. 无线通信</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q15" id="q15-c">
+                            <label for="q15-c">C. 机械制造</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="q15" id="q15-d">
+                            <label for="q15-d">D. 多媒体播放</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result" id="info-result"></div>
+                <button class="submit-btn" onclick="checkAnswers('info-tech')">提交答案</button>
+            </div>
+
+            <!-- 网络基础及应用板块 -->
+            <div class="tab-content" id="network">
+                <div class="question">
+                    <div class="question-number">1. 计算机网络最基本的功能是（ ）</div>
+                    <div class="question-text">A. 资源共享和信息交换<br>B. 网络游戏<br>C. 远程控制<br>D. 视频会议</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="nq1" id="nq1-a">
+                            <label for="nq1-a">A. 资源共享和信息交换</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq1" id="nq1-b">
+                            <label for="nq1-b">B. 网络游戏</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq1" id="nq1-c">
+                            <label for="nq1-c">C. 远程控制</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq1" id="nq1-d">
+                            <label for="nq1-d">D. 视频会议</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">2. 按照覆盖范围划分，校园网属于（ ）</div>
+                    <div class="question-text">A. 局域网（LAN）<br>B. 城域网（MAN）<br>C. 广域网（WAN）<br>D. 互联网（Internet）</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="nq2" id="nq2-a">
+                            <label for="nq2-a">A. 局域网（LAN）</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq2" id="nq2-b">
+                            <label for="nq2-b">B. 城域网（MAN）</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq2" id="nq2-c">
+                            <label for="nq2-c">C. 广域网（WAN）</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq2" id="nq2-d">
+                            <label for="nq2-d">D. 互联网（Internet）</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">3. 下列属于互联网接入方式的是（ ）</div>
+                    <div class="question-text">A. USB接入<br>B. Wi-Fi接入<br>C. 打印机接入<br>D. 键盘接入</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="nq3" id="nq3-a">
+                            <label for="nq3-a">A. USB接入</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq3" id="nq3-b">
+                            <label for="nq3-b">B. Wi-Fi接入</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq3" id="nq3-c">
+                            <label for="nq3-c">C. 打印机接入</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq3" id="nq3-d">
+                            <label for="nq3-d">D. 键盘接入</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">4. 下列IPv4地址格式正确的是（ ）</div>
+                    <div class="question-text">A. 192.168.256.1<br>B. 192.168.1.255<br>C. 192.168.1<br>D. 192.168.1.2.3</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="nq4" id="nq4-a">
+                            <label for="nq4-a">A. 192.168.256.1</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq4" id="nq4-b">
+                            <label for="nq4-b">B. 192.168.1.255</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq4" id="nq4-c">
+                            <label for="nq4-c">C. 192.168.1</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq4" id="nq4-d">
+                            <label for="nq4-d">D. 192.168.1.2.3</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">5. 域名www.163.com中，".com"代表（ ）</div>
+                    <div class="question-text">A. 教育机构<br>B. 政府部门<br>C. 商业组织<br>D. 非营利组织</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="nq5" id="nq5-a">
+                            <label for="nq5-a">A. 教育机构</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq5" id="nq5-b">
+                            <label for="nq5-b">B. 政府部门</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq5" id="nq5-c">
+                            <label for="nq5-c">C. 商业组织</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq5" id="nq5-d">
+                            <label for="nq5-d">D. 非营利组织</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">6. 下列不属于互联网常见服务的是（ ）</div>
+                    <div class="question-text">A. 电子邮件（E-mail）<br>B. 文件传输（FTP）<br>C. 文字处理<br>D. 万维网（WWW）</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="nq6" id="nq6-a">
+                            <label for="nq6-a">A. 电子邮件（E-mail）</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq6" id="nq6-b">
+                            <label for="nq6-b">B. 文件传输（FTP）</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq6" id="nq6-c">
+                            <label for="nq6-c">C. 文字处理</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq6" id="nq6-d">
+                            <label for="nq6-d">D. 万维网（WWW）</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">7. 用于在互联网上搜索信息的工具是（ ）</div>
+                    <div class="question-text">A. Word<br>B. 百度<br>C. Excel<br>D. 微信</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="nq7" id="nq7-a">
+                            <label for="nq7-a">A. Word</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq7" id="nq7-b">
+                            <label for="nq7-b">B. 百度</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq7" id="nq7-c">
+                            <label for="nq7-c">C. Excel</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq7" id="nq7-d">
+                            <label for="nq7-d">D. 微信</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">8. 下列关于FTP的说法，正确的是（ ）</div>
+                    <div class="question-text">A. 只能下载文件，不能上传文件<br>B. 是文件传输协议<br>C. 只能在局域网中使用<br>D. 需要专门的硬件设备支持</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="nq8" id="nq8-a">
+                            <label for="nq8-a">A. 只能下载文件，不能上传文件</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq8" id="nq8-b">
+                            <label for="nq8-b">B. 是文件传输协议</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq8" id="nq8-c">
+                            <label for="nq8-c">C. 只能在局域网中使用</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq8" id="nq8-d">
+                            <label for="nq8-d">D. 需要专门的硬件设备支持</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">9. 组建小型无线网络时，不需要的设备是（ ）</div>
+                    <div class="question-text">A. 无线路由器<br>B. 网线<br>C. 无线网卡<br>D. 计算机</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="nq9" id="nq9-a">
+                            <label for="nq9-a">A. 无线路由器</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq9" id="nq9-b">
+                            <label for="nq9-b">B. 网线</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq9" id="nq9-c">
+                            <label for="nq9-c">C. 无线网卡</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq9" id="nq9-d">
+                            <label for="nq9-d">D. 计算机</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">10. 电子邮件地址格式正确的是（ ）</div>
+                    <div class="question-text">A. username#163.com<br>B. username@163.com<br>C. 163.com@username<br>D. username.163.com</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="nq10" id="nq10-a">
+                            <label for="nq10-a">A. username#163.com</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq10" id="nq10-b">
+                            <label for="nq10-b">B. username@163.com</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq10" id="nq10-c">
+                            <label for="nq10-c">C. 163.com@username</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq10" id="nq10-d">
+                            <label for="nq10-d">D. username.163.com</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">11. 下列关于DNS的说法，正确的是（ ）</div>
+                    <div class="question-text">A. 将IP地址转换为域名<br>B. 将域名转换为IP地址<br>C. 是一种搜索引擎<br>D. 用于文件传输</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="nq11" id="nq11-a">
+                            <label for="nq11-a">A. 将IP地址转换为域名</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq11" id="nq11-b">
+                            <label for="nq11-b">B. 将域名转换为IP地址</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq11" id="nq11-c">
+                            <label for="nq11-c">C. 是一种搜索引擎</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq11" id="nq11-d">
+                            <label for="nq11-d">D. 用于文件传输</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">12. 局域网中，常见的拓扑结构不包括（ ）</div>
+                    <div class="question-text">A. 星型<br>B. 环型<br>C. 总线型<br>D. 直线型</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="nq12" id="nq12-a">
+                            <label for="nq12-a">A. 星型</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq12" id="nq12-b">
+                            <label for="nq12-b">B. 环型</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq12" id="nq12-c">
+                            <label for="nq12-c">C. 总线型</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq12" id="nq12-d">
+                            <label for="nq12-d">D. 直线型</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">13. 下列不属于即时通信软件的是（ ）</div>
+                    <div class="question-text">A. QQ<br>B. 微信<br>C. 电子邮件<br>D. 钉钉</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="nq13" id="nq13-a">
+                            <label for="nq13-a">A. QQ</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq13" id="nq13-b">
+                            <label for="nq13-b">B. 微信</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq13" id="nq13-c">
+                            <label for="nq13-c">C. 电子邮件</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq13" id="nq13-d">
+                            <label for="nq13-d">D. 钉钉</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">14. 网络安全中，防火墙的作用是（ ）</div>
+                    <div class="question-text">A. 防止计算机病毒感染<br>B. 阻挡非法访问，保护网络安全<br>C. 提高网络传输速度<br>D. 存储网络数据</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="nq14" id="nq14-a">
+                            <label for="nq14-a">A. 防止计算机病毒感染</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq14" id="nq14-b">
+                            <label for="nq14-b">B. 阻挡非法访问，保护网络安全</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq14" id="nq14-c">
+                            <label for="nq14-c">C. 提高网络传输速度</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq14" id="nq14-d">
+                            <label for="nq14-d">D. 存储网络数据</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <div class="question-number">15. 下列关于URL的说法，正确的是（ ）</div>
+                    <div class="question-text">A. 是统一资源定位符，用于标识网络资源<br>B. 只能用于访问网页<br>C. 与域名是同一概念<br>D. 格式中不包含协议类型</div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="radio" name="nq15" id="nq15-a">
+                            <label for="nq15-a">A. 是统一资源定位符，用于标识网络资源</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq15" id="nq15-b">
+                            <label for="nq15-b">B. 只能用于访问网页</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq15" id="nq15-c">
+                            <label for="nq15-c">C. 与域名是同一概念</label>
+                        </div>
+                        <div class="option">
+                            <input type="radio" name="nq15" id="nq15-d">
+                            <label for="nq15-d">D. 格式中不包含协议类型</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result" id="network-result"></div>
+                <button class="submit-btn" onclick="checkAnswers('network')">提交答案</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 切换标签页
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // 移除所有活跃状态
+                tabBtns.forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // 添加当前活跃状态
+                btn.classList.add('active');
+                const tabId = btn.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // 答案校验
+        function checkAnswers(tab) {
+            let correctAnswers = {};
+            let score = 0;
+            const total = 15;
+            const resultElem = document.getElementById(`${tab}-result`);
+            
+            // 信息与信息技术正确答案
+            if (tab === 'info-tech') {
+                correctAnswers = {
+                    q1: 'b', q2: 'c', q3: 'b', q4: 'c', q5: 'c',
+                    q6: 'b', q7: 'c', q8: 'b', q9: 'b', q10: 'b',
+                    q11: 'a', q12: 'b', q13: 'b', q14: 'c', q15: 'c'
+                };
+            } 
+            // 网络基础正确答案
+            else if (tab === 'network') {
+                correctAnswers = {
+                    nq1: 'a', nq2: 'a', nq3: 'b', nq4: 'b', nq5: 'c',
+                    nq6: 'c', nq7: 'b', nq8: 'b', nq9: 'b', nq10: 'b',
+                    nq11: 'b', nq12: 'd', nq13: 'c', nq14: 'b', nq15: 'a'
+                };
+            }
+
+            // 检查每道题
+            for (const [q, correct] of Object.entries(correctAnswers)) {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                if (selected && selected.id === `${q}-${correct}`) {
+                    score++;
+                }
+            }
+
+            // 显示结果
+            resultElem.style.display = 'block';
+            if (score >= 12) {
+                resultElem.className = 'result correct';
+                resultElem.textContent = `恭喜！你答对了${score}/${total}道题，成绩优秀！`;
+            } else if (score >= 8) {
+                resultElem.className = 'result correct';
+                resultElem.textContent = `不错！你答对了${score}/${total}道题，继续加油！`;
+            } else {
+                resultElem.className = 'result incorrect';
+                resultElem.textContent = `你答对了${score}/${total}道题，建议再复习一下知识点哦！`;
+            }
+        }
+    </script>
+</body>
+</html>

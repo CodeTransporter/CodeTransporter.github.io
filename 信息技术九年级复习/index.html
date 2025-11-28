@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初中信息技术复习导航系统</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Microsoft YaHei', sans-serif;
+        }
+
+        :root {
+            --primary: #165DFF;
+            --primary-light: #4080FF;
+            --primary-dark: #0E42D2;
+            --bg-gradient: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            --card-bg: #FFFFFF;
+            --text-primary: #1E293B;
+            --text-secondary: #64748B;
+            --shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 20px 40px -5px rgba(22, 93, 255, 0.2);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 头部样式 */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #FFFFFF, #CBD5E1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #94A3B8;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* 装饰元素 */
+        .decor {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(22,93,255,0.2) 0%, rgba(22,93,255,0) 70%);
+            z-index: 1;
+        }
+
+        .decor.top-left {
+            top: -50px;
+            left: -50px;
+        }
+
+        .decor.bottom-right {
+            bottom: -80px;
+            right: -80px;
+        }
+
+        /* 导航网格 */
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* 导航卡片 */
+        .nav-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 35px 30px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .nav-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* 卡片顶部装饰条 */
+        .nav-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+        }
+
+        /* 卡片图标 */
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            background: rgba(22, 93, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            transition: var(--transition);
+        }
+
+        .nav-card:hover .card-icon {
+            background: var(--primary);
+        }
+
+        .card-icon i {
+            font-size: 1.8rem;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-card:hover .card-icon i {
+            color: white;
+            transform: scale(1.1);
+        }
+
+        /* 卡片内容 */
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            transition: var(--transition);
+        }
+
+        .nav-card:hover .card-title {
+            color: var(--primary-dark);
+        }
+
+        .card-desc {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        /* 按钮样式 */
+        .card-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 12px 0;
+            background: rgba(22, 93, 255, 0.05);
+            color: var(--primary);
+            text-align: center;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(22, 93, 255, 0.1), transparent);
+            transition: 0.5s;
+        }
+
+        .nav-card:hover .card-btn {
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            color: white;
+        }
+
+        .nav-card:hover .card-btn::after {
+            left: 100%;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 1024px) {
+            .nav-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-grid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .nav-card {
+                padding: 30px 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                margin-bottom: 40px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .card-icon {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .card-icon i {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 头部标题 -->
+        <div class="header">
+            <h1>初中信息技术复习导航系统</h1>
+            <p>覆盖七八九年级核心知识点，含单元复习、综合练习、专项训练，助力高效备考</p>
+        </div>
+
+        <!-- 装饰元素 -->
+        <div class="decor top-left"></div>
+        <div class="decor bottom-right"></div>
+
+        <!-- 导航网格 -->
+        <div class="nav-grid">
+            <!-- 1. 七年级复习第一单元 -->
+            <div class="nav-card">
+                <div class="card-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h3 class="card-title">七年级复习第一单元</h3>
+                <p class="card-desc">聚焦七年级第一单元核心知识点，系统梳理基础内容</p>
+                <a href="七年级复习第一单元.html" class="card-btn">进入复习</a>
+            </div>
+
+            <!-- 2. 七年级复习 -->
+            <div class="nav-card">
+                <div class="card-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3 class="card-title">七年级全册复习</h3>
+                <p class="card-desc">整合七年级信息技术全册知识点，全面巩固复习</p>
+                <a href="七年级复习.html" class="card-btn">开始学习</a>
+            </div>
+
+            <!-- 3. 七年级练习 -->
+            <div class="nav-card">
+                <div class="card-icon">
+                    <i class="fas fa-pencil-alt"></i>
+                </div>
+                <h3 class="card-title">七年级专项练习</h3>
+                <p class="card-desc">针对性专项练习题，强化七年级知识点应用能力</p>
+                <a href="七年级练习.html" class="card-btn">开始答题</a>
+            </div>
+
+            <!-- 4. 七年级综合练习题 -->
+            <div class="nav-card">
+                <div class="card-icon">
+                    <i class="fas fa-sitemap"></i>
+                </div>
+                <h3 class="card-title">七年级综合练习题</h3>
+                <p class="card-desc">信息与信息技术+网络基础综合训练，提升综合运用能力</p>
+                <a href="七年级信息与信息技术&网络基础综合练习题.html" class="card-btn">综合训练</a>
+            </div>
+
+            <!-- 5. 八年级复习 -->
+            <div class="nav-card">
+                <div class="card-icon">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <h3 class="card-title">八年级全册复习</h3>
+                <p class="card-desc">系统梳理八年级核心知识点，构建完整知识体系</p>
+                <a href="八年级复习.html" class="card-btn">进入复习</a>
+            </div>
+
+            <!-- 6. 八年级练习 -->
+            <div class="nav-card">
+                <div class="card-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3 class="card-title">八年级专项练习</h3>
+                <p class="card-desc">精准匹配八年级知识点的专项练习题，强化薄弱环节</p>
+                <a href="八年级练习.html" class="card-btn">开始答题</a>
+            </div>
+
+            <!-- 7. Flash初中复习 -->
+            <div class="nav-card">
+                <div class="card-icon">
+                    <i class="fas fa-film"></i>
+                </div>
+                <h3 class="card-title">Flash初中复习</h3>
+                <p class="card-desc">专项复习Flash相关知识点与操作技巧，针对性突破</p>
+                <a href="flash初中复习.html" class="card-btn">专项突破</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

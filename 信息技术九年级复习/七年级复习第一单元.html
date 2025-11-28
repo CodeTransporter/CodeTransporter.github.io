@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>广州版信息技术七年级全册复习</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#36CFC9',
+                        accent: '#722ED1',
+                        success: '#00B42A',
+                        warning: '#FF7D00',
+                        danger: '#F53F3F',
+                        light: '#F5F7FA',
+                        dark: '#1D2129'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+            }
+            .timeline-item::before {
+                content: '';
+                position: absolute;
+                left: -29px;
+                top: 5px;
+                width: 16px;
+                height: 16px;
+                border-radius: 50%;
+                background: #165DFF;
+                border: 3px solid white;
+            }
+            .timeline-line {
+                position: absolute;
+                left: -21px;
+                top: 21px;
+                bottom: -20px;
+                width: 2px;
+                background: #165DFF/30;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-dark">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-md fixed w-full top-0 z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <i class="fa fa-laptop text-primary text-2xl mr-3"></i>
+                    <span class="text-xl font-bold text-primary">信息技术全册复习</span>
+                </div>
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="#unit1" class="text-gray-600 hover:text-primary transition-colors">信息与信息技术</a>
+                    <a href="#unit2" class="text-gray-600 hover:text-primary transition-colors">计算机系统</a>
+                    <a href="#unit3" class="text-gray-600 hover:text-primary transition-colors">Windows操作系统</a>
+                    <a href="#unit4" class="text-gray-600 hover:text-primary transition-colors">文字处理</a>
+                    <a href="#unit5" class="text-gray-600 hover:text-primary transition-colors">网络基础</a>
+                    <a href="#unit6" class="text-gray-600 hover:text-primary transition-colors">多媒体基础</a>
+                </div>
+                <div class="lg:hidden flex items-center">
+                    <button id="menuBtn" class="text-gray-600 hover:text-primary">
+                        <i class="fa fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 移动端菜单 -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-white shadow-lg">
+            <div class="container mx-auto px-4 py-3 space-y-3">
+                <a href="#unit1" class="block text-gray-600 hover:text-primary transition-colors py-2">信息与信息技术</a>
+                <a href="#unit2" class="block text-gray-600 hover:text-primary transition-colors py-2">计算机系统</a>
+                <a href="#unit3" class="block text-gray-600 hover:text-primary transition-colors py-2">Windows操作系统</a>
+                <a href="#unit4" class="block text-gray-600 hover:text-primary transition-colors py-2">文字处理</a>
+                <a href="#unit5" class="block text-gray-600 hover:text-primary transition-colors py-2">网络基础</a>
+                <a href="#unit6" class="block text-gray-600 hover:text-primary transition-colors py-2">多媒体基础</a>
+                <a href="#summary" class="block text-gray-600 hover:text-primary transition-colors py-2">综合总结</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 头部横幅 -->
+    <header class="pt-24 pb-16 bg-gradient-to-r from-primary to-accent text-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl sm:text-5xl font-bold mb-6 text-shadow">广州版信息技术七年级全册复习</h1>
+                <p class="text-lg sm:text-xl opacity-90 mb-8">系统梳理全册核心知识点，助力期末高效复习</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="#unit1" class="bg-white text-primary px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors flex items-center">
+                        <i class="fa fa-book mr-2"></i>开始复习
+                    </a>
+                    <a href="#summary" class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white/10 transition-colors flex items-center">
+                        <i class="fa fa-list mr-2"></i>知识总结
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- 第一单元：信息与信息技术 -->
+        <section id="unit1" class="mb-20">
+            <div class="max-w-5xl mx-auto">
+                <div class="flex items-center mb-8">
+                    <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white mr-4">
+                        <i class="fa fa-info text-xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-dark">第一单元：信息与信息技术</h2>
+                </div>
+
+                <!-- 信息的概念与特征 -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8 card-hover">
+                    <h3 class="text-xl font-semibold text-primary mb-4 flex items-center">
+                        <i class="fa fa-file-text-o mr-2"></i>信息的概念与特征
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">信息的概念</h4>
+                            <p class="text-gray-700 mb-4">信息（Information）是通过特定的媒体所承载的消息、情报、指令、数据和信号中所包含的一切可传递和可交换的内容。</p>
+                            <p class="text-gray-700">信息是客观事物的特征和变化的反映，是事物运动的状态和方式。</p>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">信息的基本特征</h4>
+                            <ul class="list-disc list-inside text-gray-700 space-y-2">
+                                <li><strong>载体依附性</strong>：信息必须依附于一定的载体存在</li>
+                                <li><strong>可传递性</strong>：信息可以通过各种渠道进行传递</li>
+                                <li><strong>共享性</strong>：信息可以被多个接收者接收和利用</li>
+                                <li><strong>时效性</strong>：信息具有一定的时间价值</li>
+                                <li><strong>价值性</strong>：信息能满足人们的某种需要</li>
+                                <li><strong>真伪性</strong>：信息有真实信息和虚假信息之分</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-6 bg-blue-50 p-4 rounded-lg">
+                        <h4 class="font-medium text-primary mb-2">生活中的信息案例</h4>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                            <div class="bg-white p-3 rounded shadow-sm">
+                                <p class="font-medium text-sm">天气预报</p>
+                                <p class="text-xs text-gray-600">提供天气变化信息，具有时效性</p>
+                            </div>
+                            <div class="bg-white p-3 rounded shadow-sm">
+                                <p class="font-medium text-sm">交通信号灯</p>
+                                <p class="text-xs text-gray-600">传递交通指挥信息，具有载体依附性</p>
+                            </div>
+                            <div class="bg-white p-3 rounded shadow-sm">
+                                <p class="font-medium text-sm">二维码支付</p>
+                                <p class="text-xs text-gray-600">包含支付信息，体现信息价值性</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 信息处理的一般过程 -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8 card-hover">
+                    <h3 class="text-xl font-semibold text-primary mb-4 flex items-center">
+                        <i class="fa fa-cogs mr-2"></i>信息处理的一般过程
+                    </h3>
+                    <p class="mb-6 text-gray-700">信息处理（Information Processing）是指对信息进行采集、存储、加工、传输和发布的全过程，无论人工处理还是借助计算机处理，都遵循这一基本流程。</p>
+                    
+                    <div class="relative pl-8 mb-6">
+                        <div class="absolute left-3 top-0 bottom-0 w-0.5 bg-primary/30"></div>
+                        
+                        <div class="space-y-8 relative">
+                            <div class="ml-8 relative timeline-item">
+                                <h4 class="text-lg font-medium text-dark mb-2">1. 信息采集</h4>
+                                <p class="text-gray-700">通过各种方式获取所需信息，如调查、观察、测量、搜索等。</p>
+                                <div class="mt-2 bg-light p-3 rounded-lg">
+                                    <p class="text-sm text-gray-600"><strong>实例：</strong>问卷调查收集数据、用相机拍摄照片、从网上搜索资料、用传感器采集环境数据</p>
+                                </div>
+                                <div class="timeline-line"></div>
+                            </div>
+                            
+                            <div class="ml-8 relative timeline-item">
+                                <h4 class="text-lg font-medium text-dark mb-2">2. 信息存储</h4>
+                                <p class="text-gray-700">将采集到的信息保存起来，以便后续使用。</p>
+                                <div class="mt-2 bg-light p-3 rounded-lg">
+                                    <p class="text-sm text-gray-600"><strong>实例：</strong>将文件保存在电脑硬盘、数据存入数据库、照片存到U盘、纸质文件归档保存</p>
+                                </div>
+                                <div class="timeline-line"></div>
+                            </div>
+                            
+                            <div class="ml-8 relative timeline-item">
+                                <h4 class="text-lg font-medium text-dark mb-2">3. 信息加工</h4>
+                                <p class="text-gray-700">对存储的信息进行整理、分析、计算、编辑等处理，使其更有价值。</p>
+                                <div class="mt-2 bg-light p-3 rounded-lg">
+                                    <p class="text-sm text-gray-600"><strong>实例：</strong>用Excel分析数据、用Photoshop处理图片、撰写报告整理资料、对数据进行统计分析</p>
+                                </div>
+                                <div class="timeline-line"></div>
+                            </div>
+                            
+                            <div class="ml-8 relative timeline-item">
+                                <h4 class="text-lg font-medium text-dark mb-2">4. 信息传输</h4>
+                                <p class="text-gray-700">将加工后的信息传递给需要的人或设备。</p>
+                                <div class="mt-2 bg-light p-3 rounded-lg">
+                                    <p class="text-sm text-gray-600"><strong>实例：</strong>发送电子邮件、通过网络传输文件、打电话交流信息、通过广播发布消息</p>
+                                </div>
+                                <div class="timeline-line"></div>
+                            </div>
+                            
+                            <div class="ml-8 relative timeline-item">
+                                <h4 class="text-lg font-medium text-dark mb-2">5. 信息发布</h4>
+                                <p class="text-gray-700">将信息公开或传递给特定受众。</p>
+                                <div class="mt-2 bg-light p-3 rounded-lg">
+                                    <p class="text-sm text-gray-600"><strong>实例：</strong>发布网站文章、展示演示文稿、张贴公告、通过社交媒体分享信息</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-green-50 p-4 rounded-lg">
+                        <h4 class="font-medium text-green-700 mb-2 flex items-center">
+                            <i class="fa fa-lightbulb-o mr-2"></i>计算机处理信息的优势
+                        </h4>
+                        <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+                            <div class="bg-white p-3 rounded shadow-sm text-center">
+                                <i class="fa fa-bolt text-warning mb-2"></i>
+                                <p class="text-sm font-medium">速度快</p>
+                                <p class="text-xs text-gray-600">短时间处理大量信息</p>
+                            </div>
+                            <div class="bg-white p-3 rounded shadow-sm text-center">
+                                <i class="fa fa-check-circle text-success mb-2"></i>
+                                <p class="text-sm font-medium">准确性高</p>
+                                <p class="text-xs text-gray-600">减少人工操作误差</p>
+                            </div>
+                            <div class="bg-white p-3 rounded shadow-sm text-center">
+                                <i class="fa fa-database text-primary mb-2"></i>
+                                <p class="text-sm font-medium">存储容量大</p>
+                                <p class="text-xs text-gray-600">长期保存大量数据</p>
+                            </div>
+                            <div class="bg-white p-3 rounded shadow-sm text-center">
+                                <i class="fa fa-cogs text-accent mb-2"></i>
+                                <p class="text-sm font-medium">自动化程度高</p>
+                                <p class="text-xs text-gray-600">按程序自动处理</p>
+                            </div>
+                            <div class="bg-white p-3 rounded shadow-sm text-center">
+                                <i class="fa fa-globe text-secondary mb-2"></i>
+                                <p class="text-sm font-medium">联网能力强</p>
+                                <p class="text-xs text-gray-600">便于信息共享</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 信息技术的发展 -->
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <h3 class="text-xl font-semibold text-primary mb-4 flex items-center">
+                        <i class="fa fa-history mr-2"></i>信息技术的发展历程
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="py-3 px-4 border-b text-left">发展阶段</th>
+                                    <th class="py-3 px-4 border-b text-left">主要特征</th>
+                                    <th class="py-3 px-4 border-b text-left">代表技术</th>
+                                    <th class="py-3 px-4 border-b text-left">社会影响</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="py-3 px-4 border-b font-medium">第一次信息技术革命</td>
+                                    <td class="py-3 px-4 border-b text-sm text-gray-700">语言的产生和应用</td>
+                                    <td class="py-3 px-4 border-b text-sm">口语、肢体语言</td>
+                                    <td class="py-3 px-4 border-b text-sm text-gray-700">人类交流方式的根本性变革</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 border-b font-medium">第二次信息技术革命</td>
+                                    <td class="py-3 px-4 border-b text-sm text-gray-700">文字的发明和使用</td>
+                                    <td class="py-3 px-4 border-b text-sm">甲骨文、竹简、纸张</td>
+                                    <td class="py-3 px-4 border-b text-sm text-gray-700">信息可以长期保存和远距离传递</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 border-b font-medium">第三次信息技术革命</td>
+                                    <td class="py-3 px-4 border-b text-sm text-gray-700">印刷术和造纸术的发明</td>
+                                    <td class="py-3 px-4 border-b text-sm">活字印刷、雕版印刷</td>
+                                    <td class="py-3 px-4 border-b text-sm text-gray-700">信息可以大量生产和传播</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 border-b font-medium">第四次信息技术革命</td>
+                                    <td class="py-3 px-4 border-b text-sm text-gray-700">电报、电话、广播、电视的发明和普及</td>
+                                    <td class="py-3 px-4 border-b text-sm">电报、电话、无线电</td>
+                                    <td class="py-3 px-4 border-b text-sm text-gray-700">信息传递速度大大提高</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 border-b font-medium">第五次信息技术革命</td>
+                                    <td class="py-3 px-4 border-b text-sm text-gray-700">计算机技术与现代通信技术的应用</td>
+                                    <td class="py-3 px-4 border-b text-sm">计算机、互联网、移动通信</td>
+                                    <td class="py-3 px-4 border-b text-sm text-gray-700">信息处理和传递进入数字化、网络化时代</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="mt-6 bg-purple-50 p-4 rounded-lg">
+                        <h4 class="font-medium text-purple-700 mb-2">信息技术的发展趋势</h4>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div class="bg-white p-3 rounded shadow-sm">
+                                <h5 class="font-medium text-dark mb-1">智能化</h5>
+                                <p class="text-xs text-gray-600">人工智能、机器学习、智能机器人</p>
+                            </div>
+                            <div class="bg-white p-3 rounded shadow-sm">
+                                <h5 class="font-medium text-dark mb-1">网络化</h5>
+                                <p class="text-xs text-gray-600">物联网、5G技术、云计算</p>
+                            </div>
+                            <div class="bg-white p-3 rounded shadow-sm">
+                                <h5 class="font-medium text-dark mb-1">数字化</h5>
+                                <p class="text-xs text-gray-600">数字生活、数字经济、数字政府</p>
+                            </div>
+                            <div class="bg-white p-3 rounded shadow-sm">
+                                <h5 class="font-medium text-dark mb-1">个性化</h5>
+                                <p class="text-xs text-gray-600">个性化服务、定制化产品</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第二单元：计算机系统 -->
+        <section id="unit2" class="mb-20">
+            <div class="max-w-5xl mx-auto">
+                <div class="flex items-center mb-8">
+                    <div class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center text-white mr-4">
+                        <i class="fa fa-desktop text-xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-dark">第二单元：计算机系统</h2>
+                </div>
+
+                <!-- 计算机的发展与分类 -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8 card-hover">
+                    <h3 class="text-xl font-semibold text-secondary mb-4 flex items-center">
+                        <i class="fa fa-microchip mr-2"></i>计算机的发展与分类
+                    </h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">计算机的发展历程</h4>
+                            <div class="space-y-4">
+                                <div class="bg-light p-3 rounded-lg">
+                                    <h5 class="font-medium text-dark">第一代计算机（1946-1958）</h5>
+                                    <p class="text-sm text-gray-700">电子管计算机，体积大、功耗高、速度慢</p>
+                                    <p class="text-xs text-gray-600">代表：ENIAC（埃尼阿克）</p>
+                                </div>
+                                <div class="bg-light p-3 rounded-lg">
+                                    <h5 class="font-medium text-dark">第二代计算机（1959-1964）</h5>
+                                    <p class="text-sm text-gray-700">晶体管计算机，体积减小、功耗降低、速度提高</p>
+                                    <p class="text-xs text-gray-600">开始使用高级编程语言</p>
+                                </div>
+                                <div class="bg-light p-3 rounded-lg">
+                                    <h5 class="font-medium text-dark">第三代计算机（1965-1970）</h5>
+                                    <p class="text-sm text-gray-700">集成电路计算机，体积更小、功耗更低、速度更快</p>
+                                    <p class="text-xs text-gray-600">操作系统开始成熟</p>
+                                </div>
+                                <div class="bg-light p-3 rounded-lg">
+                                    <h5 class="font-medium text-dark">第四代计算机（1971至今）</h5>
+                                    <p class="text-sm text-gray-700">大规模集成电路计算机，微型化、网络化、智能化</p>
+                                    <p class="text-xs text-gray-600">个人计算机普及，互联网发展</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">计算机的分类</h4>
+                            <div class="space-y-4">
+                                <div class="bg-light p-3 rounded-lg">
+                                    <h5 class="font-medium text-dark">按规模和性能分类</h5>
+                                    <ul class="list-disc list-inside text-sm text-gray-700 mt-2 space-y-1">
+                                        <li><strong>巨型计算机</strong>：运算速度最快，用于科学计算</li>
+                                        <li><strong>大型计算机</strong>：性能强，用于大型企业和机构</li>
+                                        <li><strong>小型计算机</strong>：规模较小，用于中小型企业</li>
+                                        <li><strong>微型计算机</strong>：个人计算机，体积小，价格低</li>
+                                        <li><strong>工作站</strong>：高性能计算机，用于专业领域</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-light p-3 rounded-lg">
+                                    <h5 class="font-medium text-dark">按用途分类</h5>
+                                    <ul class="list-disc list-inside text-sm text-gray-700 mt-2 space-y-1">
+                                        <li><strong>通用计算机</strong>：适用于多种用途</li>
+                                        <li><strong>专用计算机</strong>：专为某一领域设计</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mt-4 bg-blue-50 p-3 rounded-lg">
+                                <h5 class="font-medium text-primary mb-2">中国超级计算机</h5>
+                                <p class="text-sm text-gray-700">“神威·太湖之光”、“天河二号”等超级计算机处于世界领先水平</p>
+                                <p class="text-xs text-gray-600">应用于气象预报、生物医药、航空航天等领域</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 计算机系统组成 -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8 card-hover">
+                    <h3 class="text-xl font-semibold text-secondary mb-4 flex items-center">
+                        <i class="fa fa-puzzle-piece mr-2"></i>计算机系统组成
+                    </h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-8 mb-6">
+                        <!-- 硬件系统 -->
+                        <div>
+                            <h4 class="text-lg font-medium text-secondary mb-4 flex items-center">
+                                <i class="fa fa-microchip mr-2"></i>硬件系统
+                            </h4>
+                            <p class="text-gray-700 mb-4">硬件（Hardware）是计算机系统的物理部分，是看得见、摸得着的设备。</p>
+                            
+                            <h5 class="font-medium text-dark mb-3">硬件五大组成部分</h5>
+                            <div class="space-y-3">
+                                <div class="flex items-start">
+                                    <div class="w-8 h-8 rounded-full bg-secondary text-white flex items-center justify-center mr-3 mt-1 flex-shrink-0">1</div>
+                                    <div>
+                                        <h6 class="font-medium text-dark">运算器</h6>
+                                        <p class="text-sm text-gray-700">进行算术运算（加、减、乘、除）和逻辑运算（比较、判断）的部件</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="w-8 h-8 rounded-full bg-secondary text-white flex items-center justify-center mr-3 mt-1 flex-shrink-0">2</div>
+                                    <div>
+                                        <h6 class="font-medium text-dark">控制器</h6>
+                                        <p class="text-sm text-gray-700">计算机的"神经中枢"，指挥和协调计算机各部件工作</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="w-8 h-8 rounded-full bg-secondary text-white flex items-center justify-center mr-3 mt-1 flex-shrink-0">3</div>
+                                    <div>
+                                        <h6 class="font-medium text-dark">存储器</h6>
+                                        <p class="text-sm text-gray-700">存储数据和程序的部件，分为内存和外存</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="w-8 h-8 rounded-full bg-secondary text-white flex items-center justify-center mr-3 mt-1 flex-shrink-0">4</div>
+                                    <div>
+                                        <h6 class="font-medium text-dark">输入设备</h6>
+                                        <p class="text-sm text-gray-700">将外部信息送入计算机的设备，如键盘、鼠标、扫描仪等</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="w-8 h-8 rounded-full bg-secondary text-white flex items-center justify-center mr-3 mt-1 flex-shrink-0">5</div>
+                                    <div>
+                                        <h6 class="font-medium text-dark">输出设备</h6>
+                                        <p class="text-sm text-gray-700">将计算机处理结果反馈给用户的设备，如显示器、打印机等</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 bg-blue-50 p-3 rounded-lg">
+                                <p class="text-sm text-gray-700"><strong>CPU（中央处理器）</strong>：运算器和控制器集成在一起，是计算机的核心部件</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 软件系统 -->
+                        <div>
+                            <h4 class="text-lg font-medium text-secondary mb-4 flex items-center">
+                                <i class="fa fa-code mr-2"></i>软件系统
+                            </h4>
+                            <p class="text-gray-700 mb-4">软件（Software）是控制计算机工作的程序、数据和相关文档的总称。</p>
+                            
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div class="bg-light p-4 rounded-lg">
+                                    <h5 class="font-medium text-dark mb-2">系统软件</h5>
+                                    <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                        <li>操作系统（Windows、macOS、Linux）</li>
+                                        <li>语言处理程序</li>
+                                        <li>数据库管理系统</li>
+                                        <li>系统服务程序</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-light p-4 rounded-lg">
+                                    <h5 class="font-medium text-dark mb-2">应用软件</h5>
+                                    <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                        <li>办公软件（WPS、Office）</li>
+                                        <li>图形图像软件</li>
+                                        <li>娱乐软件</li>
+                                        <li>行业专用软件</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-yellow-50 p-4 rounded-lg">
+                                <h5 class="font-medium text-yellow-700 mb-2">软硬件关系</h5>
+                                <p class="text-sm text-gray-700">硬件是计算机的基础，软件是计算机的灵魂。没有硬件，软件无法运行；没有软件，硬件只是一堆无用的设备。两者结合才能使计算机发挥作用。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 存储器与存储单位 -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8 card-hover">
+                    <h3 class="text-xl font-semibold text-secondary mb-4 flex items-center">
+                        <i class="fa fa-hdd-o mr-2"></i>存储器与存储单位
+                    </h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">存储器分类</h4>
+                            <div class="space-y-4">
+                                <div class="bg-light p-4 rounded-lg">
+                                    <h5 class="font-medium text-dark mb-2">内存（主存储器）</h5>
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <div>
+                                            <h6 class="font-medium text-primary">RAM（随机存取存储器）</h6>
+                                            <ul class="list-disc list-inside text-sm text-gray-700 mt-1 space-y-1">
+                                                <li>可读可写</li>
+                                                <li>断电数据丢失</li>
+                                                <li>存取速度快</li>
+                                                <li>用于临时存储</li>
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h6 class="font-medium text-primary">ROM（只读存储器）</h6>
+                                            <ul class="list-disc list-inside text-sm text-gray-700 mt-1 space-y-1">
+                                                <li>只能读取</li>
+                                                <li>断电数据保留</li>
+                                                <li>存储基本程序</li>
+                                                <li>如BIOS程序</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-light p-4 rounded-lg">
+                                    <h5 class="font-medium text-dark mb-2">外存（辅助存储器）</h5>
+                                    <ul class="list-disc list-inside text-sm text-gray-700 space-y-2">
+                                        <li><strong>硬盘</strong>：容量大、速度较快、价格低</li>
+                                        <li><strong>固态硬盘(SSD)</strong>：速度快、防震、价格较高</li>
+                                        <li><strong>U盘</strong>：体积小、便携、即插即用</li>
+                                        <li><strong>光盘</strong>：成本低、便于分发</li>
+                                        <li><strong>存储卡</strong>：用于移动设备</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">存储单位</h4>
+                            <p class="text-gray-700 mb-3">计算机存储容量的基本单位是字节（Byte），常用的单位还有：</p>
+                            
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
+                                <div class="bg-light p-3 rounded-lg text-center">
+                                    <p class="font-medium text-dark">位（bit）</p>
+                                    <p class="text-sm text-gray-600">最小单位，0或1</p>
+                                </div>
+                                <div class="bg-light p-3 rounded-lg text-center">
+                                    <p class="font-medium text-dark">字节（B）</p>
+                                    <p class="text-sm text-gray-600">1B = 8bit</p>
+                                </div>
+                                <div class="bg-light p-3 rounded-lg text-center">
+                                    <p class="font-medium text-dark">千字节（KB）</p>
+                                    <p class="text-sm text-gray-600">1KB = 1024B</p>
+                                </div>
+                                <div class="bg-light p-3 rounded-lg text-center">
+                                    <p class="font-medium text-dark">兆字节（MB）</p>
+                                    <p class="text-sm text-gray-600">1MB = 1024KB</p>
+                                </div>
+                                <div class="bg-light p-3 rounded-lg text-center">
+                                    <p class="font-medium text-dark">千兆字节（GB）</p>
+                                    <p class="text-sm text-gray-600">1GB = 1024MB</p>
+                                </div>
+                                <div class="bg-light p-3 rounded-lg text-center">
+                                    <p class="font-medium text-dark">太字节（TB）</p>
+                                    <p class="text-sm text-gray-600">1TB = 1024GB</p>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-green-50 p-3 rounded-lg">
+                                <h5 class="font-medium text-green-700 mb-2">存储容量换算</h5>
+                                <p class="text-sm text-gray-700">1个英文字母占1字节，1个汉字占2字节</p>
+                                <p class="text-xs text-gray-600 mt-1">一首MP3歌曲约3-5MB，一张照片约2-5MB，一部电影约1-2GB</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 二进制与编码 -->
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <h3 class="text-xl font-semibold text-secondary mb-4 flex items-center">
+                        <i class="fa fa-code-fork mr-2"></i>二进制与编码
+                    </h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">二进制基础</h4>
+                            <p class="text-gray-700 mb-4">计算机内部使用二进制，只有0和1两个数码，逢二进一。</p>
+                            
+                            <div class="bg-light p-4 rounded-lg mb-4">
+                                <h5 class="font-medium text-dark mb-2">二进制的优势</h5>
+                                <ul class="list-disc list-inside text-sm text-gray-700 space-y-2">
+                                    <li><strong>易于实现</strong>：只需两种物理状态（通电/断电）</li>
+                                    <li><strong>运算简单</strong>：只有0和1，运算规则简单</li>
+                                    <li><strong>可靠性高</strong>：抗干扰能力强</li>
+                                    <li><strong>逻辑性强</strong>：适合逻辑运算</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-light p-4 rounded-lg">
+                                <h5 class="font-medium text-dark mb-2">二进制与十进制转换</h5>
+                                <div class="space-y-3">
+                                    <div>
+                                        <h6 class="font-medium text-primary">二进制转十进制</h6>
+                                        <p class="text-sm text-gray-700">按位加权求和：</p>
+                                        <p class="text-xs text-gray-600">1011 = 1×2³ + 0×2² + 1×2¹ + 1×2⁰ = 11</p>
+                                    </div>
+                                    <div>
+                                        <h6 class="font-medium text-primary">十进制转二进制</h6>
+                                        <p class="text-sm text-gray-700">除2取余，倒序排列：</p>
+                                        <p class="text-xs text-gray-600">13 → 1101</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">信息编码</h4>
+                            <p class="text-gray-700 mb-4">计算机通过编码将字符、图像、声音等转换为二进制数。</p>
+                            
+                            <div class="space-y-4">
+                                <div class="bg-light p-4 rounded-lg">
+                                    <h5 class="font-medium text-dark mb-2">字符编码</h5>
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <div>
+                                            <h6 class="font-medium text-primary">ASCII码</h6>
+                                            <p class="text-sm text-gray-700">美国信息交换标准代码</p>
+                                            <p class="text-xs text-gray-600">用7位或8位二进制表示字符</p>
+                                            <p class="text-xs text-gray-600">包含字母、数字、符号等</p>
+                                        </div>
+                                        <div>
+                                            <h6 class="font-medium text-primary">Unicode码</h6>
+                                            <p class="text-sm text-gray-700">统一字符编码</p>
+                                            <p class="text-xs text-gray-600">包含全球各种语言文字</p>
+                                            <p class="text-xs text-gray-600">UTF-8、UTF-16等编码方式</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-light p-4 rounded-lg">
+                                    <h5 class="font-medium text-dark mb-2">汉字编码</h5>
+                                    <ul class="list-disc list-inside text-sm text-gray-700 space-y-2">
+                                        <li><strong>GB2312</strong>：简体中文编码</li>
+                                        <li><strong>GBK</strong>：扩展的中文编码</li>
+                                        <li><strong>GB18030</strong>：最新中文编码标准</li>
+                                        <li><strong>BIG5</strong>：繁体中文编码</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-light p-4 rounded-lg">
+                                    <h5 class="font-medium text-dark mb-2">多媒体编码</h5>
+                                    <ul class="list-disc list-inside text-sm text-gray-700 space-y-2">
+                                        <li><strong>图像编码</strong>：JPG、PNG、GIF等格式</li>
+                                        <li><strong>音频编码</strong>：MP3、WAV、AAC等格式</li>
+                                        <li><strong>视频编码</strong>：MP4、AVI、MKV等格式</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第三单元：Windows操作系统 -->
+        <section id="unit3" class="mb-20">
+            <div class="max-w-5xl mx-auto">
+                <div class="flex items-center mb-8">
+                    <div class="w-12 h-12 rounded-full bg-warning flex items-center justify-center text-white mr-4">
+                        <i class="fa fa-windows text-xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-dark">第三单元：Windows操作系统</h2>
+                </div>
+
+                <!-- Windows基础知识 -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8 card-hover">
+                    <h3 class="text-xl font-semibold text-warning mb-4 flex items-center">
+                        <i class="fa fa-desktop mr-2"></i>Windows基础知识
+                    </h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">操作系统的功能</h4>
+                            <div class="bg-light p-4 rounded-lg mb-4">
+                                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                                    <li><strong>处理器管理</strong>：分配CPU资源，管理进程和线程</li>
+                                    <li><strong>存储器管理</strong>：分配内存空间，实现虚拟存储</li>
+                                    <li><strong>设备管理</strong>：管理输入输出设备，提供驱动程序</li>
+                                    <li><strong>文件管理</strong>：管理文件和文件夹，提供存取服务</li>
+                                    <li><strong>作业管理</strong>：处理用户请求，提供操作界面</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-light p-4 rounded-lg">
+                                <h5 class="font-medium text-dark mb-2">Windows版本发展</h5>
+                                <div class="space-y-2">
+                                    <div class="flex items-center">
+                                        <i class="fa fa-angle-right text-warning mr-2"></i>
+                                        <p class="text-sm text-gray-700"><strong>Windows XP</strong>：经典版本，稳定性好</p>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fa fa-angle-right text-warning mr-2"></i>
+                                        <p class="text-sm text-gray-700"><strong>Windows 7</strong>：界面友好，功能完善</p>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fa fa-angle-right text-warning mr-2"></i>
+                                        <p class="text-sm text-gray-700"><strong>Windows 10</strong>：最新主流版本，功能强大</p>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fa fa-angle-right text-warning mr-2"></i>
+                                        <p class="text-sm text-gray-700"><strong>Windows 11</strong>：全新界面，性能提升</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">Windows桌面组成</h4>
+                            <div class="bg-light p-4 rounded-lg mb-4">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <h5 class="font-medium text-primary mb-2">桌面图标</h5>
+                                        <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                            <li>我的电脑/此电脑</li>
+                                            <li>回收站</li>
+                                            <li>用户文件夹</li>
+                                            <li>应用程序快捷方式</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-medium text-primary mb-2">任务栏</h5>
+                                        <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                            <li>开始按钮</li>
+                                            <li>快速启动区</li>
+                                            <li>窗口按钮区</li>
+                                            <li>通知区域</li>
+                                            <li>显示桌面按钮</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-light p-4 rounded-lg">
+                                <h5 class="font-medium text-dark mb-2">Windows窗口组成</h5>
+                                <div class="space-y-2">
+                                    <div class="flex items-center">
+                                        <i class="fa fa-angle-right text-warning mr-2"></i>
+                                        <p class="text-sm text-gray-700"><strong>标题栏</strong>：显示窗口名称，包含控制按钮</p>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fa fa-angle-right text-warning mr-2"></i>
+                                        <p class="text-sm text-gray-700"><strong>菜单栏</strong>：包含各种操作命令</p>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fa fa-angle-right text-warning mr-2"></i>
+                                        <p class="text-sm text-gray-700"><strong>工具栏</strong>：常用功能按钮</p>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fa fa-angle-right text-warning mr-2"></i>
+                                        <p class="text-sm text-gray-700"><strong>工作区</strong>：显示和编辑内容的区域</p>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fa fa-angle-right text-warning mr-2"></i>
+                                        <p class="text-sm text-gray-700"><strong>状态栏</strong>：显示当前状态信息</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 文件与文件夹管理 -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8 card-hover">
+                    <h3 class="text-xl font-semibold text-warning mb-4 flex items-center">
+                        <i class="fa fa-folder-open mr-2"></i>文件与文件夹管理
+                    </h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">文件与文件夹概念</h4>
+                            <div class="bg-light p-4 rounded-lg mb-4">
+                                <div class="space-y-3">
+                                    <div>
+                                        <h5 class="font-medium text-primary">文件</h5>
+                                        <p class="text-sm text-gray-700">计算机中存储数据的基本单位，有唯一的文件名</p>
+                                        <p class="text-xs text-gray-600">文件名格式：主文件名.扩展名</p>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-medium text-primary">文件夹</h5>
+                                        <p class="text-sm text-gray-700">用于组织和管理文件的容器，可以包含文件和子文件夹</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-light p-4 rounded-lg">
+                                <h5 class="font-medium text-dark mb-2">文件类型</h5>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div>
+                                        <h6 class="font-medium text-warning">文档文件</h6>
+                                        <p class="text-xs text-gray-600">.doc、.docx、.txt、.pdf</p>
+                                    </div>
+                                    <div>
+                                        <h6 class="font-medium text-warning">图片文件</h6>
+                                        <p class="text-xs text-gray-600">.jpg、.png、.gif、.bmp</p>
+                                    </div>
+                                    <div>
+                                        <h6 class="font-medium text-warning">音频文件</h6>
+                                        <p class="text-xs text-gray-600">.mp3、.wav、.wma</p>
+                                    </div>
+                                    <div>
+                                        <h6 class="font-medium text-warning">视频文件</h6>
+                                        <p class="text-xs text-gray-600">.mp4、.avi、.mov、.flv</p>
+                                    </div>
+                                    <div>
+                                        <h6 class="font-medium text-warning">压缩文件</h6>
+                                        <p class="text-xs text-gray-600">.zip、.rar、.7z</p>
+                                    </div>
+                                    <div>
+                                        <h6 class="font-medium text-warning">程序文件</h6>
+                                        <p class="text-xs text-gray-600">.exe、.msi、.bat</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">文件操作</h4>
+                            <div class="bg-light p-4 rounded-lg mb-4">
+                                <h5 class="font-medium text-primary mb-2">基本操作</h5>
+                                <div class="space-y-2">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 rounded-full bg-warning/20 text-warning flex items-center justify-center mr-3">
+                                            <i class="fa fa-copy"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-medium">复制</p>
+                                            <p class="text-xs text-gray-600">Ctrl+C 或右键菜单</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 rounded-full bg-warning/20 text-warning flex items-center justify-center mr-3">
+                                            <i class="fa fa-cut"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-medium">剪切</p>
+                                            <p class="text-xs text-gray-600">Ctrl+X 或右键菜单</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 rounded-full bg-warning/20 text-warning flex items-center justify-center mr-3">
+                                            <i class="fa fa-paste"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-medium">粘贴</p>
+                                            <p class="text-xs text-gray-600">Ctrl+V 或右键菜单</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 rounded-full bg-warning/20 text-warning flex items-center justify-center mr-3">
+                                            <i class="fa fa-trash"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-medium">删除</p>
+                                            <p class="text-xs text-gray-600">Delete键 或右键菜单</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 rounded-full bg-warning/20 text-warning flex items-center justify-center mr-3">
+                                            <i class="fa fa-pencil"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-medium">重命名</p>
+                                            <p class="text-xs text-gray-600">F2键 或右键菜单</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-light p-4 rounded-lg">
+                                <h5 class="font-medium text-dark mb-2">文件管理技巧</h5>
+                                <ul class="list-disc list-inside text-sm text-gray-700 space-y-2">
+                                    <li><strong>创建文件夹结构</strong>：按类别或项目组织文件</li>
+                                    <li><strong>统一命名规则</strong>：便于查找和管理</li>
+                                    <li><strong>定期清理整理</strong>：删除无用文件，备份重要文件</li>
+                                    <li><strong>使用搜索功能</strong>：快速查找文件（Win+S）</li>
+                                    <li><strong>设置文件属性</strong>：只读、隐藏、存档等</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 系统设置与维护 -->
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <h3 class="text-xl font-semibold text-warning mb-4 flex items-center">
+                        <i class="fa fa-cog mr-2"></i>系统设置与维护
+                    </h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">常用系统设置</h4>
+                            <div class="space-y-4">
+                                <div class="bg-light p-4 rounded-lg">
+                                    <h5 class="font-medium text-primary mb-2">显示设置</h5>
+                                    <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                        <li>分辨率调整</li>
+                                        <li>亮度和对比度设置</li>
+                                        <li>个性化桌面背景</li>
+                                        <li>屏幕保护程序</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-light p-4 rounded-lg">
+                                    <h5 class="font-medium text-primary mb-2">设备设置</h5>
+                                    <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                        <li>鼠标和键盘设置</li>
+                                        <li>打印机设置</li>
+                                        <li>声音设置</li>
+                                        <li>网络设置</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-light p-4 rounded-lg">
+                                    <h5 class="font-medium text-primary mb-2">用户账户设置</h5>
+                                    <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                        <li>创建和管理用户账户</li>
+                                        <li>设置密码和权限</li>
+                                        <li>家长控制设置</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">系统维护</h4>
+                            <div class="space-y-4">
+                                <div class="bg-light p-4 rounded-lg">
+                                    <h5 class="font-medium text-success mb-2">系统优化</h5>
+                                    <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                        <li><strong>磁盘清理</strong>：删除临时文件和回收站文件</li>
+                                        <li><strong>磁盘碎片整理</strong>：优化硬盘性能</li>
+                                        <li><strong>启动项管理</strong>：减少开机启动程序</li>
+                                        <li><strong>定期更新</strong>：安装系统更新和补丁</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-light p-4 rounded-lg">
+                                    <h5 class="font-medium text-danger mb-2">安全防护</h5>
+                                    <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                        <li><strong>杀毒软件</strong>：安装并定期更新</li>
+                                        <li><strong>防火墙</strong>：开启Windows防火墙</li>
+                                        <li><strong>数据备份</strong>：定期备份重要文件</li>
+                                        <li><strong>密码保护</strong>：设置强密码，定期更换</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-light p-4 rounded-lg">
+                                    <h5 class="font-medium text-warning mb-2">常见问题解决</h5>
+                                    <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                        <li><strong>系统卡顿</strong>：关闭不必要程序，增加内存</li>
+                                        <li><strong>蓝屏故障</strong>：检查硬件兼容性，更新驱动</li>
+                                        <li><strong>无法开机</strong>：检查硬件连接，修复系统</li>
+                                        <li><strong>忘记密码</strong>：使用密码重置盘或管理员账户</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第四单元：文字处理 -->
+        <section id="unit4" class="mb-20">
+            <div class="max-w-5xl mx-auto">
+                <div class="flex items-center mb-8">
+                    <div class="w-12 h-12 rounded-full bg-success flex items-center justify-center text-white mr-4">
+                        <i class="fa fa-file-text text-xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-dark">第四单元：文字处理</h2>
+                </div>
+
+                <!-- 文字处理基础 -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8 card-hover">
+                    <h3 class="text-xl font-semibold text-success mb-4 flex items-center">
+                        <i class="fa fa-file-text-o mr-2"></i>文字处理基础
+                    </h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">文字处理软件</h4>
+                            <div class="bg-light p-4 rounded-lg mb-4">
+                                <div class="space-y-3">
+                                    <div>
+                                        <h5 class="font-medium text-success">Microsoft Word</h5>
+                                        <p class="text-sm text-gray-700">功能强大，使用广泛，属于Office套件</p>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-medium text-success">WPS文字</h5>
+                                        <p class="text-sm text-gray-700">国产软件，兼容Word，体积小，免费使用</p>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-medium text-success">记事本</h5>
+                                        <p class="text-sm text-gray-700">Windows自带，简单文本编辑工具</p>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-medium text-success">写字板</h5>
+                                        <p class="text-sm text-gray-700">Windows自带，功能介于记事本和Word之间</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-light p-4 rounded-lg">
+                                <h5 class="font-medium text-dark mb-2">文档视图方式</h5>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div>
+                                        <h6 class="font-medium text-success">页面视图</h6>
+                                        <p class="text-xs text-gray-600">所见即所得，适合排版</p>
+                                    </div>
+                                    <div>
+                                        <h6 class="font-medium text-success">大纲视图</h6>
+                                        <p class="text-xs text-gray-600">适合组织文档结构</p>
+                                    </div>
+                                    <div>
+                                        <h6 class="font-medium text-success">Web版式视图</h6>
+                                        <p class="text-xs text-gray-600">模拟网页显示效果</p>
+                                    </div>
+                                    <div>
+                                        <h6 class="font-medium text-success">阅读版式视图</h6>
+                                        <p class="text-xs text-gray-600">方便阅读长文档</p>
+                                    </div>
+                                    <div>
+                                        <h6 class="font-medium text-success">草稿视图</h6>
+                                        <p class="text-xs text-gray-600">快速编辑文本</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">文档基本操作</h4>
+                            <div class="bg-light p-4 rounded-lg mb-4">
+                                <h5 class="font-medium text-success mb-2">文档创建与保存</h5>
+                                <div class="space-y-2">
+                                    <div class="flex items-center">
+                                        <i class="fa fa-plus-circle text-success mr-2"></i>
+                                        <p class="text-sm text-gray-700"><strong>新建文档</strong>：Ctrl+N或"文件"→"新建"</p>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fa fa-save text-success mr-2"></i>
+                                        <p class="text-sm text-gray-700"><strong>保存文档</strong>：Ctrl+S或"文件"→"保存"</p>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fa fa-copy text-success mr-2"></i>
+                                        <p class="text-sm text-gray-700"><strong>另存为</strong>："文件"→"另存为"，可改名或改格式</p>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fa fa-floppy-o text-success mr-2"></i>
+                                        <p class="text-sm text-gray-700"><strong>自动保存</strong>：设置自动保存时间间隔</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-light p-4 rounded-lg">
+                                <h5 class="font-medium text-dark mb-2">文本编辑技巧</h5>
+                                <div class="space-y-2">
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 rounded-full bg-success/20 text-success flex items-center justify-center mr-3">
+                                            <i class="fa fa-mouse-pointer"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-medium">文本选择</p>
+                                            <p class="text-xs text-gray-600">拖动选择、双击选单词、三击选段落</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 rounded-full bg-success/20 text-success flex items-center justify-center mr-3">
+                                            <i class="fa fa-arrows"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-medium">文本移动</p>
+                                            <p class="text-xs text-gray-600">拖放或剪切粘贴</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 rounded-full bg-success/20 text-success flex items-center justify-center mr-3">
+                                            <i class="fa fa-search"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-medium">查找替换</p>
+                                            <p class="text-xs text-gray-600">Ctrl+F查找，Ctrl+H替换</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 rounded-full bg-success/20 text-success flex items-center justify-center mr-3">
+                                            <i class="fa fa-repeat"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-medium">撤销重做</p>
+                                            <p class="text-xs text-gray-600">Ctrl+Z撤销，Ctrl+Y重做</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 文档格式设置 -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8 card-hover">
+                    <h3 class="text-xl font-semibold text-success mb-4 flex items-center">
+                        <i class="fa fa-paint-brush mr-2"></i>文档格式设置
+                    </h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">字符格式</h4>
+                            <div class="bg-light p-4 rounded-lg">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <h5 class="font-medium text-success mb-2">字体设置</h5>
+                                        <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                            <li>字体类型：宋体、黑体、楷体等</li>
+                                            <li>字号大小：号数或点数</li>
+                                            <li>字形：常规、加粗、倾斜</li>
+                                            <li>字体颜色：前景色、背景色</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-medium text-success mb-2">字符效果</h5>
+                                        <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                            <li>下划线：单线、双线、点线等</li>
+                                            <li>删除线、上划线</li>
+                                            <li>上标、下标</li>
+                                            <li>字符间距调整</li>
+                                            <li>文字效果和版式</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-4 bg-white p-3 rounded shadow-sm">
+                                    <h6 class="font-medium text-dark mb-2">常用字符格式快捷键</h6>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <p class="text-xs text-gray-700"><strong>Ctrl+B</strong>：加粗</p>
+                                        <p class="text-xs text-gray-700"><strong>Ctrl+I</strong>：倾斜</p>
+                                        <p class="text-xs text-gray-700"><strong>Ctrl+U</strong>：
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 网络协议与IP地址 -->
+                    <div class="bg-white rounded-xl shadow-md p-6 mb-8 card-hover">
+                        <h3 class="text-xl font-semibold text-accent mb-4 flex items-center">
+                            <i class="fa fa-exchange mr-2"></i>网络协议与IP地址
+                        </h3>
+                        
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-medium text-dark mb-3">网络协议</h4>
+                                <div class="bg-light p-4 rounded-lg mb-4">
+                                    <p class="text-sm text-gray-700 mb-3">网络协议是计算机之间通信的规则和标准，确保数据正确传输和接收。</p>
+                                    
+                                    <h5 class="font-medium text-accent mb-2">常见网络协议</h5>
+                                    <div class="space-y-2">
+                                        <div class="bg-white p-2 rounded shadow-sm">
+                                            <p class="font-medium text-dark text-sm">TCP/IP协议</p>
+                                            <p class="text-xs text-gray-600">传输控制协议/网际协议，互联网的基础协议</p>
+                                        </div>
+                                        <div class="bg-white p-2 rounded shadow-sm">
+                                            <p class="font-medium text-dark text-sm">HTTP协议</p>
+                                            <p class="text-xs text-gray-600">超文本传输协议，用于网页传输</p>
+                                        </div>
+                                        <div class="bg-white p-2 rounded shadow-sm">
+                                            <p class="font-medium text-dark text-sm">FTP协议</p>
+                                            <p class="text-xs text-gray-600">文件传输协议，用于文件上传下载</p>
+                                        </div>
+                                        <div class="bg-white p-2 rounded shadow-sm">
+                                            <p class="font-medium text-dark text-sm">SMTP协议</p>
+                                            <p class="text-xs text-gray-600">简单邮件传输协议，用于发送电子邮件</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-dark mb-3">IP地址</h4>
+                                <div class="bg-light p-4 rounded-lg mb-4">
+                                    <p class="text-sm text-gray-700 mb-3">IP地址是网络中设备的唯一标识，用于定位和通信。</p>
+                                    
+                                    <h5 class="font-medium text-accent mb-2">IP地址格式</h5>
+                                    <div class="bg-white p-3 rounded shadow-sm mb-3">
+                                        <p class="text-sm text-gray-700">IPv4地址：由32位二进制数组成，分为4个8位段，如：</p>
+                                        <p class="text-center font-medium text-dark">192.168.1.1</p>
+                                        <p class="text-xs text-gray-600 mt-1">每个段取值范围：0-255</p>
+                                    </div>
+                                    
+                                    <h5 class="font-medium text-accent mb-2">IP地址分类</h5>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <div class="bg-white p-2 rounded text-center">
+                                            <p class="text-xs font-medium">A类地址</p>
+                                            <p class="text-xs text-gray-600">0.0.0.0-127.255.255.255</p>
+                                        </div>
+                                        <div class="bg-white p-2 rounded text-center">
+                                            <p class="text-xs font-medium">B类地址</p>
+                                            <p class="text-xs text-gray-600">128.0.0.0-191.255.255.255</p>
+                                        </div>
+                                        <div class="bg-white p-2 rounded text-center">
+                                            <p class="text-xs font-medium">C类地址</p>
+                                            <p class="text-xs text-gray-600">192.0.0.0-223.255.255.255</p>
+                                        </div>
+                                        <div class="bg-white p-2 rounded text-center">
+                                            <p class="text-xs font-medium">D/E类地址</p>
+                                            <p class="text-xs text-gray-600">组播和保留地址</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 域名系统 -->
+                        <div class="bg-light p-4 rounded-lg">
+                            <h4 class="font-medium text-dark mb-3 flex items-center">
+                                <i class="fa fa-globe mr-2 text-accent"></i>域名系统(DNS)
+                            </h4>
+                            <p class="text-sm text-gray-700 mb-3">域名系统是将域名转换为IP地址的系统，方便用户记忆和使用。</p>
+                            
+                            <div class="grid md:grid-cols-3 gap-4">
+                                <div class="bg-white p-3 rounded shadow-sm text-center">
+                                    <p class="font-medium text-dark">顶级域名</p>
+                                    <p class="text-xs text-gray-600">.com .cn .org .gov .edu</p>
+                                </div>
+                                <div class="bg-white p-3 rounded shadow-sm text-center">
+                                    <p class="font-medium text-dark">二级域名</p>
+                                    <p class="text-xs text-gray-600">baidu.com sina.com.cn</p>
+                                </div>
+                                <div class="bg-white p-3 rounded shadow-sm text-center">
+                                    <p class="font-medium text-dark">域名解析</p>
+                                    <p class="text-xs text-gray-600">域名 → DNS服务器 → IP地址</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 互联网应用 -->
+                    <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                        <h3 class="text-xl font-semibold text-accent mb-4 flex items-center">
+                            <i class="fa fa-wifi mr-2"></i>互联网应用
+                        </h3>
+                        
+                        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <div class="bg-light p-4 rounded-lg text-center">
+                                <i class="fa fa-chrome text-3xl text-accent mb-3"></i>
+                                <h4 class="font-medium text-dark mb-2">网页浏览</h4>
+                                <p class="text-xs text-gray-600">使用浏览器访问网站，获取信息</p>
+                                <p class="text-xs text-gray-500 mt-2">浏览器：Chrome、Firefox、Edge</p>
+                            </div>
+                            
+                            <div class="bg-light p-4 rounded-lg text-center">
+                                <i class="fa fa-envelope text-3xl text-accent mb-3"></i>
+                                <h4 class="font-medium text-dark mb-2">电子邮件</h4>
+                                <p class="text-xs text-gray-600">发送和接收邮件，便捷通信</p>
+                                <p class="text-xs text-gray-500 mt-2">邮箱：QQ邮箱、163邮箱、Gmail</p>
+                            </div>
+                            
+                            <div class="bg-light p-4 rounded-lg text-center">
+                                <i class="fa fa-cloud text-3xl text-accent mb-3"></i>
+                                <h4 class="font-medium text-dark mb-2">云存储</h4>
+                                <p class="text-xs text-gray-600">文件存储和共享，随时随地访问</p>
+                                <p class="text-xs text-gray-500 mt-2">服务：百度网盘、阿里云盘</p>
+                            </div>
+                            
+                            <div class="bg-light p-4 rounded-lg text-center">
+                                <i class="fa fa-video-camera text-3xl text-accent mb-3"></i>
+                                <h4 class="font-medium text-dark mb-2">在线娱乐</h4>
+                                <p class="text-xs text-gray-600">视频、音乐、游戏等娱乐服务</p>
+                                <p class="text-xs text-gray-500 mt-2">平台：腾讯视频、网易云音乐</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 bg-blue-50 p-4 rounded-lg">
+                            <h4 class="font-medium text-primary mb-2 flex items-center">
+                                <i class="fa fa-shield mr-2"></i>网络安全
+                            </h4>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <h5 class="font-medium text-dark text-sm mb-2">网络安全威胁</h5>
+                                    <ul class="list-disc list-inside text-xs text-gray-700 space-y-1">
+                                        <li>病毒：破坏计算机系统的程序</li>
+                                        <li>木马：窃取信息的恶意程序</li>
+                                        <li>钓鱼：伪装合法网站骗取信息</li>
+                                        <li>黑客攻击：非法入侵计算机系统</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-medium text-dark text-sm mb-2">网络安全防护</h5>
+                                    <ul class="list-disc list-inside text-xs text-gray-700 space-y-1">
+                                        <li>安装杀毒软件，定期更新病毒库</li>
+                                        <li>设置防火墙，阻止非法访问</li>
+                                        <li>使用强密码，定期更换</li>
+                                        <li>不打开可疑邮件和链接</li>
+                                        <li>定期备份重要数据</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 知识总结 -->
+        <section id="summary" class="mb-16">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center mb-8">
+                    <div class="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-white mr-4">
+                        <i class="fa fa-list-alt"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-dark">知识总结</h2>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- 第一部分总结 -->
+                        <div>
+                            <h3 class="text-lg font-semibold text-primary mb-4 flex items-center">
+                                <i class="fa fa-info-circle mr-2"></i>信息与信息处理
+                            </h3>
+                            <ul class="space-y-3">
+                                <li class="flex">
+                                    <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <p class="font-medium text-dark">信息的概念</p>
+                                        <p class="text-sm text-gray-600">通过媒体承载的可传递、可交换的内容，以文字、图像、声音等形式呈现</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <p class="font-medium text-dark">信息处理过程</p>
+                                        <p class="text-sm text-gray-600">采集→存储→加工→传输→发布五个基本环节</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <p class="font-medium text-dark">计算机处理优势</p>
+                                        <p class="text-sm text-gray-600">速度快、准确性高、存储容量大、自动化程度高</p>
+                                    </div>
+                                </li>
+                            </ul>
+                            
+                            <h3 class="text-lg font-semibold text-primary mb-4 mt-8 flex items-center">
+                                <i class="fa fa-desktop mr-2"></i>计算机基础
+                            </h3>
+                            <ul class="space-y-3">
+                                <li class="flex">
+                                    <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <p class="font-medium text-dark">计算机外观</p>
+                                        <p class="text-sm text-gray-600">台式机、笔记本、智能手机、平板计算机等多种形态</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <p class="font-medium text-dark">计算机系统组成</p>
+                                        <p class="text-sm text-gray-600">硬件（物理设备）和软件（程序和数据）两大部分</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <p class="font-medium text-dark">输入输出设备</p>
+                                        <p class="text-sm text-gray-600">输入设备：键盘、鼠标、触摸屏等；输出设备：显示器、打印机、音箱等</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- 第二部分总结 -->
+                        <div>
+                            <h3 class="text-lg font-semibold text-primary mb-4 flex items-center">
+                                <i class="fa fa-cube mr-2"></i>计算机硬件与二进制
+                            </h3>
+                            <ul class="space-y-3">
+                                <li class="flex">
+                                    <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <p class="font-medium text-dark">硬件五大组成部分</p>
+                                        <p class="text-sm text-gray-600">存储器、运算器、控制器、输入设备、输出设备</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <p class="font-medium text-dark">存储器</p>
+                                        <p class="text-sm text-gray-600">内存（RAM、ROM）和外存（硬盘、U盘、光盘），存储单位为字节（B）</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <p class="font-medium text-dark">二进制</p>
+                                        <p class="text-sm text-gray-600">计算机内部使用的数制，只有0和1，易于硬件实现</p>
+                                    </div>
+                                </li>
+                            </ul>
+                            
+                            <h3 class="text-lg font-semibold text-primary mb-4 mt-8 flex items-center">
+                                <i class="fa fa-code-fork mr-2"></i>程序与网络
+                            </h3>
+                            <ul class="space-y-3">
+                                <li class="flex">
+                                    <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <p class="font-medium text-dark">程序</p>
+                                        <p class="text-sm text-gray-600">控制计算机工作的命令集合，分为机器语言和高级语言</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <p class="font-medium text-dark">网络基础</p>
+                                        <p class="text-sm text-gray-600">网络协议、IP地址、域名系统，互联网应用与安全</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <i class="fa fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <div>
+                                        <p class="font-medium text-dark">计算思维</p>
+                                        <p class="text-sm text-gray-600">像计算机科学家一样思考，是解决问题的重要思维方式</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 bg-blue-50 p-4 rounded-lg">
+                        <h4 class="font-medium text-primary mb-2 flex items-center">
+                            <i class="fa fa-graduation-cap mr-2"></i>复习建议
+                        </h4>
+                        <ul class="list-disc list-inside text-gray-700 text-sm space-y-1">
+                            <li>结合实际案例理解知识点，如分析日常生活中的信息处理过程</li>
+                            <li>动手操作计算机，熟悉硬件组成和操作系统的基本使用</li>
+                            <li>尝试简单的程序思维训练，如设计解决问题的步骤</li>
+                            <li>制作思维导图，梳理知识结构，加深理解和记忆</li>
+                            <li>通过练习题巩固知识点，检验学习效果</li>
+                            <li>关注网络安全知识，养成良好的网络使用习惯</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                    <div class="flex items-center mb-4 md:mb-0">
+                        <i class="fa fa-laptop text-primary text-2xl mr-3"></i>
+                        <span class="text-xl font-bold">信息技术复习</span>
+                    </div>
+                    <div class="flex space-x-4">
+                        <a href="#info" class="text-gray-300 hover:text-white transition-colors">信息与信息处理</a>
+                        <a href="#computer" class="text-gray-300 hover:text-white transition-colors">计算机基础</a>
+                        <a href="#hardware" class="text-gray-300 hover:text-white transition-colors">计算机硬件</a>
+                        <a href="#binary" class="text-gray-300 hover:text-white transition-colors">二进制与程序</a>
+                        <a href="#unit5" class="text-gray-300 hover:text-white transition-colors">网络基础</a>
+                    </div>
+                </div>
+                
+                <div class="border-t border-gray-700 pt-8 text-center text-gray-400 text-sm">
+                    <p>© 2025 广州版信息技术七年级复习网页</p>
+                    <p class="mt-2">本网页基于广州版信息技术教材内容制作，仅供学习和复习使用</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button id="backToTop" class="fixed bottom-8 right-8 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // 移动端菜单切换
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-white/95', 'backdrop-blur-sm');
+                navbar.classList.remove('bg-white');
+            } else {
+                navbar.classList.add('bg-white');
+                navbar.classList.remove('bg-white/95', 'backdrop-blur-sm');
+            }
+        });
+        
+        // 返回顶部按钮
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.remove('opacity-0', 'invisible');
+                backToTopBtn.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopBtn.classList.add('opacity-0', 'invisible');
+                backToTopBtn.classList.remove('opacity-100', 'visible');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    // 关闭移动端菜单
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                    
+                    // 滚动到目标位置
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

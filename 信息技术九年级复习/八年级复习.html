@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>广州版信息技术八年级全册复习</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0E639C',
+                        secondary: '#27AE60',
+                        accent: '#9B59B6',
+                        dark: '#2C3E50',
+                        light: '#F8F9FA'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+            }
+            .timeline-item::before {
+                content: '';
+                position: absolute;
+                left: -29px;
+                top: 5px;
+                width: 16px;
+                height: 16px;
+                border-radius: 50%;
+                background: #0E639C;
+                border: 3px solid white;
+            }
+            .timeline-line {
+                position: absolute;
+                left: -21px;
+                top: 21px;
+                bottom: -20px;
+                width: 2px;
+                background: #0E639C30;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-dark">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-md fixed w-full top-0 z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <i class="fa fa-laptop-code text-primary text-2xl mr-3"></i>
+                    <span class="text-xl font-bold text-primary">信息技术八年级复习</span>
+                </div>
+                <div class="hidden xl:flex items-center space-x-6">
+                    <a href="#unit1" class="text-gray-600 hover:text-primary transition-colors">第1章 数据的分析与处理</a>
+                    <a href="#unit2" class="text-gray-600 hover:text-primary transition-colors">第2章 程序设计初步</a>
+                    <a href="#unit3" class="text-gray-600 hover:text-primary transition-colors">第3章 App Inventor编程</a>
+                    <a href="#summary" class="text-gray-600 hover:text-primary transition-colors">综合总结</a>
+                </div>
+                <div class="xl:hidden flex items-center">
+                    <button id="menuBtn" class="text-gray-600 hover:text-primary">
+                        <i class="fa fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- 移动端菜单 -->
+        <div id="mobileMenu" class="hidden xl:hidden bg-white shadow-lg">
+            <div class="container mx-auto px-4 py-3 space-y-3">
+                <a href="#unit1" class="block text-gray-600 hover:text-primary transition-colors py-2">第1章 数据的分析与处理</a>
+                <a href="#unit2" class="block text-gray-600 hover:text-primary transition-colors py-2">第2章 程序设计初步</a>
+                <a href="#unit3" class="block text-gray-600 hover:text-primary transition-colors py-2">第3章 App Inventor编程</a>
+                <a href="#summary" class="block text-gray-600 hover:text-primary transition-colors py-2">综合总结</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 头部横幅 -->
+    <header class="pt-24 pb-16 bg-gradient-to-r from-primary to-accent text-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl sm:text-5xl font-bold mb-6 text-shadow">广州版信息技术八年级全册复习</h1>
+                <p class="text-lg sm:text-xl opacity-90 mb-8">数据处理 + 程序设计 + App开发 全面覆盖，助力高效复习</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="#unit1" class="bg-white text-primary px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors flex items-center">
+                        <i class="fa fa-book mr-2"></i>开始复习
+                    </a>
+                    <a href="#summary" class="bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white/10 transition-colors flex items-center">
+                        <i class="fa fa-list mr-2"></i>知识总览
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- 第一单元：数据的分析与处理 -->
+        <section id="unit1" class="mb-20">
+            <div class="max-w-5xl mx-auto">
+                <div class="flex items-center mb-8">
+                    <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white mr-4">
+                        <i class="fa fa-table text-xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-dark">第1章 数据的分析与处理</h2>
+                </div>
+
+                <!-- 认识WPS表格 -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8 card-hover">
+                    <h3 class="text-xl font-semibold text-primary mb-4 flex items-center">
+                        <i class="fa fa-desktop mr-2"></i>1.1 认识WPS表格
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">表格界面组成</h4>
+                            <div class="bg-light p-3 rounded-lg mb-4">
+                                <ul class="list-disc list-inside text-sm text-gray-700 space-y-2">
+                                    <li><strong>标题栏</strong>：显示文件名和软件名称</li>
+                                    <li><strong>功能区</strong>：包含所有操作工具，按用途分类在选项卡中</li>
+                                    <li><strong>编辑区</strong>：表格主体区域，由行和列组成</li>
+                                    <li><strong>名称框</strong>：显示当前选中单元格或区域的名称</li>
+                                    <li><strong>编辑栏</strong>：输入和编辑单元格内容</li>
+                                    <li><strong>状态栏</strong>：显示表格状态信息（如选中区域统计）</li>
+                                </ul>
+                            </div>
+                            <div class="bg-blue-50 p-3 rounded-lg">
+                                <h5 class="font-medium text-primary mb-2">文件格式</h5>
+                                <p class="text-sm text-gray-700">WPS表格默认格式为.et，可另存为.xlsx格式以便兼容Excel</p>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">表格核心元素</h4>
+                            <div class="space-y-3">
+                                <div class="bg-light p-3 rounded-lg">
+                                    <h5 class="font-medium text-primary mb-1">工作簿</h5>
+                                    <p class="text-sm text-gray-700">一个WPS表格文档就是一个工作簿，扩展名为.et或.xlsx，可包含多个工作表</p>
+                                </div>
+                                <div class="bg-light p-3 rounded-lg">
+                                    <h5 class="font-medium text-primary mb-1">工作表</h5>
+                                    <p class="text-sm text-gray-700">工作簿中的单个表格页面，默认包含Sheet1、Sheet2、Sheet3，可重命名和增减</p>
+                                </div>
+                                <div class="bg-light p-3 rounded-lg">
+                                    <h5 class="font-medium text-primary mb-1">行和列</h5>
+                                    <p class="text-sm text-gray-700">行以数字标识（1、2、3...），列以字母标识（A、B、C...AA、AB...）</p>
+                                </div>
+                                <div class="bg-light p-3 rounded-lg">
+                                    <h5 class="font-medium text-primary mb-1">单元格和区域</h5>
+                                    <p class="text-sm text-gray-700">行与列的交汇处，名称由列标+行号组成（如A1、B3）；多个单元格组成区域（如A1:C5）</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 表格数据获取 -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8 card-hover">
+                    <h3 class="text-xl font-semibold text-primary mb-4 flex items-center">
+                        <i class="fa fa-keyboard-o mr-2"></i>1.2 表格数据获取
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">基础数据输入</h4>
+                            <div class="space-y-3">
+                                <div class="bg-light p-3 rounded-lg">
+                                    <h5 class="font-medium text-primary mb-1">文本输入</h5>
+                                    <p class="text-sm text-gray-700">选中单元格直接输入，默认左对齐，支持汉字、字母、数字和符号组合</p>
+                                </div>
+                                <div class="bg-light p-3 rounded-lg">
+                                    <h5 class="font-medium text-primary mb-1">数值输入</h5>
+                                    <p class="text-sm text-gray-700">先设置单元格格式（数值、货币、百分比等），再输入数值，默认右对齐</p>
+                                    <p class="text-xs text-gray-600 mt-1">注意：WPS表格有效数值为15位，第15位后数字将转为0</p>
+                                </div>
+                                <div class="bg-light p-3 rounded-lg">
+                                    <h5 class="font-medium text-primary mb-1">日期和时间输入</h5>
+                                    <p class="text-sm text-gray-700">日期用"/"或"-"分隔（如2024/05/20），时间用":"分隔（如14:30:00）</p>
+                                    <p class="text-xs text-gray-600 mt-1">可通过单元格格式设置显示样式（如2024年5月20日）</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">高效数据输入</h4>
+                            <div class="bg-light p-3 rounded-lg mb-4">
+                                <h5 class="font-medium text-primary mb-2">有规律数据填充</h5>
+                                <ol class="list-decimal list-inside text-sm text-gray-700 space-y-1">
+                                    <li>在单元格中输入起始数据（如A001）</li>
+                                    <li>鼠标移至单元格右下角，变为黑色十字（填充柄）</li>
+                                    <li>按住左键拖动至目标单元格</li>
+                                    <li>选择"以序列方式填充"完成自动填充</li>
+                                </ol>
+                            </div>
+                            <div class="bg-light p-3 rounded-lg">
+                                <h5 class="font-medium text-primary mb-2">外部数据获取</h5>
+                                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                    <li>从WPS文档复制表格数据，直接粘贴到表格中</li>
+                                    <li>导入CSV、TXT等格式的外部数据文件</li>
+                                    <li>通过"数据"选项卡中的"自文本"功能导入数据</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 表格数据处理 -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8 card-hover">
+                    <h3 class="text-xl font-semibold text-primary mb-4 flex items-center">
+                        <i class="fa fa-filter mr-2"></i>1.3 表格数据处理
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">表格样式与排序</h4>
+                            <div class="bg-light p-3 rounded-lg mb-4">
+                                <h5 class="font-medium text-primary mb-2">表格样式设置</h5>
+                                <p class="text-sm text-gray-700">选中表格区域 → 开始选项卡 → 表格样式 → 选择合适样式，可实现隔行填充、自动汇总等效果</p>
+                            </div>
+                            <div class="bg-light p-3 rounded-lg">
+                                <h5 class="font-medium text-primary mb-2">数据排序</h5>
+                                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                    <li>单关键字排序：选中数据区域 → 数据选项卡 → 排序 → 选择关键字和排序方式（升序/降序）</li>
+                                    <li>多关键字排序：添加次要关键字，解决主要关键字相同的排序问题</li>
+                                    <li>排序规则：数字按大小、日期按先后、文本按字母顺序</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">数据筛选与分类汇总</h4>
+                            <div class="bg-light p-3 rounded-lg mb-4">
+                                <h5 class="font-medium text-primary mb-2">数据筛选</h5>
+                                <ol class="list-decimal list-inside text-sm text-gray-700 space-y-1">
+                                    <li>选中数据区域任意单元格</li>
+                                    <li>数据选项卡 → 自动筛选</li>
+                                    <li>点击表头下拉按钮 → 选择筛选条件（如文本筛选、数值筛选）</li>
+                                    <li>支持多条件筛选和二次筛选</li>
+                                </ol>
+                            </div>
+                            <div class="bg-light p-3 rounded-lg">
+                                <h5 class="font-medium text-primary mb-2">分类汇总</h5>
+                                <ol class="list-decimal list-inside text-sm text-gray-700 space-y-1">
+                                    <li>先对分类字段进行排序（如按"品种"排序）</li>
+                                    <li>数据选项卡 → 分类汇总</li>
+                                    <li>设置分类字段、汇总方式（求和/平均值/计数等）、汇总项</li>
+                                    <li>通过左侧+/-按钮展开/折叠汇总结果</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 表格数据计算 -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8 card-hover">
+                    <h3 class="text-xl font-semibold text-primary mb-4 flex items-center">
+                        <i class="fa fa-calculator mr-2"></i>1.4 表格数据计算
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">公式与运算符</h4>
+                            <div class="bg-light p-3 rounded-lg mb-4">
+                                <h5 class="font-medium text-primary mb-2">公式输入</h5>
+                                <p class="text-sm text-gray-700">以等号"="开头，后跟表达式（如=D2+E2+F2+G2），按回车计算结果</p>
+                                <p class="text-xs text-gray-600 mt-1">支持复制公式：选中含公式单元格 → 复制 → 粘贴到目标单元格，公式会自动调整引用</p>
+                            </div>
+                            <div class="bg-light p-3 rounded-lg">
+                                <h5 class="font-medium text-primary mb-2">常用运算符</h5>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">算术运算符</p>
+                                        <p class="text-xs text-gray-600">+（加）、-（减）、*（乘）、/（除）、^（乘方）、%（百分比）</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">比较运算符</p>
+                                        <p class="text-xs text-gray-600">=（等于）、>（大于）、<（小于）、>=（大于等于）、<=（小于等于）、<>（不等于）</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">引用运算符</p>
+                                        <p class="text-xs text-gray-600">:（区域）、,（联合）、空格（交叉）</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">文本运算符</p>
+                                        <p class="text-xs text-gray-600">&（连接文本，如"A"&"B"="AB"）</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">单元格引用与函数</h4>
+                            <div class="bg-light p-3 rounded-lg mb-4">
+                                <h5 class="font-medium text-primary mb-2">单元格引用</h5>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">相对引用</p>
+                                        <p class="text-xs text-gray-600">如D2，复制公式时引用地址随位置自动调整</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">绝对引用</p>
+                                        <p class="text-xs text-gray-600">如$D$2，复制公式时引用地址固定不变</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-light p-3 rounded-lg">
+                                <h5 class="font-medium text-primary mb-2">常用函数</h5>
+                                <div class="space-y-2">
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">SUM(范围) - 求和</p>
+                                        <p class="text-xs text-gray-600">例：=SUM(D2:G2) 计算D2到G2的总和</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">AVERAGE(范围) - 求平均值</p>
+                                        <p class="text-xs text-gray-600">例：=AVERAGE(D2:D10) 计算D列数据的平均值</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">MAX(范围) / MIN(范围) - 求最大/最小值</p>
+                                        <p class="text-xs text-gray-600">例：=MAX(D2:D10) 找出D列最大数值</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">COUNT(范围) - 计数</p>
+                                        <p class="text-xs text-gray-600">例：=COUNT(D2:D10) 统计D列数值型数据的个数</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 图表制作 -->
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <h3 class="text-xl font-semibold text-primary mb-4 flex items-center">
+                        <i class="fa fa-bar-chart mr-2"></i>1.5 图表制作
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">图表基础</h4>
+                            <div class="bg-light p-3 rounded-lg mb-4">
+                                <h5 class="font-medium text-primary mb-2">图表组成要素</h5>
+                                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                    <li>图表标题：说明图表主题</li>
+                                    <li>坐标轴：X轴（分类轴）、Y轴（数值轴）</li>
+                                    <li>数据系列：图表中代表数据的图形（如柱形、折线）</li>
+                                    <li>图例：解释数据系列的含义</li>
+                                    <li>网格线：辅助读取数据数值</li>
+                                </ul>
+                            </div>
+                            <div class="bg-light p-3 rounded-lg">
+                                <h5 class="font-medium text-primary mb-2">常用图表类型及适用场景</h5>
+                                <div class="space-y-2">
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">柱形图</p>
+                                        <p class="text-xs text-gray-600">比较不同类别数据的差异，展示一段时间内的数据变化</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">条形图</p>
+                                        <p class="text-xs text-gray-600">适用于分类标签较长的情况，便于横向比较</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">折线图</p>
+                                        <p class="text-xs text-gray-600">强调数据的变化趋势和时间关联性</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">饼图</p>
+                                        <p class="text-xs text-gray-600">展示各部分占总体的比例关系</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">图表创建与美化</h4>
+                            <div class="bg-light p-3 rounded-lg mb-4">
+                                <h5 class="font-medium text-primary mb-2">创建图表步骤</h5>
+                                <ol class="list-decimal list-inside text-sm text-gray-700 space-y-1">
+                                    <li>选中要创建图表的数据区域（包括表头）</li>
+                                    <li>插入选项卡 → 图表 → 选择图表类型（如柱形图）</li>
+                                    <li>系统自动生成图表，可拖动图表调整位置和大小</li>
+                                    <li>通过"图表工具"选项卡编辑图表元素</li>
+                                </ol>
+                            </div>
+                            <div class="bg-light p-3 rounded-lg">
+                                <h5 class="font-medium text-primary mb-2">图表编辑与美化</h5>
+                                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                    <li>编辑图表标题：点击标题直接修改，或通过"图表元素"添加</li>
+                                    <li>更改图表类型：图表工具 → 更改类型 → 选择新类型</li>
+                                    <li>调整数据来源：图表工具 → 选择数据 → 修改数据区域</li>
+                                    <li>美化设置：设置图表颜色、填充效果、边框样式，添加数据标签</li>
+                                    <li>添加趋势线：用于显示数据变化趋势，辅助数据分析</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第二单元：程序设计初步 -->
+        <section id="unit2" class="mb-20">
+            <div class="max-w-5xl mx-auto">
+                <div class="flex items-center mb-8">
+                    <div class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center text-white mr-4">
+                        <i class="fa fa-code text-xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-dark">第2章 程序设计初步</h2>
+                </div>
+
+                <!-- 程序设计语言与流程图基础 -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8 card-hover">
+                    <h3 class="text-xl font-semibold text-secondary mb-4 flex items-center">
+                        <i class="fa fa-flowchart mr-2"></i>2.1 程序设计语言与流程图基础
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">程序与程序设计语言</h4>
+                            <div class="bg-light p-3 rounded-lg mb-4">
+                                <h5 class="font-medium text-primary mb-2">计算机程序</h5>
+                                <p class="text-sm text-gray-700">控制计算机工作的一系列命令集合，按照特定逻辑组织，让计算机完成指定任务</p>
+                            </div>
+                            <div class="bg-light p-3 rounded-lg">
+                                <h5 class="font-medium text-primary mb-2">程序设计语言分类</h5>
+                                <div class="space-y-2">
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">机器语言</p>
+                                        <p class="text-xs text-gray-600">计算机能直接识别的二进制代码，执行效率最高但难以编写</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">汇编语言</p>
+                                        <p class="text-xs text-gray-600">用助记符代替机器指令，需要汇编器转换为机器语言</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">高级语言</p>
+                                        <p class="text-xs text-gray-600">接近自然语言和数学表达式，易读易写，需编译或解释执行（如Python、C、Java）</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">算法与流程图</h4>
+                            <div class="bg-light p-3 rounded-lg mb-4">
+                                <h5 class="font-medium text-primary mb-2">算法</h5>
+                                <p class="text-sm text-gray-700">解决问题的步骤和方法，必须满足有限性、可行性、确定性要求，可用自然语言、伪代码或流程图描述</p>
+                            </div>
+                            <div class="bg-light p-3 rounded-lg">
+                                <h5 class="font-medium text-primary mb-2">流程图符号及规则</h5>
+                                <div class="overflow-x-auto">
+                                    <table class="min-w-full bg-white border border-gray-200 rounded-lg text-xs">
+                                        <thead>
+                                            <tr class="bg-gray-100">
+                                                <th class="py-2 px-3 border-b text-left">符号</th>
+                                                <th class="py-2 px-3 border-b text-left">名称</th>
+                                                <th class="py-2 px-3 border-b text-left">功能</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="py-2 px-3 border-b text-center">
+                                                    <i class="fa fa-circle-o text-primary"></i>
+                                                </td>
+                                                <td class="py-2 px-3 border-b">开始/结束</td>
+                                                <td class="py-2 px-3 border-b">表示程序的开始或结束</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-2 px-3 border-b text-center">
+                                                    <i class="fa fa-paragraph text-primary"></i>
+                                                </td>
+                                                <td class="py-2 px-3 border-b">输入/输出</td>
+                                                <td class="py-2 px-3 border-b">表示数据的输入或结果的输出</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-2 px-3 border-b text-center">
+                                                    <i class="fa fa-square text-primary"></i>
+                                                </td>
+                                                <td class="py-2 px-3 border-b">处理过程</td>
+                                                <td class="py-2 px-3 border-b">表示数据处理或运算操作</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-2 px-3 border-b text-center">
+                                                    <i class="fa fa-diamond text-primary"></i>
+                                                </td>
+                                                <td class="py-2 px-3 border-b">判断</td>
+                                                <td class="py-2 px-3 border-b">表示条件判断，有两个分支</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-2 px-3 border-b text-center">
+                                                    <i class="fa fa-arrows-h text-primary"></i>
+                                                </td>
+                                                <td class="py-2 px-3 border-b">流程线</td>
+                                                <td class="py-2 px-3 border-b">表示程序执行的方向</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <p class="text-xs text-gray-600 mt-2">流程图规则：从上到下、从左到右绘制，只有一个起点，至少一个终点</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Python编程基础 -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8 card-hover">
+                    <h3 class="text-xl font-semibold text-secondary mb-4 flex items-center">
+                        <i class="fa fa-python mr-2"></i>2.2 Python编程基础
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">数据类型与变量</h4>
+                            <div class="bg-light p-3 rounded-lg mb-4">
+                                <h5 class="font-medium text-primary mb-2">基本数据类型</h5>
+                                <div class="space-y-2">
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">整数（int）</p>
+                                        <p class="text-xs text-gray-600">如10、-5、0，支持任意大小整数</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">浮点数（float）</p>
+                                        <p class="text-xs text-gray-600">如3.14、-0.5、1.23e5（科学记数法）</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">字符串（str）</p>
+                                        <p class="text-xs text-gray-600">用单引号、双引号或三引号括起来的文本，如"Hello"、'Python'</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">布尔值（bool）</p>
+                                        <p class="text-xs text-gray-600">只有True（真）和False（假）两种值，用于逻辑判断</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">空值（None）</p>
+                                        <p class="text-xs text-gray-600">表示无值，与0和空字符串不同</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-light p-3 rounded-lg">
+                                <h5 class="font-medium text-primary mb-2">变量命名规则</h5>
+                                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                    <li>由字母、数字、汉字和下划线组成</li>
+                                    <li>不能以数字开头</li>
+                                    <li>不能包含空格</li>
+                                    <li>区分大小写（如name和Name是不同变量）</li>
+                                    <li>不能使用Python关键字（如if、for、while等）</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">输入输出与语句</h4>
+                            <div class="bg-light p-3 rounded-lg mb-4">
+                                <h5 class="font-medium text-primary mb-2">输入函数input()</h5>
+                                <p class="text-sm text-gray-700">获取用户键盘输入，返回字符串类型</p>
+                                <p class="text-xs text-gray-600 mt-1">格式：变量 = input("提示文字")</p>
+                                <p class="text-xs text-gray-600">示例：name = input("请输入你的名字：")</p>
+                                <p class="text-xs text-gray-600">注意：输入数值需转换类型，如age = int(input("请输入年龄："))</p>
+                            </div>
+                            <div class="bg-light p-3 rounded-lg mb-4">
+                                <h5 class="font-medium text-primary mb-2">输出函数print()</h5>
+                                <p class="text-sm text-gray-700">在屏幕上显示输出内容</p>
+                                <p class="text-xs text-gray-600 mt-1">格式1：print(表达式) → 输出单个内容</p>
+                                <p class="text-xs text-gray-600">格式2：print(表达式1, 表达式2, ...) → 输出多个内容，用空格分隔</p>
+                                <p class="text-xs text-gray-600">示例：print("Hello,", name)、print("1+2=", 1+2)</p>
+                            </div>
+                            <div class="bg-light p-3 rounded-lg">
+                                <h5 class="font-medium text-primary mb-2">注释语句</h5>
+                                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                    <li>单行注释：以#开头，#后的内容不执行</li>
+                                    <li>多行注释：用三个单引号'''或三个双引号"""括起来</li>
+                                    <li>作用：解释代码功能，增强程序可读性</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 分支结构 -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8 card-hover">
+                    <h3 class="text-xl font-semibold text-secondary mb-4 flex items-center">
+                        <i class="fa fa-code-fork mr-2"></i>2.3 分支结构——让机器学会做选择
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">条件表达式</h4>
+                            <div class="bg-light p-3 rounded-lg mb-4">
+                                <h5 class="font-medium text-primary mb-2">关系运算符</h5>
+                                <div class="grid grid-cols-3 gap-2 text-center">
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">==</p>
+                                        <p class="text-xs text-gray-600">等于</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">!=</p>
+                                        <p class="text-xs text-gray-600">不等于</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">></p>
+                                        <p class="text-xs text-gray-600">大于</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs"><</p>
+                                        <p class="text-xs text-gray-600">小于</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">>=</p>
+                                        <p class="text-xs text-gray-600">大于等于</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs"><=</p>
+                                        <p class="text-xs text-gray-600">小于等于</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-light p-3 rounded-lg">
+                                <h5 class="font-medium text-primary mb-2">逻辑运算符</h5>
+                                <div class="grid grid-cols-3 gap-2 text-center">
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">and</p>
+                                        <p class="text-xs text-gray-600">与运算</p>
+                                        <p class="text-xs text-gray-600">两边都为真才为真</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">or</p>
+                                        <p class="text-xs text-gray-600">或运算</p>
+                                        <p class="text-xs text-gray-600">至少一边为真即为真</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">not</p>
+                                        <p class="text-xs text-gray-600">非运算</p>
+                                        <p class="text-xs text-gray-600">取反（真变假，假变真）</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">条件语句格式</h4>
+                            <div class="space-y-4">
+                                <div class="bg-light p-3 rounded-lg">
+                                    <h5 class="font-medium text-primary mb-2">单选结构（if语句）</h5>
+                                    <p class="text-sm text-gray-700 mb-1">格式：</p>
+                                    <pre class="bg-white p-2 rounded text-xs text-gray-700 font-mono">if 条件表达式:
+    语句块  # 缩进（Tab键）</pre>
+                                    <p class="text-xs text-gray-600 mt-2">功能：条件为True时执行语句块，否则跳过</p>
+                                    <p class="text-xs text-gray-600">示例：判断PM2.5指数大于200时提醒戴口罩</p>
+                                </div>
+                                <div class="bg-light p-3 rounded-lg">
+                                    <h5 class="font-medium text-primary mb-2">二选一结构（if-else语句）</h5>
+                                    <p class="text-sm text-gray-700 mb-1">格式：</p>
+                                    <pre class="bg-white p-2 rounded text-xs text-gray-700 font-mono">if 条件表达式:
+    语句块1  # 条件为真时执行
+else:
+    语句块2  # 条件为假时执行</pre>
+                                    <p class="text-xs text-gray-600 mt-2">功能：二选一执行，必执行其中一个语句块</p>
+                                    <p class="text-xs text-gray-600">示例：判断成绩是否及格（>=60分为及格）</p>
+                                </div>
+                                <div class="bg-light p-3 rounded-lg">
+                                    <h5 class="font-medium text-primary mb-2">多选一结构（if-elif-else语句）</h5>
+                                    <p class="text-sm text-gray-700 mb-1">格式：</p>
+                                    <pre class="bg-white p-2 rounded text-xs text-gray-700 font-mono">if 条件1:
+    语句块1
+elif 条件2:
+    语句块2
+...
+else:
+    语句块n</pre>
+                                    <p class="text-xs text-gray-600 mt-2">功能：多个条件依次判断，只执行第一个满足条件的语句块</p>
+                                    <p class="text-xs text-gray-600">示例：成绩等级评定（优秀、良好、合格、不合格）</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 循环结构 -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8 card-hover">
+                    <h3 class="text-xl font-semibold text-secondary mb-4 flex items-center">
+                        <i class="fa fa-repeat mr-2"></i>2.4 循环结构——让机器重复工作
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">for循环</h4>
+                            <div class="bg-light p-3 rounded-lg mb-4">
+                                <h5 class="font-medium text-primary mb-2">基本格式</h5>
+                                <p class="text-sm text-gray-700 mb-1">格式：</p>
+                                <pre class="bg-white p-2 rounded text-xs text-gray-700 font-mono">for 循环变量 in range(参数):
+    语句块  # 缩进</pre>
+                                <p class="text-xs text-gray-600 mt-2">range()函数用法：</p>
+                                <ul class="list-disc list-inside text-xs text-gray-700 space-y-1 mt-1">
+                                    <li>range(n)：生成0~n-1的整数序列（如range(3) → 0,1,2）</li>
+                                    <li>range(a,b)：生成a~b-1的整数序列（如range(1,4) → 1,2,3）</li>
+                                    <li>range(a,b,c)：生成a~b-1、步长为c的序列（如range(1,10,2) → 1,3,5,7,9）</li>
+                                </ul>
+                            </div>
+                            <div class="bg-light p-3 rounded-lg">
+                                <h5 class="font-medium text-primary mb-2">应用示例</h5>
+                                <p class="text-sm text-gray-700 mb-1">计算1+2+3+...+n的和：</p>
+                                <pre class="bg-white p-2 rounded text-xs text-gray-700 font-mono">n = int(input("请输入n的值："))
+sum = 0
+for i in range(1, n+1):
+    sum += i  # 等价于sum = sum + i
+print("总和 =", sum)</pre>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">while循环与break语句</h4>
+                            <div class="bg-light p-3 rounded-lg mb-4">
+                                <h5 class="font-medium text-primary mb-2">while循环基本格式</h5>
+                                <p class="text-sm text-gray-700 mb-1">格式：</p>
+                                <pre class="bg-white p-2 rounded text-xs text-gray-700 font-mono">while 条件表达式:
+    语句块  # 缩进
+    循环变量更新  # 避免无限循环</pre>
+                                <p class="text-xs text-gray-600 mt-2">功能：条件为True时重复执行语句块，直到条件为False结束</p>
+                                <p class="text-xs text-gray-600">示例：用while循环计算1+2+...+n的和</p>
+                                <pre class="bg-white p-2 rounded text-xs text-gray-700 font-mono mt-1">n = int(input("请输入n的值："))
+sum = 0
+i = 1
+while i <= n:
+    sum += i
+    i += 1  # 循环变量自增
+print("总和 =", sum)</pre>
+                            </div>
+                            <div class="bg-light p-3 rounded-lg">
+                                <h5 class="font-medium text-primary mb-2">break语句</h5>
+                                <p class="text-sm text-gray-700">用于跳出循环，执行循环后的语句</p>
+                                <p class="text-xs text-gray-600 mt-1">应用场景：无限循环中根据条件退出</p>
+                                <pre class="bg-white p-2 rounded text-xs text-gray-700 font-mono mt-1"># 猜数字游戏示例
+target = 88
+while True:
+    guess = int(input("请猜一个数字(1~100)："))
+    if guess == target:
+        print("猜对了！")
+        break  # 跳出循环
+    elif guess > target:
+        print("猜大了！")
+    else:
+        print("猜小了！")</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Python库应用 -->
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <h3 class="text-xl font-semibold text-secondary mb-4 flex items-center">
+                        <i class="fa fa-puzzle-piece mr-2"></i>2.5 Python库——让强大的Python库帮忙
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">库的导入与使用</h4>
+                            <div class="bg-light p-3 rounded-lg mb-4">
+                                <h5 class="font-medium text-primary mb-2">库的导入方式</h5>
+                                <div class="space-y-2">
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">import 库名</p>
+                                        <p class="text-xs text-gray-600">导入整个库，使用格式：库名.函数名()（如import random）</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">from 库名 import 函数名</p>
+                                        <p class="text-xs text-gray-600">导入库中的指定函数，直接使用函数名()（如from random import randint）</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">import 库名 as 别名</p>
+                                        <p class="text-xs text-gray-600">给库起别名，使用更简洁（如import turtle as t）</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-light p-3 rounded-lg">
+                                <h5 class="font-medium text-primary mb-2">random库（随机数库）</h5>
+                                <div class="space-y-2">
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">random.randint(a,b)</p>
+                                        <p class="text-xs text-gray-600">生成a~b之间的随机整数（包含a和b）</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">random.random()</p>
+                                        <p class="text-xs text-gray-600">生成0~1之间的随机小数（不包含1）</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">random.choice(列表)</p>
+                                        <p class="text-xs text-gray-600">从列表中随机选择一个元素</p>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-gray-600 mt-2">应用：猜数字游戏中随机生成目标数字</p>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">turtle库（绘图库）</h4>
+                            <div class="bg-light p-3 rounded-lg mb-4">
+                                <h5 class="font-medium text-primary mb-2">常用绘图函数</h5>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">forward(d)</p>
+                                        <p class="text-xs text-gray-600">向前移动d像素</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">backward(d)</p>
+                                        <p class="text-xs text-gray-600">向后移动d像素</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">right(angle)</p>
+                                        <p class="text-xs text-gray-600">向右转angle度</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">left(angle)</p>
+                                        <p class="text-xs text-gray-600">向左转angle度</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">circle(r)</p>
+                                        <p class="text-xs text-gray-600">绘制半径为r的圆</p>
+                                    </div>
+                                    <div class="bg-white p-2 rounded shadow-sm">
+                                        <p class="font-medium text-dark text-xs">pencolor(color)</p>
+                                        <p class="text-xs text-gray-600">设置画笔颜色</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-light p-3 rounded-lg">
+                                <h5 class="font-medium text-primary mb-2">绘图示例：绘制正方形</h5>
+                                <pre class="bg-white p-2 rounded text-xs text-gray-700 font-mono">import turtle
+t = turtle.Turtle()
+for _ in range(4):
+    t.forward(100)  # 向前移动100像素
+    t.right(90)     # 向右转90度
+turtle.done()  # 保持绘图窗口</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第三单元：App Inventor手机积木式编程 -->
+        <section id="unit3" class="mb-20">
+            <div class="max-w-5xl mx-auto">
+                <div class="flex items-center mb-8">
+                    <div class="w-12 h-12 rounded-full bg-accent flex items-center justify-center text-white mr-4">
+                        <i class="fa fa-mobile text-xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-dark">第3章 App Inventor手机积木式编程</h2>
+                </div>
+
+                <!-- 认识App Inventor -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8 card-hover">
+                    <h3 class="text-xl font-semibold text-accent mb-4 flex items-center">
+                        <i class="fa fa-android mr-2"></i>3.1 认识App Inventor
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">App Inventor概述</h4>
+                            <div class="bg-light p-3 rounded-lg mb-4">
+                                <p class="text-sm text-gray-700">基于Web的Android应用开发工具，无需编写代码，通过拖拽拼接积木模块即可制作手机APP，适合编程初学者</p>
+                                <p class="text-xs text-gray-600 mt-2">支持开发多媒体应用、游戏应用、位置感知应用、基于Web的应用等</p>
+                            </div>
+                            <div class="bg-light p-3 rounded-lg">
+                                <h5 class="font-medium text-primary mb-2">启动方式</h5>
+                                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                    <li><strong>离线版</strong>：安装本地服务器，启动服务后通过浏览器访问（如192.168.0.11:8888）</li>
+                                    <li><strong>在线版</strong>：通过广州智慧教育公共服务平台的APP INVENTOR栏目，注册账号后在线开发</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">开发界面组成</h4>
+                            <div class="bg-light p-3 rounded-lg mb-4">
+                                <h5 class="font-medium text-primary mb-2">设计界面</h5>
+                                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                    <li>组件面板：提供各类可拖拽的组件（用户界面、布局、多媒体等）</li>
+                                    <li>工作区域：可视化设计APP界面，摆放组件的画布</li>
+                                    <li>组件列表：显示当前页面已添加的组件，可重命名</li>
+                                    <li>属性面板：设置选中组件的属性（如标题、颜色、大小等）</li>
+                                    <li>素材面板：管理APP所需的图片、音频等素材</li>
+                                </ul>
+                            </div>
+                            <div class="bg-light p-3 rounded-lg">
+                                <h5 class="font-medium text-primary mb-2">编程界面</h5>
+                                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                    <li>代码块面板：按组件和功能分类的积木模块库</li>
+                                    <li>工作区域：拼接积木模块，设计APP逻辑功能</li>
+                                    <li>核心概念：事件（触发动作）、方法（组件功能）、属性（组件特征）</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 基础应用制作 -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8 card-hover">
+                    <h3 class="text-xl font-semibold text-accent mb-4 flex items-center">
+                        <i class="fa fa-th-large mr-2"></i>3.2 基础应用制作
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">天气预报应用</h4>
+                            <div class="bg-light p-3 rounded-lg mb-4">
+                                <h5 class="font-medium text-primary mb-2">组件设计</h5>
+                                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                    <li>Screen组件：设置标题为"天气预报"</li>
+                                    <li>Web浏览框组件：用于显示天气预报网页</li>
+                                </ul>
+                            </div>
+                            <div class="bg-light p-3 rounded-lg">
+                                <h5 class="font-medium text-primary mb-2">编程逻辑</h5>
+                                <ol class="list-decimal list-inside text-sm text-gray-700 space-y-1">
+                                    <li>选择"当Screen1初始化时"事件</li>
+                                    <li>添加"让Web浏览框1访问网页"方法</li>
+                                    <li>设置网页地址为天气预报手机版网址（如http://a.weather.com.cn/）</li>
+                                </ol>
+                                <p class="text-xs text-gray-600 mt-2">测试方式：AI伴侣（手机+电脑同局域网）、模拟器、USB端口连接</p>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">摇一摇听单词应用</h4>
+                            <div class="bg-light p-3 rounded-lg mb-4">
+                                <h5 class="font-medium text-primary mb-2">组件设计</h5>
+                                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                    <li>Screen组件：标题设为"摇一摇听单词"，水平对齐居中</li>
+                                    <li>文本输入框：用于输入英文单词</li>
+                                    <li>按钮组件：文本设为"听单词"，用于手动触发朗读</li>
+                                    <li>加速度传感器：非可视化组件，实现摇一摇功能</li>
+                                    <li>语音合成器：非可视化组件，实现单词朗读功能</li>
+                                </ul>
+                            </div>
+                            <div class="bg-light p-3 rounded-lg">
+                                <h5 class="font-medium text-primary mb-2">编程逻辑</h5>
+                                <ol class="list-decimal list-inside text-sm text-gray-700 space-y-1">
+                                    <li>摇一摇触发：当加速度传感器被晃动时，调用语音合成器朗读文本输入框中的单词</li>
+                                    <li>按钮触发：当按钮被点击时，同样调用语音合成器朗读单词</li>
+                                    <li>进阶功能：结合列表实现内置单词随机朗读，结合微数据库实现单词增删</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 创意应用开发 -->
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <h3 class="text-xl font-semibold text-accent mb-4 flex items-center">
+                        <i class="fa fa-lightbulb-o mr-2"></i>3.3 创意应用开发
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">创意涂鸦应用</h4>
+                            <div class="bg-light p-3 rounded-lg mb-4">
+                                <h5 class="font-medium text-primary mb-2">组件设计</h5>
+                                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                    <li>水平布局1：放置画布组件（宽度320像素，高度320像素）</li>
+                                    <li>水平布局2：放置图像选择框（重命名"打开图片"）和按钮（重命名"保存"）</li>
+                                    <li>画布组件：核心绘图区域，设置背景颜色为白色</li>
+                                    <li>图像选择框：用于打开手机相册中的图片</li>
+                                    <li>按钮组件：用于保存涂鸦后的图片</li>
+                                </ul>
+                            </div>
+                            <div class="bg-light p-3 rounded-lg">
+                                <h5 class="font-medium text-primary mb-2">编程逻辑</h5>
+                                <ol class="list-decimal list-inside text-sm text-gray-700 space-y-1">
+                                    <li>打开图片：当图像选择框完成选择时，将画布背景图片设为选中的图片</li>
+                                    <li>涂鸦功能：当画布被拖动时，调用画线方法，以邻点和当前点为参数绘制线条</li>
+                                    <li>保存图片：当保存按钮被点击时，调用画布的"另存为"方法，保存到系统相册路径（如/dcim/camera/）</li>
+                                    <li>进阶功能：添加颜色选择按钮、画笔大小调节滑块、拍照功能</li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-dark mb-3">调用API的天气预报APP</h4>
+                            <div class="bg-light p-3 rounded-lg mb-4">
+                                <h5 class="font-medium text-primary mb-2">组件设计</h5>
+                                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                    <li>Screen组件：标题设为"天气预报"</li>
+                                    <li>水平布局：放置文本输入框（输入城市）和按钮（查询）</li>
+                                    <li>标签组件：两个标签，分别显示"天气情况"和查询结果</li>
+                                    <li>Web客户端组件：用于调用天气预报API获取数据</li>
+                                    <li>文本语音转换器：用于语音播报查询结果</li>
+                                </ul>
+                            </div>
+                            <div class="bg-light p-3 rounded-lg">
+                                <h5 class="font-medium text-primary mb-2">编程逻辑</h5>
+                                <ol class="list-decimal list-inside text-sm text-gray-700 space-y-1">
+                                    <li>发起查询：点击查询按钮时，拼接API请求地址（包含城市名、APPKEY），调用Web客户端的GET请求</li>
+                                    <li>处理响应：Web客户端获得文本时，解码JSON数据，提取天气信息</li>
+                                    <li>显示结果：将提取的天气数据显示在标签中</li>
+                                    <li>语音播报：调用文本语音转换器，播报城市天气情况</li>
+                                </ol>
+                                <p class="text-xs text-gray-600 mt-2">API调用注意：中文参数需URI编码，需提前获取开发者APPKEY</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 综合总结 -->
+        <section id="summary" class="mb-16">
+            <div class="max-w-5xl mx-auto">
+                <div class="flex items-center mb-8">
+                    <div class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center text-white mr-4">
+                        <i class="fa fa-list-alt text-xl"></i>
+                    </div>
+                    <h2 class="text-3xl font-bold text-dark">全册知识综合总结</h2>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <!-- 第1章总结 -->
+                        <div class="bg-light p-4 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white mr-2">1</div>
+                                <h3 class="text-lg font-semibold text-primary">第1章 数据的分析与处理</h3>
+                            </div>
+                            <ul class="space-y-3">
+                                <li class="flex">
+                                    <i class="fa fa-check-circle text-success mt-1 mr-2"></i>
+                                    <div>
+                                        <p class="font-medium text-dark text-sm">表格基础</p>
+                                        <p class="text-xs text-gray-600">工作簿、工作表、单元格等核心元素；数据输入方法（文本、数值、日期、序列填充）</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <i class="fa fa-check-circle text-success mt-1 mr-2"></i>
+                                    <div>
+                                        <p class="font-medium text-dark text-sm">数据处理</p>
+                                        <p class="text-xs text-gray-600">排序（单/多关键字）、筛选（自动筛选、多条件筛选）、分类汇总</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <i class="fa fa-check-circle text-success mt-1 mr-2"></i>
+                                    <div>
+                                        <p class="font-medium text-dark text-sm">数据计算</p>
+                                        <p class="text-xs text-gray-600">公式与运算符；单元格引用（相对/绝对）；常用函数（SUM、AVERAGE、MAX等）</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <i class="fa fa-check-circle text-success mt-1 mr-2"></i>
+                                    <div>
+                                        <p class="font-medium text-dark text-sm">图表制作</p>
+                                        <p class="text-xs text-gray-600">图表类型选择；图表创建与编辑；图表美化与数据可视化</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- 第2章总结 -->
+                        <div class="bg-light p-4 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <div class="w-8 h-8 rounded-full bg-secondary flex items-center justify-center text-white mr-2">2</div>
+                                <h3 class="text-lg font-semibold text-secondary">第2章 程序设计初步</h3>
+                            </div>
+                            <ul class="space-y-3">
+                                <li class="flex">
+                                    <i class="fa fa-check-circle text-success mt-1 mr-2"></i>
+                                    <div>
+                                        <p class="font-medium text-dark text-sm">编程基础</p>
+                                        <p class="text-xs text-gray-600">程序与编程语言；算法与流程图；Python环境与基本语法</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <i class="fa fa-check-circle text-success mt-1 mr-2"></i>
+                                    <div>
+                                        <p class="font-medium text-dark text-sm">数据与表达式</p>
+                                        <p class="text-xs text-gray-600">基本数据类型（int、float、str、bool）；变量命名；运算符与表达式；输入输出函数</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <i class="fa fa-check-circle text-success mt-1 mr-2"></i>
+                                    <div>
+                                        <p class="font-medium text-dark text-sm">程序结构</p>
+                                        <p class="text-xs text-gray-600">分支结构（if、if-else、if-elif-else）；循环结构（for、while）；break语句</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <i class="fa fa-check-circle text-success mt-1 mr-2"></i>
+                                    <div>
+                                        <p class="font-medium text-dark text-sm">Python库应用</p>
+                                        <p class="text-xs text-gray-600">库的导入方式；random库（随机数）；turtle库（绘图）；第三方库安装与使用</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- 第3章总结 -->
+                        <div class="bg-light p-4 rounded-lg">
+                            <div class="flex items-center mb-4">
+                                <div class="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-white mr-2">3</div>
+                                <h3 class="text-lg font-semibold text-accent">第3章 App Inventor编程</h3>
+                            </div>
+                            <ul class="space-y-3">
+                                <li class="flex">
+                                    <i class="fa fa-check-circle text-success mt-1 mr-2"></i>
+                                    <div>
+                                        <p class="font-medium text-dark text-sm">开发环境</p>
+                                        <p class="text-xs text-gray-600">App Inventor启动方式（离线/在线）；设计界面与编程界面组成</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <i class="fa fa-check-circle text-success mt-1 mr-2"></i>
+                                    <div>
+                                        <p class="font-medium text-dark text-sm">组件与逻辑</p>
+                                        <p class="text-xs text-gray-600">常用组件（用户界面、传感器、多媒体）；事件、方法、属性的概念；积木拼接逻辑</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <i class="fa fa-check-circle text-success mt-1 mr-2"></i>
+                                    <div>
+                                        <p class="font-medium text-dark text-sm">应用开发</p>
+                                        <p class="text-xs text-gray-600">基础应用（天气预报、摇一摇听单词）；创意应用（涂鸦、API调用）；测试与优化</p>
+                                    </div>
+                                </li>
+                                <li class="flex">
+                                    <i class="fa fa-check-circle text-success mt-1 mr-2"></i>
+                                    <div>
+                                        <p class="font-medium text-dark text-sm">进阶功能</p>
+                                        <p class="text-xs text-gray-600">传感器调用（加速度、方向）；API接口调用；语音合成与识别；数据存储</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 bg-blue-50 p-4 rounded-lg">
+                        <h4 class="font-medium text-primary mb-3 flex items-center">
+                            <i class="fa fa-graduation-cap mr-2"></i>复习建议与重点提示
+                        </h4>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <h5 class="font-medium text-dark text-sm mb-2">重点掌握内容</h5>
+                                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                    <li>WPS表格数据处理：排序、筛选、分类汇总、函数应用</li>
+                                    <li>Python程序设计：分支与循环结构的灵活运用</li>
+                                    <li>App Inventor：组件布局与核心逻辑编程，传感器与API调用</li>
+                                    <li>数据可视化：图表制作与数据分析思维</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 class="font-medium text-dark text-sm mb-2">实践操作建议</h5>
+                                <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
+                                    <li>表格练习：用真实数据（如班级成绩、家庭支出）练习排序、筛选和函数计算</li>
+                                    <li>编程练习：编写实用小程序（如成绩评定、猜数字游戏、简单绘图）</li>
+                                    <li>App开发：完成1-2个完整应用（如课程表、简易计算器），掌握组件与逻辑结合</li>
+                                    <li>综合应用：尝试用Python处理表格数据，用App呈现分析结果</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-5xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                    <div class="flex items-center mb-4 md:mb-0">
+                        <i class="fa fa-laptop-code text-primary text-2xl mr-3"></i>
+                        <span class="text-xl font-bold">信息技术八年级复习</span>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a href="#unit1" class="text-gray-300 hover:text-white transition-colors">第1章</a>
+                        <a href="#unit2" class="text-gray-300 hover:text-white transition-colors">第2章</a>
+                        <a href="#unit3" class="text-gray-300 hover:text-white transition-colors">第3章</a>
+                        <a href="#summary" class="text-gray-300 hover:text-white transition-colors">知识总结</a>
+                    </div>
+                </div>
+                
+                <div class="border-t border-gray-700 pt-8 text-center text-gray-400 text-sm">
+                    <p>© 2025 广州版信息技术八年级全册复习网页</p>
+                    <p class="mt-2">基于广州版信息技术教材（第二册）内容制作，仅供学习和复习使用</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button id="backToTop" class="fixed bottom-8 right-8 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // 移动端菜单切换
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-white/95', 'backdrop-blur-sm');
+                navbar.classList.remove('bg-white');
+            } else {
+                navbar.classList.add('bg-white');
+                navbar.classList.remove('bg-white/95', 'backdrop-blur-sm');
+            }
+        });
+        
+        // 返回顶部按钮
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.remove('opacity-0', 'invisible');
+                backToTopBtn.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopBtn.classList.add('opacity-0', 'invisible');
+                backToTopBtn.classList.remove('opacity-100', 'visible');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    // 关闭移动端菜单
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                    
+                    // 滚动到目标位置
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
