@@ -603,18 +603,18 @@
 							{'zhandian':'芙蓉超市','zdtime':'@7:39分@@16:36分@'}
 							];
 							
-		var lsChangeXwZdTC1=[{'station':'傍江西村公交站','stationPY':'bjxcgjz','zdLsTime':'15:50分'},//10:30分发车
-							{'station':'城市花园路口公交站','stationPY':'cshylkgjz','zdLsTime':'15:52分'},
-							{'station':'石岗美心苑公交站','stationPY':'sgmxygjz','zdLsTime':'15:53分'},
-							{'station':'石岗东村公交站','stationPY':'sgdcgjz','zdLsTime':'15:54分'},
-							{'station':'沙墟市场公交站','stationPY':'sxscgjz','zdLsTime':'16:01分'},
-							{'station':'罗家村富怡路公交站','stationPY':'ljcfylgjz','zdLsTime':'16:07分'}];//下午临时更改下午第一趟站点名称   学校回，估计要20分
-		var lsChangeXwZdTC2=[{'station':'新桥东公交站','stationPY':'xqdgjz','zdLsTime':'16:26分'},
-							{'station':'新桥村公交站','stationPY':'xqcgjz','zdLsTime':'16:27分'},
-							{'station':'傍新路口公交站','stationPY':'bxlkgjz','zdLsTime':'16:28分'},
-							{'station':'傍江东村公交站','stationPY':'bjdcgjz','zdLsTime':'16:30分'},
-							{'station':'华盛隆超市对面','stationPY':'hslcsdm','zdLsTime':'16:33分'},
-							{'station':'芙蓉超市','stationPY':'frcs','zdLsTime':'16:34分'}];//临时更改下午第二趟站点名称
+		var lsChangeXwZdTC1=[{'station':'傍江西村公交站','stationPY':'bjxcgjz','zdLsTime':'16:50分'},//16:40分发车
+							{'station':'城市花园路口公交站','stationPY':'cshylkgjz','zdLsTime':'16:52分'},
+							{'station':'石岗美心苑公交站','stationPY':'sgmxygjz','zdLsTime':'16:53分'},
+							{'station':'石岗东村公交站','stationPY':'sgdcgjz','zdLsTime':'16:54分'},
+							{'station':'沙墟市场公交站','stationPY':'sxscgjz','zdLsTime':'17:01分'},
+							{'station':'罗家村富怡路公交站','stationPY':'ljcfylgjz','zdLsTime':'17:07分'}];//下午临时更改下午第一趟站点名称   学校回，估计要20分
+		var lsChangeXwZdTC2=[{'station':'新桥东公交站','stationPY':'xqdgjz','zdLsTime':'17:26分'},
+							{'station':'新桥村公交站','stationPY':'xqcgjz','zdLsTime':'17:27分'},
+							{'station':'傍新路口公交站','stationPY':'bxlkgjz','zdLsTime':'17:28分'},
+							{'station':'傍江东村公交站','stationPY':'bjdcgjz','zdLsTime':'17:30分'},
+							{'station':'华盛隆超市对面','stationPY':'hslcsdm','zdLsTime':'17:33分'},
+							{'station':'芙蓉超市','stationPY':'frcs','zdLsTime':'17:34分'}];//临时更改下午第二趟站点名称
 		var allZhandian=[{'station':'傍江东村公交站','stationPY':'bjdcgjz'},
 						{'station':'傍江西村公交站','stationPY':'bjxcgjz'},
 						{'station':'城市花园路口公交站','stationPY':'cshylkgjz'},
@@ -632,9 +632,7 @@
 		//console.log(banji);
 		/*Tip:不知道如何批量输入数据的话，notepad++里面按住Alt并往下拖动鼠标即可，即可进行多行编辑*/
 		//坐车人员数据，早上数据DataZao    晚上数据DataWan	//<beizhu>请假，家长接送</beizhu><newstu>是</newstu>/n
-var DataZao='[data]'+'503邓嘉韵18074736046<zd>傍江西村公交站</zd><newstu>是</newstu>/n'+
-
-'101童泳乐13326436588<zd>傍江西村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+var DataZao='[data]'+'101童泳乐13326436588<zd>傍江西村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
 
 '402张玥13078823782<zd>傍江西村公交站</zd>/n'+
 
@@ -682,7 +680,7 @@ var DataZao='[data]'+'503邓嘉韵18074736046<zd>傍江西村公交站</zd><news
 
 '202邓钰阳13265001430<zd>石岗东村公交站</zd><beizhu>家长接送</beizhu>/n'+
 
-'501崔一帆13560163650<zd>石岗东村公交站</zd>/n'+
+'501崔一帆13560163650<zd>石岗东村公交站</zd><beizhu>请假</beizhu>/n'+
 
 '304苏宇轩13539456833<zd>石岗东村公交站</zd>/n'+
 
@@ -705,6 +703,8 @@ var DataZao='[data]'+'503邓嘉韵18074736046<zd>傍江西村公交站</zd><news
 '702赵宏彬18518441444<zd>桥虹花园公交站</zd>/n[/data]'+
 
 '[data]'+'603谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
+
+'303李天硕<zd>新桥东公交站</zd>/n'+
 
 '202徐子涵15914278291<zd>新桥东公交站</zd><beizhu>家长接送</beizhu>/n'+
 
@@ -742,6 +742,8 @@ var DataZao='[data]'+'503邓嘉韵18074736046<zd>傍江西村公交站</zd><news
 
 '303张雨露18127891370<zd>傍江东村公交站</zd>/n'+
 
+'503邓嘉韵18074736046<zd>傍江东村公交站</zd><newstu>是</newstu>/n'+
+
 '303黄子睿15914361341<zd>傍江东村公交站</zd><beizhu>家长接送</beizhu>/n'+
 
 '502张锦航18680257967<zd>傍江东村公交站</zd>/n'+
@@ -755,6 +757,8 @@ var DataZao='[data]'+'503邓嘉韵18074736046<zd>傍江西村公交站</zd><news
 '403闭洪强13887255774<zd>华盛隆超市对面</zd><newstu>是</newstu>/n'+
 
 '203卢雨欣13711447299<zd>华盛隆超市对面</zd>/n'+
+
+'601孟晋毅<zd>华盛隆超市对面</zd>/n'+
 
 '604蒋欢欣15800239162<zd>华盛隆超市对面</zd>/n'+
 
@@ -770,9 +774,11 @@ var DataZao='[data]'+'503邓嘉韵18074736046<zd>傍江西村公交站</zd><news
 
 var DataWan='[data]'+'603谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
 
+'303李天硕<zd>新桥东公交站</zd>/n'+
+
 '201张陈晞13595256795<zd>傍江东村公交站</zd>/n'+
 
-'103谢梦瑶13828464096<zd>傍江东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+'103谢梦瑶13828464096<zd>傍江东村公交站</zd><newstu>是</newstu>/n'+
 
 '303农奕祺13660708781<zd>傍江西村公交站</zd>/n'+
 
@@ -804,6 +810,8 @@ var DataWan='[data]'+'603谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
 
 '502王毅轩18617395868<zd>华盛隆超市对面</zd>/n'+
 
+'601孟晋毅<zd>华盛隆超市对面</zd>/n'+
+
 '604蒋欢欣15800239162<zd>华盛隆超市对面</zd>/n'+
 
 '601谭绍均<zd>芙蓉超市</zd>/n'+
@@ -822,9 +830,9 @@ var DataWan='[data]'+'603谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
 
 '601谢雨乐15814899027<zd>新桥村公交站</zd>/n'+
 
-'502施海声13724062709<zd>新桥村公交站</zd><newstu>是</newstu>/n'+
+'502施海声13724062709<zd>新桥村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
 
-'402施海晴13724062709<zd>新桥村公交站</zd><newstu>是</newstu>/n'+
+'402施海晴13724062709<zd>新桥村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
 
 '601傅梦圆17576065436<zd>新桥村公交站</zd>/n'+
 
@@ -850,11 +858,11 @@ var DataWan='[data]'+'603谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
 
 '502张锦航18680257967<zd>傍江东村公交站</zd>/n'+
 
-'204冼俊凯13070264941<zd>傍江东村公交站</zd><beizhu>家长接送</beizhu>/n'+
+'204冼俊凯13070264941<zd>傍江东村公交站</zd>/n'+
 
 '203张欣怡18581452696<zd>傍江东村公交站</zd><beizhu>家长接送</beizhu>/n'+
 
-'303黄子睿15914361341<zd>傍江东村公交站</zd><beizhu>家长接送</beizhu>/n'+
+'303黄子睿15914361341<zd>傍江东村公交站</zd>/n'+
 
 '304林安琪15107599092<zd>傍江东村公交站</zd>/n'+
 
@@ -870,7 +878,7 @@ var DataWan='[data]'+'603谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
 
 '401张家瑞15013315123<zd>傍江西村公交站</zd>/n'+
 
-'304苏宇轩13539456833<zd>石岗东村公交站</zd><beizhu>家长接送</beizhu>/n'+
+'304苏宇轩13539456833<zd>石岗东村公交站</zd>/n'+
 
 '501游雅倩13922499093<zd>石岗东村公交站</zd>/n'+
 
@@ -882,11 +890,11 @@ var DataWan='[data]'+'603谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
 
 '501钟沅钊18922474912<zd>石岗东村公交站</zd>/n'+
 
-'201韦世楚17776799128<zd>石岗东村公交站</zd><beizhu>家长接送</beizhu>/n'+
+'201韦世楚17776799128<zd>石岗东村公交站</zd>/n'+
 
 '501韦世航17776799128<zd>石岗东村公交站</zd>/n'+
 
-'102余道江13678908215<zd>石岗东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
+'102余道江13678908215<zd>石岗东村公交站</zd><newstu>是</newstu>/n'+
 
 '201刘沐炎13928964395<zd>石岗东村公交站</zd><beizhu>家长接送</beizhu>/n'+
 
@@ -896,7 +904,7 @@ var DataWan='[data]'+'603谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
 
 '104石佳敏15975461806<zd>石岗东村公交站</zd><beizhu>家长接送</beizhu><newstu>是</newstu>/n'+
 
-'303甘翌朋13929575856<zd>石岗东村公交站</zd>/n'+
+'303甘翌朋13929575856<zd>石岗东村公交站</zd><newstu>是</newstu>/n'+
 
 '202吴翊恒15102084769<zd>石岗东村公交站</zd><beizhu>家长接送，单程</beizhu><newstu>是</newstu>/n'+
 
@@ -908,7 +916,7 @@ var DataWan='[data]'+'603谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
 
 '401张贤威<zd>石岗东村公交站</zd><beizhu>家长接送</beizhu>/n'+
 
-'501崔一帆13560163650<zd>石岗东村公交站</zd>/n'+
+'501崔一帆13560163650<zd>石岗东村公交站</zd><beizhu>请假</beizhu>/n'+
 
 '603韩媛婷19127470026<zd>石岗东村公交站</zd>/n'+
 
@@ -1669,8 +1677,8 @@ var DataWan='[data]'+'603谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
 			//比较日期是否已经结束或者已经开始
 			function BjTimeStatus(){
 				var currq = new Date(gainCurRq());
-				var beginTime = new Date("2025-06-26 00:30:00");//临时变更开始时间
-				var overTime = new Date("2025-07-05 17:59:59");//临时变更结束时间
+				var beginTime = new Date("2026-01-24 00:00:00");//临时变更开始时间
+				var overTime = new Date("2026-01-31 17:59:59");//临时变更结束时间
 				if (currq.getTime() < beginTime.getTime()) {
 					//console.log('临时变更尚未启用!');
 					return false;
@@ -1759,7 +1767,7 @@ var DataWan='[data]'+'603谢鹏宇13662848541<zd>新桥东公交站</zd>/n'+
 					}
 					changeYS=setInterval(changeColor.bind(null, 'dtbeizhu'),300);
 					/*因为有些时间到站时间不一致，做个提示*/
-					alert("温馨提示【重要!!!!!】\n2025年7月2日在下面的时间基础上加1小时\n2025年7月3日在下面的时间基础上加30分钟");
+					alert("温馨提示【重要!!!!!必看!!!!】\n2026年1月27日至2026年1月29日下午回程时间在下面的时间基础上减55分钟\n2026年1月30日将于早上10点左右校车发车!届时的到站时间会发到校车群!");
 				}
 				else if(caoz=="ZSWanChangeZd"){
 					if (BjTimeStatus()){
