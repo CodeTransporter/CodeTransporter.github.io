@@ -1,0 +1,375 @@
+/* ================= 全局基础变量与重置 ================= */
+:root {
+    --primary-color: #00e5ff; /* 赛博蓝 */
+    --secondary-color: #bd00ff; /* 霓虹紫 */
+    --bg-color: #0a0e17; /* 深邃夜空黑 */
+    --surface-color: rgba(20, 26, 40, 0.7); /* 玻璃拟态底色 */
+    --text-main: #e2e8f0;
+    --text-muted: #94a3b8;
+    --danger-color: #ff3366;
+    --success-color: #00ff9d;
+    --glass-border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+    scroll-behavior: smooth; /* 平滑滚动 */
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    background-image: 
+        radial-gradient(circle at 15% 50%, rgba(0, 229, 255, 0.08), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(189, 0, 255, 0.08), transparent 25%);
+    background-attachment: fixed;
+}
+
+/* ================= 导航栏 (拟态悬浮) ================= */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: rgba(10, 14, 23, 0.8);
+    backdrop-filter: blur(12px); /* 毛玻璃效果 */
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: var(--glass-border);
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.nav-links li a:hover {
+    color: var(--bg-color);
+    background-color: var(--primary-color);
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
+}
+
+.hamburger {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--primary-color);
+}
+
+/* ================= 首屏 Hero 区域 ================= */
+.hero {
+    height: 60vh;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+    margin-top: 60px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 添加一个轻微的发光网格背景 */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+    z-index: -1;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(0, 229, 255, 0.2);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ================= 核心内容容器 ================= */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 50px;
+}
+
+.unit-section {
+    margin-bottom: 80px;
+    scroll-margin-top: 100px; /* 锚点定位偏移，防止被导航栏遮挡 */
+}
+
+.section-title {
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 2px solid rgba(0, 229, 255, 0.2);
+    padding-bottom: 10px;
+}
+
+.section-title i {
+    color: var(--primary-color);
+}
+
+/* ================= 卡片样式 (玻璃拟态) ================= */
+.card {
+    background: var(--surface-color);
+    border: var(--glass-border);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 229, 255, 0.1);
+    border-color: rgba(0, 229, 255, 0.3);
+}
+
+.card h3 {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.card h4 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.card ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.card li {
+    margin-bottom: 8px;
+    color: var(--text-muted);
+}
+
+.card p {
+    margin-bottom: 12px;
+}
+
+.card strong {
+    color: #fff;
+    font-weight: 600;
+}
+
+/* 重点卡片高亮 */
+.highlight-card {
+    background: linear-gradient(135deg, rgba(20, 26, 40, 0.9), rgba(0, 229, 255, 0.05));
+    border-left: 4px solid var(--primary-color);
+}
+
+/* 标签样式 */
+.tag {
+    display: inline-block;
+    background: rgba(0, 229, 255, 0.1);
+    color: var(--primary-color);
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    margin-right: 5px;
+}
+
+/* ================= 架构图样式 (U1的三层架构) ================= */
+.architecture-diagram {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.layer {
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+    border: 1px solid transparent;
+    transition: all 0.3s;
+}
+
+.app-layer {
+    background: rgba(189, 0, 255, 0.1);
+    border-color: rgba(189, 0, 255, 0.3);
+    color: #e0b3ff;
+}
+
+.net-layer {
+    background: rgba(0, 157, 255, 0.1);
+    border-color: rgba(0, 157, 255, 0.3);
+    color: #b3e5ff;
+}
+
+.sense-layer {
+    background: rgba(0, 255, 157, 0.1);
+    border-color: rgba(0, 255, 157, 0.3);
+    color: #b3ffd9;
+}
+
+.layer:hover {
+    filter: brightness(1.2);
+    transform: scale(1.02);
+}
+
+/* ================= 数据表格样式 ================= */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    font-size: 0.95rem;
+}
+
+.data-table th, .data-table td {
+    padding: 12px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: left;
+}
+
+.data-table th {
+    background-color: rgba(0, 229, 255, 0.1);
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.data-table tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.data-table tr:hover {
+    background-color: rgba(0, 229, 255, 0.05);
+}
+
+/* ================= 代码块美化 ================= */
+.code-title {
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #ffd700; /* 金黄色提示 */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+pre {
+    background-color: #11151c !important; /* 覆盖prism默认深色 */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 15px !important;
+    overflow-x: auto;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+    margin-top: 5px !important;
+}
+
+code {
+    font-family: 'Fira Code', 'Consolas', monospace !important;
+    font-size: 0.9rem !important;
+}
+
+/* ================= 网格布局 (U5 智慧城市卡片) ================= */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.grid-item {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.grid-item h4 {
+    color: #fff;
+    margin-top: 0;
+    font-size: 1.1rem;
+    border-bottom: 1px dashed rgba(255,255,255,0.1);
+    padding-bottom: 10px;
+}
+
+/* ================= 底部版权 ================= */
+footer {
+    text-align: center;
+    padding: 30px;
+    color: var(--text-muted);
+    border-top: var(--glass-border);
+    background: rgba(10, 14, 23, 0.8);
+}
+
+/* ================= 响应式设计 (手机端适配) ================= */
+@media screen and (max-width: 768px) {
+    .nav-links {
+        position: absolute;
+        right: -100%; /* 隐藏在右侧 */
+        top: 60px;
+        flex-direction: column;
+        background: rgba(10, 14, 23, 0.95);
+        width: 200px;
+        height: 100vh;
+        padding-top: 20px;
+        transition: 0.3s;
+        border-left: var(--glass-border);
+    }
+
+    .nav-links.active {
+        right: 0; /* 展开菜单 */
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+}

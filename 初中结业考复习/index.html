@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>初中信息科技复习冲刺系统 Pro</title>
+    
+    <!-- 引入字体图标库 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- 引入样式表 -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 登录拦截弹窗 (默认隐藏，由JS控制) -->
+    <div id="login-overlay" class="overlay" style="display: none;">
+        <div class="login-box">
+            <div class="login-header">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <h2>冲刺营 登录</h2>
+                <p>请输入您的信息以保存学习进度</p>
+            </div>
+            <div class="input-group">
+                <i class="fa-solid fa-id-card"></i>
+                <input type="text" id="login-id" placeholder="请输入学号 (如: 202401)" autocomplete="off">
+            </div>
+            <div class="input-group">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" id="login-name" placeholder="请输入真实姓名" autocomplete="off">
+            </div>
+            <button id="login-btn" class="primary-btn">开始学习 <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+    </div>
+
+    <!-- 顶部导航栏 -->
+    <header class="app-header">
+        <div class="header-left">
+            <!-- 移动端侧边栏触发按钮 -->
+            <button id="mobile-menu-btn" class="mobile-menu-btn"><i class="fa-solid fa-bars"></i></button>
+            <div class="logo">
+                <i class="fa-solid fa-microchip"></i>
+                <h1 class="hide-on-mobile">信息科技冲刺营</h1>
+            </div>
+            <nav class="grade-toggle">
+                <button class="toggle-btn active" data-grade="7">七年级</button>
+                <button class="toggle-btn" data-grade="8">八年级</button>
+            </nav>
+        </div>
+        
+        <!-- 用户操作控制台 -->
+        <div class="header-right user-console">
+            <div class="user-info">
+                <div class="avatar"><i class="fa-solid fa-user-astronaut"></i></div>
+                <div class="user-text">
+                    <span id="display-name">未登录</span>
+                    <span id="display-id" class="small-text">--</span>
+                </div>
+            </div>
+            <div class="action-buttons">
+                <!-- 导出记录按钮 -->
+                <button id="export-btn" class="icon-btn tooltip" data-tip="导出作答记录(JSON)">
+                    <i class="fa-solid fa-file-export"></i>
+                </button>
+                <!-- 导入记录按钮 (隐藏的input file) -->
+                <label for="import-file" class="icon-btn tooltip" data-tip="导入作答记录(JSON)">
+                    <i class="fa-solid fa-file-import"></i>
+                </label>
+                <input type="file" id="import-file" accept=".json" style="display: none;">
+                <!-- 退出登录按钮 -->
+                <button id="logout-btn" class="icon-btn danger-text tooltip" data-tip="切换账号">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主体布局区域 -->
+    <div class="main-layout">
+        
+        <!-- 左侧：知识点导航侧边栏 -->
+        <aside id="sidebar" class="sidebar">
+            <div class="sidebar-title">
+                <span><i class="fa-solid fa-list-ul"></i> 知识图谱</span>
+                <button id="close-sidebar-btn" class="close-sidebar hide-on-pc"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="搜索考点/关键字...">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <!-- 知识点列表由JS动态渲染 -->
+            <ul id="topic-list" class="topic-list">
+                <!-- 列表项由JS注入 -->
+            </ul>
+            
+            <!-- 底部危险操作区 -->
+            <div class="sidebar-footer">
+                <button id="clear-all-btn" class="danger-outline-btn">
+                    <i class="fa-solid fa-trash-can"></i> 清空全部作答记录
+                </button>
+            </div>
+        </aside>
+
+        <!-- 移动端侧边栏遮罩层 -->
+        <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+        <!-- 右侧：内容与测试区 -->
+        <main class="content-area" id="main-content">
+            
+            <!-- 初始欢迎页 -->
+            <div id="welcome-screen" class="welcome-screen">
+                <img src="https://api.iconify.design/fluent:rocket-20-filled.svg?color=%234a90e2" alt="Rocket" class="welcome-icon">
+                <h2>欢迎回来，<span id="welcome-name">同学</span>！</h2>
+                <p>您的学习进度已自动云同步至本地浏览器。请从左侧选择知识点继续挑战！</p>
+            </div>
+
+            <!-- 知识点卡片区 -->
+            <section id="knowledge-section" class="knowledge-card" style="display: none;">
+                <div class="card-header">
+                    <span class="badge grade-badge" id="k-grade"><i class="fa-solid fa-layer-group"></i> 单元</span>
+                    <span class="badge page-badge" id="k-page"><i class="fa-solid fa-book-open"></i> 页码</span>
+                </div>
+                
+                <h2 id="k-title" class="k-title">知识点标题</h2>
+                
+                <div class="k-content-wrapper">
+                    <!-- 严肃考点部分 -->
+                    <div class="k-box official-box">
+                        <h3 class="box-title"><i class="fa-solid fa-thumbtack"></i> 核心考点提炼</h3>
+                        <div id="k-content" class="box-text">这里是官方知识点描述。</div>
+                    </div>
+
+                    <!-- 幽默解析部分 -->
+                    <div class="k-box humor-box">
+                        <h3 class="box-title"><i class="fa-solid fa-lightbulb"></i> 老师的秒懂解析</h3>
+                        <div id="k-humor" class="box-text">这里是通俗解释。</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 随堂测试区 -->
+            <section id="quiz-section" class="quiz-container" style="display: none;">
+                <div class="quiz-header">
+                    <h2><i class="fa-solid fa-pen-to-square"></i> 闯关实战</h2>
+                    <div class="quiz-header-right">
+                        <span class="status-badge" id="unit-status-badge">未作答</span>
+                        <span class="question-count">共 <span id="q-count">0</span> 题</span>
+                    </div>
+                </div>
+
+                <!-- 题目列表由JS动态渲染 -->
+                <div id="quiz-list" class="quiz-list">
+                    <!-- 题目容器预留 -->
+                </div>
+
+                <!-- 测试控制面板 -->
+                <div class="quiz-actions" id="quiz-actions">
+                    <button id="submit-btn" class="primary-btn large-btn">
+                        <i class="fa-solid fa-paper-plane"></i> 提交保存进度
+                    </button>
+                    <button id="clear-unit-btn" class="secondary-btn large-btn">
+                        <i class="fa-solid fa-rotate-left"></i> 清空本单元重答
+                    </button>
+                </div>
+
+                <!-- 测试结果反馈区 -->
+                <div id="result-area" class="result-area" style="display: none;">
+                    <div class="score-circle">
+                        <span id="final-score">0</span><span class="score-unit">分</span>
+                    </div>
+                    <div class="feedback-msg">
+                        <h3 id="feedback-title">评估完成</h3>
+                        <p id="feedback-desc">作答记录已安全保存至本地。</p>
+                        <p class="time-stats" id="time-stats-desc"><i class="fa-regular fa-clock"></i> 本单元总耗时: --秒</p>
+                    </div>
+                </div>
+            </section>
+            
+        </main>
+    </div>
+	<!-- 【新增】高颜值自定义确认弹窗 -->
+    <!-- 注意：去掉了 style="display:none"，改用 hidden 类来控制显示隐藏 -->
+    <div id="custom-confirm" class="overlay confirm-overlay hidden">
+        <div class="confirm-box">
+            <div class="confirm-icon"><i class="fa-solid fa-circle-exclamation"></i></div>
+            <h3 id="confirm-title">提示</h3>
+            <p id="confirm-msg">确定执行此操作吗？</p>
+            <div class="confirm-actions">
+                <button id="confirm-cancel" class="secondary-btn">取消</button>
+                <button id="confirm-ok" class="primary-btn danger-bg">确定重做</button>
+            </div>
+        </div>
+    </div>
+    <!-- 提示消息容器 (Toast) -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

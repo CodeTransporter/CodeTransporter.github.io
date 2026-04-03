@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>奇妙网络实验室 - 期末冲刺无敌宝典</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&family=ZCOOL+KuaiLe&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'kuai':['"ZCOOL KuaiLe"', 'cursive'],
+                        'sans':['"Noto Sans SC"', 'sans-serif'],
+                        'mono':['"JetBrains Mono"', 'monospace'], 
+                    },
+                    colors: {
+                        'neo-blue': '#38bdf8',
+                        'neo-yellow': '#fde047',
+                        'neo-pink': '#f472b6',
+                        'neo-green': '#4ade80',
+                        'neo-dark': '#1e293b',
+                        'neo-bg': '#f8fafc'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#f0fdf4] text-neo-dark font-sans antialiased min-h-screen relative pb-20 selection:bg-neo-yellow selection:text-neo-dark scroll-smooth">
+	<!-- 🌟 卡通顶部导航栏 (修复版：把闯关按钮加回来了！) 🌟 -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-white border-b-4 border-neo-dark h-20 flex items-center shadow-sm">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="bg-red-500 w-12 h-12 rounded-xl border-2 border-neo-dark shadow-[2px_2px_0px_0px_rgba(30,41,59,1)] flex items-center justify-center transform -rotate-6">
+                    <i class="fas fa-fire text-white text-2xl animate-pulse"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-kuai text-neo-dark leading-none hidden md:block">期末冲刺宝典</h1>
+                    <span class="text-[10px] md:text-xs font-bold text-white bg-red-500 px-2 py-0.5 rounded-full border border-red-700 shadow-sm">涵盖第四至第七单元全考点</span>
+                </div>
+            </div>
+            
+            <!-- 🚀 核心修复：被我漏掉的终极闯关按钮，回来了！ -->
+            <div class="flex gap-2 md:gap-4">
+                <button id="tab-study" class="neo-btn bg-neo-yellow px-4 md:px-6 py-2 rounded-2xl border-2 border-neo-dark font-bold text-sm md:text-lg flex items-center gap-2 transform transition hover:-translate-y-1 shadow-[4px_4px_0_0_#000]">
+                    <i class="fas fa-book-reader"></i> 复习背诵
+                </button>
+                <button id="tab-quiz" class="neo-btn bg-white px-4 md:px-6 py-2 rounded-2xl border-2 border-neo-dark font-bold text-sm md:text-lg text-gray-400 hover:text-neo-dark flex items-center gap-2 transform transition hover:-translate-y-1 shadow-[4px_4px_0_0_#000]">
+                    <i class="fas fa-gamepad"></i> 闯关考试
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- 悬浮的单元快捷导航 (移到下面来，不占用顶部栏) -->
+    <div class="fixed top-20 left-0 w-full z-40 bg-gray-100 border-b-2 border-gray-300 shadow-sm py-2 px-4 flex gap-2 md:justify-center overflow-x-auto no-scrollbar" id="sub-nav">
+        <a href="#module-4" class="bg-white border-2 border-neo-dark text-neo-dark font-bold text-xs md:text-sm px-4 py-1 rounded-full hover:bg-neo-blue hover:text-white transition whitespace-nowrap">Unit 4: 网络基础</a>
+        <a href="#module-5" class="bg-white border-2 border-neo-dark text-neo-dark font-bold text-xs md:text-sm px-4 py-1 rounded-full hover:bg-neo-green hover:text-white transition whitespace-nowrap">Unit 5: 创新应用</a>
+        <a href="#module-6" class="bg-white border-2 border-neo-dark text-neo-dark font-bold text-xs md:text-sm px-4 py-1 rounded-full hover:bg-neo-pink hover:text-white transition whitespace-nowrap">Unit 6: 安全防范</a>
+        <a href="#module-7" class="bg-white border-2 border-neo-dark text-neo-dark font-bold text-xs md:text-sm px-4 py-1 rounded-full hover:bg-neo-yellow hover:text-neo-dark transition whitespace-nowrap">Unit 7: AI大模型</a>
+    </div>
+
+    <main class="container mx-auto px-4 mt-28 mb-10 max-w-5xl">
+		<div id="study-content" class="space-y-12">
+			<!-- 复习范围声明卡片 -->
+			<div class="bg-white border-4 border-neo-dark rounded-3xl p-6 md:p-8 relative shadow-[8px_8px_0px_0px_rgba(30,41,59,1)] mb-12 flex flex-col md:flex-row items-center gap-6">
+				<i class="fas fa-bullhorn text-6xl text-neo-yellow animate-bounce"></i>
+				<div>
+					<h2 class="text-2xl font-black text-neo-dark mb-2">📢 绝密复习大纲已送达！</h2>
+					<p class="text-sm font-bold text-gray-600 leading-relaxed bg-gray-100 p-3 rounded-xl border border-gray-300">
+						<span class="text-red-500 font-black">【复习范围】：</span>七年级教材 P83 至 P184。<br>
+						<span class="text-blue-600 font-black">【涵盖章节】：</span>第四单元《搭建校园网》、第五单元《社区志愿服务(互联网创新)》、第六单元《互联网安全与防范》、第七单元《智能学习助手(生成式AI)》。<br>
+						<span class="text-green-600 font-black">【使用说明】：</span>所有带荧光笔高亮的都是必考概念！快速浏览下方四大板块，最后在底部的“记忆闪卡”实验室测试自己！
+					</p>
+				</div>
+			</div>
+
+			<!-- ==============================
+				 复习模块 1：第四单元 (网络基础)
+				 ============================== -->
+			<section id="module-4" class="bg-white border-4 border-neo-dark rounded-3xl p-6 md:p-10 relative shadow-[8px_8px_0px_0px_rgba(30,41,59,1)] scroll-mt-28 mb-12">
+				<div class="absolute -top-5 -left-5 bg-neo-blue border-2 border-neo-dark text-white font-black px-4 py-2 rounded-xl shadow-[2px_2px_0px_0px_#000] transform -rotate-3 z-10">Unit 4</div>
+				<h3 class="text-2xl font-black border-l-8 border-neo-blue pl-4 mb-6">第四单元：搭建校园网络系统 (底层原理)</h3>
+				
+				<div class="space-y-6 text-sm font-bold text-gray-700">
+					<!-- 考点 1 -->
+					<div class="bg-blue-50 p-5 rounded-2xl border-2 border-blue-200">
+						<h4 class="text-blue-800 text-lg font-black mb-3 border-b border-blue-200 pb-2"><i class="fas fa-network-wired"></i> 考点 1：网络分类、设备与连接</h4>
+						<ul class="list-disc pl-5 space-y-3">
+							<li><span class="highlighter-yellow text-red-600">局域网 (LAN) vs 广域网 (WAN)</span>：LAN 范围小（如一栋楼/校园网），WAN 范围大（如跨省跨国骨干网）。</li>
+							<li><span class="highlighter-blue">路由器 (核心枢纽)</span>：功能是<span class="underline decoration-wavy">路由选择与数据转发</span>。连线口诀：<span class="bg-blue-200 px-1 rounded text-black">WAN口接外网(光猫)，LAN口接本地电脑。</span></li>
+							<li><span class="highlighter-green">传输介质对比</span>：<span class="font-black text-black">双绞线</span>(成本低，短距离)；<span class="font-black text-black">光纤</span>(速度极快，抗干扰强，长距离)；<span class="font-black text-black">Wi-Fi</span>(便捷，覆盖广)；<span class="font-black text-black">蓝牙</span>(极短距离，低功耗)。</li>
+							<li><span class="highlighter-pink">三种连接方式</span>：<span class="font-black text-black">PPPoE</span>(需账号密码拨号)；<span class="font-black text-black">动态 IP / DHCP</span>(全自动获取IP，最常用)；<span class="font-black text-black">静态 IP</span>(技术人员手动死记硬填)。</li>
+						</ul>
+					</div>
+
+					<!-- 考点 2 -->
+					<div class="bg-blue-50 p-5 rounded-2xl border-2 border-blue-200">
+						<h4 class="text-blue-800 text-lg font-black mb-3 border-b border-blue-200 pb-2"><i class="fas fa-map-marker-alt"></i> 考点 2：IP 地址与网络测试工具</h4>
+						<ul class="list-disc pl-5 space-y-3">
+							<li><span class="highlighter-yellow text-red-600">IPv4</span>：由 <span class="font-black text-black">32 位二进制数</span>组成，常用<span class="underline decoration-wavy">点分十进制</span>形式表示（如192.168.1.1）。<br>
+							💡 <span class="text-blue-600">秒懂：</span>分成四组，每组8位，方便人类记忆。由<span class="font-black text-black bg-white px-1 border border-gray-300">网络号(小区名)</span>和<span class="font-black text-black bg-white px-1 border border-gray-300">主机号(门牌号)</span>组成。</li>
+							<li><span class="highlighter-green">IPv6</span>：为解决 IPv4 枯竭而生，采用 <span class="font-black text-red-600">128 位二进制数</span>，数量高达 2 的 128 次方，能给地球上每一粒沙子分配 IP！</li>
+							<li><span class="highlighter-pink">网络测试三大黑客命令</span>：
+								<div class="mt-2 space-y-1 bg-white p-3 rounded-lg border border-blue-100 font-mono text-xs">
+									<div><span class="text-blue-600 font-black">ping[目标IP]</span>：测试连通性 (像潜水艇发声呐听回声)。</div>
+									<div><span class="text-purple-600 font-black">ipconfig /all</span>：查看本机所有网络配置信息。</div>
+									<div><span class="text-orange-600 font-black">tracert [目标IP]</span>：路由追踪 (看数据包沿途经过了哪些路由器中转站)。</div>
+									<div><span class="text-green-600 font-black">netstat</span>：显示网络连接和端口状态 (抓内鬼)。</div>
+								</div>
+							</li>
+						</ul>
+						<!-- ✨ 补齐漏点：子网掩码秒懂实验室 -->
+						<div class="bg-neo-bg border-4 border-neo-dark rounded-xl p-4 mt-4 shadow-sm transform transition hover:-translate-y-1">
+							<h5 class="font-black text-neo-blue mb-1"><i class="fas fa-mask text-blue-500 mr-2"></i> 助教秒懂：被遗忘的【子网掩码】</h5>
+							<p class="text-xs font-bold text-gray-700 leading-relaxed">
+								课本上说 IP 地址由“网络号”和“主机号”组成，但电脑怎么知道从哪劈开呢？<br>
+								这就需要 <span class="bg-blue-200 text-blue-900 px-1 rounded border border-blue-400">子网掩码 (如 255.255.255.0)</span>！它就像一把“尺子”，用来告诉路由器：“前三段 192.168.1 是小区名(网络号)，最后一段是门牌号(主机号)”。没有子网掩码，IP 地址就是一串废数字！
+							</p>
+						</div>
+					</div>
+
+					<!-- 考点 3 -->
+					<div class="bg-blue-50 p-5 rounded-2xl border-2 border-blue-200">
+						<h4 class="text-blue-800 text-lg font-black mb-3 border-b border-blue-200 pb-2"><i class="fas fa-layer-group"></i> 考点 3：TCP/IP 协议分层与三次握手</h4>
+						<ul class="list-disc pl-5 space-y-3">
+							<li><span class="highlighter-yellow text-red-600">TCP/IP 四层架构 (从上到下)</span>：
+								<div class="mt-2 space-y-1 bg-white p-3 rounded-lg border border-blue-100 text-xs">
+									<div><span class="font-black">1. 应用层 (老板)：</span>表达需求，把用户操作变成网络信息。协议：<span class="text-blue-600">HTTP(网页), SMTP/POP3(邮件)</span></div>
+									<div><span class="font-black">2. 传输层 (打包部)：</span>端对端传送，贴上端口号。协议：<span class="text-blue-600">TCP(可靠), UDP(极快但不可靠)</span></div>
+									<div><span class="font-black">3. 网络层 (物流调度)：</span>拿着 IP 地址找路规划路线。协议：<span class="text-blue-600">IP</span></div>
+									<div><span class="font-black">4. 网络接口层 (司机)：</span>最底层，通过物理介质(网线/光纤)收发光电信号。</div>
+								</div>
+								💡 <span class="text-blue-600">秒懂封装解封：</span>发件时是从上往下套娃穿衣服（数据 ➡ 贴TCP头 ➡ 贴IP头 ➡ 贴MAC头）；收件时反过来一层层脱衣服检查。
+							</li>
+							<li><span class="highlighter-green text-red-600">TCP 的三次握手</span>：建立可靠连接的专属机制。<br>
+							💡 <span class="text-blue-600">秒懂：</span>第一次 A 喊“在吗？(SYN)” ➡ 第二次 B 喊“在的，你呢？(SYN+ACK)” ➡ 第三次 A 喊“听到了，开始传吧！(ACK)”。确保双方都能听能说！</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<!-- ==============================
+				 复习模块 2：第五单元 (互联网创新应用)
+				 ============================== -->
+			<section id="module-5" class="bg-white border-4 border-neo-dark rounded-3xl p-6 md:p-10 relative shadow-[8px_8px_0px_0px_rgba(30,41,59,1)] scroll-mt-28 mb-12">
+				<div class="absolute -top-5 -left-5 bg-neo-green border-2 border-neo-dark text-neo-dark font-black px-4 py-2 rounded-xl shadow-[2px_2px_0px_0px_#000] transform -rotate-3 z-10">Unit 5</div>
+				<h3 class="text-2xl font-black border-l-8 border-neo-green pl-4 mb-6">社区志愿服务行动 (互联网创新应用)</h3>
+				
+				<div class="space-y-6 text-sm font-bold text-gray-700">
+					<!-- 考点 1 -->
+					<div class="bg-green-50 p-5 rounded-2xl border-2 border-green-300">
+						<h4 class="text-green-800 text-lg font-black mb-3 border-b border-green-300 pb-2"><i class="fas fa-cloud"></i> 考点 1：云计算与云协作</h4>
+						<ul class="list-disc pl-5 space-y-3">
+							<li><span class="highlighter-yellow text-red-600">在线学习优势</span>：提供海量资源、<span class="underline decoration-wavy">打破时空限制</span>、支持个性化与沉浸式体验。</li>
+							<li><span class="highlighter-green text-black">云计算的 3 个分层架构</span>：
+								<div class="mt-2 space-y-1 bg-white p-2 rounded border border-green-200 text-xs">
+									<div><span class="font-black text-red-500">IaaS (基础设施即服务)</span>：买速冻披萨，提供底层服务器和存储硬件。</div>
+									<div><span class="font-black text-blue-500">PaaS (平台即服务)</span>：买外卖披萨，提供编程和运行开发环境。</div>
+									<div><span class="font-black text-purple-500">SaaS (软件即服务)</span>：去餐厅吃披萨，无需安装直接在网页用（如网盘、在线文档）。</div>
+								</div>
+							</li>
+							<li><span class="highlighter-pink text-black">云存储底层技术</span>：<span class="font-black">虚拟化技术</span>(物理机打隔断变成多台虚拟机)；<span class="font-black">分布式存储</span>(切成小块分散存多地，炸毁一台也能恢复)。</li>
+							<li><span class="highlighter-blue">云文档协同</span>：多人实时同步打字，自动云端保存，杜绝来回传文件导致的冲突。</li>
+						</ul>
+					</div>
+
+					<!-- 考点 2 -->
+					<div class="bg-green-50 p-5 rounded-2xl border-2 border-green-300">
+						<h4 class="text-green-800 text-lg font-black mb-3 border-b border-green-300 pb-2"><i class="fas fa-chart-pie"></i> 考点 2：智能工具与数据驱动决策</h4>
+						<ul class="list-disc pl-5 space-y-3">
+							<li><span class="highlighter-yellow text-red-600">智能会议助手</span>：利用自然语言处理等技术，实现 <span class="font-black text-blue-600">语音实时转文字</span> 和 <span class="font-black text-green-600">智能提取摘要(脑图)</span>。</li>
+							<li><span class="highlighter-green text-red-600">数据驱动决策的 5 步流程</span>：<span class="bg-white px-1 border border-gray-300 rounded">1.采集</span> ➡ <span class="bg-white px-1 border border-gray-300 rounded">2.分析</span> ➡ <span class="bg-white px-1 border border-gray-300 rounded">3.可视化(画图表)</span> ➡ <span class="bg-white px-1 border border-gray-300 rounded">4.科学决策</span> ➡ <span class="bg-white px-1 border border-gray-300 rounded">5.持续改进</span>。<br>
+							💡 <span class="text-green-700">核心意义：抛弃主观的“拍脑袋我以为”，用真实的客观数据指导工作！</span></li>
+						</ul>
+					</div>
+
+					<!-- 考点 3 -->
+					<div class="bg-green-50 p-5 rounded-2xl border-2 border-green-300">
+						<h4 class="text-green-800 text-lg font-black mb-3 border-b border-green-300 pb-2"><i class="fas fa-car-side"></i> 考点 3：智慧交通与导航原理</h4>
+						<ul class="list-disc pl-5 space-y-3">
+							<li><span class="highlighter-yellow text-red-600">电子导航的三大技术底座</span>：全球卫星导航系统 (GPS/北斗)、地理信息系统 (GIS地图库)、通信技术。</li>
+							<li><span class="highlighter-green text-black">导航的步骤</span>：卫星定位 ➡ 地图数据匹配(把你放在地图上) ➡ 路线规划 ➡ 实时路况更新 ➡ 语音可视化。</li>
+							<li><span class="highlighter-pink text-red-600">AI 在交通的应用</span>：<span class="font-black text-blue-600">无感支付</span>(摄像头抓拍车牌秒过闸)；<span class="font-black text-green-600">交通流量管理</span>(AI控制红绿灯治堵)；<span class="font-black text-red-600">AEB 智能防碰撞</span>(雷达自动刹车保命)。</li>
+							<li><span class="highlighter-blue text-black">车路协同 (V2X)</span>：未来趋势，车、马路设施、云端大脑实时互联互通，让路灯帮你扫除视觉盲区！</li>
+						</ul>
+						<!-- ✨ 补齐漏点：物联网与5G 秒懂实验室 -->
+						<div class="bg-neo-bg border-4 border-neo-dark rounded-xl p-4 mt-4 shadow-sm transform transition hover:-translate-y-1">
+							<h5 class="font-black text-neo-green mb-1"><i class="fas fa-signal text-green-500 mr-2"></i> 助教秒懂：智慧交通全靠【物联网+5G】</h5>
+							<p class="text-xs font-bold text-gray-700 leading-relaxed">
+								为什么汽车能和路灯说话（车路协同）？因为万物互联！<br>
+								<span class="bg-green-200 text-green-900 px-1 rounded border border-green-400">物联网 (IoT)</span> 给每个路灯和汽车都装了芯片；而 <span class="bg-green-200 text-green-900 px-1 rounded border border-green-400">5G 通信技术</span> 提供了“超低延迟”。如果用 4G，汽车看到障碍物踩刹车可能要等 1 秒（早就撞上了），而 5G 只需要 1 毫秒！
+							</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- ==============================
+				 复习模块 3：第六单元 (网络安全)
+				 ============================== -->
+			<section id="module-6" class="bg-white border-4 border-neo-dark rounded-3xl p-6 md:p-10 relative shadow-[8px_8px_0px_0px_rgba(30,41,59,1)] scroll-mt-28 mb-12">
+				<div class="absolute -top-5 -left-5 bg-neo-pink border-2 border-neo-dark text-white font-black px-4 py-2 rounded-xl shadow-[2px_2px_0px_0px_#000] transform -rotate-3 z-10">Unit 6</div>
+				<h3 class="text-2xl font-black border-l-8 border-neo-pink pl-4 mb-6">共同守护在线生活 (安全与防范)</h3>
+				
+				<div class="space-y-6 text-sm font-bold text-gray-700">
+					<!-- 考点 1 -->
+					<div class="bg-pink-50 p-5 rounded-2xl border-2 border-pink-300">
+						<h4 class="text-pink-800 text-lg font-black mb-3 border-b border-pink-300 pb-2"><i class="fas fa-shield-alt"></i> 考点 1：安全风险与防范体系</h4>
+						<ul class="list-disc pl-5 space-y-3">
+							<li><span class="highlighter-yellow text-red-600 font-black">病毒 vs 木马</span>：病毒会<span class="underline decoration-wavy">自我复制传染</span>，破坏系统；木马不复制，只会伪装成正常软件潜伏并<span class="underline decoration-wavy">偷数据(开后门)</span>。</li>
+							<li><span class="highlighter-green text-black font-black">社会工程学攻击</span>：利用人类信任、恐慌等心理弱点的骗局（如冒充客服退款）。防范口诀：陌生人借钱必先语音核实！</li>
+							<li><span class="highlighter-pink text-black font-black">防火墙</span>：部署在网络边界的安全系统，根据规则<span class="text-red-500">允许或阻止</span>数据传输（第一道防线的城墙卫兵）。</li>
+							<li><span class="highlighter-blue text-black font-black">打补丁 (更新系统)</span>：为了修补可能被黑客利用的安全漏洞（补城墙狗洞）。</li>
+							<li><span class="highlighter-yellow text-black font-black">网络安全法</span>：2017年6月1日实施，是我国网络安全的基础性法律。</li>
+						</ul>
+					</div>
+
+					<!-- 考点 2 -->
+					<div class="bg-pink-50 p-5 rounded-2xl border-2 border-pink-300">
+						<h4 class="text-pink-800 text-lg font-black mb-3 border-b border-pink-300 pb-2"><i class="fas fa-fingerprint"></i> 考点 2：身份验证三大因子与防御分层</h4>
+						<ul class="list-disc pl-5 space-y-3">
+							<li><span class="highlighter-yellow text-red-600">身份验证三大核心因子</span>：
+								<div class="mt-2 space-y-1 bg-white p-2 rounded border border-pink-200 text-xs">
+									<div><span class="font-black text-yellow-600">1. 知识因子</span>：你脑子记住的（如：静态密码）。</div>
+									<div><span class="font-black text-green-600">2. 持有因子</span>：你物理拿着的（如：手机短信验证码、动态令牌）。</div>
+									<div><span class="font-black text-pink-600">3. 生物因子</span>：你身体长着的（如：指纹、人脸、虹膜-瞳孔随光缩放无法伪造）。</div>
+								</div>
+							</li>
+							<li><span class="highlighter-green text-red-600 font-black">防御分层 (多因素验证)</span>：为了极高安全性，将上述两种及以上因子结合（如：密码+人脸）。一层被破，下一层还能挡住！</li>
+							<li><span class="highlighter-pink text-black">强密码规则</span>：长度超 12 位，必须包含大小写字母、数字和特殊符号混合，绝不用生日和字典单词防暴力破解。</li>
+						</ul>
+					</div>
+
+					<!-- 考点 3 -->
+					<div class="bg-pink-50 p-5 rounded-2xl border-2 border-pink-300">
+						<h4 class="text-pink-800 text-lg font-black mb-3 border-b border-pink-300 pb-2"><i class="fas fa-lock"></i> 考点 3：密码学大揭秘</h4>
+						<ul class="list-disc pl-5 space-y-3">
+							<li><span class="highlighter-yellow text-red-600">对称加密 vs 非对称加密</span>：
+								<div class="mt-2 space-y-1 bg-white p-2 rounded border border-pink-200 text-xs">
+									<div><span class="font-black text-blue-600">对称加密</span>：加密和解密用<span class="underline decoration-wavy">同一把钥匙</span>。速度极快，但送钥匙路上容易被偷。</div>
+									<div><span class="font-black text-purple-600">非对称加密 (RSA)</span>：用<span class="font-black text-red-500">公钥</span>加密(相当于开放投信口)，用<span class="font-black text-green-500">私钥</span>解密(唯一钥匙)。极其安全但算力消耗极大速度慢！底层是极难分解的大素数相乘的数学难题。</div>
+								</div>
+							</li>
+							<li><span class="highlighter-green text-black">WPS文档加密区别</span>：<span class="font-black text-blue-600">账号加密</span>认人不认密码(不怕忘)，<span class="font-black text-orange-600">密码加密</span>认锁不认人(忘了直接死锁)。</li>
+							<li><span class="highlighter-pink text-red-600 font-black">未来加密前沿技术</span>：<span class="text-blue-600 font-black">量子加密</span>(利用微观粒子不确定性，一旦被窃听立马发现，物理绝对防盗)；<span class="text-green-600 font-black">区块链</span>(分布式全网公开记账，数据永远不可篡改)。</li>
+						</ul>
+						<!-- ✨ 补齐漏点：AES vs RSA 算法秒懂实验室 -->
+						<div class="bg-neo-bg border-4 border-neo-dark rounded-xl p-4 mt-4 shadow-sm transform transition hover:-translate-y-1">
+							<h5 class="font-black text-neo-pink mb-1"><i class="fas fa-key text-pink-500 mr-2"></i> 助教秒懂：课本里的 AES 和 RSA 是啥？</h5>
+							<p class="text-xs font-bold text-gray-700 leading-relaxed">
+								<span class="bg-pink-200 text-pink-900 px-1 rounded border border-pink-400">AES 算法</span> = 最牛的“对称加密”。加密解密同一把钥匙，速度极快！常用来加密你电脑里的一整部 10G 高清电影。<br>
+								<span class="bg-pink-200 text-pink-900 px-1 rounded border border-pink-400">RSA 算法</span> = 最牛的“非对称加密”。利用大素数相乘的数学难题，公钥锁门，私钥开门。速度极慢！常用来保护极其重要的极短数字（比如银行卡密码）。
+							</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- ==============================
+				 复习模块 4：第七单元 (生成式 AI)
+				 ============================== -->
+			<section id="module-7" class="bg-white border-4 border-neo-dark rounded-3xl p-6 md:p-10 relative shadow-[8px_8px_0px_0px_rgba(30,41,59,1)] scroll-mt-28 mb-16">
+				<div class="absolute -top-5 -left-5 bg-neo-yellow border-2 border-neo-dark text-neo-dark font-black px-4 py-2 rounded-xl shadow-[2px_2px_0px_0px_#000] transform -rotate-3 z-10">Unit 7</div>
+				<h3 class="text-2xl font-black border-l-8 border-neo-yellow pl-4 mb-6">智能学习助手 (AI 与多模态技术)</h3>
+				
+				<div class="space-y-6 text-sm font-bold text-gray-700">
+					<!-- 考点 1 -->
+					<div class="bg-yellow-50 p-5 rounded-2xl border-2 border-yellow-400">
+						<h4 class="text-yellow-800 text-lg font-black mb-3 border-b border-yellow-400 pb-2"><i class="fas fa-robot"></i> 考点 1：生成式 AI 与代码生成</h4>
+						<ul class="list-disc pl-5 space-y-3">
+							<li><span class="highlighter-yellow text-red-600 font-black">Transformer 架构</span>：当代大语言模型(LLM)的底层核心。本质是从海量文本中学习，<span class="underline decoration-wavy">预测下一步最合理的表达方式</span>（高级文字接龙）。</li>
+							<li><span class="highlighter-green text-black font-black">提示词 (Prompt) 优化 3 原则</span>：必须做到 <span class="bg-white border border-gray-300 px-1 rounded text-green-700">1. 指令明确</span>、<span class="bg-white border border-gray-300 px-1 rounded text-green-700">2. 条件具体(给背景)</span>、<span class="bg-white border border-gray-300 px-1 rounded text-green-700">3. 格式规范</span>。</li>
+							<li><span class="highlighter-pink text-black font-black">代码生成能力</span>：AI 不仅能一键写代码，还能帮你找 Bug (漏洞检测与修复)，极大地提高了软件开发效率。</li>
+						</ul>
+						<!-- ✨ 补齐漏点：AI 代码生成的 4 个底层步骤 -->
+						<div class="bg-neo-bg border-4 border-neo-dark rounded-xl p-4 mt-4 shadow-sm transform transition hover:-translate-y-1">
+							<h5 class="font-black text-neo-yellow text-neo-dark mb-1"><i class="fas fa-code text-yellow-600 mr-2"></i> 助教秒懂：AI 写代码的 4 步流水线</h5>
+							<p class="text-xs font-bold text-gray-700 leading-relaxed">
+								AI 可不是凭空变出代码的，它的脑子里有 4 个步骤：<br>
+								1. <span class="text-blue-600">学习资源</span> (平时背下了全网的开源代码)<br>
+								2. <span class="text-blue-600">解析意图</span> (用 NLP 分析你的提示词到底想要啥)<br>
+								3. <span class="text-blue-600">生成框架</span> (先搭一个 HTML 骨架草稿)<br>
+								4. <span class="text-blue-600">迭代优化</span> (自己检查 Bug，加上 CSS 和 JS 的细节)。
+							</p>
+						</div>
+					</div>
+
+					<!-- 考点 2 -->
+					<div class="bg-yellow-50 p-5 rounded-2xl border-2 border-yellow-400">
+						<h4 class="text-yellow-800 text-lg font-black mb-3 border-b border-yellow-400 pb-2"><i class="fas fa-magic"></i> 考点 2：文生图与 OCR 图像识别原理</h4>
+						<ul class="list-disc pl-5 space-y-3">
+							<li><span class="highlighter-yellow text-red-600 font-black">扩散模型 (Diffusion)</span>：文生图（文字画画）的绝对王者！原理是<span class="underline decoration-wavy">“从混沌到清晰”</span>：从一张完全随机的噪声雪花图像开始，根据提示词逐步去除噪声，最终恢复出精美画面。</li>
+							<li><span class="highlighter-green text-black">文生图优化策略</span>：明确关键词(主体) + 限定风格(如赛博朋克) + 补充细节(如背景环境)。</li>
+							<li><span class="highlighter-pink text-red-600 font-black">OCR (图片转文字) 5步曲</span>：
+								<div class="mt-2 flex items-center flex-wrap gap-1 text-xs">
+									<span class="bg-white border border-gray-400 px-2 py-1 rounded">1. 图像预处理</span> ➡ 
+									<span class="bg-white border border-gray-400 px-2 py-1 rounded">2. 文字检测</span> ➡ 
+									<span class="bg-white border border-gray-400 px-2 py-1 rounded">3. 文本定位</span> ➡ 
+									<span class="bg-blue-100 text-blue-800 border border-blue-400 px-2 py-1 rounded font-black shadow-sm">4. 字符识别 (依赖 CNN 卷积神经网络抓取特征)</span> ➡ 
+									<span class="bg-white border border-gray-400 px-2 py-1 rounded">5. 语义校正 (结合大模型)</span>
+								</div>
+							</li>
+						</ul>
+					</div>
+
+					<!-- 考点 3 -->
+					<div class="bg-yellow-50 p-5 rounded-2xl border-2 border-yellow-400">
+						<h4 class="text-yellow-800 text-lg font-black mb-3 border-b border-yellow-400 pb-2"><i class="fas fa-globe-asia"></i> 考点 3：多模态技术与 AI 伦理</h4>
+						<ul class="list-disc pl-5 space-y-3">
+							<li><span class="highlighter-yellow text-purple-700 font-black">多模态人工智能</span>：打破传统单一处理的局限，融合文本、图像、音频、视频等多种类型数据。让机器像人一样拥有“视觉听觉综合感知”，能实现极其震撼的<span class="underline decoration-wavy">“图生文、视频生成”</span>。</li>
+							<li><span class="highlighter-green text-red-600 font-black">AI 幻觉与批判性思维</span>：AI 并不是神仙，它会产生“一本正经地胡说八道”的幻觉现象。因此我们绝对不能当甩手掌柜盲目相信，必须保持<span class="underline decoration-wavy">批判性思维</span>进行人工核对和逻辑甄别！</li>
+							<li><span class="highlighter-pink text-black font-black">数字公民素养</span>：技术应作为人类智慧的延伸而非替代。使用 AI 必须核实标注信息来源，尊重版权，做个有道德的数字公民！</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<!-- ==============================
+				 🔥 免打字终极互动：AI 记忆闪卡实验室
+				 ============================== -->
+			<section class="bg-neo-dark border-4 border-neo-dark rounded-3xl p-6 md:p-10 relative shadow-[8px_8px_0px_0px_rgba(239,68,68,1)] mb-10">
+				<div class="bg-red-500 text-white px-4 py-3 border-b-4 border-neo-dark flex items-center justify-between rounded-t-2xl -mt-6 -mx-6 md:-mt-10 md:-mx-10 mb-8">
+					<h4 class="font-black text-xl"><i class="fas fa-bolt text-neo-yellow mr-2 animate-bounce"></i>极客实验室：AI 记忆闪卡 (考前突击专版)</h4>
+					<span class="bg-white text-red-600 text-xs font-black px-2 py-1 rounded-full border-2 border-black">免打字·点击翻转背诵</span>
+				</div>
+
+				<div class="text-center text-gray-300 font-bold mb-6">
+					👨‍🏫 助教提示：下面是全书最容易混淆、必考的 8 个硬核概念！看着正面，在心里默背答案，然后点击卡片翻面核对！
+				</div>
+
+				<!-- HTML 直接写死 8 张闪卡，0 JS注入 -->
+				<div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 perspective-1000">
+					
+					<!-- 卡片 1 -->
+					<div class="flashcard h-32 md:h-40 cursor-pointer group w-full relative preserve-3d transition-transform duration-500" onclick="this.classList.toggle('flipped')">
+						<div class="card-face front absolute inset-0 bg-white border-4 border-neo-dark rounded-xl flex flex-col items-center justify-center p-3 shadow-[4px_4px_0px_0px_#1e293b] backface-hidden">
+							<i class="fas fa-bug text-3xl text-red-500 mb-2"></i>
+							<span class="font-black text-center text-sm md:text-base text-neo-dark">病毒 vs 木马<br>最核心的区别是？</span>
+						</div>
+						<div class="card-face back absolute inset-0 bg-red-100 border-4 border-red-500 rounded-xl flex flex-col items-center justify-center p-3 shadow-[4px_4px_0px_0px_#ef4444] backface-hidden rotate-y-180">
+							<span class="font-black text-center text-xs md:text-sm text-red-900 leading-relaxed">病毒会<span class="bg-red-300 px-1 rounded">自我复制</span>到处传染破坏；木马不复制，只潜伏<span class="bg-red-300 px-1 rounded">偷数据开后门</span>！</span>
+						</div>
+					</div>
+
+					<!-- 卡片 2 -->
+					<div class="flashcard h-32 md:h-40 cursor-pointer group w-full relative preserve-3d transition-transform duration-500" onclick="this.classList.toggle('flipped')">
+						<div class="card-face front absolute inset-0 bg-white border-4 border-neo-dark rounded-xl flex flex-col items-center justify-center p-3 shadow-[4px_4px_0px_0px_#1e293b] backface-hidden">
+							<i class="fas fa-lock text-3xl text-blue-500 mb-2"></i>
+							<span class="font-black text-center text-sm md:text-base text-neo-dark">对称 vs 非对称<br>加密的区别？</span>
+						</div>
+						<div class="card-face back absolute inset-0 bg-blue-100 border-4 border-blue-500 rounded-xl flex flex-col items-center justify-center p-3 shadow-[4px_4px_0px_0px_#3b82f6] backface-hidden rotate-y-180">
+							<span class="font-black text-center text-xs md:text-sm text-blue-900 leading-relaxed">对称加密用<span class="bg-blue-300 px-1 rounded">同一把钥匙</span>速度快；非对称加密用<span class="bg-blue-300 px-1 rounded">公钥加密、私钥解密</span>极度安全！</span>
+						</div>
+					</div>
+
+					<!-- 卡片 3 -->
+					<div class="flashcard h-32 md:h-40 cursor-pointer group w-full relative preserve-3d transition-transform duration-500" onclick="this.classList.toggle('flipped')">
+						<div class="card-face front absolute inset-0 bg-white border-4 border-neo-dark rounded-xl flex flex-col items-center justify-center p-3 shadow-[4px_4px_0px_0px_#1e293b] backface-hidden">
+							<i class="fas fa-layer-group text-3xl text-green-500 mb-2"></i>
+							<span class="font-black text-center text-sm md:text-base text-neo-dark">TCP/IP 分层中<br>IP协议在哪个层？</span>
+						</div>
+						<div class="card-face back absolute inset-0 bg-green-100 border-4 border-green-500 rounded-xl flex flex-col items-center justify-center p-3 shadow-[4px_4px_0px_0px_#22c55e] backface-hidden rotate-y-180">
+							<span class="font-black text-center text-xs md:text-sm text-green-900 leading-relaxed">在<span class="bg-green-300 px-1 rounded">网络层</span>！它拿着 IP 地址，像物流调度一样在复杂的网络中<span class="bg-green-300 px-1 rounded">规划最优路线</span>！</span>
+						</div>
+					</div>
+
+					<!-- 卡片 4 -->
+					<div class="flashcard h-32 md:h-40 cursor-pointer group w-full relative preserve-3d transition-transform duration-500" onclick="this.classList.toggle('flipped')">
+						<div class="card-face front absolute inset-0 bg-white border-4 border-neo-dark rounded-xl flex flex-col items-center justify-center p-3 shadow-[4px_4px_0px_0px_#1e293b] backface-hidden">
+							<i class="fas fa-fingerprint text-3xl text-purple-500 mb-2"></i>
+							<span class="font-black text-center text-sm md:text-base text-neo-dark">身份验证的<br>三大因子是啥？</span>
+						</div>
+						<div class="card-face back absolute inset-0 bg-purple-100 border-4 border-purple-500 rounded-xl flex flex-col items-center justify-center p-3 shadow-[4px_4px_0px_0px_#a855f7] backface-hidden rotate-y-180">
+							<span class="font-black text-center text-xs md:text-sm text-purple-900 leading-relaxed"><span class="bg-purple-300 px-1 rounded mb-1 inline-block">知识(密码)</span><br><span class="bg-purple-300 px-1 rounded mb-1 inline-block">持有(手机验证码)</span><br><span class="bg-purple-300 px-1 rounded inline-block">生物(指纹虹膜)</span></span>
+						</div>
+					</div>
+
+					<!-- 卡片 5 -->
+					<div class="flashcard h-32 md:h-40 cursor-pointer group w-full relative preserve-3d transition-transform duration-500" onclick="this.classList.toggle('flipped')">
+						<div class="card-face front absolute inset-0 bg-white border-4 border-neo-dark rounded-xl flex flex-col items-center justify-center p-3 shadow-[4px_4px_0px_0px_#1e293b] backface-hidden">
+							<i class="fas fa-magic text-3xl text-pink-500 mb-2"></i>
+							<span class="font-black text-center text-sm md:text-base text-neo-dark">AI 扩散模型<br>画图的核心原理？</span>
+						</div>
+						<div class="card-face back absolute inset-0 bg-pink-100 border-4 border-pink-500 rounded-xl flex flex-col items-center justify-center p-3 shadow-[4px_4px_0px_0px_#ec4899] backface-hidden rotate-y-180">
+							<span class="font-black text-center text-xs md:text-sm text-pink-900 leading-relaxed">从混沌到清晰！从一张<span class="bg-pink-300 px-1 rounded">完全随机的噪声图</span>开始，根据提示词<span class="bg-pink-300 px-1 rounded">逐步去除噪点</span>！</span>
+						</div>
+					</div>
+
+					<!-- 卡片 6 -->
+					<div class="flashcard h-32 md:h-40 cursor-pointer group w-full relative preserve-3d transition-transform duration-500" onclick="this.classList.toggle('flipped')">
+						<div class="card-face front absolute inset-0 bg-white border-4 border-neo-dark rounded-xl flex flex-col items-center justify-center p-3 shadow-[4px_4px_0px_0px_#1e293b] backface-hidden">
+							<i class="fas fa-envelope text-3xl text-orange-500 mb-2"></i>
+							<span class="font-black text-center text-sm md:text-base text-neo-dark">发邮件和收邮件<br>分别用啥协议？</span>
+						</div>
+						<div class="card-face back absolute inset-0 bg-orange-100 border-4 border-orange-500 rounded-xl flex flex-col items-center justify-center p-3 shadow-[4px_4px_0px_0px_#f97316] backface-hidden rotate-y-180">
+							<span class="font-black text-center text-xs md:text-sm text-orange-900 leading-relaxed">发送并中转用劳模 <span class="bg-orange-300 px-1 rounded">SMTP</span> 协议；接收下载到本地看用 <span class="bg-orange-300 px-1 rounded">POP3</span> 协议！</span>
+						</div>
+					</div>
+
+					<!-- 卡片 7 -->
+					<div class="flashcard h-32 md:h-40 cursor-pointer group w-full relative preserve-3d transition-transform duration-500" onclick="this.classList.toggle('flipped')">
+						<div class="card-face front absolute inset-0 bg-white border-4 border-neo-dark rounded-xl flex flex-col items-center justify-center p-3 shadow-[4px_4px_0px_0px_#1e293b] backface-hidden">
+							<i class="fas fa-brain text-3xl text-yellow-500 mb-2"></i>
+							<span class="font-black text-center text-sm md:text-base text-neo-dark">Transformer 架构<br>的本质是什么？</span>
+						</div>
+						<div class="card-face back absolute inset-0 bg-yellow-100 border-4 border-yellow-500 rounded-xl flex flex-col items-center justify-center p-3 shadow-[4px_4px_0px_0px_#eab308] backface-hidden rotate-y-180">
+							<span class="font-black text-center text-xs md:text-sm text-yellow-900 leading-relaxed">它是一个超级无敌<span class="bg-yellow-300 px-1 rounded">文字接龙大师</span>！通过算概率，永远在<span class="bg-yellow-300 px-1 rounded">预测下一步最合理的词</span>！</span>
+						</div>
+					</div>
+
+					<!-- 卡片 8 -->
+					<div class="flashcard h-32 md:h-40 cursor-pointer group w-full relative preserve-3d transition-transform duration-500" onclick="this.classList.toggle('flipped')">
+						<div class="card-face front absolute inset-0 bg-white border-4 border-neo-dark rounded-xl flex flex-col items-center justify-center p-3 shadow-[4px_4px_0px_0px_#1e293b] backface-hidden">
+							<i class="fas fa-globe text-3xl text-teal-500 mb-2"></i>
+							<span class="font-black text-center text-sm md:text-base text-neo-dark">多模态人工智能<br>打破了什么局限？</span>
+						</div>
+						<div class="card-face back absolute inset-0 bg-teal-100 border-4 border-teal-500 rounded-xl flex flex-col items-center justify-center p-3 shadow-[4px_4px_0px_0px_#14b8a6] backface-hidden rotate-y-180">
+							<span class="font-black text-center text-xs md:text-sm text-teal-900 leading-relaxed">打破单一处理！它能把<span class="bg-teal-300 px-1 rounded">文本、图像、音频</span>等多种形式融合，实现图生文、生成视频等大招！</span>
+						</div>
+					</div>
+
+				</div>
+			</section>
+		</div>
+		<!-- ======================= 闯关模式核心容器 (硬编码，绝对不消失) ======================= -->
+        <div id="quiz-content" class="hidden pb-10 mt-12">
+            <div class="bg-white border-4 border-neo-dark rounded-3xl p-6 md:p-10 relative shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+                <!-- 顶部计分与状态栏 -->
+                <div class="flex justify-between items-center mb-8 border-b-4 border-gray-200 pb-4">
+                    <div class="flex items-center gap-2 md:gap-4">
+                        <span class="bg-neo-blue text-white px-4 py-2 rounded-xl font-black border-2 border-neo-dark shadow-sm">第 <span id="quiz-current-q" class="text-neo-yellow text-xl">1</span> / 35 题</span>
+                        <span class="font-black text-lg">HP: <span id="hp-display" class="text-red-500 tracking-widest text-xl">❤️❤️❤️❤️❤️</span></span>
+                    </div>
+                    <div class="bg-neo-yellow px-4 py-2 rounded-xl font-black border-2 border-neo-dark shadow-sm">
+                        <i class="fas fa-star text-orange-500"></i> 得分: <span id="quiz-score" class="text-xl">0</span>
+                    </div>
+                </div>
+                
+                <h3 id="question-text" class="text-xl md:text-2xl font-black text-neo-dark mb-8 leading-relaxed">题库正在加载中...</h3>
+                <div id="options-container" class="space-y-4 font-bold text-gray-700"></div>
+
+                <div id="explanation-box" class="hidden mt-8 p-6 rounded-2xl border-4 transition-all">
+                    <div class="flex items-center mb-2">
+                        <span id="explain-icon" class="text-3xl mr-3"></span>
+                        <span id="explain-title" class="font-black text-xl"></span>
+                    </div>
+                    <p id="explain-text" class="text-gray-800 mt-2 leading-relaxed bg-white/50 p-3 rounded-xl shadow-inner font-bold"></p>
+                    <button id="btn-next-q" class="mt-6 neo-btn bg-neo-blue text-white px-8 py-3 rounded-xl font-black border-2 border-neo-dark shadow-neo hover:-translate-y-1 transition transform w-full md:w-auto">
+                        继续挑战 <i class="fas fa-forward ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+	<!-- 结果结算弹窗 -->
+    <div id="result-modal" class="fixed inset-0 bg-neo-dark/80 backdrop-blur-md hidden z-[150] flex-col items-center justify-center">
+        <div class="bg-white w-11/12 max-w-lg p-8 text-center relative border-8 border-red-500 rounded-3xl shadow-2xl animate-pop">
+            <div class="text-7xl mb-2 drop-shadow-md transform -translate-y-16 absolute left-1/2 -ml-10">🏆</div>
+            <h2 class="text-4xl font-kuai text-neo-dark mt-6 mb-2">大满贯结业！</h2>
+            <p class="text-lg text-gray-600 mb-6 font-bold">最终称号：<span id="result-title-badge" class="text-red-500 bg-red-100 px-3 py-1 rounded-full border-2 border-red-300">绝地极客导师</span></p>
+            
+            <div class="flex justify-center gap-6 mb-8">
+                <div class="bg-blue-50 p-4 rounded-2xl border-2 border-blue-200 w-32 shadow-inner">
+                    <p class="text-xs text-gray-500 font-bold mb-1">最终得分</p>
+                    <p class="text-4xl font-black text-neo-blue" id="final-score">100</p>
+                </div>
+                <div class="bg-red-50 p-4 rounded-2xl border-2 border-red-200 w-32 shadow-inner">
+                    <p class="text-xs text-gray-500 font-bold mb-1">剩余 HP</p>
+                    <p class="text-2xl font-bold text-red-500 mt-2" id="final-hp">❤️❤️</p>
+                </div>
+            </div>
+            <button id="btn-restart-quiz" class="neo-btn w-full bg-neo-yellow text-neo-dark py-3 text-lg font-black border-2 border-neo-dark shadow-[4px_4px_0_0_#000] rounded-xl hover:-translate-y-1 transition active:scale-95">再次挑战</button>
+        </div>
+    </div>
+    <!-- 底部引入 JS -->
+    <script src="script.js"></script>
+</body>
+</html>

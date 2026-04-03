@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>八年级信息科技 | 物联网(IoT)终极深挖版</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Prism.js 语法高亮 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo"><i class="fas fa-microchip"></i> IoT 满分宝典</div>
+        <ul class="nav-links">
+            <li><a href="#unit1">U1 架构</a></li>
+            <li><a href="#unit2">U2 感知(代码)</a></li>
+            <li><a href="#unit3">U3 网络(协议)</a></li>
+            <li><a href="#unit4">U4 控制(实操)</a></li>
+            <li><a href="#unit5">U5 城市</a></li>
+            <li><a href="#unit6">U6 安全</a></li>
+        </ul>
+        <div class="hamburger"><i class="fas fa-bars"></i></div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>八年级物联网：理论 + 代码全覆盖</h1>
+            <p>拒绝遗漏！行空板硬件逻辑 · Python代码段 · MQTT收发机制 · 安全底层原理</p>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- ================= 第一单元 ================= -->
+        <section id="unit1" class="unit-section">
+            <h2 class="section-title"><i class="fas fa-layer-group"></i> 第一单元：初识物联网</h2>
+            
+            <div class="card">
+                <h3>1. 核心发展史与概念</h3>
+                <ul>
+                    <li><strong>1982年：</strong>卡内基梅隆大学的<strong>可乐售卖机(Only)</strong>，最早的物联网雏形。</li>
+                    <li><strong>1991年：</strong>剑桥大学<strong>特洛伊咖啡壶</strong>（摄像头+网络）。</li>
+                    <li><strong>1995年：</strong>比尔·盖茨《未来之路》提出构想。</li>
+                    <li><strong>1999年：</strong>麻省理工首次提出“物联网”概念，并与 <strong>RFID（射频识别）</strong> 结合。</li>
+                </ul>
+            </div>
+
+            <div class="card highlight-card">
+                <h3>🔥 2. 物联网三层架构 (全书灵魂，必考！)</h3>
+                <table class="data-table">
+                    <tr><th>架构层级</th><th>核心功能</th><th>关键技术/设备</th></tr>
+                    <tr><td><strong>应用层 (大脑)</strong></td><td>对数据进行计算、处理、挖掘，转化为具体应用服务</td><td>云计算、大数据、人工智能、各种软件平台(Web/App)</td></tr>
+                    <tr><td><strong>网络层 (神经)</strong></td><td>将感知层数据准确高效地传输到处理中心</td><td>Wi-Fi, 蓝牙, ZigBee, LoRa, NB-IoT, 5G, IPv6, <strong>MQTT协议</strong></td></tr>
+                    <tr><td><strong>感知层 (五官)</strong></td><td>感知、识别和采集物理世界中的各种信息(声光温等)</td><td>传感器, RFID, 二维码, GPS, 摄像头</td></tr>
+                </table>
+                <p class="mt-15"><strong>三大特征：</strong><span class="tag">全面感知</span> <span class="tag">可靠传递</span> <span class="tag">智能处理</span></p>
+            </div>
+        </section>
+
+        <!-- ================= 第二单元 ================= -->
+        <section id="unit2" class="unit-section">
+            <h2 class="section-title"><i class="fas fa-eye"></i> 第二单元：感知层初体验 (含代码)</h2>
+
+            <div class="card">
+                <h3>1. 二维码与 RFID 识别技术</h3>
+                <p><strong>二维码：</strong>黑白方块二进制(黑1白0)。优势是信息量大、<strong>容错纠错能力强(抗损)</strong>。安全措施是动态二维码(防截图)。</p>
+                <p><strong>RFID(射频识别)：</strong>利用无线电波双向通信。分为标签和读写器。优势是<strong>批量快速读取</strong>、防污耐高温。缺点是金属/液体环境易失效。</p>
+                
+                <h4 class="code-title">💻 代码实操：RFID 电子围栏预警 (教材P27)</h4>
+                <pre><code class="language-python">from pn7150 import rfid  # 导入RFID模块库
+while True:
+    # wait=False 代表非阻塞扫描，没有刷卡也会继续循环
+    card = rfid.scanning(wait=False) 
+    if card:  # 如果检测到电子标签进入特定区域
+        screen.clear()
+        screen.draw_text(text="警告：人员靠近！", x=60, y=60, color=0xFF0000)
+        # 此处可添加蜂鸣器发声代码作为警报</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>2. 红外传感器与算法优化</h3>
+                <p><strong>对射式：</strong>两端对齐，直射光，抗干扰强。<strong>漫反射式：</strong>单侧安装，靠物体反光，易受环境光干扰。</p>
+                <p><strong>算法防坑：</strong>必须引入<strong>“防抖动滤波”</strong>（规避衣服晃动导致多次计数）和<strong>“方向锁定”</strong>（利用A、B双传感器先后触发顺序判断进出）。</p>
+
+                <h4 class="code-title">💻 代码实操：红外传感器读取与防抖动 (教材P34)</h4>
+                <pre><code class="language-python">from unihiker_k10 import rgb, pin, screen
+import time
+while True:
+    # 读取模拟量数据，返回int型数值
+    infrared_intensity = p0.read_analog() 
+    
+    # 设定阈值判断是否有人遮挡
+    if infrared_intensity < 100: 
+        rgb.write(num=2, R=0, G=0, B=255) # 点亮蓝灯
+        # Num_person += 1 (人数+1)
+        time.sleep(1) # 【极其重要】防抖动：延时1秒，防止短时间重复计数
+    else:
+        rgb.write(num=2, R=0, G=0, B=0) # 无人则关灯</code></pre>
+            </div>
+        </section>
+
+        <!-- ================= 第三单元 ================= -->
+        <section id="unit3" class="unit-section">
+            <h2 class="section-title"><i class="fas fa-wifi"></i> 第三单元：网络层技术与MQTT协议 (全书核心)</h2>
+
+            <div class="card">
+                <h3>1. 通信技术深度分类</h3>
+                <ul>
+                    <li><strong>近距离通信：</strong>
+                        <ul>
+                            <li><strong>Wi-Fi：</strong>局域网高速传输，工作在 <strong>2.4GHz 和 5GHz 免授权(ISM)频段</strong>。</li>
+                            <li><strong>蓝牙 (Bluetooth)：</strong>极低功耗，距离约10米，常用于设备配对（一主多从）。</li>
+                            <li><strong>ZigBee：</strong>低功耗，自组网能力强，适合智能家居传感器网络。</li>
+                        </ul>
+                    </li>
+                    <li><strong>远距离通信：</strong>
+                        <ul>
+                            <li><strong>LoRa & NB-IoT：</strong>低功耗广域网（LPWAN），速率低但覆盖极广，特别适合偏远地区农业大棚/环境监测。</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card highlight-card">
+                <h3>🔥 2. MQTT 协议原理与代码剖析 (考点密集区)</h3>
+                <p><strong>特性：</strong>轻量级、低带宽，专为物联网设计。</p>
+                <p><strong>通信机制：发布——订阅 (Pub-Sub) 模式</strong>。包含三个角色：发布者、订阅者、服务器代理(Broker)。双方不直接建立连接，而是依靠 <strong>Topic(主题)</strong> 进行数据路由。</p>
+                <p><strong>QoS(服务质量)：</strong>QoS 0(最多一次，发完不管)、QoS 1(至少一次，保证到达可能重复)、QoS 2(只有一次，最可靠但耗资源)。</p>
+
+                <h4 class="code-title">💻 代码实操：Wi-Fi 连接与 MQTT 客户端 (教材P63/69/70)</h4>
+                <pre><code class="language-python">from unihiker_k10 import wifi, mqttclient
+# 1. 必备第一步：连接 Wi-Fi 局域网
+wifi.connect(ssid="School-WiFi", psd="123456", timeout=50000)
+if wifi.status():
+    print(wifi.info()) # 返回IP地址等信息
+
+# 2. 建立 MQTT 服务器连接 (常用SIoT本地服务器，端口1883)
+mqttclient.connect(server="192.168.43.86", port=1883, user="siot", psd="dfrobot")
+
+# 3. 发布者 (Publisher) 发送数据：向特定 Topic 发送 Content
+mqttclient.publish(topic="siot/msg", content="hello")
+
+# 4. 订阅者 (Subscriber) 接收数据：必须定义回调函数
+def on_message_recv(msg):
+    print("收到消息:", msg)
+# 订阅该主题，绑定回调函数
+mqttclient.subscribe(topic="siot/msg", callback=on_message_recv)</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>3. 蓝牙通信与 JSON 数据解析 (教材P58)</h3>
+                <pre><code class="language-python">import bluetooth, rgb, ujson
+# 蓝牙传输经常使用字符串，利用 ujson.loads 转为 Python 字典格式
+msg = ujson.loads(notify_data.decode()) 
+# 判断字典中键 'led' 的值
+if msg.get("led") == "on":
+    rgb.write(R=255, G=0, B=0) # 开红灯
+elif msg.get("led") == "off":
+    rgb.write(R=0, G=0, B=0)   # 关灯</code></pre>
+            </div>
+        </section>
+
+        <!-- ================= 第四单元 ================= -->
+        <section id="unit4" class="unit-section">
+            <h2 class="section-title"><i class="fas fa-home"></i> 第四单元：智能家居系统实践 (硬核控制逻辑)</h2>
+
+            <div class="card">
+                <h3>1. 温度传感器与边缘计算</h3>
+                <p><strong>边缘计算原理：</strong>传感器采集的数据<strong>不上传云端</strong>，直接由本地控制中心（如行空板主控）完成判断与响应。优势是：<strong>无网络延迟、断网不断联、保护隐私数据</strong>。</p>
+                <h4 class="code-title">💻 代码实操：本地超温报警逻辑 (教材P82)</h4>
+                <pre><code class="language-python">from unihiker_k10 import temp_humi, rgb
+while True:
+    temp = temp_humi.read_temp() # 读取本地摄氏温度
+    # 边缘计算判断：不需要连网，本地直接处理
+    if temp > 40: 
+        flash_red()   # 调用自定义闪红灯函数报警
+    else:
+        flash_green() # 安全状态闪绿灯</code></pre>
+            </div>
+
+            <div class="card">
+                <h3>2. 远程开关窗：舵机控制与异常防崩逻辑</h3>
+                <p>智能家居控制流：感知 ➔ 采集 ➔ 传输 ➔ 分析 ➔ <strong>反馈 ➔ 控制(执行器)</strong>。舵机(Servo)即为执行器。</p>
+                <h4 class="code-title">💻 代码实操：安全的舵机控制指令 (教材P94)</h4>
+                <pre><code class="language-python">from unihiker_k10 import servo
+s1 = servo(1) # 初始化接入引脚1的舵机
+# 假设从 MQTT 接收到了指令变量 msg
+try:
+    angle = int(msg) # 尝试将网络传来的字符串强转为整数
+    # 【考试重点】保护硬件：无论传什么值，强制约束在 0 到 180 度之间
+    angle = max(0, min(180, angle)) 
+    s1.angle(angle) # 控制舵机转动开窗
+except Exception as e:
+    # 如果 msg 传来了字母 "open"，int("open")会报错，被这里拦截，防止程序崩溃
+    print("收到非法指令，忽略操作", e) </code></pre>
+            </div>
+        </section>
+
+        <!-- ================= 第五单元 ================= -->
+        <section id="unit5" class="unit-section">
+            <h2 class="section-title"><i class="fas fa-city"></i> 第五单元：智慧城市创新应用</h2>
+            <div class="card-grid">
+                <div class="grid-item">
+                    <h4>🏥 智能医疗与健康</h4>
+                    <p><strong>PPG光学心率：</strong>血液里的血红蛋白对光（特别是绿光和红外光）有吸收作用。利用光电传感器检测皮下反射光的周期性强弱变化，计算心率。<br><strong>智能药柜：</strong>结合RFID射频标签与Database(数据库)系统，实现过期预警、库存盘点和权限取药。</p>
+                </div>
+                <div class="grid-item">
+                    <h4>🚗 智能交通</h4>
+                    <p><strong>摄像头双重能力：</strong>不仅能拍摄画面（图像获取），还能结合AI进行<strong>目标识别</strong>（识别车牌、车型、行人）。系统通过分析路口“等待排队长度”，动态延长红绿灯时间，缓解拥堵。</p>
+                </div>
+                <div class="grid-item">
+                    <h4>🌾 智能大棚的三层映射</h4>
+                    <p><strong>感知层：</strong>温湿度、光照、土壤水分、<strong>二氧化碳浓度(光合作用必需)</strong>传感器。<br><strong>网络层：</strong>使用低功耗远距离的 LoRa 节点传输数据。<br><strong>应用层：</strong>自动控制滴灌阀门、遮阳网和风机。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= 第六单元 ================= -->
+        <section id="unit6" class="unit-section">
+            <h2 class="section-title"><i class="fas fa-shield-alt"></i> 第六单元：物联网安全与发展</h2>
+
+            <div class="card">
+                <h3>1. 各层面的典型安全威胁 (必考概念)</h3>
+                <ul>
+                    <li><strong>感知层：</strong>物理破坏、电磁波信号干扰（导致传感器发送错误脉冲）、克隆复制RFID门禁卡。</li>
+                    <li><strong>网络层：</strong>
+                        <ul>
+                            <li><strong>中间人攻击 (MitM)：</strong>黑客悄悄潜伏在通信两端之间，截获或篡改通信数据。</li>
+                            <li><strong>Wi-Fi 钓鱼：</strong>在公共场所伪造免费Wi-Fi热点，盗取用户账号密码。</li>
+                            <li><strong>DDoS 攻击 (分布式拒绝服务)：</strong>控制海量带有漏洞的物联网设备（僵尸网络），同时向目标发送巨量无用请求，导致服务器瘫痪。</li>
+                        </ul>
+                    </li>
+                    <li><strong>应用层：</strong>API（应用程序接口）缺少权限验证导致越权操作、数据库密码被暴力破解。</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>2. 身份认证与自主可控战略</h3>
+                <p><strong>身份认证方式：</strong>1. 密码认证（需避免弱口令）；2. <strong>生物特征认证</strong>（指纹、人脸、虹膜，基于人体生物特征的唯一性和不可复制性）；3. API令牌认证（程序间通信）。</p>
+                <p><strong>自主可控（国家命脉）：</strong><br>
+                物联网设备高度依赖芯片和底层操作系统。分为<strong>高端芯片</strong>（如AI计算芯片，计算力强，极易被国外“卡脖子”）和<strong>低端芯片</strong>（如温湿度传感器）。<br>
+                《中华人民共和国网络安全法》要求，关键信息基础设施必须实现<strong>自主可控</strong>，拒绝底层依赖，确保国家数据安全不受外部断供或恶意后门的威胁。</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>八年级信息科技 | 物联网(IoT)终极硬核复习宝典</p>
+    </footer>
+
+    <!-- 引入 Prism.js 用于 Python 代码的华丽高亮显示 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

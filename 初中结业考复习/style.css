@@ -1,0 +1,553 @@
+/* ==========================================
+   全局变量与基础重置
+   ========================================== */
+   :root {
+    /* 核心色彩 */
+    --primary-color: #3498db;      /* 科技蓝 */
+    --primary-dark: #2980b9;
+    --secondary-color: #2ecc71;    /* 薄荷绿 */
+    --accent-color: #f39c12;       /* 活力橙 */
+    --danger-color: #e74c3c;       /* 警告红 */
+    --danger-hover: #c0392b;
+    --bg-light: #f8f9fa;           /* 极浅灰蓝 */
+    --card-bg: #ffffff;            /* 纯白 */
+    
+    /* 文本色彩 */
+    --text-main: #2c3e50;
+    --text-muted: #7f8c8d;
+    --border-color: #e2e8f0;
+    
+    /* 阴影与圆角 */
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+    --shadow-md: 0 6px 16px rgba(0,0,0,0.08);
+    --shadow-lg: 0 12px 24px rgba(0,0,0,0.12);
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-main);
+    line-height: 1.6;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* ==========================================
+   登录与遮罩层 (Login Overlay)
+   ========================================== */
+/* ==========================================
+   全新高颜值毛玻璃登录层 (Login Overlay)
+   ========================================== */
+#login-overlay {
+    position: fixed;
+    inset: 0;
+    /* 炫酷的动态渐变背景 */
+    background: linear-gradient(-45deg, #12c2e9, #c471ed, #f64f59);
+    background-size: 400% 400%;
+    animation: gradientBG 10s ease infinite;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.login-box {
+    /* 苹果级毛玻璃质感 */
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 40px 35px;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    width: 90%;
+    max-width: 380px;
+    text-align: center;
+    transform: translateY(20px);
+    animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUpFade {
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.login-header i {
+    font-size: 45px;
+    background: linear-gradient(135deg, #3498db, #8e44ad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 15px;
+}
+
+.login-header h2 { 
+    color: #2c3e50; 
+    font-size: 24px; 
+    font-weight: 800; 
+    letter-spacing: 1px;
+}
+
+.login-header p { 
+    color: #7f8c8d; 
+    font-size: 13px; 
+    margin-bottom: 30px; 
+    margin-top: 5px;
+}
+
+/* ==========================================
+   【修复】全新丝滑 Flex 布局的输入框
+   ========================================== */
+.input-group {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid #e0e6ed;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    overflow: hidden; /* 保证图标和输入框融为一体 */
+}
+
+.input-group:focus-within {
+    border-color: #3498db;
+    box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.15);
+    background: #fff;
+}
+
+.input-group i {
+    padding: 0 15px;
+    color: var(--text-muted);
+    font-size: 16px;
+    background: transparent !important;
+    -webkit-text-fill-color: initial !important;
+}
+
+.input-group input {
+    flex: 1;
+    padding: 14px 15px 14px 0; /* 左侧不需要padding，有图标撑着 */
+    border: none !important; /* 去掉input本身的边框 */
+    background: transparent !important;
+    font-size: 15px;
+    outline: none;
+    box-shadow: none !important;
+}
+
+#login-btn { 
+    width: 100%; 
+    margin-top: 15px; 
+    padding: 14px; 
+    font-size: 16px; 
+    border-radius: 12px; 
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    letter-spacing: 1px;
+}
+
+/* ==========================================
+   【新增】高颜值自定义确认弹窗样式
+   ========================================== */
+/* ==========================================
+   【终极修复】高颜值居中弹窗 (强制全屏覆盖)
+   ========================================== */
+/* ==========================================
+   【终极修复】高颜值居中弹窗 (彻底解决一直显示和定位问题)
+   ========================================== */
+.confirm-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    z-index: 99999;
+    display: flex; /* 默认使用 flex 居中 */
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* 通过这个 class 来控制隐藏，比 display:none 过渡更平滑 */
+.confirm-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none; /* 隐藏时禁止点击穿透 */
+}
+
+.confirm-box {
+    background: #ffffff;
+    padding: 35px 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+    width: 90%;
+    max-width: 360px;
+    text-align: center;
+    transform: scale(1);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.confirm-overlay.hidden .confirm-box {
+    transform: scale(0.8); /* 隐藏时缩小，显示时放大，配合上面的过渡动画 */
+}
+
+.confirm-icon {
+    font-size: 55px;
+    color: #f39c12;
+    margin-bottom: 15px;
+    text-shadow: 0 4px 10px rgba(243, 156, 18, 0.3);
+}
+
+#confirm-title {
+    color: #2c3e50;
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+#confirm-msg {
+    color: #64748b;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    white-space: pre-wrap;
+}
+
+.confirm-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.confirm-actions button {
+    flex: 1;
+    padding: 12px 0;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 12px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+#confirm-cancel {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+#confirm-cancel:hover {
+    background: #e2e8f0;
+    color: #1e293b;
+}
+
+#confirm-ok {
+    background: #e74c3c;
+    color: white;
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.25);
+}
+
+#confirm-ok:hover {
+    background: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(231, 76, 60, 0.4);
+}
+
+
+/* 单题重做按钮样式 */
+.redo-q-btn {
+    float: right;
+    background: #fff0f0;
+    color: #e74c3c;
+    border: 1px solid #f5c6cb;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.redo-q-btn:hover {
+    background: #e74c3c;
+    color: white;
+}
+/* ==========================================
+   顶部导航栏 (Header)
+   ========================================== */
+.app-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 0 20px;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--shadow-sm);
+    z-index: 100;
+}
+
+.header-left { display: flex; align-items: center; gap: 15px; }
+.mobile-menu-btn { display: none; background: transparent; border: none; color: white; font-size: 20px; cursor: pointer; }
+
+.logo { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: bold; }
+
+.grade-toggle {
+    display: flex;
+    background: rgba(0,0,0,0.15);
+    border-radius: 20px;
+    padding: 3px;
+    margin-left: 20px;
+}
+
+.toggle-btn {
+    background: transparent;
+    border: none;
+    color: rgba(255,255,255,0.8);
+    padding: 5px 15px;
+    border-radius: 18px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.toggle-btn.active {
+    background: white;
+    color: var(--primary-color);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* 用户控制台 */
+.header-right { display: flex; align-items: center; gap: 20px; }
+
+.user-info { display: flex; align-items: center; gap: 10px; background: rgba(0,0,0,0.1); padding: 4px 12px 4px 4px; border-radius: 30px; }
+.avatar { width: 32px; height: 32px; background: white; color: var(--primary-color); border-radius: 50%; display: flex; justify-content: center; align-items: center; }
+.user-text { display: flex; flex-direction: column; font-size: 13px; line-height: 1.2; }
+.small-text { font-size: 11px; opacity: 0.8; }
+
+.action-buttons { display: flex; gap: 10px; }
+.icon-btn {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex; justify-content: center; align-items: center;
+    transition: var(--transition);
+}
+.icon-btn:hover { background: white; color: var(--primary-color); transform: translateY(-2px); }
+.danger-text:hover { color: var(--danger-color); }
+
+/* 工具提示 Tooltip */
+.tooltip { position: relative; }
+.tooltip::after {
+    content: attr(data-tip);
+    position: absolute;
+    top: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+    pointer-events: none;
+}
+.tooltip:hover::after { opacity: 1; visibility: visible; }
+
+/* ==========================================
+   主体布局与侧边栏 (Layout & Sidebar)
+   ========================================== */
+.main-layout { display: flex; flex: 1; overflow: hidden; position: relative; }
+
+.sidebar {
+    width: 280px;
+    background: var(--card-bg);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.02);
+    z-index: 50;
+    transition: transform 0.3s ease;
+}
+
+.sidebar-title {
+    padding: 15px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--primary-color);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-sidebar { background: transparent; border: none; font-size: 20px; color: var(--text-muted); cursor: pointer; display: none; }
+
+.search-box { padding: 15px; position: relative; }
+.search-box input { width: 100%; padding: 8px 15px 8px 32px; border: 1px solid var(--border-color); border-radius: 20px; outline: none; font-size: 13px; }
+.search-box input:focus { border-color: var(--primary-color); }
+.search-box i { position: absolute; left: 25px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 12px; }
+
+.topic-list { list-style: none; overflow-y: auto; flex: 1; }
+.topic-item { padding: 12px 20px; border-bottom: 1px solid #f1f5f9; cursor: pointer; transition: var(--transition); }
+.topic-item:hover { background: var(--bg-light); }
+.topic-item.active { background: #eff6ff; border-left: 4px solid var(--primary-color); }
+.topic-item h4 { font-size: 14px; color: var(--text-main); margin-bottom: 4px; }
+.topic-meta { font-size: 12px; color: var(--text-muted); }
+.topic-status { font-size: 12px; margin-left: 5px; color: var(--secondary-color); font-weight: bold; }
+
+.sidebar-footer { padding: 15px; border-top: 1px solid var(--border-color); background: #fafafa; }
+.danger-outline-btn {
+    width: 100%; padding: 10px; background: transparent; border: 1px solid var(--danger-color);
+    color: var(--danger-color); border-radius: var(--radius-sm); cursor: pointer; transition: var(--transition); font-weight: 600;
+}
+.danger-outline-btn:hover { background: var(--danger-color); color: white; }
+
+.sidebar-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 40; opacity: 0; visibility: hidden; transition: var(--transition); }
+.sidebar-overlay.show { opacity: 1; visibility: visible; }
+
+/* ==========================================
+   内容与测试区 (Content Area)
+   ========================================== */
+.content-area { flex: 1; padding: 20px; overflow-y: auto; scroll-behavior: smooth; background: var(--bg-light); }
+
+.welcome-screen { height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; color: var(--text-muted); text-align: center; }
+.welcome-icon { width: 100px; margin-bottom: 20px; }
+.welcome-screen h2 { color: var(--primary-color); margin-bottom: 10px; }
+
+/* 卡片通用样式 */
+.knowledge-card, .quiz-container { background: var(--card-bg); border-radius: var(--radius-lg); padding: 25px; box-shadow: var(--shadow-md); margin-bottom: 25px; animation: fadeIn 0.4s ease-out; }
+
+/* 知识点卡片 */
+.card-header { display: flex; gap: 10px; margin-bottom: 10px; }
+.badge { padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: bold; color: white; }
+.grade-badge { background-color: var(--primary-color); }
+.page-badge { background-color: var(--accent-color); }
+
+.k-title { font-size: 22px; color: var(--text-main); margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border-color); }
+
+.k-content-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.k-box { padding: 15px 20px; border-radius: var(--radius-md); background: #fafafa; border: 1px solid var(--border-color); }
+.official-box { border-top: 3px solid var(--primary-color); }
+.humor-box { border-top: 3px solid var(--accent-color); background: #fffcf5; }
+.box-title { font-size: 15px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.official-box .box-title { color: var(--primary-dark); }
+.humor-box .box-title { color: #d35400; }
+.box-text { font-size: 14px; color: #444; line-height: 1.7; }
+.box-text p { margin-bottom: 8px; }
+.box-text ul { padding-left: 20px; margin-bottom: 8px; }
+.box-text table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13px; }
+.box-text th, .box-text td { border: 1px solid var(--border-color); padding: 6px; }
+.box-text th { background: #f1f5f9; }
+
+/* ==========================================
+   随堂测试区 (Quiz Section)
+   ========================================== */
+.quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border-color); }
+.quiz-header h2 { font-size: 20px; color: var(--text-main); }
+.quiz-header-right { display: flex; align-items: center; gap: 10px; }
+.status-badge { font-size: 12px; padding: 3px 8px; border-radius: 10px; background: #e2e8f0; color: #64748b; font-weight: bold; }
+.status-badge.completed { background: #dcfce7; color: #166534; }
+.question-count { background: #f1f5f9; padding: 4px 12px; border-radius: 12px; color: var(--text-muted); font-size: 13px; }
+
+.quiz-item { margin-bottom: 20px; padding: 20px; background: #ffffff; border-radius: var(--radius-md); border: 1px solid var(--border-color); border-left: 4px solid var(--primary-color); box-shadow: var(--shadow-sm); }
+.q-title { font-size: 15px; font-weight: 600; margin-bottom: 15px; color: var(--text-main); line-height: 1.5; }
+
+/* 选项样式 */
+.options-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.option-label { display: flex; align-items: flex-start; padding: 12px 15px; background: #fafafa; border: 1px solid var(--border-color); border-radius: var(--radius-sm); cursor: pointer; transition: var(--transition); font-size: 14px; }
+.option-label:hover:not(.disabled) { border-color: var(--primary-color); background: #f0f7ff; }
+.option-label input[type="radio"] { margin-top: 3px; margin-right: 12px; cursor: pointer; }
+.option-label.selected { border-color: var(--primary-color); background: #f0f7ff; font-weight: bold; box-shadow: 0 0 0 1px var(--primary-color); }
+
+/* HTML 代码填空题样式 */
+.code-input-group { background: #282c34; padding: 15px; border-radius: var(--radius-sm); color: #abb2bf; font-family: 'Consolas', 'Courier New', monospace; font-size: 14px; line-height: 2; overflow-x: auto; margin-top: 10px; }
+.code-blank { background: #1e1e1e; border: 1px solid #61afef; color: #98c379; padding: 2px 6px; border-radius: 4px; width: 100px; outline: none; text-align: center; font-family: monospace; font-size: 14px; margin: 0 4px; }
+.code-blank:focus { box-shadow: 0 0 5px rgba(97, 175, 239, 0.6); }
+
+/* 提交后状态样式 */
+.option-label.correct { background: #f0fdf4; border-color: var(--secondary-color); color: #166534; font-weight: bold; }
+.option-label.wrong { background: #fef2f2; border-color: var(--danger-color); color: #991b1b; }
+.code-blank.correct { border-color: var(--secondary-color); background: rgba(46,204,113,0.1); color: var(--secondary-color); }
+.code-blank.wrong { border-color: var(--danger-color); background: rgba(231,76,60,0.1); color: var(--danger-color); }
+.explanation { margin-top: 15px; padding: 12px; background: #eff6ff; border-radius: var(--radius-sm); font-size: 13px; color: #1e40af; line-height: 1.6; display: none; border-left: 3px solid var(--primary-color); }
+.time-spent { font-size: 12px; color: #94a3b8; float: right; margin-top: 5px; }
+
+/* 按钮组 */
+.quiz-actions { display: flex; gap: 15px; justify-content: center; margin-top: 25px; }
+.primary-btn { background: var(--primary-color); color: white; border: none; border-radius: 25px; cursor: pointer; transition: var(--transition); box-shadow: 0 4px 12px rgba(52,152,219,0.3); }
+.primary-btn:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(52,152,219,0.4); }
+.secondary-btn { background: white; color: var(--text-main); border: 1px solid var(--border-color); border-radius: 25px; cursor: pointer; transition: var(--transition); }
+.secondary-btn:hover { background: #f1f5f9; border-color: #cbd5e1; }
+.large-btn { padding: 12px 30px; font-size: 15px; font-weight: bold; }
+
+/* 结果区 */
+.result-area { margin-top: 25px; padding: 20px; background: #f0fdf4; border: 2px solid var(--secondary-color); border-radius: var(--radius-md); display: flex; align-items: center; gap: 20px; animation: bounceIn 0.5s ease-out; }
+.score-circle { width: 70px; height: 70px; border-radius: 50%; background: var(--secondary-color); color: white; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 10px rgba(46,204,113,0.3); }
+#final-score { font-size: 28px; font-weight: bold; }
+.score-unit { font-size: 12px; margin-top: 5px; }
+.feedback-msg h3 { color: #166534; margin-bottom: 4px; font-size: 18px; }
+.feedback-msg p { color: #15803d; font-size: 14px; }
+.time-stats { font-family: monospace; background: rgba(255,255,255,0.7); padding: 2px 8px; border-radius: 4px; display: inline-block; margin-top: 5px; }
+
+/* ==========================================
+   全局提示框 (Toast)
+   ========================================== */
+.toast-container { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 10000; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
+.toast { background: rgba(0, 0, 0, 0.8); color: white; padding: 10px 20px; border-radius: 20px; font-size: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); display: flex; align-items: center; gap: 8px; animation: slideDown 0.3s ease-out; }
+.toast.success { background: rgba(46, 204, 113, 0.95); }
+.toast.error { background: rgba(231, 76, 60, 0.95); }
+
+/* ==========================================
+   动画与响应式适配
+   ========================================== */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes bounceIn { 0% { transform: scale(0.9); opacity: 0; } 60% { transform: scale(1.02); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+@keyframes slideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* 平板适配 */
+@media (max-width: 992px) {
+    .k-content-wrapper { grid-template-columns: 1fr; }
+}
+
+/* 手机端适配 */
+@media (max-width: 768px) {
+    .hide-on-mobile { display: none !important; }
+    .mobile-menu-btn { display: block; }
+    .close-sidebar { display: block; }
+    
+    .sidebar { position: fixed; left: 0; top: 0; bottom: 0; z-index: 500; transform: translateX(-100%); }
+    .sidebar.show { transform: translateX(0); }
+    
+    .app-header { padding: 0 10px; }
+    .grade-toggle { margin-left: 0; }
+    .toggle-btn { padding: 4px 10px; font-size: 13px; }
+    
+    .user-info { padding: 0; background: transparent; }
+    .user-text { display: none; } /* 手机端隐藏姓名文字，只留头像和图标 */
+    .icon-btn { width: 32px; height: 32px; font-size: 14px; }
+    
+    .content-area { padding: 15px; }
+    .knowledge-card, .quiz-container { padding: 15px; margin-bottom: 15px; }
+    .quiz-actions { flex-direction: column; }
+    .large-btn { width: 100%; }
+}

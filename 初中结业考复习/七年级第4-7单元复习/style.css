@@ -1,0 +1,81 @@
+/* ==========================================================================
+   奇妙网络实验室 —— 核心样式表 (期末冲刺宝典 专版)
+   包含：新拟态风格、马克笔高亮、3D 闪卡翻转引擎
+   ========================================================================== */
+
+body {
+    background-color: #f0fdf4; 
+    background-image: 
+        radial-gradient(#94a3b8 1px, transparent 1px),
+        radial-gradient(#94a3b8 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+}
+
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+html { scroll-behavior: smooth; }
+
+/* --------------------------------------------------------------------------
+   丝滑版 马克笔高亮划线特效
+   -------------------------------------------------------------------------- */
+.highlighter-yellow, .highlighter-green, .highlighter-pink, .highlighter-blue, .highlighter-red, .highlighter-purple, .highlighter-orange {
+    background-repeat: no-repeat;
+    background-position: 0 85%; 
+    background-size: 100% 35%; 
+    transition: background-size 0.2s ease-in-out;
+    border-radius: 2px;
+    padding: 0 4px;
+    cursor: default;
+}
+.highlighter-yellow { background-image: linear-gradient(to right, rgba(253, 224, 71, 0.8), rgba(253, 224, 71, 0.8)); }
+.highlighter-yellow:hover { background-size: 100% 100%; }
+.highlighter-green { background-image: linear-gradient(to right, rgba(74, 222, 128, 0.6), rgba(74, 222, 128, 0.6)); }
+.highlighter-green:hover { background-size: 100% 100%; }
+.highlighter-pink { background-image: linear-gradient(to right, rgba(244, 114, 182, 0.6), rgba(244, 114, 182, 0.6)); }
+.highlighter-pink:hover { background-size: 100% 100%; }
+.highlighter-blue { background-image: linear-gradient(to right, rgba(56, 189, 248, 0.6), rgba(56, 189, 248, 0.6)); }
+.highlighter-blue:hover { background-size: 100% 100%; }
+
+/* --------------------------------------------------------------------------
+   🚀 真·3D 记忆闪卡物理引擎
+   -------------------------------------------------------------------------- */
+.perspective-1000 {
+    perspective: 1000px; /* 赋予 3D 景深 */
+}
+.preserve-3d {
+    transform-style: preserve-3d; /* 保持子元素的 3D 空间关系 */
+}
+.backface-hidden {
+    backface-visibility: hidden; /* 翻转到背面时隐藏内容 */
+    -webkit-backface-visibility: hidden;
+}
+.rotate-y-180 {
+    transform: rotateY(180deg); /* 背面初始状态转过去 */
+}
+.flashcard.flipped {
+    transform: rotateY(180deg); /* 点击后整个卡片翻转 180 度 */
+}
+
+/* --------------------------------------------------------------------------
+   闯关模式：选项按钮动态样式
+   -------------------------------------------------------------------------- */
+.quiz-opt-btn {
+    width: 100%; text-align: left; padding: 16px 24px;
+    background-color: white; border: 3px solid #1e293b; border-radius: 16px;
+    font-weight: 700; font-size: 1.125rem; color: #334155;
+    box-shadow: 4px 4px 0px 0px #1e293b; transition: all 0.2s; cursor: pointer; display: flex; align-items: center;
+}
+.quiz-opt-btn:hover:not(.disabled) { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px 0px #1e293b; background-color: #f0f9ff; border-color: #0ea5e9; }
+.quiz-opt-btn:active:not(.disabled) { transform: translate(2px, 2px); box-shadow: 2px 2px 0px 0px #1e293b; }
+.quiz-opt-btn.correct { background-color: #dcfce7; border-color: #16a34a; color: #166534; box-shadow: 4px 4px 0px 0px #16a34a; }
+.quiz-opt-btn.wrong { background-color: #fee2e2; border-color: #dc2626; color: #991b1b; box-shadow: 4px 4px 0px 0px #dc2626; }
+.quiz-opt-btn.disabled { cursor: not-allowed; opacity: 0.8; }
+
+/* --------------------------------------------------------------------------
+   通用动画库
+   -------------------------------------------------------------------------- */
+@keyframes popIn { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+.animate-pop { animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+@keyframes shake-wrong { 0%, 100% { transform: translateX(0); } 20%, 60% { transform: translateX(-8px); } 40%, 80% { transform: translateX(8px); } }
+.animate-shake-wrong { animation: shake-wrong 0.4s ease-in-out; }
