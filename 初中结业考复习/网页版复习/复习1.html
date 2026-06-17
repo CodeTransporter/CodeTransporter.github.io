@@ -1,0 +1,1802 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>七八年级信息科技｜全单元整合学习系统</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft Yahei","PingFang SC",sans-serif}
+:root{
+    --must:#ff3d3d;
+    --high:#ffb700;
+    --base:#2ac464;
+    --theme:#4299e1;
+    --light:#f8fafc;
+    --dark:#1a202c;
+    --card:#ffffff;
+    --dark-card:#2d3748;
+}
+body{background:#f0f7ff;transition:all 0.3s;color:#2d3748}
+body.dark{background:#1a202c;color:#e2e8f0}
+
+/* 顶部导航 */
+.header{
+    background:linear-gradient(135deg,#4299e1,#667eea);
+    color:white;padding:24px 20px;border-radius:0 0 30px 30px;
+    box-shadow:0 8px 25px rgba(66,153,225,0.2);text-align:center;
+}
+.header h1{font-size:clamp(1.5rem,4vw,2.2rem);margin-bottom:10px}
+.toolbar{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+.btn{padding:10px 16px;border:none;border-radius:15px;font-weight:bold;cursor:pointer;transition:0.2s}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:#48bb78;color:white}
+.btn-warning{background:#ed8936;color:white}
+.btn-dark{background:#718096;color:white}
+
+/* 年级选项卡 */
+.grade-tabs{max-width:1000px;margin:24px auto;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.grade-tab{
+    padding:14px 28px;border-radius:999px;border:none;
+    font-size:16px;font-weight:bold;cursor:pointer;
+    background:white;box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+.grade-tab.active{background:#4299e1;color:white}
+body.dark .grade-tab{background:#2d3748}
+
+/* 单元选项卡 */
+.unit-tabs{
+    max-width:1000px;margin:0 auto 20px;
+    display:flex;gap:10px;overflow-x:auto;padding:0 14px;
+    scrollbar-width:none;
+}
+.unit-tab{
+    white-space:nowrap;padding:10px 18px;border-radius:999px;
+    border:none;background:white;box-shadow:0 2px 8px rgba(0,0,0,0.05);
+    font-weight:bold;cursor:pointer;
+}
+.unit-tab.active{background:#48bb78;color:white}
+body.dark .unit-tab{background:#2d3748}
+
+/* 内容区域 */
+.content{
+    max-width:1000px;margin:0 auto 40px;
+    background:white;border-radius:24px;box-shadow:0 10px 25px rgba(0,0,0,0.06);
+    padding:28px;min-height:500px;
+}
+body.dark .content{background:#2d3748}
+.page{display:none}
+.page.active{display:block}
+
+/* 标注样式（全覆盖） */
+.tag-must{border:2px solid var(--must);background:#ffe5e5;padding:3px 6px;border-radius:6px;font-weight:bold}
+.tag-high{border:2px solid var(--high);background:#fff3bf;padding:3px 6px;border-radius:6px;font-weight:bold}
+.tag-base{border:2px solid var(--base);background:#e6fffa;padding:3px 6px;border-radius:6px}
+body.dark .tag-must{background:#742a2a;border:#fc8181}
+body.dark .tag-high{background:#744210;border:#f6ad55}
+body.dark .tag-base{background:#22543d;border:#48bb78}
+
+/* 悬浮提示 */
+.hover{position:relative;cursor:help}
+.hover .tip{
+    position:absolute;top:120%;left:0;width:220px;
+    background:#2d3748;color:white;padding:10px;border-radius:10px;
+    font-size:13px;z-index:10;display:none;
+}
+.hover:hover .tip{display:block}
+
+/* 标题样式 */
+h2{margin:24px 0 12px;border-left:6px solid #4299e1;padding-left:12px}
+h3{margin:16px 0 10px;color:#4a5568}
+body.dark h3{color:#e2e8f0}
+p{line-height:1.8;margin-bottom:12px}
+ul{padding-left:24px;margin-bottom:16px}
+li{margin-bottom:8px;line-height:1.7}
+
+/* 卡片提示 */
+.bubble{
+    background:#fef5e7;border:2px dashed #ed8936;
+    border-radius:16px;padding:16px;margin:16px 0;
+}
+body.dark .bubble{background:#4a371f;border:#dd6b20}
+
+/* 单元测试弹窗（高颜值） */
+.modal{
+    position:fixed;top:0;left:0;width:100%;height:100%;
+    background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;
+    z-index:999;display:none;
+}
+.modal-box{
+    background:white;width:90%;max-width:580px;border-radius:24px;
+    padding:30px;position:relative;box-shadow:0 20px 40px rgba(0,0,0,0.2);
+}
+body.dark .modal-box{background:#2d3748}
+.modal-close{
+    position:absolute;top:16px;right:16px;
+    width:36px;height:36px;border-radius:50%;
+    background:#fc8181;color:white;border:none;
+    font-size:18px;cursor:pointer;
+}
+.modal h2{margin-top:0;border:none;padding-left:0}
+
+/* 折叠 */
+.collapse{cursor:pointer}
+.collapse::after{content:" ▼";font-size:12px}
+.collapse.open::after{content:" ▲"}
+.collapse-content{max-height:0;overflow:hidden;transition:max-height 0.4s}
+.collapse.open + .collapse-content{max-height:9999px}
+
+/*收藏按钮*/
+.collect-btn{cursor:pointer;padding:2px 6px;background:#eee;border-radius:4px;margin-left:6px;font-size:14px}
+.collect-btn.active{background:#ffdd70}
+/* 核心：居中自动换行，两端留白 */
+.unit-tabs-center {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* 按钮整体居中，两端自动留白 */
+  gap: 10px; /* 按钮间距均匀 */
+  padding: 10px 40px; /* 左右固定留白，不贴边 */
+  margin-bottom: 15px;
+}
+
+/* 按钮样式：文字完整显示，不被挤压 */
+.unit-tab {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  padding: 10px 18px;
+  font-size: 15px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.unit-tab.active {
+  background: #4CAF50;
+  color: #fff;
+  border-color: #4CAF50;
+}
+</style>
+</head>
+<body>
+
+<!-- 顶部 -->
+<div class="header">
+    <h1>📚 七八年级信息科技学习系统｜单页标签切换全讲义</h1>
+    <div>七八年级全考点三色标注、词条悬浮释义、分栏切换、美化</div>
+    <div class="toolbar">
+        <button class="btn btn-primary" onclick="openTest()">🧪 打开当前单元测试</button>
+        <button class="btn btn-warning" onclick="window.print()">🖨 全文打印</button>
+        <button class="btn btn-dark" onclick="toggleDark()">🌙 明暗深色切换</button>
+    </div>
+</div>
+
+<!-- 年级切换 -->
+<div class="grade-tabs">
+    <button class="grade-tab active" onclick="switchGrade(7)">七年级</button>
+    <button class="grade-tab" onclick="switchGrade(8)">八年级</button>
+</div>
+
+
+<!-- 七年级选项卡：居中自动换行 -->
+<div class="unit-tabs-center" id="unit-tabs-7">
+  <button class="unit-tab active" onclick="switchUnit(7,1)">第一单元：互联网及其影响</button>
+  <button class="unit-tab" onclick="switchUnit(7,2)">第二单元：中华优秀传统文化数字传播</button>
+  <button class="unit-tab" onclick="switchUnit(7,3)">第三单元 利用互联网推广中国非遗（网页制作）</button>
+  <button class="unit-tab" onclick="switchUnit(7,4)">第四单元 搭建校园网络系统</button>
+  <button class="unit-tab" onclick="switchUnit(7,5)">第五单元 社区志愿服务行动</button>
+  <button class="unit-tab" onclick="switchUnit(7,6)">第六单元 共同守护在线生活</button>
+  <button class="unit-tab" onclick="switchUnit(7,7)">第七单元 智能学习助手</button>
+</div>
+
+<!-- 八年级选项卡：居中自动换行，默认隐藏 -->
+<div class="unit-tabs-center" id="unit-tabs-8" style="display: none;">
+  <button class="unit-tab active" onclick="switchUnit(8,1)">第一单元 校园“物联网”改造—初识物联网</button>
+  <button class="unit-tab" onclick="switchUnit(8,2)">第二单元 景区智能管理系统—感知层初体验</button>
+  <button class="unit-tab" onclick="switchUnit(8,3)">第三单元 智慧校园系统—网络层初体验</button>
+  <button class="unit-tab" onclick="switchUnit(8,4)">第四单元 智能家居系统—物联网系统实践</button>
+  <button class="unit-tab" onclick="switchUnit(8,5)">第五单元 智慧城市物联网设计—物联网创新应用</button>
+  <button class="unit-tab" onclick="switchUnit(8,6)">第六单元 物联网安全保卫战—物联网安全与发展</button>
+</div>
+
+<!-- 内容区 -->
+<div class="content">
+    <!-- =========七上第一单元完整原文 p7-1========= -->
+    <div class="page active" id="p7-1">
+        <h2 class="collapse open">第一单元 互联网及其影响（互联网博物馆策展）</h2>
+        <div class="collapse-content">
+            <h3 class="collapse open">一、互联网核心基础概念（<span class="tag-must">整段全为考试必考内容</span>）</h3>
+            <div class="collapse-content">
+                <p>1.<span class="tag-must hover">互联网<span class="tip">考试整句默写定义，全书开篇核心概念</span></span>完整定义：<span class="tag-base">互联网又称因特网</span>，是<span class="tag-high hover">全球规模最大、开放程度最高的信息网络体系<span class="tip">选择题高频描述</span></span>，由<span class="tag-high hover">路由器<span class="tip">互联核心硬件设备</span></span>等网络设备相互连接，实现<span class="tag-base">全网互联互通、信息资源共享</span>的巨型网络系统。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+                <p>2.<span class="tag-high hover">主机<span class="tip">所有联网终端统一名称，选择常考</span></span>定义：所有能够接入互联网的终端设备（<span class="tag-base">计算机、手机、平板、智能家电</span>等），在网络体系中统一被称为主机，是<span class="tag-base">网络数据收发的基本单元</span>。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+                <h4>3.<span class="tag-high hover">阿帕网（ARPANET）<span class="tip">互联网雏形，选择必考</span></span>完整知识点</h4>
+                <p>诞生背景：<span class="tag-base">20世纪60年代</span>，<span class="tag-high hover">包交换技术<span class="tip">阿帕网底层关键技术</span></span>取得技术突破，为阿帕网搭建奠定核心技术基础。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+                <p>关键事件：<span class="tag-must hover">1969年10月<span class="tip">必考年份，填空</span></span>，美国加州大学洛杉矶分校与斯坦福研究所的计算机，通过阿帕网完成首次跨节点远程通信。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+                <p>核心意义：本次通信虽仅完成部分数据传输，但标志着<span class="tag-high">互联网雏形正式诞生</span>，证明跨地域计算机可通过网络实现数据交换，打破空间通信壁垒。</p>
+                <div class="bubble">💡趣味注解：阿帕网是互联网最初原型，最早只有4台计算机互通哦！</div>
+            </div>
+
+            <h3 class="collapse open">二、互联网完整发展历程（<span class="tag-high">全部时间、事件均为选择题考点</span>）</h3>
+            <div class="collapse-content">
+                <ul>
+                    <li>1.<span class="tag-base">20世纪60年代</span>：阿帕网诞生，互联网雏形出现</li>
+                    <li>2.<span class="tag-base">20世纪70年代</span>：<span class="tag-must hover">TCP/IP协议<span class="tip">全书重中之重，名词解释必考</span></span>正式诞生，统一全网通信标准，实现不同网络、不同设备之间的互联互通<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+                    <li>3.<span class="tag-base">20世纪90年代</span>：<span class="tag-high hover">万维网（WWW）<span class="tip">推动民用关键技术</span></span>问世并商业化，简化互联网使用门槛，推动互联网从专业领域走向大众普及</li>
+                    <li>4.<span class="tag-base">21世纪初</span>：<span class="tag-high">智能手机普及</span>，移动互联网时代来临，全面改变大众生产生活方式</li>
+                    <li>5.<span class="tag-base">21世纪中后期</span>：<span class="tag-high">5G技术全面商用</span>，全球进入万物互联时代；<span class="tag-base">生成式人工智能兴起</span>，开启互联网智能化交互新阶段</li>
+                </ul>
+            </div>
+
+            <h3 class="collapse open">三、IP地址核心知识点（<span class="tag-must">全书重难点，选择填空简答全覆盖，全段逐词标注</span>）</h3>
+            <div class="collapse-content">
+                <p>1.<span class="tag-high hover">IP地址<span class="tip">设备网络唯一编号，必考名词</span></span>定义：IP地址是互联网中每一台主机的唯一逻辑标识，相当于<span class="tag-base">设备在网络中的专属“住址”</span>，是网络识别、定位设备的核心依据。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+                <p>2.IP地址完整结构：由<span class="tag-high hover">网络号 + 主机号<span class="tip">组成要素必考填空</span></span>两部分组成，二者缺一不可<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+                <p><span class="tag-base">网络号</span>：标识设备所属的网络区域（类比邮政编码，确定大范围区域）</p>
+                <p><span class="tag-base">主机号</span>：标识该网络区域内的具体设备（类比门牌号，确定精准设备）</p>
+                <h4>3.<span class="tag-must">IPv4 完整概念</span></h4>
+                <p>组成：采用<span class="tag-must hover">32位二进制数<span class="tip">必考数字填空</span></span>编制，分为<span class="tag-base">4组8位二进制数</span>，转换为十进制展示（例：<span class="tag-base">192.168.1.1</span>）<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+                <p>特点：<span class="tag-high">地址总量固定、数量有限</span>，无法适配当下海量物联网设备接入需求，目前已面临<span class="tag-base">地址枯竭问题</span></p>
+                <h4>4.<span class="tag-must">IPv6 完整概念</span></h4>
+                <p>组成：采用<span class="tag-must hover">128位二进制数<span class="tip">和IPv4对比必背数值</span></span>编制<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+                <p>特点：<span class="tag-high">地址空间呈指数级扩大</span>，可满足全球万物互联的设备接入需求，具备<span class="tag-base">安全性高、传输稳定、适配性强</span>的优势，是未来互联网的核心地址协议</p>
+                <h4>5.IPv4与IPv6核心对比（<span class="tag-must">必背对比考点</span>）</h4>
+                <p>IPv4：<span class="tag-base">32位二进制、地址有限、安全性较弱、传统互联网通用</span></p>
+                <p>IPv6：<span class="tag-base">128位二进制、地址无限、安全性更强、适配物联网/智能设备</span></p>
+            </div>
+
+            <h3 class="collapse open">四、互联网应用及完整特征（<span class="tag-high">分类+5条特征全部考题</span>）</h3>
+            <div class="collapse-content">
+                <h4>1.常见互联网应用分类</h4>
+                <p><span class="tag-base">信息检索类：各类搜索引擎</span>；<span class="tag-base">社交沟通类：即时通讯软件</span>；<span class="tag-base">学习办公类：在线课堂、云端办公平台</span>；<span class="tag-base">生活服务类：网购、外卖、在线支付</span>；<span class="tag-base">娱乐休闲类：视频、游戏平台</span></p>
+                <h4>2.互联网应用完整核心特征</h4>
+                <ul>
+                    <li>①<span class="tag-base">无时空限制</span>：可随时随地联网使用，打破地域、时间束缚</li>
+                    <li>②<span class="tag-base">非接触式交互</span>：全程线上数据交互，无需线下接触即可完成服务</li>
+                    <li>③<span class="tag-base">服务个性化、多元化</span>：依托算法推送，适配不同用户需求，服务场景全覆盖</li>
+                    <li>④<span class="tag-base">呈现形式多媒体化</span>：从早期单一文本，升级为图文、音频、视频融合呈现</li>
+                    <li>⑤<span class="tag-base">功能集成融合化</span>：单一应用可集成多项功能，告别单一服务模式，提升使用效率</li>
+                </ul>
+            </div>
+
+            <h3 class="collapse open">五、互联网双重影响（<span class="tag-high">材料分析大题全考点，每条全标注</span>）</h3>
+            <div class="collapse-content">
+                <h4>1.互联网创新积极价值</h4>
+                <ul>
+                    <li>①信息领域：<span class="tag-base">打破信息壁垒，信息检索、传播高效便捷，实现全球信息共享</span></li>
+                    <li>②经济领域：催生<span class="tag-base">电商、共享经济、数字支付</span>等新业态，<span class="tag-high hover">“互联网+”<span class="tip">政策名词必考</span></span>赋能传统农业、工业、服务业，重构产业生态、优化资源配置<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+                    <li>③教育领域：<span class="tag-base">打破教育资源地域差异，在线教育、远程研学实现优质资源普惠共享</span></li>
+                    <li>④社会领域：<span class="tag-base">电子政务、智慧城市、在线医疗提升公共服务效率</span>，助力文化跨地域传播交流</li>
+                </ul>
+                <p><span class="tag-high hover">2015年国家正式提出“互联网+”行动计划<span class="tip">填空年份</span></span>，推动互联网与实体经济深度融合。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+                <h4>2.互联网潜在消极风险（<span class="tag-base">5项全是选择题选项</span>）</h4>
+                <ul>
+                    <li>①信息过载与虚假信息：<span class="tag-base">网络信息繁杂冗余，不实谣言、伪科学快速扩散</span></li>
+                    <li>②网络暴力与不良文化：<span class="tag-base">人肉搜索、网络欺凌、低俗内容泛滥</span></li>
+                    <li>③青少年网络成瘾：<span class="tag-base">沉迷网游短视频，荒废学业、损伤心理</span></li>
+                    <li>④<span class="tag-high hover">数字鸿沟<span class="tip">概念考点</span></span>：老人、偏远人群缺少设备技能，无法均等使用网络<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+                    <li>⑤隐私泄露与网络诈骗：<span class="tag-base">手机号、住址泄露，衍生精准诈骗</span></li>
+                </ul>
+            </div>
+
+            <h3 class="collapse open">六、中国互联网发展与核心贡献（<span class="tag-high">时间、法案、成就全标注</span>）</h3>
+            <div class="collapse-content">
+                <h4>1.中国互联网发展关键时间节点</h4>
+                <ul>
+                    <li>①<span class="tag-must hover">1987年9月<span class="tip">必考填空，首封跨境邮件</span></span>：我国发出第一封跨境电子邮件，内容“<span class="tag-base">越过长城，走向世界</span>”<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+                    <li>②<span class="tag-must hover">1994年4月<span class="tip">全功能接入互联网必考年份</span></span>：开通64K国际专线，全球第77个入网国家<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+                    <li>③21世纪初：<span class="tag-base">宽带普及、4G商用</span></li>
+                    <li>④现阶段：<span class="tag-base">5G规模化商用、布局6G研发</span></li>
+                </ul>
+                <h4>2.中国互联网核心创新成就</h4>
+                <ul>
+                    <li>①通信：<span class="tag-high">1G空白、2G跟随、3G突破、4G并跑、5G领跑</span></li>
+                    <li>②应用：<span class="tag-base">移动支付、电商、短视频全球领先</span></li>
+                    <li>③前沿：<span class="tag-high hover">京沪干线<span class="tip">量子保密通信工程考点</span></span>，千公里级量子干线<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+                </ul>
+                <h4>3.法规体系</h4>
+                <p><span class="tag-must hover">《网络安全法》《数据安全法》《个人信息保护法》<span class="tip">三部法律名称简答必考</span></span>，规范网络秩序<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+                <p><span class="tag-base">世界互联网大会（乌镇）、一带一路数字合作</span></p>
+            </div>
+
+            <h3 class="collapse open">七、青少年健康上网规范（<span class="tag-high">4条简答必背，整段标注</span>）</h3>
+            <div class="collapse-content">
+                <ul>
+                    <li>1.<span class="tag-base">合理规划上网时长，杜绝网瘾</span></li>
+                    <li>2.<span class="tag-base">甄别信息，抵制谣言低俗内容</span></li>
+                    <li>3.<span class="tag-base">保护隐私，不随意泄露个人信息</span></li>
+                    <li>4.<span class="tag-high">遵守《新时代青少年网络文明公约》，拒绝网暴</span></li>
+                </ul>
+                <div class="bubble">💡四条直接背诵，考试简答题满分标准答案！</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========七上第二单元完整原文 p7-2========= -->
+    <div class="page" id="p7-2">
+        <h2 class="collapse open">第二单元 中华优秀传统文化数字传播（互联网信息处理）</h2>
+        <div class="collapse-content">
+            <h3 class="collapse open">一、五大信息获取方式（<span class="tag-high">五种全为选择、简答题素材</span>）</h3>
+            <div class="collapse-content">
+                <p>1.<span class="tag-base hover">查阅纸质资料<span class="tip">书本文献类信息来源</span></span>：优势是<span class="tag-high">内容权威、无网络虚假信息</span>；不足是<span class="tag-base">更新慢、携带不便、检索效率低</span><span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+                <p>2.<span class="tag-base hover">询问他人<span class="tip">口述调研获取信息</span></span>：优势是<span class="tag-base">获取信息快速、针对性强</span>；不足是<span class="tag-base">受个人认知局限，信息主观性强、易出错</span><span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+                <p>3.<span class="tag-base hover">实地考察<span class="tip">一手实地调研</span></span>：优势是<span class="tag-high">获取一手真实资料、体验感强</span>；不足是<span class="tag-base">耗时耗力、成本高、受地域限制</span><span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+                <p>4.<span class="tag-base hover">互联网搜索<span class="tip">最常用信息检索方式</span></span>：优势是<span class="tag-high">信息量大、检索快速、不受时空限制</span>；不足是<span class="tag-base">信息参差不齐、需人工甄别真伪</span><span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+                <p>5.<span class="tag-base hover">生成式AI工具<span class="tip">新型信息整理工具</span></span>：优势是<span class="tag-base">可自主生成、整合信息，效率极高</span>；不足是<span class="tag-high">存在生成错误信息风险，需核验权威来源</span><span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+                <div class="bubble">💡小提示：考试简答题常让对比几种信息获取方式优缺点，按需摘抄！</div>
+            </div>
+
+            <h3 class="collapse open">二、搜索引擎核心知识点（<span class="tag-must">定义+三步流程必考</span>）</h3>
+            <div class="collapse-content">
+                <p>1.搜索引擎定义：依托<span class="tag-high hover">爬虫程序<span class="tip">网络蜘蛛，正规抓取网页程序</span></span>、索引数据库，帮助用户在海量网络信息中快速检索、匹配所需资源的网络工具，可检索<span class="tag-base">网页、图片、视频、资讯</span>等各类内容。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+                <p>2.搜索引擎完整工作三步法（<span class="tag-must">必考默写，三步一字不差</span>）</p>
+                <ul>
+                    <li>①<span class="tag-must hover">抓取<span class="tip">爬虫遍历网页采集资源</span></span>：通过网络爬虫（蜘蛛程序）自动遍历全网网页，采集各类信息资源（爬虫属于正规工具，并非病毒）<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+                    <li>②<span class="tag-must hover">索引<span class="tip">分类建数据库</span></span>：对抓取的海量数据进行分类、整理、标注关键词，搭建专属索引数据库，实现快速检索储备<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+                    <li>③<span class="tag-must hover">排序<span class="tip">按匹配度展示结果</span></span>：依托算法，根据用户关键词匹配度、网页权威性、内容相关性，对检索结果优先级排序，优质内容前置展示<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+                </ul>
+                <p>3.<span class="tag-high">搜索引擎四大分类</span>：<span class="tag-base">全文搜索引擎、垂直搜索引擎（细分领域专属）、元搜索引擎（整合多平台结果）、目录搜索引擎（人工分类整理）</span><span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+            </div>
+
+            <h3 class="collapse open">三、高阶搜索技巧（<span class="tag-high">实操选择+实操考题</span>）</h3>
+            <div class="collapse-content">
+                <p>1.<span class="tag-must hover">精确匹配：英文双引号""<span class="tip">必考操作，禁止拆分关键词</span></span>包裹关键词，禁止系统拆分词语，实现精准检索（例：<span class="tag-base">"广东醒狮文化"</span>）<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+                <p>2.<span class="tag-base">关键词优化</span>：摒弃口语化语句，使用简洁、专业的词组作为关键词，可多关键词空格组合缩小范围</p>
+                <p>3.<span class="tag-base">分类筛选</span>：检索时可精准选择网页、图片、视频、资讯等类型，过滤无效资源</p>
+                <p>4.<span class="tag-high hover">权威资源优先<span class="tip">非遗官方平台，版权安全</span></span>：优先使用<span class="tag-base">数字故宫、数字敦煌、故宫名画记、数字多宝阁、数字藏经洞</span>等官方文化平台资源，内容权威无版权问题<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+            </div>
+
+            <h3 class="collapse open">四、网络素材下载规范与格式（<span class="tag-base">格式填空考点</span>）</h3>
+            <div class="collapse-content">
+                <p>1.<span class="tag-base">文字素材</span>：选中复制粘贴，保存为<span class="tag-high">TXT、WPS、Word</span>格式<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+                <p>2.<span class="tag-base">图片素材</span>：右键“图像另存为”，常用格式<span class="tag-high">JPG、JPEG、PNG、GIF、BMP</span>；模糊图片可使用识图工具以图搜原图<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+                <p>3.<span class="tag-base">音视频素材</span>：正规平台下载，音频常用<span class="tag-high">MP3、WMA、WAV</span>；视频常用<span class="tag-high">MP4、AVI、FLV</span>；格式不兼容可使用格式转换工具处理<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+            </div>
+
+            <h3 class="collapse open">五、互联网信息管理核心知识（<span class="tag-high">目录树、两种存储必考</span>）</h3>
+            <div class="collapse-content">
+                <p>1.<span class="tag-base">信息分类依据</span>：可按照<span class="tag-high">文件类型、主题内容、创建时间、文件大小</span>四大维度分类整理网络资源<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+                <p>2.<span class="tag-must hover">目录树结构<span class="tip">电脑文件夹存储结构，填空高频</span></span>定义：以根目录为起点，逐层拆分一级、二级子文件夹，形成倒立树形存储结构，层级清晰，方便文件快速查找、归类、管理，是计算机资源管理的核心方式<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+                <p>3.两种信息存储管理方式完整对比</p>
+                <p><span class="tag-high">本地存储管理（硬盘、U盘、移动硬盘）</span></p>
+                <p>优势：<span class="tag-base">无需网络即可读写、数据隐私性强、无第三方泄露风险、读写稳定</span></p>
+                <p>不足：<span class="tag-base">物理介质易损坏、丢失、老化，无法跨设备同步，远程调用不便</span></p>
+                <p><span class="tag-high">云端在线管理（网盘、云文档、在线协作平台）</span></p>
+                <p>优势：<span class="tag-base">支持多设备实时同步、多人在线协作、远程随时访问、无需占用本地硬件空间</span></p>
+                <p>不足：<span class="tag-base">完全依赖网络网速，数据存储于第三方服务器，存在隐私泄露、平台关停丢失数据风险</span></p>
+            </div>
+
+            <h3 class="collapse open">六、数字作品制作（微视频）完整考点（<span class="tag-must">三步流程+四大评价标准必背</span>）</h3>
+            <div class="collapse-content">
+                <p>1.微视频制作三阶段完整流程</p>
+                <ul>
+                    <li>①<span class="tag-must">前期筹备</span>：确定主题、撰写详细脚本（包含场景、画面、音效、时长、字幕规划）<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+                    <li>②<span class="tag-must">中期制作</span>：采集版权合规素材、视频剪辑、画面调色、添加字幕、匹配配乐音效<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+                    <li>③<span class="tag-must">后期收尾</span>：统一视频分辨率与格式、平台发布、统计复盘观看量、点赞、评论等数据<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+                </ul>
+                <p>2.<span class="tag-must hover">数字作品四大评价标准<span class="tip">简答题标准答案，四项全背</span></span>（必考）：<span class="tag-high">思想性、创造性、技术性、艺术性</span><span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+                <div class="bubble">💡四项评分标准考试反复出题，务必完整背诵！</div>
+            </div>
+
+            <h3 class="collapse open">七、网络信息交流规范（<span class="tag-high">简答小点</span>）</h3>
+            <div class="collapse-content">
+                <p><span class="tag-base">遵纪守法、文明互动、尊重版权、不造谣传谣、保护个人与他人隐私。</span><span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+            </div>
+        </div>
+    </div>
+	
+	<div class="page" id="p7-3">
+		<h2 class="collapse open">第三单元 利用互联网推广中国非遗文化（网站制作）</h2>
+		<div class="collapse-content">
+			<h3 class="collapse open">一、网页与网站基础数据构成（<span class="tag-high">选择考点</span>）</h3>
+			<div class="collapse-content">
+				<p>一个完整的网页/包含五类核心数据：<span class="tag-base">文本数据、图像数据、音频数据、视频数据、用户行为数据</span><span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-high hover">用户行为数据<span class="tip">后台统计浏览、点击等信息</span></span>：用户浏览网页时的点击记录、停留时长、页面跳转、搜索记录等后台统计数据<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡趣味注解：网站就像非遗展览馆，各类素材就是展品，用户数据就是访客参观记录！</div>
+			</div>
+
+			<h3 class="collapse open">二、网站导航系统完整分类（<span class="tag-high">高频考点</span>）</h3>
+			<div class="collapse-content">
+				<p>1.<span class="tag-must hover">全局导航<span class="tip">全站通用顶部导航，固定布局</span></span>：固定布置在网页顶部，覆盖全站所有页面，可实现任意子页面一键跳转返回主页，是网站核心导航<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p>2.<span class="tag-base">局部导航</span>：仅适配当前栏目、当前页面的专属导航，服务于细分内容浏览</p>
+				<p>3.<span class="tag-high hover">面包屑导航<span class="tip">层级路径导航，示例：主页>非遗>青瓷</span></span>：层级式导航（例：主页>传统技艺>龙泉青瓷），清晰展示用户当前浏览位置，方便用户回溯上级页面，提升浏览体验<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</p>
+			</div>
+
+			<h3 class="collapse open">三、HTML核心标签大全（<span class="tag-m">定义+属性+用法·必考</span>）</h3>
+			<div class="collapse-content">
+				<h4>1. 网页基础骨架标签（<span class="tag-must">层级固定必背</span>）</h4>
+				<p><span class="tag-base">&lt;html&gt;</span>：网页根标签，包裹网页所有代码内容，是整个网页最外层结构</p>
+				<p><span class="tag-base">&lt;head&gt;</span>：网页头部标签，存放网页元数据、标题、样式配置，内容不会在页面可视化展示</p>
+				<p><span class="tag-base">&lt;title&gt;</span>：网页标题标签，定义浏览器标题栏显示的文字名称</p>
+				<p><span class="tag-base">&lt;body&gt;</span>：网页主体标签，所有可视化的文本、图片、按钮等内容均存放于此</p>
+				<div class="bubble">💡小提醒：html包裹head+body，标签嵌套不能写反！</div>
+
+				<h4>2. 文本排版标签</h4>
+				<p><span class="tag-high hover">&lt;h1&gt;~&lt;h6&gt;<span class="tip">六级标题，h1最大权重最高</span></span>：六级标题标签，h1字号最大、权重最高，h6最小，用于页面标题层级区分<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-base">&lt;p&gt;</span>：段落标签，自动实现段落换行、预留间距，用于正文文本排版</p>
+
+				<h4>3. 媒体与超链接标签（<span class="tag-must">核心属性必考</span>）</h4>
+				<p><span class="tag-high hover">&lt;img&gt;<span class="tip">图片单标签，无闭合</span></span>：图片单标签，用于插入网页图片</p>
+				<p>核心属性：<span class="tag-base">src（必填，图片路径）、alt（图片失效替代文字）、width/height（尺寸px）</span><span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-high hover">&lt;a&gt;<span class="tip">超链接双标签，href填跳转地址</span></span>：超链接双标签，实现页面跳转</p>
+				<p>核心属性：<span class="tag-base">href（必填，跳转目标网址/页面路径）</span>，格式：&lt;a href="目标地址"&gt;显示文字&lt;/a&gt;<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+
+				<h4>4. 表格标签</h4>
+				<p><span class="tag-base">&lt;table&gt;</span>：表格外框标签，定义整体表格</p>
+				<p><span class="tag-base">&lt;tr&gt;</span>：表格行标签，定义表格中的一行内容</p>
+				<p><span class="tag-base">&lt;td&gt;</span>：单元格标签，定义表格中单个单元格，存放具体内容</p>
+			</div>
+
+			<h3 class="collapse open">四、HTML标签核心规则（<span class="tag-high">必背</span>）</h3>
+			<div class="collapse-content">
+				<p>1.<span class="tag-base">双标签</span>：成对出现，有开始标签和结束标签（例：&lt;p&gt;&lt;/p&gt;、&lt;body&gt;&lt;/body&gt;）</p>
+				<p>2.<span class="tag-base">单标签</span>：无结束标签，独立使用（例：&lt;img&gt;、&lt;br&gt;换行标签）</p>
+				<p>3.<span class="tag-must">固定层级关系</span>：&lt;html&gt;包含&lt;head&gt;和&lt;body&gt;，&lt;head&gt;与&lt;body&gt;为并列关系，不可嵌套错乱<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+			</div>
+
+			<h3 class="collapse open">五、网页美化与交互技术</h3>
+			<div class="collapse-content">
+				<p>1.<span class="tag-high hover">CSS样式<span class="tip">静态美化，改颜色背景</span></span>：用于网页静态美化，核心属性：<span class="tag-base">background-color（背景颜色）、background-image（背景图片）、opacity（透明度，0-1，0全透、1不透）</span><span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p>2.<span class="tag-high hover">JavaScript(JS)<span class="tip">实现点击等动态交互</span></span>：用于实现网页动态交互效果，让网页具备点击响应、动态切换等互动功能<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+			</div>
+
+			<h3 class="collapse open">六、网站完整发布流程（<span class="tag-high">两种方式全解析</span>）</h3>
+			<div class="collapse-content">
+				<p>1.<span class="tag-base">局域网发布</span>：依托Windows系统自带IIS服务器搭建，配置完成后，仅同一局域网内的设备可通过IP地址访问网站，适合校园内部展示、测试使用</p>
+				<p>2.<span class="tag-must">互联网公网发布四步流程</span>：①申请合法域名 ②购买/托管云端服务器 ③完成ICP备案（国内网站必备） ④ DNS解析绑定域名与IP<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+			</div>
+
+			<h3 class="collapse open">七、域名与DNS解析重难点（<span class="tag-must">填空+选择</span>）</h3>
+			<div class="collapse-content">
+				<h4>1.常见域名后缀含义</h4>
+				<p>地区类：<span class="tag-base">cn（中国）、hk（中国香港）、us（美国）</span></p>
+				<p>机构类：<span class="tag-base">gov（政府）、edu（教育）、com（商业）、net（网络）、org（非营利）</span></p>
+				<h4>2.<span class="tag-must hover">DNS解析定义<span class="tip">域名转IP，网络电话簿</span></span>：DNS即域名系统，相当于网络电话簿，核心作用是将人类易记忆的域名，自动转换为设备可识别的IP地址，解决IP晦涩难记问题，是网页访问的核心前置步骤<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></h4>
+			</div>
+		</div>
+	</div>
+	<div class="page" id="p7-4">
+		<h2 class="collapse open">第四单元 搭建校园网络系统（互联网基本原理）</h2>
+		<div class="collapse-content">
+			<h3 class="collapse open">一、网络连接方式与设备考点</h3>
+			<div class="collapse-content">
+				<h4>1. 有线传输方式</h4>
+				<p><span class="tag-high hover">双绞线<span class="tip">短距离、教室/办公室主流有线布线材料</span></span>：短距离传输、成本低、适用性广，多用于校园教室、办公室局域网布线<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-high hover">光纤<span class="tip">骨干网络专用，高速、抗干扰、传输距离远</span></span>：传输带宽大、速度快、抗干扰能力极强、传输距离远，是骨干网络核心传输介质<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<h4>2. 无线传输方式</h4>
+				<p><span class="tag-base">Wi-Fi</span>：覆盖范围广、传输速率高，适合室内大面积设备联网</p>
+				<p><span class="tag-base">蓝牙</span>：传输距离近、功耗极低，适合手机、耳机、外设等短距离设备互联</p>
+				<div class="bubble">💡有线稳抗干扰，无线便捷灵活，校园组网两种搭配使用！</div>
+			</div>
+
+			<h3 class="collapse open">二、网络类型完整定义（<span class="tag-must">必考区分考点</span>）</h3>
+			<div class="collapse-content">
+				<p>1.<span class="tag-must hover">LAN局域网<span class="tip">覆盖教室、校园等小范围区域</span></span>：覆盖范围小（单教室、办公室、校园）、传输速度快、延迟低、搭建成本低，仅限局部区域设备互联<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p>2.<span class="tag-must hover">WAN广域网<span class="tip">跨城市/跨省/跨国，互联网属于广域网</span></span>：覆盖范围极大（跨城市、跨省、跨国），传输距离远，互联网本质是无数局域网通过广域网交织形成的巨型网络<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p>3.<span class="tag-must hover">路由器核心作用<span class="tip">唯一连通局域网与广域网的设备</span></span>：唯一可实现局域网与广域网互联互通的核心网络设备，负责数据转发、路由寻址<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡路由器就是网络“中转站”，实现内网连外网！</div>
+			</div>
+
+			<h3 class="collapse open">三、TCP/IP四层协议模型（<span class="tag-must">必考重难点·逐层解析</span>）</h3>
+			<div class="collapse-content">
+				<p>1. <span class="tag-high">应用层</span>：面向用户的功能应用层，承载各类网络服务，对应核心协议：</p>
+				<ul>
+					<li><span class="tag-base hover">HTTP（网页浏览协议）<span class="tip">访问网页专用通信协议</span></span><span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li><span class="tag-base hover">SMTP（发送邮件协议）<span class="tip">负责向外发送电子邮件</span></span><span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li><span class="tag-base hover">POP3/IMAP（接收邮件协议）<span class="tip">负责收取电子邮件</span></span><span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+				</ul>
+				<p>2. <span class="tag-high">传输层</span>：负责端到端的数据传输，保障传输质量</p>
+				<ul>
+					<li><span class="tag-must hover">TCP协议：可靠传输协议<span class="tip">三次握手，数据完整不丢失，用于网页、文件传输</span></span>：通过三次握手建立连接，数据不丢失、不乱序、完整性高，适用于文件传输、网页浏览等严谨场景<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li><span class="tag-must hover">UDP协议：快速传输协议<span class="tip">无连接，用于直播、网络游戏等实时场景</span></span>：无需握手、无连接确认，传输速度极快，不保证数据百分百送达，适用于直播、网络游戏、视频通话等实时场景<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+				</ul>
+				<p>3. <span class="tag-must">网络层：核心协议为IP协议，负责设备寻址、规划数据传输路由路径，确定数据从发送端到接收端的传输路线</span><span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p>4. <span class="tag-base">网络接口层</span>：最底层，负责将数字数据转换为光电信号，通过网线、光纤、Wi-Fi等物理介质完成数据传输</p>
+			</div>
+
+			<h3 class="collapse open">四、TCP三次握手（<span class="tag-must">完整流程+核心目的 必考</span>）</h3>
+			<div class="collapse-content">
+				<p>1. 第一次握手（请求连接）：客户端（电脑/手机）向服务器发送SYN请求，告知服务器“请求建立通信连接”</p>
+				<p>2. 第二次握手（应答确认）：服务器接收请求后，返回SYN+ACK报文，告知客户端“已收到请求，可准备连接”</p>
+				<p>3. 第三次握手（最终确认）：客户端接收应答后，发送ACK确认报文，告知服务器“设备已就绪，正式开始数据传输”</p>
+				<p><span class="tag-must">核心目的</span>：双向校验客户端与服务器的收发能力，确保通信链路通畅，避免无效连接占用服务器资源，保障传输可靠性<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡三次握手是TCP协议建立连接的标准流程，考试简答、填空高频考点</div>
+			</div>
+
+			<h3 class="collapse open">五、数据封装与解封装完整过程（<span class="tag-must">必考流程</span>）</h3>
+			<div class="collapse-content">
+				<p>1. 发送端-数据封装：原始数据 → 传输层添加端口信息 → 网络层添加IP地址信息 → 网络接口层添加物理地址信息 → 转换为光电信号发出</p>
+				<p>2. 接收端-数据解封装：接收光电信号 → 逐层剥离各层协议报头 → 层层校验解析 → 还原为原始数据</p>
+			</div>
+
+			<h3 class="collapse open">六、网络诊断命令（<span class="tag-high">实操必考·完整功能</span>）</h3>
+			<div class="collapse-content">
+				<p>1. <span class="tag-high hover">ipconfig /all<span class="tip">查看本机全部网络配置信息</span></span>：查看本机完整网络配置，包含IP地址、MAC物理地址、子网掩码、网关、DNS服务器地址<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p>2. <span class="tag-high hover">ping<span class="tip">测试网络连通性与延迟</span></span>：测试本机与目标设备/服务器的网络连通性，判断网络是否通畅、延迟高低<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p>3. <span class="tag-high hover">tracert<span class="tip">追踪数据包传输路径，排查网络故障</span></span>：追踪数据包传输全程路径，显示数据经过的所有路由器节点，用于排查网络卡顿、中断问题<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+			</div>
+
+			<h3 class="collapse open">七、电子邮件传输原理与协议区别（<span class="tag-high">高频考点</span>）</h3>
+			<div class="collapse-content">
+				<p>1. 邮件传输流程：用户客户端 → SMTP发件服务器 → 互联网传输 → 收件服务器 → POP3/IMAP协议推送至用户客户端</p>
+				<p>2. POP3与IMAP核心区别：</p>
+				<p><span class="tag-base">POP3</span>：仅将邮件下载至本地设备，多设备无法同步邮件读取状态</p>
+				<p><span class="tag-base">IMAP</span>：支持云端同步，多设备可实时同步邮件已读、未读、删除状态，适配多终端使用</p>
+			</div>
+		</div>
+	</div>
+	<div class="page" id="p7-5">
+		<h2 class="collapse open">第五单元 社区志愿服务行动——互联网创新应用</h2>
+		<div class="collapse-content">
+			<h3 class="collapse open">一、单元核心概述</h3>
+			<div class="collapse-content">
+				<p>本单元核心：依托互联网各类创新应用，赋能社区志愿服务全流程，涵盖线上学习志愿知识、线上协同策划活动、智能规划志愿出行三大核心应用场景，掌握互联网生活化、公益化创新用法。</p>
+				<p><span class="tag-must hover">志愿服务核心定义<span class="tip">考试简答高频，牢记四大特征与志愿精神</span></span>：志愿者自愿、无偿向社区及社会公众提供的公益性服务，具备<span class="tag-must">自愿性、无偿性、公益性、组织性</span>四大核心特征，秉持<span class="tag-must">“奉献、友爱、互助、进步”</span>的志愿精神。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡志愿精神和四大特征是本单元开篇必背考点，选择、简答都会考查</div>
+			</div>
+
+			<h3 class="collapse open">二、在线学习志愿服务知识——互联网学习新模式</h3>
+			<div class="collapse-content">
+				<p><span class="tag-high hover">数字化在线学习完整定义<span class="tip">新型学习模式核心概念</span></span>：依托互联网平台、数字资源与智能工具，突破传统课堂固定时间、固定地点的限制，学习者可自主把控学习进度、反复回看、按需学习的新型学习模式。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+
+				<h4>在线学习五大核心优势（<span class="tag-must">教材原文完整版，简答必考</span>）</h4>
+				<ul>
+					<li><span class="tag-base">① 时空自由化</span>：不受时间、地点限制，随时随地开展学习，可暂停、回放、反复巩固知识点</li>
+					<li><span class="tag-base">② 资源海量化</span>：汇聚全国优质公益、科普、文化、志愿培训资源，资源覆盖面远超传统书本</li>
+					<li><span class="tag-base">③ 学习个性化</span>：可根据自身学习基础、学习节奏自主安排学习内容，适配个人学习需求</li>
+					<li><span class="tag-base">④ 互动沉浸式</span>：图文、视频、直播、互动问答多形式结合，提升学习趣味性与吸收效率</li>
+					<li><span class="tag-base">⑤ 成果可视化</span>：多数平台可记录学习时长、学习进度、学习成果，方便复盘总结</li>
+				</ul>
+
+				<h4><span class="tag-high">官方权威在线学习平台（教材必考清单）</span></h4>
+				<p><span class="tag-base">国家智慧教育公共服务平台、中国大学MOOC、科普中国、数字故宫系列平台、中国知网、各类正规公益志愿培训平台、生成式AI学习辅助平台</span></p>
+
+				<h4><span class="tag-high">在线协同学习完整概念+核心特点</span></h4>
+				<p>定义：依托云端协作工具，多名学习者跨地域、同时段参与学习研讨、资源整理、内容创作，实现实时编辑、资源共享、远程沟通、分工协作的数字化学习方式。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p>核心特点：高效协同、打破地域限制、分工明确、成果统一、可追溯修改记录。</p>
+
+				<h4><span class="tag-must">在线协同学习标准四步骤（教材原文）</span></h4>
+				<ul>
+					<li>① 筛选适配的云端协作平台</li>
+					<li>② 创建共享文档，设置成员查看、编辑、评论权限</li>
+					<li>③ 小组分工、实时协作编辑、在线沟通研讨</li>
+					<li>④ 统一整理成果、导出文件、归档留存</li>
+				</ul>
+
+				<h4>智能学习工具完整解析</h4>
+				<p>定义：融合大数据、自然语言处理、人工智能技术，辅助学习者完成知识检索、内容梳理、错题整理、内容创作、知识答疑的数字化工具。</p>
+				<p>常用工具：生成式AI工具、WPS AI、知网AI助手、智能知识库、在线思维导图工具。</p>
+
+				<h4><span class="tag-must">智能工具使用三大准则（必考）</span></h4>
+				<ul>
+					<li>① 按需使用，不依赖AI直接照搬成果</li>
+					<li>② 保持批判性思维，人工核验AI生成内容的真实性、准确性</li>
+					<li>③ 合理利用工具优化学习效率，自主思考为主、AI辅助为辅</li>
+				</ul>
+			</div>
+
+			<h3 class="collapse open">三、网络共商志愿活动——互联网工作新模式</h3>
+			<div class="collapse-content">
+				<h4><span class="tag-high">互联网+工作模式四大变革（教材完整版）</span></h4>
+				<ul>
+					<li>① 提升协作效率：告别线下集中开会，跨地域实时沟通、同步工作，大幅节省时间成本</li>
+					<li>② 优化业务流程：数字化流程替代纸质流程，简化审批、整理、归档步骤，工作更规范</li>
+					<li>③ 促进知识共享：云端知识库统一存储志愿方案、活动总结、培训资料，全员可随时查阅复用</li>
+					<li>④ 辅助科学决策：依托问卷数据、统计图表等真实数据，替代主观判断，让活动策划更科学</li>
+				</ul>
+
+				<h4>智能会议助手完整知识点</h4>
+				<p>定义：集成语音识别、语义分析、智能摘要技术，实现志愿活动研讨会议智能化管理的辅助工具。</p>
+				<p><span class="tag-base">六大核心功能</span>：会议资料云端存储共享、实时语音转文字、自动提炼会议重点、智能生成会议纪要与思维导图、在线投票互动、会议录制回放、任务分工提醒。</p>
+
+				<h4><span class="tag-must">数据驱动决策完整定义+标准五步法（必考）</span></h4>
+				<p>定义：通过采集志愿活动相关数据，经过整理、分析、可视化呈现，依托真实数据优化活动方案、规避风险、提升服务质量的科学决策方式。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p>标准流程：① 数据采集（问卷、报名信息、服务记录）② 数据整理筛选（剔除无效数据）③ 数据分析（统计问题、优势、需求）④ 数据可视化（柱状图、饼图、折线图）⑤ 优化方案、落地执行、持续迭代改进</p>
+			</div>
+
+			<h3 class="collapse open">四、规划志愿活动出行——互联网出行新模式</h3>
+			<div class="collapse-content">
+				<h4><span class="tag-high">五大互联网智慧出行工具（教材完整分类）</span></h4>
+				<ul>
+					<li>① 共享出行类：共享单车、共享电单车、共享汽车，适合短途志愿出行</li>
+					<li>② 预约出行类：网约车、专车，适合多人集体志愿出行、远距离出行</li>
+					<li>③ 智能导航类：实时路线规划、路况查询、语音导航、避堵路线推荐</li>
+					<li>④ 公共交通辅助类：公交地铁实时到站查询、换乘方案、票价查询、末班车提醒</li>
+					<li>⑤ 智慧交通服务类：无感支付、智能停车、交通流量预测、自动驾驶辅助</li>
+				</ul>
+
+				<h4><span class="tag-must">电子导航完整工作原理（教材五步原版）</span></h4>
+				<p>① 卫星定位：依托北斗卫星、GPS卫星获取用户实时地理位置</p>
+				<p>② 数据匹配：结合GIS地理信息系统，将定位信息匹配电子地图数据</p>
+				<p>③ 智能规划：根据出行方式、实时路况，规划最优出行路线</p>
+				<p>④ 动态更新：实时接收道路拥堵、事故、施工信息，动态调整路线</p>
+				<p>⑤ 可视化指引：通过画面、语音双重提示，引导用户精准出行</p>
+				<div class="bubble">💡电子导航五步流程是简答题高频考点，务必熟记</div>
+
+				<h4>人工智能在交通出行的三大应用价值</h4>
+				<ul>
+					<li>① 提升便捷性：刷脸通行、无感支付、智能导航、自动停车，简化出行流程</li>
+					<li>② 提升运行效率：AI监测交通流量、优化红绿灯时长、智能调度公共交通，缓解拥堵</li>
+					<li>③ 提升出行安全性：驾驶行为预警、事故智能识别、路况风险提示</li>
+				</ul>
+
+				<h4>未来智慧交通四大发展趋势</h4>
+				<p>全面智能化、绿色低碳化、车路协同一体化、自动驾驶普及化、服务人性化</p>
+			</div>
+
+			<h3 class="collapse open">五、单元拓展：志愿服务数字化规范</h3>
+			<div class="collapse-content">
+				<p>1. 未成年志愿者需年满十周岁，经监护人同意方可参与志愿服务活动。</p>
+				<p>2. 志愿活动全程可通过数字化工具记录时长、服务内容、服务成果，实现数据留痕。</p>
+				<p>3. 可通过线上平台完成志愿报名、培训、打卡、总结、评优全流程操作。</p>
+			</div>
+		</div>
+	</div>
+	<div class="page" id="p7-6">
+		<h2 class="collapse open">第六单元 共同守护在线生活——互联网安全与防范</h2>
+		<div class="collapse-content">
+			<h3 class="collapse open">一、单元核心概述</h3>
+			<div class="collapse-content">
+				<p>本单元核心：<span class="tag-must">掌握互联网安全风险类型、身份验证机制、数据加密技术</span>，<span class="tag-high">树立网络安全防护意识</span>，<span class="tag-must">学会全方位保护个人账号、隐私、数据安全</span>，<span class="tag-base">规范在线生活行为</span>。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡本单元为安全类核心考点，选择、简答、材料分析题高频出题！</div>
+			</div>
+
+			<h3 class="collapse open">二、筑牢防护之盾——互联网安全意识与风险防范</h3>
+			<div class="collapse-content">
+				<h4>1. 互联网五大核心安全风险（<span class="tag-must">全类别必考，逐条背诵</span>）</h4>
+				<p><span class="tag-must hover">① 网络诈骗风险<span class="tip">利用虚假信息骗取钱财、个人信息</span></span>：通过<span class="tag-base">钓鱼网站、虚假中奖信息、虚假理财、冒充客服、冒充亲友</span>等方式，骗取用户钱财、个人信息的违法违规行为。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-must hover">② 恶意软件风险<span class="tip">包含病毒、木马、勒索软件等</span></span>：包含<span class="tag-base">计算机病毒、木马程序、勒索软件、恶意广告软件</span>，会<span class="tag-high">窃取数据、篡改文件、锁定设备、推送垃圾信息</span>。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-must hover">③ 个人信息泄露风险<span class="tip">隐私数据被非法获取倒卖</span></span>：<span class="tag-base">手机号、身份证号、住址、消费记录、浏览记录、人脸信息</span>等隐私数据被非法获取、倒卖、滥用。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-must hover">④ 网络欺凌风险<span class="tip">网络暴力相关行为</span></span>：网络辱骂、造谣抹黑、隐私曝光、恶意P图、人身攻击等网络暴力行为，<span class="tag-high">侵害他人权益、危害身心健康</span>。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-must hover">⑤ 生成式AI新型风险<span class="tip">AI衍生网络诈骗新隐患</span></span>：<span class="tag-base">AI深度伪造音视频、AI自动生成钓鱼信息、AI虚假内容诈骗、深度换脸诈骗</span>等新型网络安全隐患。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+
+				<h4>2. 全方位网络安全防范措施（<span class="tag-must">八条简答必背，考试标准答案</span>）</h4>
+				<ul>
+					<li>① <span class="tag-high">系统开启并定期更新防火墙</span>，拦截非法网络访问与攻击。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li>② <span class="tag-high">及时更新电脑、手机系统补丁与软件版本</span>，修复系统安全漏洞。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li>③ <span class="tag-must">设置高强度账号密码，开启多因素身份验证</span>，杜绝弱密码。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li>④ <span class="tag-high">安装正规杀毒软件、安全防护软件</span>，定期全盘查杀病毒木马。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li>⑤ <span class="tag-must">不点击陌生链接、不下载不明来源软件、不扫描陌生二维码</span>。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li>⑥ <span class="tag-high">谨慎连接公共免费Wi-Fi</span>，不在公共网络进行支付、登录账号等敏感操作。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li>⑦ <span class="tag-high">定期备份手机、电脑重要文件数据</span>，防止数据丢失、被勒索锁定。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li>⑧ <span class="tag-must">理性甄别网络信息，不随意授权APP权限，不泄露个人敏感信息</span>。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+				</ul>
+
+				<h4>3. 网络安全核心法律法规（<span class="tag-must">法条+年份 填空/简答必考</span>）</h4>
+				<p><span class="tag-must hover">① 《网络安全法》<span class="tip">2017年实施，网络基础法律</span></span>（<span class="tag-high">2017年实施</span>）：网络领域基础性法律，规范全网网络运行安全、信息安全。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-must hover">② 《数据安全法》<span class="tip">2021年实施，规范数据管理</span></span>（<span class="tag-high">2021年实施</span>）：规范各类数据的收集、存储、使用、传输安全。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-must hover">③ 《个人信息保护法》<span class="tip">保护公民隐私信息</span></span>：专门保护公民个人隐私信息，禁止非法收集、倒卖个人信息。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-must hover">④ 《反电信网络诈骗法》<span class="tip">打击电信、网络诈骗</span></span>：打击各类网络、电信诈骗违法犯罪行为。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-must hover">固定考点：国家网络安全宣传周<span class="tip">每年9月第三周</span></span>为<span class="tag-high">每年9月第三周</span>，普及全民网络安全知识。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡四部法律+宣传周时间，是填空、判断题高频考点，务必记牢！</div>
+			</div>
+
+			<h3 class="collapse open">三、严守身份之门——互联网身份验证（<span class="tag-must">全书重难点</span>）</h3>
+			<div class="collapse-content">
+				<h4>1. 基础核心概念</h4>
+				<p><span class="tag-high hover">用户标识<span class="tip">区分网络用户的专属编号/名称</span></span>：用于唯一区分网络用户的专属标识，包含<span class="tag-base">用户名、注册手机号、邮箱账号、平台唯一ID</span>。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-must hover">身份验证<span class="tip">又称身份认证，账号第一道防线</span></span>：又称身份认证，是网络系统核实用户、设备真实身份的核心流程，<span class="tag-high">是防止账号被盗、非法登录的第一道安全屏障</span>。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-must">身份验证标准三流程</span>：<span class="tag-base">用户提交身份认证请求 → 系统比对核验身份凭证 → 核验通过授权访问，核验失败拒绝访问</span>。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+
+				<h4>2. 身份验证三大核心因子（<span class="tag-must">分类必考</span>）</h4>
+				<p><span class="tag-must hover">① 知识因子<span class="tip">你所知道的信息</span></span>（你知道的信息）：<span class="tag-base">账号密码、密保问题、专属验证答案</span>。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-must hover">② 持有因子<span class="tip">你所拥有的实物/设备</span></span>（你拥有的物品）：<span class="tag-base">手机短信验证码、动态口令牌、硬件密钥</span>。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-must hover">③ 生物因子<span class="tip">个人独有生物特征，难以伪造</span></span>（你独有的特征）：<span class="tag-base">指纹、人脸、虹膜、声纹、步态</span>等唯一生物特征。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+
+				<h4>3. 四种主流身份验证方式+安全等级对比（<span class="tag-high">选择/判断高频</span>）</h4>
+				<ul>
+					<li>① <span class="tag-base">单密码验证</span>：操作简单，<span class="tag-high">安全性最低</span>，易被盗、破解。</li>
+					<li>② <span class="tag-base">短信验证码验证</span>：依托手持设备验证，<span class="tag-high">安全性中等</span>。</li>
+					<li>③ <span class="tag-base">生物特征验证</span>：唯一性强、不易伪造，<span class="tag-high">安全性较高</span>。</li>
+					<li>④ <span class="tag-must">多因素验证</span>：组合两种及以上验证因子，<span class="tag-high">安全性最高</span>，官方推荐的安全验证方式。
+					<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+				</ul>
+
+				<h4>4. 高强度密码完整设置规则（<span class="tag-must">简答/实操必背</span>）</h4>
+				<ul>
+					<li>① <span class="tag-high">密码长度不低于12位</span></li>
+					<li>② <span class="tag-must">必须包含大写字母、小写字母、数字、特殊符号四类组合</span></li>
+					<li>③ <span class="tag-high">禁止使用生日、姓名、手机号、简单连续数字等弱密码</span></li>
+					<li>④ <span class="tag-high">不同平台使用独立密码，不通用、不重复</span></li>
+					<li>⑤ <span class="tag-high">定期更换密码，长期不使用账号及时注销</span></li>
+				</ul>
+				<div class="bubble">💡密码设置规则是实操题、简答题常考内容，严格按照要求设置才能保障账号安全！</div>
+			</div>
+
+			<h3 class="collapse open">四、守护数据之钥——互联网信息加密（<span class="tag-must">核心重难点</span>）</h3>
+			<div class="collapse-content">
+				<h4>1. 加密技术四大基础概念（<span class="tag-must">名词解释必考</span>）</h4>
+				<p><span class="tag-must hover">明文<span class="tip">未加密、可直接阅读的数据</span></span>：未经加密、可以直接阅读、理解的原始数据。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-must hover">密文<span class="tip">加密后无规律数据</span></span>：经过加密算法处理后，无规律、无法直接阅读和解读的加密数据。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-must hover">密钥<span class="tip">加解密的关键参数</span></span>：控制加密、解密过程的专属关键参数，密钥不同，加密结果不同。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-must hover">加密<span class="tip">明文转为密文</span></span>：将明文通过算法转换为密文的过程，用于保护数据安全。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-must hover">解密<span class="tip">密文还原为明文</span></span>：持有合法密钥，将密文还原为原始明文的过程。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-high hover">经典案例：凯撒密码<span class="tip">基础对称加密示例</span></span>（基础对称加密），通过固定字母位移实现简单加密解密。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+
+				<h4>2. 两大加密方式完整对比（<span class="tag-must">对比题必考</span>）</h4>
+				<p><span class="tag-must hover">对称加密<span class="tip">加解密共用同一密钥</span></span>：加密、解密全程使用同一组密钥，<span class="tag-high">运算速度快、效率高</span>，适合大批量文件加密；<span class="tag-base">缺点是密钥传输、存储存在泄露风险</span>.
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-must hover">非对称加密<span class="tip">公钥加密、私钥解密，成对密钥</span></span>：采用<span class="tag-base">公钥、私钥</span>成对密钥，公钥公开用于加密，私钥私密保存用于解密；<span class="tag-high">优点是安全性极高、不易破解</span>；<span class="tag-base">缺点是运算速度慢、耗时更长</span>。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+
+				<h4>3. 日常文件三种加密实操方式（<span class="tag-high">实操考点</span>）</h4>
+				<p>① <span class="tag-base">文档加密</span>：WPS/Word设置打开密码、编辑权限密码，限制他人查看、修改。</p>
+				<p>② <span class="tag-base">压缩包加密</span>：WinRAR、7-Zip工具对压缩文件设置密码，保护批量文件。</p>
+				<p>③ <span class="tag-base">磁盘加密</span>：电脑BitLocker磁盘加密，保护整盘数据不被窃取。</p>
+
+				<h4>4. 前沿加密技术拓展（<span class="tag-base">常识考点</span>）</h4>
+				<p><span class="tag-high">量子加密</span>（绝对安全、无法窃听破解）、<span class="tag-high">区块链加密</span>（数据不可篡改、全程可追溯）、<span class="tag-base">AI智能加密防御</span>（实时识别攻击、自动防护）。</p>
+			</div>
+		</div>
+	</div>
+	<div class="page" id="p7-7">
+		<h2 class="collapse open">第七单元 智能学习助手——生成式人工智能赋能互联网创新</h2>
+		<div class="collapse-content">
+			<h3 class="collapse open">一、单元核心概述</h3>
+			<div class="collapse-content">
+				<p>本单元核心：<span class="tag-must">认识生成式人工智能的核心原理、功能与应用场景</span>，<span class="tag-high">掌握AI代码生成、文生图、PPT智能生成实操方法</span>，<span class="tag-must">树立人机协同、合规用AI的数字化素养</span>。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡本单元紧跟前沿技术，实操题、简答题考查频率很高，所有功能与使用规范务必熟记！</div>
+			</div>
+
+			<h3 class="collapse open">二、智能学习助手作品设计——AI代码生成</h3>
+			<div class="collapse-content">
+				<p><span class="tag-must hover">AI代码生成完整定义<span class="tip">生成式AI解析文本需求，自动编写合规代码</span></span>：生成式AI通过海量代码数据训练，具备自然语言理解能力，可精准解析用户文字需求，自动生成符合语法规范、逻辑通顺、可正常运行的计算机代码的智能技术。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+
+				<h4><span class="tag-must">AI代码生成六大核心能力（全考点逐条标注）</span></h4>
+				<ul>
+					<li><span class="tag-base">自定义代码编写</span></li>
+					<li><span class="tag-base">现有代码补全</span></li>
+					<li><span class="tag-base">代码语法错误修复</span></li>
+					<li><span class="tag-base">代码漏洞检测</span></li>
+					<li><span class="tag-base">代码逻辑优化</span></li>
+					<li><span class="tag-base">跨编程语言转换</span></li>
+				</ul>
+
+				<h4><span class="tag-must">高质量提示词（Prompt）三核心要素（简答必考）</span></h4>
+				<ul>
+					<li><span class="tag-high">① 指令明确</span>：清晰说明需要AI完成的具体任务，无模糊表述</li>
+					<li><span class="tag-high">② 条件具体</span>：限定功能、格式、风格、运行环境、细节要求</li>
+					<li><span class="tag-high">③ 格式清晰</span>：明确输出排版、结构、呈现形式</li>
+				</ul>
+
+				<h4><span class="tag-must">AI代码生成标准工作流程（流程类高频考点）</span></h4>
+				<p>① <span class="tag-base">AI模型调取海量优质代码数据储备</span></p>
+				<p>② <span class="tag-base">解析用户输入的提示词需求</span></p>
+				<p>③ <span class="tag-base">搭建基础代码框架、填充核心逻辑</span></p>
+				<p>④ <span class="tag-base">自动排查语法错误、优化代码</span></p>
+				<p>⑤ <span class="tag-base">输出成品代码，支持人工迭代修改</span></p>
+			</div>
+
+			<h3 class="collapse open">三、展板设计创作——AI文本生成图像</h3>
+			<div class="collapse-content">
+				<p><span class="tag-must hover">文生图技术完整定义与原理<span class="tip">依托图文数据，由文字生成对应图像</span></span>：生成式AI依托海量图文数据训练，通过用户文字描述，自动生成对应风格、内容、构图的原创图像的智能技术。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-high hover">核心原理（扩散模型）<span class="tip">主流文生图底层技术</span></span>：以随机像素噪声为基础，通过多次迭代去噪、细节优化，逐步生成清晰、完整、贴合文字描述的图像。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+
+				<h4><span class="tag-high">文生图提示词优化三大核心技巧（实操考点）</span></h4>
+				<ul>
+					<li><span class="tag-base">① 精准明确主体关键词（人物、景物、主题、元素）</span></li>
+					<li><span class="tag-base">② 限定画面风格（国风、卡通、写实、科技风）</span></li>
+					<li><span class="tag-base">③ 补充细节参数（构图、色彩、清晰度、比例、光影）</span></li>
+				</ul>
+
+				<h4><span class="tag-must">云计算与云存储（名词解释+填空高频考点）</span></h4>
+				<p><span class="tag-must hover">云计算定义<span class="tip">远程调用云端算力、软硬件资源</span></span>：依托互联网，按需远程调用云端服务器的算力、存储、软件、服务等资源，无需本地搭建硬件设备的新型计算模式。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-must hover">云存储定义<span class="tip">文件上传云端，多设备同步访问</span></span>：将本地文件、数据上传至云端服务器存储，实现多设备同步、远程访问、多人协作的存储方式。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</p>
+				<p><span class="tag-high">云存储四大核心优势</span>：<span class="tag-base">数据安全稳定、随时随地跨设备访问、支持多人在线协作、节省本地设备存储空间</span></p>
+				<p><span class="tag-high">云计算三层服务架构（拓展考点）</span>：<span class="tag-base">IaaS基础设施服务、PaaS平台服务、SaaS软件服务</span></p>
+			</div>
+
+			<h3 class="collapse open">四、作品展示优化——AI演示文稿生成</h3>
+			<div class="collapse-content">
+				<p><span class="tag-must">AI自动生成PPT完整工作流程（流程类必考）</span></p>
+				<p>AI提取用户主题关键词 → 智能梳理核心知识要点 → 搭建完整PPT大纲 → 自动分页排版 → 智能匹配配图、配色 → 生成完整演示文稿 → 支持人工微调优化</p>
+
+				<p><span class="tag-must hover">多模态人工智能技术（核心定义）<span class="tip">同时处理文本/图像/音视频等多种数据</span></span>：可同时识别、处理、生成文本、图像、音频、视频多种类型数据的人工智能技术，是生成式AI的核心能力。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-high">典型应用</span>：<span class="tag-base">文生图、图生文、文生视频、智能语音解说、图文智能转换</span></p>
+			</div>
+
+			<h3 class="collapse open">五、生成式AI规范使用准则（五条完整版，简答必背）</h3>
+			<div class="collapse-content">
+				<ul>
+					<li><span class="tag-must">1. 内容核验优化</span>：AI生成内容仅为初稿，必须人工核对事实、修正错误、完善细节，杜绝虚假信息
+					<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li><span class="tag-must">2. 逻辑梳理优化</span>：调整内容结构，保证逻辑通顺、层次清晰、贴合学习需求
+					<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li><span class="tag-must">3. 视觉规范优化</span>：统一作品风格、配色、排版，保证页面简洁美观、重点突出
+					<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li><span class="tag-must">4. 坚持人机协同</span>：AI辅助创作，人工主导思考、设计、创新，不直接照搬AI成品
+					<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li><span class="tag-must">5. 严守合规底线</span>：尊重版权、保护个人隐私，不利用AI生成违法、低俗、侵权内容
+					<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+				</ul>
+				<div class="bubble">💡五条使用准则是考试高频简答题，务必完整背诵，答题直接套用原文！</div>
+			</div>
+
+			<h3 class="collapse open">六、单元微创新与项目评价标准</h3>
+			<div class="collapse-content">
+				<p><span class="tag-high">作品优化方向</span>：<span class="tag-base">功能完整性、界面美观度、交互流畅度、创意创新性、内容专业性</span></p>
+				<p><span class="tag-must">项目评价维度（综合题必考）</span>：<span class="tag-base">思想性、创造性、技术性、艺术性、合规性五大维度综合评分</span></p>
+			</div>
+		</div>
+	</div>
+
+    <!-- 八年级占位 -->
+    <div class="page" id="p8-1">
+		<h2 class="collapse open">第一单元 校园“物联网”改造——初识物联网</h2>
+		<div class="collapse-content">
+			<h3 class="collapse open">一、物联网完整官方定义（<span class="tag-must">教材原话，必考默写</span>）</h3>
+			<div class="collapse-content">
+				<p><span class="tag-must hover">物联网<span class="tip">万物互联核心定义，考试高频名词解释</span></span>：通过<span class="tag-base">传感器、二维码识读设备、射频识别（RFID）、红外感应器、全球定位系统、激光扫描器</span>等信息传感设备，按约定的通信协议，将任意物品与互联网连接起来，进行信息交换和通信，最终实现物品的智能化识别、定位、跟踪、监控和管理的新型网络架构。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡幽默注解：以前互联网是“人上网聊天查资料”，物联网是“万物开口说话、主动上报状态”，让普通家电、设备、都变成会汇报、能自控的“智能打工人”。</div>
+			</div>
+
+			<h3 class="collapse open">二、物联网中“物”的严格限定（<span class="tag-high">易漏选择/判断题</span>）</h3>
+			<div class="collapse-content">
+				<p>并不是所有东西都能叫物联网终端！必须是<span class="tag-base">经过智能化改造、搭载传感/通信模块、可联网交互</span>的物品，普通桌椅、风扇、水杯不算物联网设备。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡幽默注解：普通物品是“哑巴”，物联网物品是“会联网说话的聪明人”，没改装的普通物件根本没资格进物联网圈子。</div>
+			</div>
+
+			<h3 class="collapse open">三、物联网四大核心特性（<span class="tag-must">简答必背，全考点</span>）</h3>
+			<div class="collapse-content">
+				<ul>
+					<li>① <span class="tag-base">全面感知</span>：全天候、全方位采集物理世界数据，不遗漏环境、设备细微变化。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li>② <span class="tag-base">可靠传递</span>：数据传输稳定、低丢失、低错乱，弱网络环境也能适配基础传输。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li>③ <span class="tag-base">智能处理</span>：依托大数据、AI分析数据，不靠人工主观判断，自动输出决策。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li>④ <span class="tag-high hover">双向交互<span class="tip">高频易漏考点，区分单向传输</span></span>：不止设备上传数据，平台可以下发指令控制设备，是双向沟通，不是单向汇报。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+				</ul>
+				<div class="bubble">💡幽默注解：感知是“眼睛看”，传递是“嘴巴说”，智能处理是“大脑想”，双向交互是“手脚动”，一套完整智能操作，不是只会看不会动的摆设。</div>
+			</div>
+
+			<h3 class="collapse open">四、物联网发展完整时间线（<span class="tag-high">填空/选择高频，全时间事件标注</span>）</h3>
+			<div class="collapse-content">
+				<ul>
+					<li>① <span class="tag-must hover">1982年<span class="tip">全球首个物联网设备诞生年份</span></span>：卡内基梅隆大学 联网可乐售卖机（全球首个物联网设备）。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li>② <span class="tag-high">1991年</span>：剑桥大学 特洛伊咖啡壶（初代物联网可视化应用）。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li>③ <span class="tag-high">1995年</span>：比尔盖茨《未来之路》首次提出万物互联构想，物联网概念雏形诞生。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li>④ <span class="tag-must hover">1999年<span class="tip">物联网正式定义年份</span></span>：美国MIT正式定义“物联网”，核心依托RFID射频识别技术落地；同年中国启动物联网相关技术研究。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li>⑤ <span class="tag-high">2009年</span>：物联网纳入中国国家战略产业。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li>⑥ <span class="tag-high">2010年</span>：物联网首次写入中国政府工作报告，迎来高速发展期。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+				</ul>
+				<div class="bubble">💡幽默注解：物联网不是突然冒出来的黑科技，是从“看可乐、看咖啡”的小工具，一步步进化成现在的全屋智能、智慧城市。</div>
+			</div>
+
+			<h3 class="collapse open">五、互联网VS物联网 详细对比（<span class="tag-must">辨析题必考</span>）</h3>
+			<div class="collapse-content">
+				<p><span class="tag-high">相同点</span>：均依托互联网基础网络架构，遵循网络通信协议，实现数据交换。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-must">核心不同点：</span></p>
+				<ul>
+					<li>① <span class="tag-base">连接对象</span>：互联网=人、电脑；物联网=物、人、设备。</li>
+					<li>② <span class="tag-base">核心功能</span>：互联网=信息浏览、社交、资源共享；物联网=感知、监测、自动控制、智能管理。</li>
+					<li>③ <span class="tag-base">工作模式</span>：互联网=人工主动操作；物联网=全自动、无人值守为主。</li>
+					<li>④ <span class="tag-base">数据特点</span>：互联网=大数据、碎片化娱乐/学习数据；物联网=小数据、高频次、实时性传感数据。</li>
+				</ul>
+				<div class="bubble">💡幽默注解：互联网是“人类社交工具”，物联网是“设备管家工具”，一个服务人娱乐学习，一个帮人干活值守。</div>
+			</div>
+
+			<h3 class="collapse open">六、物联网三层架构（<span class="tag-must">全书重难点，分层考点全覆盖</span>）</h3>
+			<div class="collapse-content">
+				<h4>1. <span class="tag-must hover">感知层<span class="tip">物联网五官，唯一数据来源</span></span>——物联网的“五官皮肤”</h4>
+				<p>核心功能：唯一负责物理信号转数字信号，是物联网数据的唯一来源。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p>完整设备：各类传感器、RFID标签、二维码、GPS定位、摄像头、生物识别设备。</p>
+				<p><span class="tag-high">易错点</span>：感知只采集数据，不传输、不分析、不决策。</p>
+				<div class="bubble">💡幽默注解：感知层就是物联网的眼睛、耳朵、皮肤，只负责收集外界信息。</div>
+
+				<h4>2. <span class="tag-must hover">网络层<span class="tip">物联网神经，负责双向传输</span></span>——物联网的“神经血管”</h4>
+				<p>核心功能：承担数据上传、指令下发双向传输任务，打通感知层和应用层的通道。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p>传输介质&技术：有线（以太网、光纤、同轴电缆）、无线（Wi-Fi、蓝牙、ZigBee、LoRa、NB-IoT、5G）</p>
+				<p>核心协议：IPv6、MQTT、TCP、UDP、HTTP</p>
+				<p><span class="tag-high">易错点</span>：网络层只传数据，不采集、不分析数据。</p>
+				<div class="bubble">💡幽默注解：网络层像血管和神经，专门负责把信息来回传递。</div>
+
+				<h4>3. <span class="tag-must hover">应用层<span class="tip">物联网大脑，处理决策中心</span></span>——物联网的“大脑中枢”</h4>
+				<p>核心功能：处理、分析、存储数据，输出智能决策、执行控制、展示服务。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p>核心技术：云计算、大数据分析、人工智能、平台软件、安全加密、可视化界面</p>
+				<p>常见场景：后台管理平台、手机控制端、智能预警系统、自动调控系统</p>
+				<div class="bubble">💡幽默注解：应用层是大脑，负责思考判断、下达最终指令。</div>
+			</div>
+
+			<h3 class="collapse open">七、物联网与普通物联系统（<span class="tag-high">易混淆辨析考点</span>）</h3>
+			<div class="collapse-content">
+				<p>① <span class="tag-base">物联网</span>：宏观、通用的技术体系，是一整套互联规则和技术合集。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p>② <span class="tag-base">物联系统</span>：微观、具体的落地产品，由硬件+网络+软件组成，例如智慧校园监测系统、景区管理系统。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡幽默注解：物联网是“整套行业规则”，物联系统是“按照规则做出来的成品工具”。</div>
+			</div>
+
+			<h3 class="collapse open">八、物联网全场景应用（<span class="tag-base">基础常识考点</span>）</h3>
+			<div class="collapse-content">
+				<p>主流场景+冷门拓展：智慧仓储、智能安防、智慧环保、远程设备运维、智慧校园、智能家居、智能农业、智慧城市。</p>
+			</div>
+		</div>
+	</div>
+	<div class="page" id="p8-2">
+		<h2 class="collapse open">第二单元 景区智能管理系统——感知层初体验</h2>
+		<div class="collapse-content">
+			<h3 class="collapse open">一、二维码技术（<span class="tag-must">填空/判断/实操 全考点</span>）</h3>
+			<div class="collapse-content">
+				<p><span class="tag-must hover">编码原理<span class="tip">黑白点阵对应二进制0、1，是二维码核心原理</span></span>：黑白点阵对应二进制0和1，白色代表0，黑色代表1，通过点阵排列存储海量信息。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-must">完整结构（必考填空）</span>：<span class="tag-base">定位图形、校正图形、数据编码区、纠错冗余区</span>。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-high hover">纠错能力<span class="tip">破损30%仍可识别，高频判断题</span></span>：自带冗余纠错，破损30%以内仍可正常识别。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-must hover">完整识别流程<span class="tip">考试流程默写题</span></span>：光学扫描→光电信号转换→译码解析→信息输出展示。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-high">全部安全隐患</span>：<span class="tag-base">伪造仿冒二维码、恶意跳转钓鱼链接、隐私信息裸漏、被他人私自扫码窃取信息</span>。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-high">全套防护手段</span>：<span class="tag-base">动态刷新二维码、内容加密、添加专属防伪水印、限制扫码权限、官方专用扫码工具、定期更换二维码</span>。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡幽默解读：二维码自带“抗摔buff”，磕掉一小块照样能用；但最怕被人掉包成假码，扫码前一定要多看一眼哦！</div>
+			</div>
+
+			<h3 class="collapse open">二、RFID射频识别（<span class="tag-must">名词解释+应用 必考</span>）</h3>
+			<div class="collapse-content">
+				<p><span class="tag-must hover">工作原理<span class="tip">无线电波激活标签，完成数据读取</span></span>：读卡器发射无线电波→激活电子标签→标签返回存储数据→读卡器接收解析→系统处理。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-high hover">电子标签分类<span class="tip">有源/无源是高频区分考点</span></span>：
+				<br>1. <span class="tag-base">有源标签</span>：自带电池、传输距离远；
+				<br>2. <span class="tag-base">无源标签</span>：无电池、靠射频供电、成本低、使用最广泛。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-high">完整优缺点</span>：无视觉遮挡要求、可穿透非金属物体识别；<span class="tag-must">致命短板：金属、液体完全屏蔽信号</span>。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-base">核心应用细节</span>：景区电子围栏预警、游客轨迹追踪、门票防伪核验、设备资产管理。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡幽默解读：RFID就像隐形门禁卡，不用扫码、不用接触就能识别；但遇到金属和水就会“失灵罢工”，使用时要避开这类环境~</div>
+			</div>
+
+			<h3 class="collapse open">三、红外传感器（<span class="tag-must">原理+分类+实操 全覆盖</span>）</h3>
+			<div class="collapse-content">
+				<p><span class="tag-must hover">核心工作原理<span class="tip">发射+接收红外光束判断物体</span></span>：发射器发射红外光束，接收器接收光束，通过光束遮挡/反射状态判断物体有无。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-must">两类传感器完整对比（必考辨析）</span></p>
+				<ul>
+					<li><span class="tag-high hover">对射式<span class="tip">远距离、抗干扰强，安防首选</span></span>：收发分离、光束集中、抗干扰极强、检测距离远（数米至数十米），适合精准计数、安防预警。
+					<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li><span class="tag-high hover">反射式<span class="tip">近距离使用，易受光线影响</span></span>：收发一体、靠物体反射光线工作、距离近、易受光线干扰，适合近距离感应、自动设备。
+					<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+				</ul>
+				<p><span class="tag-must hover">人流量统计完整逻辑<span class="tip">景区实操高频考点</span></span>：双红外配对使用，通过遮挡顺序判断进出，软件算法防抖、防重复计数、防误触发。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡幽默解读：对射红外是“远距离岗哨”，看得远、不怕干扰；反射红外是“近距离助手”，小巧方便，就是怕强光捣乱。</div>
+			</div>
+
+			<h3 class="collapse open">四、多传感器融合技术（<span class="tag-must">简答+流程 重难点</span>）</h3>
+			<div class="collapse-content">
+				<p><span class="tag-must hover">核心定义<span class="tip">多设备互补，修正单一数据误差</span></span>：单一传感器数据误差大、信息片面，通过算法整合多类传感器数据，弥补单一设备缺陷。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-must hover">完整五步流程（教材原文，默写考点）</span>：数据采集→数据预处理（去噪、校准、筛选无效数据）→特征提取→多源数据融合计算→智能决策与设备控制。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-high">核心优势细化</span>：降低环境干扰、提升数据精准度、覆盖多维监测场景、设备容错率大幅提升，单个传感器故障不影响整体工作。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-base">景区全套监测传感器</span>：温湿度、光照强度、PM2.5、CO₂浓度、环境噪声、二氧化硫、氮氧化物、水质传感器。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡幽默解读：一个传感器容易“看走眼”，多个传感器组队互相校验，就像多人一起判断问题，结果准得多！</div>
+			</div>
+		</div>
+	</div>
+	<div class="page" id="p8-3">
+		<h2 class="collapse open">第三单元 智慧校园系统——网络层初体验</h2>
+		<div class="collapse-content">
+			<h3 class="collapse open">一、数据通信完整分类（<span class="tag-must">多选/填空必考，分类标准全覆盖</span>）</h3>
+			<div class="collapse-content">
+				<p>1. <span class="tag-high hover">按传输介质划分<span class="tip">最基础分类方式</span></span>：<span class="tag-base">有线通信、无线通信</span>
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p>2. <span class="tag-high hover">按传输距离划分<span class="tip">区分局域网/广域通信</span></span>：<span class="tag-base">短距离通信、长距离广域通信</span>
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p>3. <span class="tag-must hover">按传输信号划分<span class="tip">物联网主流为数字信号</span></span>：<span class="tag-base">数字通信（物联网主流、抗干扰、精准）、模拟通信（老旧设备使用）</span>
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p>4. <span class="tag-high hover">按通信方式划分<span class="tip">一对一/多类场景区分</span></span>：<span class="tag-base">一对一单播、一对多组播、全网广播</span>
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡幽默解读：通信就像日常聊天，一对一私聊、小组群聊、全班喊话，不同场景用不同方式~</div>
+			</div>
+
+			<h3 class="collapse open">二、六大无线通信技术（<span class="tag-must">重难点，定义+特点+优缺点+场景全标注</span>）</h3>
+			<div class="collapse-content">
+				<h4>1. Wi-Fi 无线局域网</h4>
+				<p><span class="tag-must hover">定义<span class="tip">短中距离高速无线技术，室内主流</span></span>：基于WLAN标准的短中距离高速无线通信技术，将有线网络信号转化为无线信号，支持多设备并发联网。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-high">频段详解</span>：<span class="tag-base">2.4GHz（穿墙能力强、覆盖广、干扰多、速度一般）；5GHz（速率高、延迟低、干扰少、穿墙弱）</span></p>
+				<p><span class="tag-high">优缺点</span>：<span class="tag-base">高速传输、适配大流量数据；功耗偏高、远距离信号衰减快</span></p>
+				<p><span class="tag-base">适用场景</span>：校园上网、视频传输、大屏设备、大数据同步</p>
+				<div class="bubble">💡幽默解读：Wi-Fi堪称网络“大力士”，传视频、大文件毫无压力，唯一缺点就是离远了信号就变弱啦。</div>
+
+				<h4>2. 蓝牙 Bluetooth</h4>
+				<p><span class="tag-must hover">定义<span class="tip">超短距离、低功耗，贴身设备专用</span></span>：超短距离、低功耗的个人局域网通信技术，主打近距离小型设备配对交互。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-high">核心参数</span>：<span class="tag-base">有效距离10米内，低功耗、小数据传输、双向通信</span></p>
+				<p><span class="tag-high">优缺点</span>：<span class="tag-base">省电、配对简单、延迟低；传输速度慢、距离极短</span></p>
+				<p><span class="tag-base">适用场景</span>：手环、耳机、智能灯具、小型传感器指令传输</p>
+				<div class="bubble">💡幽默解读：蓝牙是“贴身小助理”，只在身边设备间工作，超级省电，就是跑不远。</div>
+
+				<h4>3. ZigBee 紫蜂协议</h4>
+				<p><span class="tag-must hover">定义<span class="tip">物联网专属低功耗自组网技术</span></span>：专为物联网设计的低功耗、低速率、大容量自组网无线通信技术。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-high">核心特点</span>：<span class="tag-base">功耗极低、可容纳上百个设备组网、自动组网、自动修复网络链路</span></p>
+				<p><span class="tag-high">优缺点</span>：<span class="tag-base">超级省电、适合长期待机；传输速度慢，不适合大文件</span></p>
+				<p><span class="tag-base">适用场景</span>：校园传感器集群、全屋智能设备、长期电池供电设备</p>
+				<div class="bubble">💡幽默解读：ZigBee是物联网“省电劳模”，充一次电能用超久，可惜只擅长干细活，传不了大文件。</div>
+
+				<h4>4. LoRa 远距离低功耗通信</h4>
+				<p><span class="tag-must hover">定义<span class="tip">长距离、强穿墙，野外大范围使用</span></span>：远距离、低功耗、强穿墙的广域物联网无线通信技术。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-high">核心特点</span>：<span class="tag-base">传输距离可达3-5公里、抗干扰强、穿墙能力优秀、超低功耗</span></p>
+				<p><span class="tag-high">优缺点</span>：<span class="tag-base">距离远、信号稳；传输速率极低</span></p>
+				<p><span class="tag-base">适用场景</span>：校园大范围环境监测、园区安防、野外传感设备</p>
+				<div class="bubble">💡幽默解读：LoRa是“长跑健将”，翻山越岭信号都稳，就是干活速度比较慢。</div>
+
+				<h4>5. NB-IoT 窄带物联网</h4>
+				<p><span class="tag-must hover">定义<span class="tip">依托运营商基站，全域覆盖</span></span>：依托运营商蜂窝基站的广覆盖、超低功耗物联网专用通信技术。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-high">核心特点</span>：<span class="tag-base">全网覆盖、无需自建基站、功耗极低、支持海量设备接入</span></p>
+				<p><span class="tag-high">优缺点</span>：<span class="tag-base">覆盖无死角、不用布线组网；速率低、依赖运营商信号</span></p>
+				<p><span class="tag-base">适用场景</span>：智能水表、气表、路灯、智慧城市远程监测</p>
+				<div class="bubble">💡幽默解读：NB-IoT就像全域网格员，有手机信号的地方就能用，不用额外搭建设备。</div>
+
+				<h4>6. 5G 第五代移动通信</h4>
+				<p><span class="tag-must hover">定义<span class="tip">高速低延迟，实时交互首选</span></span>：新一代蜂窝移动通信技术，是物联网高速实时交互的核心技术。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-high">核心特点</span>：<span class="tag-base">超高速率、超低延迟、海量设备并发接入、高可靠性</span></p>
+				<p><span class="tag-high">优缺点</span>：<span class="tag-base">实时性拉满、支持高清视频、远程控制；功耗高、成本高</span></p>
+				<p><span class="tag-base">适用场景</span>：实时监控、远程智能控制、高清视频回传、无人驾驶测试</p>
+				<div class="bubble">💡幽默解读：5G是网络“极速赛车”，反应飞快，美中不足就是耗电、使用成本偏高。</div>
+			</div>
+
+			<h3 class="collapse open">三、MQTT协议（<span class="tag-must">必考细碎知识点全覆盖</span>）</h3>
+			<div class="collapse-content">
+				<p><span class="tag-must hover">协议定位<span class="tip">物联网专属轻量级发布/订阅协议</span></span>：物联网专属轻量级发布/订阅协议，专为弱网、低功耗设备设计。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-must">三大核心角色完整职责</span></p>
+				<ul>
+					<li><span class="tag-high hover">发布者<span class="tip">采集数据、主动发消息</span></span>：传感器、终端设备，负责上传数据、发布消息
+					<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li><span class="tag-high hover">服务器（Broker消息代理）<span class="tip">消息中转站，核心枢纽</span></span>：中转站，存储、转发所有消息，核心枢纽
+					<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li><span class="tag-high hover">订阅者<span class="tip">接收消息、执行操作</span></span>：平台、手机、控制器，接收消息、执行对应操作
+					<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+				</ul>
+				<p><span class="tag-high hover">Topic主题<span class="tip">消息分类通道，隔离不同数据</span></span>：消息分类通道，不同设备对应不同主题，消息互不干扰。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-must hover">QoS服务质量三级标准<span class="tip">区分消息优先级，简答高频</span></span>：</p>
+				<ul>
+					<li><span class="tag-base">QoS0 至多一次</span>：消息发完即止，不保证送达，适合非重要数据</li>
+					<li><span class="tag-base">QoS1 至少一次</span>：保证消息一定送达，可能重复，适合常规监测数据</li>
+					<li><span class="tag-base">QoS2 只有一次</span>：精准送达、不重复不丢失，适合控制指令、核心数据</li>
+				</ul>
+				<div class="bubble">💡幽默解读：MQTT就像物联网快递系统，主题是快递分类，QoS就是快递优先级，重要指令走特快，普通数据正常派送。</div>
+			</div>
+
+			<h3 class="collapse open">四、SIoT本地服务器（<span class="tag-must">实操必考固定参数+功能</span>）</h3>
+			<div class="collapse-content">
+				<p><span class="tag-must hover">本质<span class="tip">教学专用本地MQTT服务器</span></span>：开源免费、专为教学设计的本地MQTT消息服务器。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-must">默认固定参数（填空必考）</span>：
+				<span class="tag-base">端口1883、账号siot、密码dfrobot</span>
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-high">核心功能</span>：本地消息转发、实时数据查看、设备状态监测、数据本地存储、教学调试。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-high">优势</span>：无需联网、本地运行、零延迟、适合校园课堂实训。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡幽默解读：SIoT就是教室专属“小型快递总站”，不用外网，课堂上就能完成全部设备消息传递。</div>
+			</div>
+
+			<h3 class="collapse open">五、网络层完整性能指标（<span class="tag-high">选择/判断高频考点</span>）</h3>
+			<div class="collapse-content">
+				<p>核心指标：<span class="tag-base">传输带宽、网络延迟、设备功耗、传输距离、最大连接数、抗干扰能力、稳定性</span>
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡幽默解读：评判网络好坏不能只看快慢，距离、耗电、稳不稳定都得综合考量哦。</div>
+			</div>
+
+			<h3 class="collapse open">六、物联网组网方式（<span class="tag-high">易漏填空考点</span>）</h3>
+			<div class="collapse-content">
+				<p>常见组网：<span class="tag-base">一对一组网、一对多星型组网、多对多Mesh自组网、广播组网</span>
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡幽默解读：设备组网就像小伙伴组队，一对一私聊、一群人抱团，不同玩法适配不同场景。</div>
+			</div>
+
+			<h3 class="collapse open">七、物联网网络安全基础考点（<span class="tag-high">基础简答考点</span>）</h3>
+			<div class="collapse-content">
+				<p>基础防护：<span class="tag-base">设备身份认证、数据加密传输、访问权限划分、陌生设备拦截、定期设备维护</span>
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡幽默解读：物联网设备联网不是“裸奔”，一定要做好安全防护，防止外来设备蹭网、篡改数据。</div>
+			</div>
+		</div>
+	</div>
+	<div class="page" id="p8-4">
+		<h2 class="collapse open">第四单元 智能家居系统——物联网系统实践</h2>
+		<div class="collapse-content">
+			<h3 class="collapse open">单元总纲领（<span class="tag-must">单元开篇必考</span>）</h3>
+			<div class="collapse-content">
+				<p><span class="tag-high">核心项目问题</span>：如何利用物联网技术构建完整智能家居系统？<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-must">四大拆解项目任务（教材固定考点）</span></p>
+				<ul>
+					<li>1. <span class="tag-base">本地监测：发现温度异常，实现本地报警（无网络也能用）</span></li>
+					<li>2. <span class="tag-base">远程反馈：离家在外，异地接收家中温度异常通知</span></li>
+					<li>3. <span class="tag-base">远程控制：手机/终端远程操控窗户开关</span></li>
+					<li>4. <span class="tag-base">综合应用：融合自动控制+远程操控，实现智能窗全自动智能运行</span></li>
+				</ul>
+				<div class="bubble">💡幽默解读：智能家居是一步步进阶的过程，从现场报警→远程收提醒→远程操控→全自动运行，就像设备慢慢学会独立干活~</div>
+			</div>
+
+			<h3 class="collapse open">第一节 温度超限本地报警系统（物联系统本地应用）</h3>
+			<div class="collapse-content">
+				<h4>一、传统测温方式弊端（<span class="tag-high">填空考点</span>）</h4>
+				<p>传统依靠人体感官、人工查看温度计测温，存在<span class="tag-must">滞后性、安全隐患高、无法实时监测、无人值守无提醒</span>的问题。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡幽默解读：人工测温全靠“随缘查看”，忙起来就忘记，等发现问题往往已经晚啦。</div>
+
+				<h4>二、系统核心工作逻辑（<span class="tag-must">固定三环节，简答必考</span>）</h4>
+				<p>完整闭环：<span class="tag-must hover">输入环节<span class="tip">传感器采集原始环境数据</span></span>→<span class="tag-must hover">计算环节<span class="tip">控制器分析判断数据</span></span>→<span class="tag-must hover">输出环节<span class="tip">执行报警动作</span></span></p>
+				<ul>
+					<li>1. 输入环节：<span class="tag-high">温度传感器24小时实时采集环境温度原始数据</span></li>
+					<li>2. 计算环节：<span class="tag-high">单片机控制器读取数据，搭配滤波器过滤无效波动数据，对比预设温度阈值，判断是否超限</span></li>
+					<li>3. 输出环节：<span class="tag-high">超限触发RGB灯闪烁、蜂鸣器鸣响等本地报警；温度正常则保持常态</span></li>
+				</ul>
+				<div class="bubble">💡幽默解读：整套流程就像人的“眼睛看→大脑判断→嘴巴提醒”，分工明确，反应及时。</div>
+
+				<h4>三、全新专业术语超细解析</h4>
+				<p><span class="tag-must hover">1. 阈值<span class="tip">系统判断正常/异常的临界值，名词解释高频考点</span></span>（考试高频名词）：人为提前设定的临界数值，是系统判断正常/异常的分界线。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡幽默解读：阈值就是系统的“安全红线”，越过红线就会触发报警。</div>
+
+				<p><span class="tag-high hover">2. 滤波器<span class="tip">过滤干扰，防止误报警，易漏考点</span></span>（超易漏考点）：数据筛选工具，过滤温度瞬间小幅波动、干扰杂讯，只保留有效稳定数据，杜绝系统误报警。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡幽默解读：滤波器相当于系统的“冷静管理员”，轻微波动直接忽略，不会乱报警打扰人。</div>
+
+				<p><span class="tag-high hover">3. 本地应用<span class="tip">断网也可独立运行</span></span>：数据全程在本地设备处理、判断、响应，无需上传云端、无需网络支持。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡幽默解读：本地应用就是“单机模式”，断网也能正常工作，不依赖外网。</div>
+
+				<h4>四、两类温度传感器 教材全细节</h4>
+				<p><span class="tag-must hover">1. 热电偶<span class="tip">耐高温，工业场景专用传感器</span></span></p>
+				<p>核心原理：<span class="tag-high">热电效应（跨学科物理考点）</span>，两种不同金属/半导体导体组成闭合回路，两端温差产生电势差，以此换算温度。</p>
+				<p>核心优点：<span class="tag-base">结构简单、测温范围极广、耐高温、测量精准、稳定性强</span></p>
+				<p>适用场景：<span class="tag-base">工业测温、高温设备监测、冷链工业监控</span></p>
+				<div class="bubble">💡幽默解读：热电偶是测温界“硬汉”，耐高温、扛造，工业高温环境首选。</div>
+
+				<p><span class="tag-must hover">2. 热敏电阻<span class="tip">灵敏小巧，家用设备主流</span></span></p>
+				<p>核心原理：电阻阻值随环境温度变化发生规律性改变，控制器通过电阻变化换算温度数值。</p>
+				<p>分类：<span class="tag-base">金属热电阻、半导体热电阻</span></p>
+				<p>核心优点：<span class="tag-base">体积超小、灵敏度极高、响应速度快、适配常温环境</span></p>
+				<p>适用场景：<span class="tag-base">家用电器、智能设备、室内环境监测</span></p>
+				<div class="bubble">💡幽默解读：热敏电阻是“小机灵鬼”，个头小、反应快，家里智能设备基本都在用它。</div>
+
+				<h4>五、边缘计算（<span class="tag-must">定义+四大优势 必考</span>）</h4>
+				<p><span class="tag-must hover">边缘计算完整定义<span class="tip">终端本地处理数据，不上传云端</span></span>：边缘计算是在数据采集终端附近，就地完成数据处理、逻辑判断、指令输出的计算模式，无需将全部数据上传云端。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-must">四大核心优势（教材全写）</span>：</p>
+				<ul>
+					<li>① <span class="tag-base">降低系统延迟、响应超快</span></li>
+					<li>② <span class="tag-base">节省网络带宽资源</span></li>
+					<li>③ <span class="tag-base">避免云端拥堵</span></li>
+					<li>④ <span class="tag-base">提升系统稳定性、断网可用</span></li>
+				</ul>
+				<div class="bubble">💡幽默解读：云端好比总部远程审批，边缘计算就是现场当场拍板，省去层层上报，效率翻倍。</div>
+
+				<h4>六、系统优化提升策略（<span class="tag-high">探究题/填空必背</span>）</h4>
+				<p>1. 儿童房场景：报警方式改为柔和灯光渐变提醒，搭配手机静默推送，避免刺耳蜂鸣惊吓儿童</p>
+				<p>2. 浴室潮湿场景：选用防水型温度传感器，搭配灯光提示+低音量蜂鸣，防潮防短路</p>
+				<p>3. 通用优化：自定义报警阈值、开启延迟报警、夜间静音模式、联动风扇/插座自动降温、记录温度数据日志</p>
+
+				<h4>七、完整项目代码 + 逐行注释</h4>
+	<pre style="background:#f5f7fa;padding:12px;border-radius:10px;overflow-x:auto;line-height:1.6;">
+	# 导入所需工具库（相当于提前备好干活工具）
+	from unihiker_k10 import temp_humi, rgb  # 导入温湿度采集模块、RGB彩灯控制模块
+	import time  # 导入时间延时模块，用来控制灯闪烁速度
+
+	# 定义红灯闪烁函数：专门负责超限报警
+	def flash_red():
+		rgb.write(R=255, G=0, B=0)  # RGB灯调纯红色（报警色）
+		time.sleep(0.5)  # 红灯亮0.5秒，保持状态
+		rgb.write(R=0, G=0, B=0)  # 关闭所有灯光
+		time.sleep(0.5)  # 熄灯0.5秒，完成一次闪烁
+
+	# 定义绿灯闪烁函数：专门负责正常状态提示
+	def flash_green():
+		rgb.write(R=0, G=255, B=0)  # RGB灯调纯绿色（正常色）
+		time.sleep(0.5)  # 绿灯亮0.5秒
+		rgb.write(R=0, G=0, B=0)  # 熄灯
+		time.sleep(0.5)  # 熄灯停留0.5秒
+
+	# 无限循环：持续监测温度，不停止
+	while True:
+		temp = temp_humi.read_temp()  # 实时读取当前环境摄氏温度
+		temp_f = temp_humi.read_temp_f()  # 实时读取华氏温度（备用数据）
+		humi = temp_humi.read_humi()  # 实时读取环境湿度
+		print(temp, temp_f, humi)  # 在屏幕打印数据，方便查看实时状态
+
+		# 核心判断逻辑：温度阈值40℃
+		if temp > 40:  # 如果温度超过40℃（异常）
+			flash_red()  # 触发红灯报警闪烁
+		else:  # 温度正常
+			flash_green()  # 绿灯正常闪烁
+	</pre>
+			</div>
+
+			<h3 class="collapse open">第二节 温度超限远程警示通知系统（物联系统远程应用）</h3>
+			<div class="collapse-content">
+				<h4>一、本地报警核心缺陷（<span class="tag-high">开篇考点</span>）</h4>
+				<p>本地报警仅设备现场发声发光，用户离家后无法感知异常，错过最佳处置时机，存在严重居家安全隐患。</p>
+				<div class="bubble">💡幽默解读：本地报警只能“在家听见”，出门就失效，远程提醒刚好补上这个漏洞。</div>
+
+				<h4>二、远程系统完整三层架构分工（<span class="tag-must">简答必考</span>）</h4>
+				<ul>
+					<li>1. <span class="tag-high">感知层</span>：温度传感器采集温湿度原始数据（数据源头）</li>
+					<li>2. <span class="tag-high">网络层</span>：Wi-Fi联网+MQTT协议传输，实现跨设备、远距离数据通信（传输通道）</li>
+					<li>3. <span class="tag-high">应用层</span>：终端接收消息、弹窗提醒、灯光警示、数据可视化展示（结果呈现）</li>
+				</ul>
+				<div class="bubble">💡幽默解读：感知层=眼睛，网络层=传送通道，应用层=你的手机，一套组合完成远程提醒。</div>
+
+				<h4>三、系统完整数据传输流程（<span class="tag-must">流程图原话，默写必考</span>）</h4>
+				<p>温度采集端采集数据→本地判断温度是否超限→通过MQTT发布消息至SIoT服务器→服务器转发消息→远程订阅终端接收消息→终端弹窗+灯光报警提醒用户</p>
+
+				<h4>四、专业术语全解</h4>
+				<p><span class="tag-high hover">1. 发布者、订阅者、MQTT服务器(Broker)<span class="tip">消息收发三大角色</span></span></p>
+				<p>发布者：主动采集数据、发送消息的设备（温度采集行空板）</p>
+				<p>订阅者：主动订阅主题、被动接收消息的设备（远程接收端）</p>
+				<p>服务器：消息中转站，负责存储、转发所有消息，是系统核心枢纽</p>
+				<div class="bubble">💡幽默解读：发布者=寄件人，服务器=快递驿站，订阅者=收件人，三者缺一不可。</div>
+
+				<p><span class="tag-high hover">2. 主题(Topic)<span class="tip">消息分类通道，防止消息混淆</span></span>：MQTT消息分类通道，不同设备对应专属主题，消息互不干扰、精准传输。<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p>固定考试主题：<span class="tag-base">siot/temp（温度数据主题）、siot/tempAlarm（温度报警主题）</span></p>
+				<div class="bubble">💡幽默解读：主题就像专属快递单号，避免不同消息混在一起出错。</div>
+
+				<p><span class="tag-base hover">3. 三元条件表达式<span class="tip">代码简写判断语句</span></span>：简化if判断的简写代码，快速根据条件输出结果。</p>
+				<div class="bubble">💡幽默解读：代码里的快捷写法，一行就能完成多行判断。</div>
+
+				<p><span class="tag-base hover">4. 全局变量global<span class="tip">整个程序通用变量</span></span>：可以在整个程序、所有函数内部通用的变量，不受代码区域限制。</p>
+				<div class="bubble">💡幽默解读：全局变量如同全校通知，所有区域都能看到。</div>
+
+				<p><span class="tag-base hover">5. try-except异常捕获<span class="tip">程序防崩溃机制</span></span>：程序容错机制，代码报错时不会直接崩溃终止，而是捕获错误、继续运行。</p>
+				<div class="bubble">💡幽默解读：相当于程序的“急救包”，出问题也不会直接罢工。</div>
+
+				<h4>五、数据可视化（<span class="tag-high">连线/填空考点</span>）</h4>
+				<p>1. <span class="tag-base">折线图</span>：展示数据随时间的变化趋势（看温度涨跌规律）</p>
+				<p>2. <span class="tag-base">地图标注</span>：查看各个温度采集点的地理位置分布（哪个房间异常一眼看清）</p>
+				<p>3. <span class="tag-base">热力图</span>：直观展示温度高低分布区域（哪里最热、哪里最冷）</p>
+				<p><span class="tag-must">可视化核心意义</span>：将枯燥数字转化为图形，直观发现数据规律、快速辅助决策。</p>
+
+				<h4>六、数据模型三类（<span class="tag-high">易漏填空考点</span>）</h4>
+				<ul>
+					<li>1. <span class="tag-base">时间序列数据模型</span>：记录不同时间的温度数据，看变化趋势</li>
+					<li>2. <span class="tag-base">空间数据模型</span>：记录不同位置的温度数据，看区域差异</li>
+					<li>3. <span class="tag-base">事件驱动数据模型</span>：仅记录温度超限等异常事件，精准定位问题</li>
+				</ul>
+
+				<h4>七、发布端+订阅端完整代码 逐行注释</h4>
+	<h5>1. 发布者客户端代码（发温度、发报警消息）</h5>
+	<pre style="background:#f5f7fa;padding:12px;border-radius:10px;overflow-x:auto;line-height:1.6;">
+	# 导入所需模块
+	from unihiker_k10 import wifi, mqttclient, temp_humi
+	import time
+
+	# 1. 连接WiFi（联网必备，不联网无法远程传输）
+	wifi.connect(ssid="填写WiFi名称",psd="填写WiFi密码",timeout=50000)
+
+	# 2. 连接本地SIoT-MQTT服务器
+	mqttclient.connect(server="192.168.43.86",port=1883,client_id="",user="siot",psd="dfrobot")
+
+	# 无限循环持续采集发布数据
+	while True:
+		temp = temp_humi.read_temp()  # 读取实时摄氏温度
+		temp_str = "{:.1f}".format(temp)  # 温度保留1位小数，转为字符串（方便传输）
+		# 三元表达式：温度大于40度标记True（报警），否则False（正常）
+		over_heat = True if temp > 40 else False
+
+		# 向温度主题发布实时温度数据
+		mqttclient.publish("siot/temp",content=temp_str)
+		# 向报警主题发布超限状态
+		mqttclient.publish("siot/tempAlarm",content=str(over_heat))
+		time.sleep(1)  # 1秒更新一次数据，避免刷屏
+	</pre>
+
+	<h5>2. 订阅者客户端代码（收消息、触发报警）</h5>
+	<pre style="background:#f5f7fa;padding:12px;border-radius:10px;overflow-x:auto;line-height:1.6;">
+	from unihiker_k10 import wifi, mqttclient, temp_humi, rgb
+	import time
+
+	# 连接WiFi和MQTT服务器
+	wifi.connect(ssid="填写WiFi名称",psd="填写WiFi密码",timeout=50000)
+	mqttclient.connect(server="192.168.43.86",port=1883,client_id="",user="siot",psd="dfrobot")
+
+	# 定义全局变量，存储接收的温度和报警状态
+	global last_temp, tempAlarm_flag
+	last_temp = "0"
+	tempAlarm_flag = 0
+
+	# 接收温度消息的回调函数
+	def on_temp_recv(msg):
+		global last_temp
+		last_temp = msg  # 保存收到的温度数据
+
+	# 接收报警消息的回调函数
+	def on_tempAlarm_recv(msg):
+		global tempAlarm_flag
+		tempAlarm_flag = int(msg)  # 转换为数字，用于判断报警
+
+	# 订阅两个核心主题
+	mqttclient.subscribe("siot/temp",on_temp_recv)
+	mqttclient.subscribe("siot/tempAlarm",on_tempAlarm_recv)
+
+	# 主循环：持续判断报警状态
+	while True:
+		try:
+			# 超限红灯闪烁报警
+			if tempAlarm_flag == 1:
+				rgb.write(R=255,G=0,B=0)
+				time.sleep(0.5)
+				rgb.write(R=0,G=0,B=0)
+				time.sleep(0.5)
+			# 正常绿灯闪烁
+			else:
+				rgb.write(R=0,G=255)
+				time.sleep(0.5)
+				rgb.write(R=0,G=0,B=0)
+		except Exception as e:
+			# 报错不崩溃，跳过错误继续运行
+			print("运行异常",e)
+			time.sleep(1)
+	</pre>
+			</div>
+
+			<h3 class="collapse open">第三节 远程开窗系统（物联系统远程控制应用）</h3>
+			<div class="collapse-content">
+				<h4>一、项目痛点（教材原文）</h4>
+				<p>传统窗户只能人工现场开关，外出时室内高温、空气污浊，无法及时通风，居家舒适性、安全性差。</p>
+				<div class="bubble">💡幽默解读：人不在家没法开窗通风，远程控制完美解决这个难题。</div>
+
+				<h4>二、远程控制系统三环节完整逻辑（<span class="tag-high">考点</span>）</h4>
+				<ul>
+					<li>1. 输入环节：按键/手机终端接收用户人工控制指令，生成控制消息</li>
+					<li>2. 计算环节：MQTT服务器转发、校验指令，确保指令准确无误传输</li>
+					<li>3. 输出环节：舵机执行指令，旋转对应角度，模拟窗户开关动作</li>
+				</ul>
+
+				<h4>三、人工控制VS自动控制（<span class="tag-must">定义对比 必考</span>）</h4>
+				<p><span class="tag-high">1. 人工控制</span>：用户根据系统反馈数据，主动手动下发指令，设备被动执行。例：出门手机手动点开窗。</p>
+				<p><span class="tag-high">2. 自动控制</span>：系统依据预设规则，无需人工干预，自动下发指令执行。例：温度超40℃系统自动开窗。</p>
+				<div class="bubble">💡幽默解读：人工控制=人指挥设备；自动控制=设备自主判断干活。</div>
+
+				<h4>四、舵机控制核心知识点（<span class="tag-high">实操考点</span>）</h4>
+				<p>固定对应角度：<span class="tag-base">0°=关窗（初始复位状态）、90°=完全开窗</span></p>
+				<p>角度限制逻辑：代码强制限制0-180°，防止舵机超范围损坏</p>
+				<div class="bubble">💡幽默解读：舵机就像窗户的机械手臂，角度不能超限，否则容易损坏硬件。</div>
+
+				<h4>五、远程控制完整安全风险（<span class="tag-must">全维度考点</span>）</h4>
+				<ul>
+					<li>1. 软件层面：程序代码漏洞、系统bug、软件兼容性差</li>
+					<li>2. 网络层面：WiFi中断、网络延迟、数据丢包、中间人攻击</li>
+					<li>3. 设备层面：舵机故障、传感器失灵、硬件老化损坏</li>
+					<li>4. 安全层面：非法设备入侵、指令被篡改、恶意远程操控</li>
+					<li>5. 物理&电力层面：外力破坏设备、断电停机、电路故障</li>
+				</ul>
+
+				<h4>六、物联网安全认证机制（<span class="tag-high">细分考点</span>）</h4>
+				<p><span class="tag-base">1. 实体认证</span>：验证通信设备、登录用户的真实身份，防止伪造设备、虚假用户接入</p>
+				<p><span class="tag-base">2. 消息认证</span>：验证传输消息的完整性、真实性，防止指令被篡改、替换、伪造</p>
+				<div class="bubble">💡幽默解读：实体认证查“身份”，消息认证查“内容”，双重防护更安全。</div>
+
+				<h4>七、远程开窗完整代码 逐行注释</h4>
+	<h5>1. 指令发布端（按键发指令）</h5>
+	<pre style="background:#f5f7fa;padding:12px;border-radius:10px;overflow-x:auto;line-height:1.6;">
+	from unihiker_k10 import wifi, mqttclient, button
+	import time
+
+	# 联网+连接服务器
+	wifi.connect(ssid="WiFi名",psd="WiFi密码",timeout=50000)
+	mqttclient.connect(server="192.168.43.86",port=1883,user="siot",psd="dfrobot")
+
+	# A键按下：发送0度（关窗指令）
+	def button_a_pressed():
+		print("按下A键，执行关窗")
+		mqttclient.publish("siot/servo",content="0")
+
+	# B键按下：发送90度（开窗指令）
+	def button_b_pressed():
+		print("按下B键，执行开窗")
+		mqttclient.publish("siot/servo",content="90")
+
+	# 持续检测按键状态
+	while True:
+		if button.is_pressed("A"):
+			button_a_pressed()
+		if button.is_pressed("B"):
+			button_b_pressed()
+		time.sleep(0.2)
+	</pre>
+
+	<h5>2. 指令订阅执行端（舵机执行动作）</h5>
+	<pre style="background:#f5f7fa;padding:12px;border-radius:10px;overflow-x:auto;line-height:1.6;">
+	from unihiker_k10 import wifi, mqttclient, servo
+	import time
+
+	# 初始化舵机，绑定P0接口
+	s1 = servo(1)
+	# 联网连服务器
+	wifi.connect(ssid="WiFi名",psd="WiFi密码",timeout=50000)
+	mqttclient.connect(server="192.168.43.86",port=1883,user="siot",psd="dfrobot")
+
+	# 接收舵机控制消息
+	def servo_recv(msg):
+		try:
+			angle = int(msg)  # 接收的字符串角度转为数字
+			angle = max(0,min(180,angle))  # 强制限制角度0-180，保护设备
+			s1.angle(angle)  # 舵机旋转至指定角度
+			print("已执行角度：",angle)
+		except Exception as e:
+			print("指令无效",e)
+
+	# 订阅舵机控制主题
+	mqttclient.subscribe("siot/servo",servo_recv)
+
+	# 持续监听指令
+	while True:
+		time.sleep(0.1)
+	</pre>
+			</div>
+
+			<h3 class="collapse open">第四节 智能窗系统（物联系统综合应用）</h3>
+			<div class="collapse-content">
+				<h4>一、系统核心定位</h4>
+				<p>智能窗是自动控制+远程人工控制双模式融合的综合物联网系统，兼顾智能化自动运行和人工手动干预。</p>
+
+				<h4>二、完整输入-计算-闭环（<span class="tag-high">优先级考点</span>）</h4>
+				<p>1. 输入：环境传感器数据+用户远程控制指令（双输入）</p>
+				<p>2. 计算：系统预设规则判断，<span class="tag-must">人工指令优先级高于自动指令</span>（超易漏考点）</p>
+				<p>3. 输出：舵机执行开关窗动作，同步反馈设备状态给用户</p>
+
+				<h4>三、系统优化改进方向（<span class="tag-high">探究题标准答案</span>）</h4>
+				<p>1. 增加雨量传感器：下雨自动关窗，规避雨天进水</p>
+				<p>2. 增加空气质量传感器：空气污浊自动开窗通风</p>
+				<p>3. 智能优先级调节：可自定义人工/自动优先模式</p>
+				<p>4. 数据记录分析：统计开窗时长、环境变化规律，优化控制策略</p>
+			</div>
+		</div>
+	</div>
+	<div class="page" id="p8-5">
+		<h2 class="collapse open">第五单元 智慧城市物联网设计——物联网创新应用</h2>
+		<div class="collapse-content">
+			<h3 class="collapse open">单元核心总知识点</h3>
+			<div class="collapse-content">
+				<p><span class="tag-must hover">单元核心<span class="tip">智慧城市物联网整体工作逻辑</span></span>：智慧城市依托物联网技术，实现城市环境、交通、民生、医疗、农业全场景智能化管理，核心是<span class="tag-must">感知采集+智能分析+自动调控</span>。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡幽默解读：物联网就像城市的“智慧大脑+神经末梢”，全城各类设备实时感知、自动分析、按需调控，让城市运转更智能。</div>
+			</div>
+
+			<h3 class="collapse open">第一节 智能健康监测系统</h3>
+			<div class="collapse-content">
+				<h4>一、智能穿戴设备全传感器清单（<span class="tag-high">填空/多选高频考点</span>）</h4>
+				<ul>
+					<li><span class="tag-base hover">光学心率传感器<span class="tip">检测血流，计算心率、血氧</span></span>：绿光照射皮下血管，检测血流变化，计算心率、血氧饱和度。
+					<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li><span class="tag-base hover">高精度体温传感器<span class="tip">贴身采集人体温度</span></span>：贴合皮肤采集人体温度。
+					<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li><span class="tag-base hover">三轴加速度计<span class="tip">识别运动、步数、姿态</span></span>：检测人体运动、步数、姿态变化。
+					<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li><span class="tag-base hover">陀螺仪<span class="tip">修正数据，精准识别动作状态</span></span>：修正运动数据，精准识别跑步、走路、久坐、睡眠状态。
+					<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li><span class="tag-base hover">皮肤电导传感器<span class="tip">判断情绪、疲劳程度</span></span>：检测皮肤电信号，判断情绪压力、疲劳状态。
+					<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li><span class="tag-base hover">生物电阻抗传感器<span class="tip">测算体脂、肌肉数据</span></span>：测算体脂率、肌肉量等身体数据。
+					<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+				</ul>
+				<div class="bubble">💡幽默解读：智能手环/手表就是随身“小型体检站”，一堆传感器24小时帮你监控身体各项指标。</div>
+
+				<h4>二、健康数据核心应用（<span class="tag-high">简答考点</span>）</h4>
+				<p><span class="tag-base">数据可视化报表、个性化健康建议、异常数据预警、家人数据同步、长期健康趋势分析</span>。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+			</div>
+
+			<h3 class="collapse open">第二节 智能交通系统</h3>
+			<div class="collapse-content">
+				<h4>一、交通感知全套设备（<span class="tag-high">基础考点</span>）</h4>
+				<p><span class="tag-base">地磁传感器、高清监控摄像头、超声波雷达、激光雷达、车流检测器</span>。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+
+				<h4>二、分布式部署核心考点（<span class="tag-must">名词解释+优缺点，必考</span>）</h4>
+				<p><span class="tag-must hover">定义<span class="tip">各路口独立处理数据，不上传中心服务器</span></span>：各路口终端独立完成数据处理、车流分析、信号灯调控，无需全部数据上传中心服务器。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-high">优势</span>：响应速度快、中心服务器压力小、局部故障不影响整体路网运行。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡幽默解读：每个路口都有独立“小交警”，自己干活、自己判断，不用扎堆等总部指令，局部出问题也不会全线瘫痪。</div>
+			</div>
+
+			<h3 class="collapse open">第三节 智能农业大棚系统</h3>
+			<div class="collapse-content">
+				<h4>一、大棚专用传感器全清单（<span class="tag-high">多选/填空考点</span>）</h4>
+				<p><span class="tag-base">空气温湿度传感器、光照强度传感器、土壤湿度传感器、土壤肥力传感器、CO₂浓度传感器</span>。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+
+				<h4>二、三层架构落地应用（<span class="tag-must">分层考点，必考</span>）</h4>
+				<p><span class="tag-high">感知层</span>：采集大棚温湿度、光照、土壤、气体数据。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-high">网络层</span>：LoRa、NB-IoT远距离低功耗传输，适配野外大棚场景。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-high">应用层</span>：自动灌溉、自动补光、自动通风、温控调节、肥力预警。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡幽默解读：大棚里的传感器是“田间观察员”，搭配远距离通信技术，实现无人值守、自动种养管理。</div>
+			</div>
+
+			<h3 class="collapse open">第四节 智能药柜管理系统</h3>
+			<div class="collapse-content">
+				<h4>一、数据库核心概念（<span class="tag-must">名词解释必考</span>）</h4>
+				<p><span class="tag-must hover">数据库<span class="tip">结构化电子数据仓库，可检索修改</span></span>：数据库是结构化、有序、可检索、可修改的电子数据仓库，用于集中存储药品名称、批号、有效期、库存、存放位置、出入库记录等信息。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡幽默解读：数据库就像电子化大仓库账本，所有药品信息分类整理，查库存、找药品一目了然。</div>
+
+				<h4>二、系统三层架构</h4>
+				<p><span class="tag-high">感知层</span>：RFID标签识别药品、温湿度传感器监测储药环境。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-high">网络层</span>：WiFi/NB-IoT传输数据。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p><span class="tag-high">应用层</span>：自动盘点、过期预警、库存告警、药品溯源、出入库记录。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+			</div>
+		</div>
+	</div>
+	<div class="page" id="p8-6">
+		<h2 class="collapse open">第六单元 物联网安全保卫战——物联网安全与发展</h2>
+		<div class="collapse-content">
+			<h3 class="collapse open">核心总纲：物联网三层安全体系（<span class="tag-must">整体框架，简答必考</span>）</h3>
+			<div class="collapse-content">
+				<p>物联网安全整体分为三大层级：<span class="tag-must hover">感知层<span class="tip">设备硬件、传感器相关安全</span></span> + <span class="tag-must hover">网络层<span class="tip">数据传输过程安全</span></span> + <span class="tag-must hover">应用层<span class="tip">平台、软件、用户端安全</span></span>，三层层层防护，缺一不可。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡幽默解读：就像一栋房子，感知层是门窗、网络层是过道、应用层是室内空间，三层都做好防护才安全。</div>
+			</div>
+
+			<h3 class="collapse open">一、感知层安全风险（<span class="tag-must">全覆盖，含传感器欺骗超重点考点</span>）</h3>
+			<div class="collapse-content">
+				<p>1. <span class="tag-high hover">物理风险<span class="tip">人为外力造成设备损坏</span></span>：设备被人为破坏、拆卸、浸水、磕碰损坏。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p>2. <span class="tag-high hover">硬件缺陷<span class="tip">设备出厂自带故障、老化问题</span></span>：设备出厂漏洞、传感器精度故障、硬件老化。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p>3. <span class="tag-high hover">软件风险<span class="tip">固件漏洞、恶意程序入侵</span></span>：设备固件漏洞、植入恶意程序。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p>4. <span class="tag-must hover">数据欺骗（超重点）<span class="tip">伪造环境数据误导系统判断</span></span>：人为伪造环境数据，如热水袋伪造体温、遮挡传感器伪造正常环境，导致系统误判。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡幽默解读：感知层相当于物联网的眼睛和皮肤，一旦被遮挡、造假，整个系统都会被误导做出错误判断。</div>
+			</div>
+
+			<h3 class="collapse open">二、网络层安全风险（<span class="tag-must">冷门攻击考点全覆盖</span>）</h3>
+			<div class="collapse-content">
+				<p>1. <span class="tag-must hover">中间人攻击<span class="tip">拦截、窃取、篡改传输数据</span></span>：拦截、窃取、篡改设备传输数据。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p>2. <span class="tag-must hover">WiFi钓鱼<span class="tip">伪造虚假WiFi诱骗设备连接</span></span>：伪造虚假WiFi，诱导设备连接，窃取数据。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p>3. <span class="tag-must hover">DDoS攻击<span class="tip">海量请求挤爆服务器致瘫痪</span></span>：海量垃圾请求挤爆服务器，导致系统瘫痪、无法使用。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p>4. <span class="tag-high hover">数据丢包<span class="tip">传输过程数据丢失</span></span>：数据在传输途中出现丢失现象。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p>5. <span class="tag-high hover">窃听<span class="tip">非法截取传输信息</span></span>：非法监听、截取设备之间的通信内容。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p>6. <span class="tag-high hover">非法入侵<span class="tip">外部设备强行接入网络</span></span>：陌生设备非法接入物联网内部网络。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡幽默解读：网络层是数据传输的“公路”，路上会遇到偷数据、堵路、偷听等各类安全威胁，必须做好防护。</div>
+			</div>
+
+			<h3 class="collapse open">三、应用层安全风险（<span class="tag-high">平台与权限类高频考点</span>）</h3>
+			<div class="collapse-content">
+				<p>1. <span class="tag-high hover">用户隐私数据泄露<span class="tip">个人、设备数据外泄</span></span>：用户隐私数据、日志数据泄露。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p>2. <span class="tag-high hover">平台组件漏洞<span class="tip">软件平台自身安全缺陷</span></span>：平台组件存在安全漏洞、API接口滥用。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p>3. <span class="tag-must hover">权限管理混乱<span class="tip">普通用户越权操作，必考考点</span></span>：权限管理混乱，普通用户非法获取管理员权限。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡幽默解读：应用层是整个系统的“指挥大厅”，一旦权限、数据出问题，整个管理体系都会失控。</div>
+			</div>
+
+			<h3 class="collapse open">四、全维度防护措施（<span class="tag-must">简答标准答案，必背</span>）</h3>
+			<div class="collapse-content">
+				<h4>1. <span class="tag-high">设备防护</span></h4>
+				<p><span class="tag-base">加固硬件、定期检修、防水防破坏。</span>
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+
+				<h4>2. <span class="tag-high">网络防护</span></h4>
+				<p><span class="tag-base">数据加密、WiFi密码加固、关闭陌生端口。</span>
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+
+				<h4>3. <span class="tag-must">身份防护</span></h4>
+				<p><span class="tag-base">实体认证+消息认证、多因素登录、权限分级。</span>
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+
+				<h4>4. <span class="tag-high">系统防护</span></h4>
+				<p><span class="tag-base">定期更新固件、修复漏洞、备份数据。</span>
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡幽默解读：防护要从硬件、网络、身份、系统全方位下手，层层把关才能抵御各类攻击。</div>
+			</div>
+
+			<h3 class="collapse open">第二节 物联网虚拟身份（<span class="tag-must">全新必考知识点</span>）</h3>
+			<div class="collapse-content">
+				<p><span class="tag-must hover">虚拟身份定义<span class="tip">网络中唯一数字标识，名词解释</span></span>：物联网场景中，设备和用户在网络中的唯一数字标识，无实体形态，用于身份校验。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+
+				<h4>一、两类虚拟身份（<span class="tag-high">区分考点</span>）</h4>
+				<p>1. <span class="tag-must hover">用户虚拟身份<span class="tip">使用者网络身份</span></span>：账号密码、人脸、指纹、登录令牌。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<p>2. <span class="tag-must hover">设备虚拟身份<span class="tip">联网设备专属编号</span></span>：设备ID、MAC地址、SN序列号、唯一设备编码。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+				<div class="bubble">💡幽默解读：虚拟身份就像网络世界的身份证，人和设备都有专属“证件”，没有合法身份就无法联网接入。</div>
+			</div>
+
+			<h3 class="collapse open">第三节 物联网自主可控技术（<span class="tag-must">单元压轴大题、简答核心考点</span>）</h3>
+			<div class="collapse-content">
+				<p><span class="tag-must hover">自主可控完整定义<span class="tip">全自研、不依赖外部技术</span></span>：核心技术、硬件设备、系统软件、研发维护全部由国内自主研发、自主生产、自主升级、自主维护，不依赖国外技术，无外部后门风险。
+				<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></p>
+
+				<h4><span class="tag-must">核心意义（四点必背，考试高频简答）</span></h4>
+				<ul>
+					<li>1. <span class="tag-base">保障国家网络安全、信息安全。</span>
+					<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li>2. <span class="tag-base">打破国外技术垄断，不被“卡脖子”。</span>
+					<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li>3. <span class="tag-base">稳定供应链，保障设备批量应用。</span>
+					<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</span></li>
+					<li>4. <span class="tag-base">拥有自主修改、升级、优化权限，适配国内场景。</span>
+					<span class="collect-btn" onclick="this.classList.toggle('active')">☆收藏</li>
+				</ul>
+				<div class="bubble">💡幽默解读：自主可控就是核心技术握在自己手里，自己说了算，不用受制于他人，安全和发展都有保障。</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 美化版单元测试弹窗 -->
+<div class="modal" id="testModal">
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeTest()">×</button>
+        <h2>📝 当前单元随堂专项测试</h2>
+        <div id="testContent"></div>
+    </div>
+</div>
+
+<script>
+let currentGrade = 7;
+let currentUnit = 1;
+//分单元题库
+const testBank = {
+    "7-1":`
+<p>1.互联网雏形阿帕网诞生年份？A.1969 B.1970</p>
+<p>2.IPv4二进制位数？A.32 B.128</p>
+<p>3.我国首封跨境邮件年份？A.1987 B.1994</p>
+<p>4.全功能接入国际互联网？A.1994 B.1995</p>
+<p style="color:#2ac464;font-weight:bold;margin-top:15px">参考答案：1.A 2.A 3.A 4.A</p>
+`,
+    "7-2":`
+<p>1.搜索引擎三大工作步骤是？<span class="tag-must">抓取、索引、排序</span></p>
+<p>2.英文双引号检索作用？A.精确匹配 B.模糊搜索</p>
+<p>3.数字作品四项评价标准？<span class="tag-must">思想性、创造性、技术性、艺术性</span></p>
+<p style="color:#2ac464;font-weight:bold;margin-top:15px">参考答案：2.A</p>
+`,
+	"7-3":`
+<p>1.网页根标签是？A.html B.body</p>
+<p>2.用来设置网页超链接标签？A.a B.img</p>
+<p>3.cn代表？A中国域名 B美国域名</p>
+<p>参考答案：1.A 2.A 3.A</p>`,
+	"7-4":`
+<p>1. 教室、校园内的小型网络属于？A.LAN局域网 B.WAN广域网</p>
+<p>2. TCP协议建立连接的流程是？A.三次握手 B.两次握手</p>
+<p>3. 查看本机完整网络配置的命令是？A.ipconfig /all B.ping</p>
+<p>4. 多设备同步邮件优先使用？A.IMAP B.POP3</p>
+<p>参考答案：1.A  2.A  3.A  4.A</p>`,
+	"7-5":`
+<p>1. 志愿服务四大核心特征不包含？A.无偿性 B.盈利性</p>
+<p>2. 在线协同学习第一步是？A.筛选协作平台 B.直接编辑文档</p>
+<p>3. 电子导航第一步工作是？A.卫星定位 B.规划路线</p>
+<p>4. 未成年志愿者最低年龄要求？A.十周岁 B.八周岁</p>
+<p>参考答案：1.B 2.A 3.A 4.A</p>`,
+	"7-6":`
+<p>1. 我国《网络安全法》实施年份？A.2017 B.2021</p>
+<p>2. 身份验证安全性最高的方式？A.多因素验证 B.单密码验证</p>
+<p>3. 网络安全宣传周时间？A.9月第三周 B.10月第一周</p>
+<p>4. 对称加密特点？A.同一密钥 B.公私双密钥</p>
+<p>参考答案：1.A  2.A  3.A  4.A</p>`,
+	"7-7":`
+<p>1. 编写AI提示词首要要求是？A.指令明确 B.随意描述</p>
+<p>2. 文生图主流底层技术是？A.扩散模型 B.编译模型</p>
+<p>3. 云存储最大优势不包括？A.多设备同步 B.只能本地查看</p>
+<p>4. 使用AI创作首要原则是？A.人工核验内容 B.直接照搬使用</p>
+<p>参考答案：1.A  2.A  3.B  4.A</p>`,
+    "8-1":`
+<p>1. 物联网数据唯一来源是？A.感知层 B.应用层</p>
+<p>2. 全球首个物联网设备诞生于？A.1982 B.1991</p>
+<p>3. 物联网核心特性不包括？A.单向传输 B.双向交互</p>
+<p>4. 互联网和物联网共同依托？A.网络协议 B.专用硬件</p>
+<p>参考答案：1.A  2.A  3.A  4.A</p>`,
+	"8-2":`
+<p>1. 二维码最大容错破损比例？A.30% B.50%</p>
+<p>2. RFID标签哪种不用自带电池？A.无源标签 B.有源标签</p>
+<p>3. 远距离安防优先使用？A.对射红外 B.反射红外</p>
+<p>4. 多传感器融合第一步是？A.数据采集 B.特征提取</p>
+<p>参考答案：1.A 2.A 3.A 4.A</p>`,
+	"8-3":`
+<p>1. 穿墙能力强、速度一般的WiFi频段是？A.2.4GHz B.5GHz</p>
+<p>2. 物联网教学服务器SIoT默认端口？A.1883 B.80</p>
+<p>3. 保证指令精准不重复的QoS等级？A.QoS2 B.QoS0</p>
+<p>4. 超短距离贴身设备常用？A.蓝牙 B.LoRa</p>
+<p>参考答案：1.A 2.A 3.A 4.A</p>`,
+	"8-4":`
+<p>1. 本地报警系统断网后能否使用？A.可以 B.不可以</p>
+<p>2. 热电偶主要适用场景？A.高温工业 B.室内常温</p>
+<p>3. 舵机0°代表动作？A.关窗 B.开窗</p>
+<p>4. 综合系统中谁优先级更高？A.人工指令 B.自动指令</p>
+<p>参考答案：1.A 2.A 3.A 4.A</p>`,
+	"8-5":`
+<p>1. 智能手环用来计算心率的传感器是？A.光学心率传感器 B.陀螺仪</p>
+<p>2. 智能交通分布式部署最大优势？A.局部故障不影响全网 B.数据全部上传</p>
+<p>3. 农业大棚远距离传输优先用？A.NB-IoT B.蓝牙</p>
+<p>4. 智能药柜存储数据依托？A.数据库 B.纯文本文件</p>
+<p>参考答案：1.A 2.A 3.A 4.A</p>`,
+	"8-6":`
+<p>1. 人为遮挡传感器属于哪类风险？A.感知层 B.网络层</p>
+<p>2. 海量请求瘫痪服务器是？A.DDoS攻击 B.WiFi钓鱼</p>
+<p>3. MAC地址属于？A.设备虚拟身份 B.用户虚拟身份</p>
+<p>4. 自主可控的意义不包括？A.依赖国外技术 B.保障网络安全</p>
+<p>参考答案：1.A 2.A 3.A 4.A</p>`
+}
+
+//切换年级
+function switchGrade(g){
+    currentGrade = g;
+    document.querySelectorAll('.grade-tab').forEach(t=>t.classList.remove('active'));
+    document.querySelector(`.grade-tab:nth-child(${g===7?1:2})`).classList.add('active');
+    document.getElementById('unit-tabs-7').style.display = g===7?'flex':'none';
+    document.getElementById('unit-tabs-8').style.display = g===8?'flex':'none';
+    switchUnit(g,1);
+}
+
+//切换单元
+function switchUnit(g,u){
+    currentGrade = g; currentUnit = u;
+    document.querySelectorAll('.unit-tab').forEach(t=>t.classList.remove('active'));
+    let tabs = document.getElementById(`unit-tabs-${g}`);
+    tabs.querySelector('.unit-tab:nth-child('+u+')').classList.add('active');
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById(`p${g}-${u}`).classList.add('active');
+}
+
+//折叠初始化
+document.querySelectorAll('.collapse').forEach(el=>{
+    el.onclick=()=>el.classList.toggle('open');
+});
+
+//暗黑切换
+function toggleDark(){document.body.classList.toggle('dark')}
+
+//弹窗测试内容自动匹配当前单元
+function openTest(){
+    let key = currentGrade+"-"+currentUnit;
+    document.getElementById('testContent').innerHTML = testBank[key];
+    document.getElementById('testModal').style.display='flex'
+}
+function closeTest(){document.getElementById('testModal').style.display='none'}
+
+function scrollTabs(step) {
+  const tabs = document.getElementById('unit-tabs');
+  tabs.scrollBy({ left: step, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
